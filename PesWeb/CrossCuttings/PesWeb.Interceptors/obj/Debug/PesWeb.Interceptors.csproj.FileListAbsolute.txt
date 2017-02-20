@@ -1,0 +1,50 @@
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\PesWeb.Interceptors.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\PesWeb.Interceptors.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\Castle.Core.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CastleWindsorHelper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.Common.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\log4net.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\PesWeb.Service.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.Security.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.ModelHelper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\AutoMapper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\EntityFramework.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\Castle.Windsor.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\PesWeb.Service.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CastleWindsorHelper.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.Common.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\Castle.Core.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\log4net.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.Security.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.ModelHelper.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\AutoMapper.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\EntityFramework.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\Castle.Windsor.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\obj\Debug\PesWeb.Interceptors.csprojResolveAssemblyReference.cache
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\obj\Debug\PesWeb.Interceptors.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\obj\Debug\PesWeb.Interceptors.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\PesWeb.Interceptors.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\PesWeb.Interceptors.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\Castle.Core.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CastleWindsorHelper.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.Common.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\log4net.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\PesWeb.Service.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\EntityFramework.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.Security.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.ModelHelper.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\AutoMapper.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\Castle.Windsor.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\PesWeb.Service.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CastleWindsorHelper.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.Common.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\Castle.Core.xml
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\log4net.xml
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\EntityFramework.xml
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.Security.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\CSI.ModelHelper.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\AutoMapper.xml
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\bin\Debug\Castle.Windsor.xml
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\obj\Debug\PesWeb.Interceptors.csprojResolveAssemblyReference.cache
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\obj\Debug\PesWeb.Interceptors.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Interceptors\obj\Debug\PesWeb.Interceptors.pdb

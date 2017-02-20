@@ -1,0 +1,48 @@
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\PesWeb.Service.dll.config
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\PesWeb.Service.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\PesWeb.Service.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\AutoMapper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CastleWindsorHelper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.Common.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.ModelHelper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.Security.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\EntityFramework.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\EntityFramework.SqlServer.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\Castle.Windsor.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\Castle.Core.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CastleWindsorHelper.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.Common.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.ModelHelper.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.Security.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\AutoMapper.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\EntityFramework.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\EntityFramework.SqlServer.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\Castle.Windsor.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\Castle.Core.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\obj\Debug\PesWeb.Service.csprojResolveAssemblyReference.cache
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\obj\Debug\PesWeb.Service.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\Models\PesWeb.Service\obj\Debug\PesWeb.Service.pdb
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\PesWeb.Service.dll.config
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\PesWeb.Service.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\PesWeb.Service.pdb
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\AutoMapper.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CastleWindsorHelper.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.Common.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.ModelHelper.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.Security.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\EntityFramework.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\EntityFramework.SqlServer.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\Castle.Windsor.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\Castle.Core.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CastleWindsorHelper.pdb
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.Common.pdb
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.ModelHelper.pdb
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\CSI.Security.pdb
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\AutoMapper.xml
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\EntityFramework.xml
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\EntityFramework.SqlServer.xml
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\Castle.Windsor.xml
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\bin\Debug\Castle.Core.xml
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\obj\Debug\PesWeb.Service.csprojResolveAssemblyReference.cache
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\obj\Debug\PesWeb.Service.dll
+D:\PesWeb\PesWeb\PesWeb\Models\PesWeb.Service\obj\Debug\PesWeb.Service.pdb

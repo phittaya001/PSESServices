@@ -1,0 +1,24 @@
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.Security.dll.config
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.Security.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.Security.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.ModelHelper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\AutoMapper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\Castle.Core.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.ModelHelper.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\AutoMapper.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\Castle.Core.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.csprojResolveAssemblyReference.cache
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.pdb
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.Security.dll.config
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.Security.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.Security.pdb
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.ModelHelper.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\AutoMapper.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\Castle.Core.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.ModelHelper.pdb
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\AutoMapper.xml
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\Castle.Core.xml
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.csprojResolveAssemblyReference.cache
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.pdb

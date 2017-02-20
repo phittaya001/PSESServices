@@ -1,0 +1,56 @@
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Injectors.dll.config
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Injectors.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Injectors.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\AutoMapper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\Castle.Core.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\Castle.Windsor.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CastleWindsorHelper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.Common.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.ModelHelper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.Security.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Interceptors.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Service.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\log4net.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\EntityFramework.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CastleWindsorHelper.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.Common.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.ModelHelper.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.Security.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Interceptors.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Service.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\AutoMapper.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\Castle.Core.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\Castle.Windsor.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\log4net.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\EntityFramework.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\obj\Debug\PesWeb.Injectors.csprojResolveAssemblyReference.cache
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\obj\Debug\PesWeb.Injectors.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\obj\Debug\PesWeb.Injectors.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Injectors.dll.config
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Injectors.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Injectors.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\AutoMapper.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\Castle.Core.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\Castle.Windsor.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CastleWindsorHelper.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.Common.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.ModelHelper.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.Security.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Interceptors.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Service.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\log4net.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\EntityFramework.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CastleWindsorHelper.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.Common.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.ModelHelper.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\CSI.Security.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Interceptors.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\PesWeb.Service.pdb
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\AutoMapper.xml
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\Castle.Core.xml
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\Castle.Windsor.xml
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\log4net.xml
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\bin\Debug\EntityFramework.xml
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\obj\Debug\PesWeb.Injectors.csprojResolveAssemblyReference.cache
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\obj\Debug\PesWeb.Injectors.dll
+D:\PesWeb\PesWeb\PesWeb\CrossCuttings\PesWeb.Injectors\obj\Debug\PesWeb.Injectors.pdb

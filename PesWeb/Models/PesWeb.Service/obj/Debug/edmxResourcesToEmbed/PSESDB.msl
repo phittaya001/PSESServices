@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PSESModelStoreContainer" CdmEntityContainer="PSESEntities">
+    <EntitySetMapping Name="tblEvaluation">
+      <EntityTypeMapping TypeName="PSESModel.tblEvaluation">
+        <MappingFragment StoreEntitySet="tblEvaluation">
+          <ScalarProperty Name="ProjectNO" ColumnName="ProjectNO" />
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+          <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
+          <ScalarProperty Name="EvaluatorNO" ColumnName="EvaluatorNO" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Job_ID" ColumnName="Job_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblHeaderBot">
+      <EntityTypeMapping TypeName="PSESModel.tblHeaderBot">
+        <MappingFragment StoreEntitySet="tblHeaderBot">
+          <ScalarProperty Name="H3_ID" ColumnName="H3_ID" />
+          <ScalarProperty Name="H2_ID" ColumnName="H2_ID" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblHeaderJob">
+      <EntityTypeMapping TypeName="PSESModel.tblHeaderJob">
+        <MappingFragment StoreEntitySet="tblHeaderJob">
+          <ScalarProperty Name="HJ_ID" ColumnName="HJ_ID" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+          <ScalarProperty Name="H1_ID" ColumnName="H1_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblHeaderMid">
+      <EntityTypeMapping TypeName="PSESModel.tblHeaderMid">
+        <MappingFragment StoreEntitySet="tblHeaderMid">
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="H2_ID" ColumnName="H2_ID" />
+          <ScalarProperty Name="HJ_ID" ColumnName="HJ_ID" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblHeaderTop">
+      <EntityTypeMapping TypeName="PSESModel.tblHeaderTop">
+        <MappingFragment StoreEntitySet="tblHeaderTop">
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="H1_ID" ColumnName="H1_ID" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="CreateForm" FunctionName="PSESModel.Store.CreateForm" />
+    <FunctionImportMapping FunctionImportName="getEvaID" FunctionName="PSESModel.Store.getEvaID" />
+    <FunctionImportMapping FunctionImportName="GetHeader3ByH2ID" FunctionName="PSESModel.Store.GetHeader3ByH2ID" />
+    <FunctionImportMapping FunctionImportName="GetHeaderByJobID" FunctionName="PSESModel.Store.GetHeaderByJobID" />
+    <FunctionImportMapping FunctionImportName="GetEvaluationRequest" FunctionName="PSESModel.Store.GetEvaluationRequest">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.GetEvaluationRequest_Result">
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+          <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
+          <ScalarProperty Name="EvaluatorNO" ColumnName="EvaluatorNO" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Job_ID" ColumnName="Job_ID" />
+          <ScalarProperty Name="ProjectNO" ColumnName="ProjectNO" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tblPosition">
+      <EntityTypeMapping TypeName="PSESModel.tblPosition">
+        <MappingFragment StoreEntitySet="tblPosition">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="PositionLevel" ColumnName="PositionLevel" />
+          <ScalarProperty Name="PositionCancelDate" ColumnName="PositionCancelDate" />
+          <ScalarProperty Name="PositionStartDate" ColumnName="PositionStartDate" />
+          <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+          <ScalarProperty Name="PositionAlias" ColumnName="PositionAlias" />
+          <ScalarProperty Name="pwPosition" ColumnName="pwPosition" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetJobDetail" FunctionName="PSESModel.Store.SP_GetJobDetail">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetJobDetail_Result">
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+          <ScalarProperty Name="pwPosition" ColumnName="pwPosition" />
+          <ScalarProperty Name="PositionAlias" ColumnName="PositionAlias" />
+          <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+          <ScalarProperty Name="PositionStartDate" ColumnName="PositionStartDate" />
+          <ScalarProperty Name="PositionCancelDate" ColumnName="PositionCancelDate" />
+          <ScalarProperty Name="PositionLevel" ColumnName="PositionLevel" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetAllHeaderJob" FunctionName="PSESModel.Store.SP_GetAllHeaderJob">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetAllHeaderJob_Result">
+          <ScalarProperty Name="HJ_ID" ColumnName="HJ_ID" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+          <ScalarProperty Name="H1_ID" ColumnName="H1_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetHeader2BYHJ" FunctionName="PSESModel.Store.SP_GetHeader2BYHJ" />
+    <FunctionImportMapping FunctionImportName="SP_GetAllHeaderByJobID" FunctionName="PSESModel.Store.SP_GetAllHeaderByJobID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetAllHeaderByJobID_Result">
+          <ScalarProperty Name="H3_ID" ColumnName="H3_ID" />
+          <ScalarProperty Name="MidText" ColumnName="MidText" />
+          <ScalarProperty Name="BotText" ColumnName="BotText" />
+          <ScalarProperty Name="H2_ID" ColumnName="H2_ID" />
+          <ScalarProperty Name="HJ_ID" ColumnName="HJ_ID" />
+          <ScalarProperty Name="H1_ID" ColumnName="H1_ID" />
+          <ScalarProperty Name="JobID" ColumnName="JobID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_HeaderTopByJob" FunctionName="PSESModel.Store.SP_HeaderTopByJob">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_HeaderTopByJob_Result">
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+          <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+          <ScalarProperty Name="PositionAlias" ColumnName="PositionAlias" />
+          <ScalarProperty Name="H1_ID" ColumnName="H1_ID" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="HJ_ID" ColumnName="HJ_ID" />
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetHeaderMidByHeaderTopAndJobID" FunctionName="PSESModel.Store.SP_GetHeaderMidByHeaderTopAndJobID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderMidByHeaderTopAndJobID_Result">
+          <ScalarProperty Name="HJ_ID" ColumnName="HJ_ID" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+          <ScalarProperty Name="H2_ID" ColumnName="H2_ID" />
+          <ScalarProperty Name="H1_ID" ColumnName="H1_ID" />
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_HeaderTopByJobID" FunctionName="PSESModel.Store.SP_HeaderTopByJobID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_HeaderTopByJobID_Result">
+          <ScalarProperty Name="H1_ID" ColumnName="H1_ID" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="HJ_ID" ColumnName="HJ_ID" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+  </EntityContainerMapping>
+</Mapping>

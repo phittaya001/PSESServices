@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PSESModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tblEvaluation">
+    <Key>
+      <PropertyRef Name="Eva_ID" />
+    </Key>
+    <Property Name="Eva_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="EmployeeNO" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="EvaluatorNO" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="Date" Type="DateTime" Precision="3" />
+    <Property Name="Job_ID" Type="Int32" />
+    <Property Name="ProjectNO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblHeaderBot">
+    <Key>
+      <PropertyRef Name="H3_ID" />
+    </Key>
+    <Property Name="H3_ID" Type="Int32" Nullable="false" />
+    <Property Name="H2_ID" Type="Int32" />
+    <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblHeaderJob">
+    <Key>
+      <PropertyRef Name="HJ_ID" />
+    </Key>
+    <Property Name="HJ_ID" Type="Int32" Nullable="false" />
+    <Property Name="PositionNo" Type="Int32" />
+    <Property Name="H1_ID" Type="Int32" />
+  </EntityType>
+  <EntityType Name="tblHeaderMid">
+    <Key>
+      <PropertyRef Name="H2_ID" />
+    </Key>
+    <Property Name="H2_ID" Type="Int32" Nullable="false" />
+    <Property Name="HJ_ID" Type="Int32" />
+    <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Text_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblHeaderTop">
+    <Key>
+      <PropertyRef Name="H1_ID" />
+    </Key>
+    <Property Name="H1_ID" Type="Int32" Nullable="false" />
+    <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Alias" Type="String" MaxLength="1" FixedLength="true" Unicode="false" />
+    <Property Name="Text_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityContainer Name="PSESEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" />
+    <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" />
+    <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" />
+    <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" />
+    <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" />
+    <FunctionImport Name="CreateForm">
+      <Parameter Name="EmpID" Mode="In" Type="String" />
+      <Parameter Name="Evaluator" Mode="In" Type="String" />
+      <Parameter Name="JobID" Mode="In" Type="Int32" />
+      <Parameter Name="ProjectNO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="getEvaID" ReturnType="Collection(Int32)">
+      <Parameter Name="EvaluatorNO" Mode="In" Type="String" />
+      <Parameter Name="EmployeeNO" Mode="In" Type="String" />
+      <Parameter Name="ProjectNO" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="GetHeader2BYHJ" ReturnType="Collection(Int32)">
+      <Parameter Name="HJ_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetHeader3ByH2ID" ReturnType="Collection(Int32)">
+      <Parameter Name="H2_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="GetHeaderByJobID" ReturnType="Collection(Int32)" />
+    <FunctionImport Name="GetEvaluationRequest" ReturnType="Collection(PSESModel.GetEvaluationRequest_Result)">
+      <Parameter Name="evaluator" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <EntitySet Name="tblPosition" EntityType="PSESModel.tblPosition" />
+    <FunctionImport Name="SP_GetJobDetail" ReturnType="Collection(PSESModel.SP_GetJobDetail_Result)" />
+    <FunctionImport Name="SP_GetAllHeaderJob" ReturnType="Collection(PSESModel.SP_GetAllHeaderJob_Result)" />
+    <FunctionImport Name="SP_GetHeader2BYHJ" ReturnType="Collection(Int32)">
+      <Parameter Name="HJ_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetAllHeaderByJobID" ReturnType="Collection(PSESModel.SP_GetAllHeaderByJobID_Result)" />
+    <FunctionImport Name="SP_HeaderTopByJob" ReturnType="Collection(PSESModel.SP_HeaderTopByJob_Result)" />
+    <FunctionImport Name="SP_GetHeaderMidByHeaderTopAndJobID" ReturnType="Collection(PSESModel.SP_GetHeaderMidByHeaderTopAndJobID_Result)">
+      <Parameter Name="H1_ID" Mode="In" Type="Int32" />
+      <Parameter Name="JobID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_HeaderTopByJobID" ReturnType="Collection(PSESModel.SP_HeaderTopByJobID_Result)" />
+  </EntityContainer>
+  <ComplexType Name="GetEvaluationRequest_Result">
+    <Property Type="Int32" Name="Eva_ID" Nullable="false" />
+    <Property Type="String" Name="EmployeeNO" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="EvaluatorNO" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+    <Property Type="Int32" Name="Job_ID" Nullable="true" />
+    <Property Type="String" Name="ProjectNO" Nullable="true" MaxLength="15" />
+  </ComplexType>
+  <EntityType Name="tblPosition">
+    <Key>
+      <PropertyRef Name="PositionNo" />
+    </Key>
+    <Property Name="PositionNo" Type="Int32" Nullable="false" />
+    <Property Name="pwPosition" Type="String" MaxLength="7" FixedLength="true" Unicode="false" />
+    <Property Name="PositionAlias" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="PositionName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="PositionStartDate" Type="DateTime" Precision="0" />
+    <Property Name="PositionCancelDate" Type="DateTime" Precision="0" />
+    <Property Name="PositionLevel" Type="Byte" />
+    <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <ComplexType Name="SP_GetJobDetail_Result">
+    <Property Type="Int32" Name="PositionNo" Nullable="false" />
+    <Property Type="String" Name="pwPosition" Nullable="true" MaxLength="7" />
+    <Property Type="String" Name="PositionAlias" Nullable="true" MaxLength="15" />
+    <Property Type="String" Name="PositionName" Nullable="true" MaxLength="50" />
+    <Property Type="DateTime" Name="PositionStartDate" Nullable="true" Precision="16" />
+    <Property Type="DateTime" Name="PositionCancelDate" Nullable="true" Precision="16" />
+    <Property Type="Byte" Name="PositionLevel" Nullable="true" />
+    <Property Type="String" Name="UpdateUser" Nullable="true" MaxLength="10" />
+    <Property Type="DateTime" Name="UpdateDate" Nullable="true" Precision="16" />
+  </ComplexType>
+  <ComplexType Name="SP_GetAllHeaderJob_Result">
+    <Property Type="Int32" Name="HJ_ID" Nullable="false" />
+    <Property Type="Int32" Name="PositionNo" Nullable="true" />
+    <Property Type="Int32" Name="H1_ID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SP_GetAllHeaderByJobID_Result">
+    <Property Type="Int32" Name="H3_ID" Nullable="false" />
+    <Property Type="String" Name="MidText" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="BotText" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="H2_ID" Nullable="false" />
+    <Property Type="Int32" Name="HJ_ID" Nullable="true" />
+    <Property Type="Int32" Name="H1_ID" Nullable="true" />
+    <Property Type="Int32" Name="JobID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SP_HeaderTopByJob_Result">
+    <Property Type="Int32" Name="PositionNo" Nullable="false" />
+    <Property Type="String" Name="PositionName" Nullable="true" MaxLength="50" />
+    <Property Type="String" Name="PositionAlias" Nullable="true" MaxLength="15" />
+    <Property Type="Int32" Name="H1_ID" Nullable="false" />
+    <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Alias" Nullable="true" MaxLength="1" />
+    <Property Type="Int32" Name="HJ_ID" Nullable="false" />
+    <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="SP_GetHeaderMidByHeaderTopAndJobID_Result">
+    <Property Type="Int32" Name="HJ_ID" Nullable="false" />
+    <Property Type="Int32" Name="PositionNo" Nullable="true" />
+    <Property Type="Int32" Name="H2_ID" Nullable="false" />
+    <Property Type="Int32" Name="H1_ID" Nullable="true" />
+    <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+  </ComplexType>
+  <ComplexType Name="SP_HeaderTopByJobID_Result">
+    <Property Type="Int32" Name="H1_ID" Nullable="false" />
+    <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Alias" Nullable="true" MaxLength="1" />
+    <Property Type="Int32" Name="HJ_ID" Nullable="false" />
+    <Property Type="Int32" Name="PositionNo" Nullable="true" />
+  </ComplexType>
+</Schema>

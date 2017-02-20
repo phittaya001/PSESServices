@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="PES_dbModelStoreContainer" CdmEntityContainer="PES_dbEntities">
+    <EntitySetMapping Name="UserLogs">
+      <EntityTypeMapping TypeName="PES_dbModel.UserLog">
+        <MappingFragment StoreEntitySet="UserLog">
+          <ScalarProperty Name="ActivityDateTime" ColumnName="ActivityDateTime" />
+          <ScalarProperty Name="Activity" ColumnName="Activity" />
+          <ScalarProperty Name="EmolyeeNo" ColumnName="EmolyeeNo" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permission">
+      <EntityTypeMapping TypeName="PES_dbModel.Permission">
+        <MappingFragment StoreEntitySet="Permission">
+          <ScalarProperty Name="PermissionType" ColumnName="PermissionType" />
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

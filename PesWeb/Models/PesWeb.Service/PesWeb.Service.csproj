@@ -1,0 +1,259 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{FE57D042-A803-43FA-B075-7786C8E1486E}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>PesWeb.Service</RootNamespace>
+    <AssemblyName>PesWeb.Service</AssemblyName>
+    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
+    <SccProjectName>
+    </SccProjectName>
+    <SccLocalPath>
+    </SccLocalPath>
+    <SccAuxPath>
+    </SccAuxPath>
+    <SccProvider>
+    </SccProvider>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="AutoMapper, Version=5.0.2.0, Culture=neutral, PublicKeyToken=be96cd2c38ef1005, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\AutoMapper.5.0.2\lib\net45\AutoMapper.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\..\..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.DirectoryServices" />
+    <Reference Include="System.DirectoryServices.AccountManagement" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Transactions" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Common\CacheTags.cs" />
+    <Compile Include="Common\DbMessageBoxSvc.cs" />
+    <Compile Include="Common\IMessageBoxSvc.cs" />
+    <Compile Include="Common\Repositories\DbMessageBoxRepositiry.cs" />
+    <Compile Include="GetEvaluationRequest_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmployeeData.cs" />
+    <Compile Include="Modules\FormManage.cs" />
+    <Compile Include="Modules\HeaderManage.cs" />
+    <Compile Include="Modules\LDAPHelper.cs" />
+    <Compile Include="Modules\UserLogSvr.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="PSESDB.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PSESDB.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PSESDB.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="PSESDB.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PSESDB.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Security\NonCachedAuthorization.cs" />
+    <Compile Include="Security\GroupMaintenanceSvc.cs" />
+    <Compile Include="Security\ModelExtensions.cs" />
+    <Compile Include="Security\PermissionMaintenanceSvc.cs" />
+    <Compile Include="Security\Repositories\AuthenticationRepo.cs" />
+    <Compile Include="Security\Repositories\AuthorizationRepo.cs" />
+    <Compile Include="Security\SecurityModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\SecurityModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\SecurityModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>SecurityModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Security\tbs_Group.cs">
+      <DependentUpon>SecurityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\tbs_Permission.cs">
+      <DependentUpon>SecurityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\tbs_PermissionGroupMap.cs">
+      <DependentUpon>SecurityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\tbs_PermissionUserMap.cs">
+      <DependentUpon>SecurityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\tbs_RestrictControlItem.cs">
+      <DependentUpon>SecurityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\tbs_ScreenItem.cs">
+      <DependentUpon>SecurityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\tbs_ScreenPermission.cs">
+      <DependentUpon>SecurityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\tbs_User.cs">
+      <DependentUpon>SecurityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\tbs_UserGroup.cs">
+      <DependentUpon>SecurityModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Security\UserInformation.cs" />
+    <Compile Include="Security\UserMaintenanceSvc.cs" />
+    <Compile Include="SP_GetAllHeaderByJobID_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GetAllHeaderJob_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GetHeaderMidByHeaderTopAndJobID_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GetJobDetail_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_HeaderTopByJobID_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_HeaderTopByJob_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblEvaluation.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblHeaderBot.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblHeaderJob.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblHeaderMid.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblHeaderTop.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblPosition.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="packages.config" />
+    <EntityDeploy Include="Security\SecurityModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>SecurityModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <EntityDeploy Include="PSESDB.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>PSESDB.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="PSESDB.edmx.diagram">
+      <DependentUpon>PSESDB.edmx</DependentUpon>
+    </None>
+    <None Include="Security\SecurityModel.edmx.diagram">
+      <DependentUpon>SecurityModel.edmx</DependentUpon>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\..\_CSI\CSI.CastleWindsorHelper\CSI.CastleWindsorHelper.csproj">
+      <Project>{48f6968e-ccf2-4bd8-8717-452d99fcd390}</Project>
+      <Name>CSI.CastleWindsorHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\_CSI\CSI.Common\CSI.Common.csproj">
+      <Project>{359bc7f1-4290-4b31-bfcd-9765031ad459}</Project>
+      <Name>CSI.Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\_CSI\CSI.ModelHelper\CSI.ModelHelper.csproj">
+      <Project>{98f51196-0bf6-49b9-a06c-9fc8a0fd1a76}</Project>
+      <Name>CSI.ModelHelper</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\_CSI\CSI.Security\CSI.Security.csproj">
+      <Project>{aa14f3cd-fade-4df9-8ef2-20d98942ecf8}</Project>
+      <Name>CSI.Security</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="PSESDB.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PSESDB.edmx</DependentUpon>
+      <LastGenOutput>PSESDB.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="PSESDB.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PSESDB.edmx</DependentUpon>
+      <LastGenOutput>PSESDB.cs</LastGenOutput>
+    </Content>
+    <Content Include="Security\SecurityModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SecurityModel.edmx</DependentUpon>
+      <LastGenOutput>SecurityModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Security\SecurityModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>SecurityModel.edmx</DependentUpon>
+      <LastGenOutput>SecurityModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

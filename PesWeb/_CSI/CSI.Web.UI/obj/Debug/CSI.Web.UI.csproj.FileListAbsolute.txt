@@ -1,0 +1,26 @@
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CSI.Web.UI.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CSI.Web.UI.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CastleWindsorHelper.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CSI.Security.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\Castle.Windsor.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\Castle.Core.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CastleWindsorHelper.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CSI.Security.pdb
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\Castle.Windsor.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\Castle.Core.xml
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\obj\Debug\CSI.Web.UI.csprojResolveAssemblyReference.cache
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\obj\Debug\CSI.Web.UI.dll
+c:\users\phittaya\documents\visual studio 2015\Projects\PesWeb\PesWeb\_CSI\CSI.Web.UI\obj\Debug\CSI.Web.UI.pdb
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CSI.Web.UI.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CSI.Web.UI.pdb
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CastleWindsorHelper.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CSI.Security.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\Castle.Windsor.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\Castle.Core.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CastleWindsorHelper.pdb
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\CSI.Security.pdb
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\Castle.Windsor.xml
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\bin\Debug\Castle.Core.xml
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\obj\Debug\CSI.Web.UI.csprojResolveAssemblyReference.cache
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\obj\Debug\CSI.Web.UI.dll
+D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Web.UI\obj\Debug\CSI.Web.UI.pdb

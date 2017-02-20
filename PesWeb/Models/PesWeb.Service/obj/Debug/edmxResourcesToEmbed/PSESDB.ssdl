@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="PSESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tblEvaluation">
+    <Key>
+      <PropertyRef Name="Eva_ID" />
+    </Key>
+    <Property Name="Eva_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EmployeeNO" Type="char" MaxLength="10" />
+    <Property Name="EvaluatorNO" Type="char" MaxLength="10" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="Job_ID" Type="int" />
+    <Property Name="ProjectNO" Type="varchar" MaxLength="15" />
+  </EntityType>
+  <EntityType Name="tblHeaderBot">
+    <Key>
+      <PropertyRef Name="H3_ID" />
+    </Key>
+    <Property Name="H3_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="H2_ID" Type="int" />
+    <Property Name="Text" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tblHeaderJob">
+    <Key>
+      <PropertyRef Name="HJ_ID" />
+    </Key>
+    <Property Name="HJ_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="PositionNo" Type="int" />
+    <Property Name="H1_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="tblHeaderMid">
+    <Key>
+      <PropertyRef Name="H2_ID" />
+    </Key>
+    <Property Name="H2_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="HJ_ID" Type="int" />
+    <Property Name="Text" Type="varchar" MaxLength="255" />
+    <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tblHeaderTop">
+    <Key>
+      <PropertyRef Name="H1_ID" />
+    </Key>
+    <Property Name="H1_ID" Type="int" Nullable="false" />
+    <Property Name="Text" Type="varchar" MaxLength="255" />
+    <Property Name="Alias" Type="char" MaxLength="1" />
+    <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tblPosition">
+    <Key>
+      <PropertyRef Name="PositionNo" />
+    </Key>
+    <Property Name="PositionNo" Type="int" Nullable="false" />
+    <Property Name="pwPosition" Type="char" MaxLength="7" />
+    <Property Name="PositionAlias" Type="nvarchar" MaxLength="15" />
+    <Property Name="PositionName" Type="nvarchar" MaxLength="50" />
+    <Property Name="PositionStartDate" Type="smalldatetime" />
+    <Property Name="PositionCancelDate" Type="smalldatetime" />
+    <Property Name="PositionLevel" Type="tinyint" />
+    <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
+    <Property Name="UpdateDate" Type="smalldatetime" />
+  </EntityType>
+  <Function Name="CreateForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpID" Type="char" Mode="In" />
+    <Parameter Name="Evaluator" Type="char" Mode="In" />
+    <Parameter Name="JobID" Type="int" Mode="In" />
+    <Parameter Name="ProjectNO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="getEvaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaluatorNO" Type="char" Mode="In" />
+    <Parameter Name="EmployeeNO" Type="char" Mode="In" />
+    <Parameter Name="ProjectNO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="GetEvaluationRequest" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="evaluator" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetHeader3ByH2ID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="H2_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="GetHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_GetAllHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_GetAllHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_GetHeader2BYHJ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="HJ_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GetHeaderMidByHeaderTopAndJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="H1_ID" Type="int" Mode="In" />
+    <Parameter Name="JobID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GetJobDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_HeaderTopByJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_HeaderTopByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <EntityContainer Name="PSESModelStoreContainer">
+    <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>
