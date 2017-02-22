@@ -99,6 +99,30 @@
     <FunctionImport Name="SP_GetEvaHeaderByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaHeaderByEvaID_Result)">
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_DeleteHeaderTop">
+      <Parameter Name="H1_ID" Mode="In" Type="Int32" />
+      <Parameter Name="JobID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_DeleteHeaderBot">
+      <Parameter Name="H3_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_DeleteHeaderMid">
+      <Parameter Name="H2_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertHeaderBot">
+      <Parameter Name="Text" Mode="In" Type="String" />
+      <Parameter Name="H2_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertHeaderMid">
+      <Parameter Name="Text" Mode="In" Type="String" />
+      <Parameter Name="HJ_ID" Mode="In" Type="Int32" />
+      <Parameter Name="Text_Eng" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="InsertHeaderTop">
+      <Parameter Name="Text" Mode="In" Type="String" />
+      <Parameter Name="Alias" Mode="In" Type="String" />
+      <Parameter Name="Text_Eng" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />

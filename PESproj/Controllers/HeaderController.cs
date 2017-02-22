@@ -1,4 +1,5 @@
 ﻿using CSI.CastleWindsorHelper;
+using Newtonsoft.Json.Linq;
 using PesWeb.Service;
 using System;
 using System.Collections.Generic;
@@ -150,6 +151,14 @@ namespace PESproj.Controllers
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
             header.DeleteHeaderBot(HeaderBotID);
+        }
+
+        [Route("HeaderBot/HeaderTop/Insert")]
+        [HttpPut]
+        public void InsertHeaderTop([FromBody]JObject Data)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            header.InsertHeaderTop(Data["Text"].ToString(), Data["Alias"].ToString(), Data["Text_Eng"].ToString());
         }
     }
 }

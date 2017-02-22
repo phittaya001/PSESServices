@@ -86,11 +86,35 @@
     <Parameter Name="H2_ID" Type="int" Mode="In" />
   </Function>
   <Function Name="GetHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="InsertHeaderBot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Text" Type="varchar" Mode="In" />
+    <Parameter Name="H2_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="InsertHeaderMid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Text" Type="varchar" Mode="In" />
+    <Parameter Name="HJ_ID" Type="int" Mode="In" />
+    <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="InsertHeaderTop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Text" Type="varchar" Mode="In" />
+    <Parameter Name="Alias" Type="char" Mode="In" />
+    <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SP_CreateEvaFormAndReturnPrimary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EmpID" Type="char" Mode="In" />
     <Parameter Name="Evaluator" Type="char" Mode="In" />
     <Parameter Name="JobID" Type="int" Mode="In" />
     <Parameter Name="ProjectNO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_DeleteHeaderBot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="H3_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_DeleteHeaderMid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="H2_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_DeleteHeaderTop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="H1_ID" Type="int" Mode="In" />
+    <Parameter Name="JobID" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_GetAllHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SP_GetAllHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />

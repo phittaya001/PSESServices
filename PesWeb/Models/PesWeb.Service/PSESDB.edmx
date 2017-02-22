@@ -91,6 +91,20 @@
           <Parameter Name="H2_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="InsertHeaderBot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Text" Type="varchar" Mode="In" />
+          <Parameter Name="H2_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="InsertHeaderMid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Text" Type="varchar" Mode="In" />
+          <Parameter Name="HJ_ID" Type="int" Mode="In" />
+          <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="InsertHeaderTop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Text" Type="varchar" Mode="In" />
+          <Parameter Name="Alias" Type="char" Mode="In" />
+          <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_CreateEvaFormAndReturnPrimary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpID" Type="char" Mode="In" />
           <Parameter Name="Evaluator" Type="char" Mode="In" />
@@ -245,10 +259,24 @@
             <Parameter Name="JobID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_DeleteHeaderBot">
-            <Parameter Name="H3_ID" Mode="In" Type="Int32" />
+          <Parameter Name="H3_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_DeleteHeaderMid">
+          <Parameter Name="H2_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertHeaderBot">
+            <Parameter Name="Text" Mode="In" Type="String" />
             <Parameter Name="H2_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertHeaderMid">
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="HJ_ID" Mode="In" Type="Int32" />
+            <Parameter Name="Text_Eng" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="InsertHeaderTop">
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="Alias" Mode="In" Type="String" />
+            <Parameter Name="Text_Eng" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -547,6 +575,9 @@
           <FunctionImportMapping FunctionImportName="SP_DeleteHeaderTop" FunctionName="PSESModel.Store.SP_DeleteHeaderTop" />
           <FunctionImportMapping FunctionImportName="SP_DeleteHeaderBot" FunctionName="PSESModel.Store.SP_DeleteHeaderBot" />
           <FunctionImportMapping FunctionImportName="SP_DeleteHeaderMid" FunctionName="PSESModel.Store.SP_DeleteHeaderMid" />
+          <FunctionImportMapping FunctionImportName="InsertHeaderBot" FunctionName="PSESModel.Store.InsertHeaderBot" />
+          <FunctionImportMapping FunctionImportName="InsertHeaderMid" FunctionName="PSESModel.Store.InsertHeaderMid" />
+          <FunctionImportMapping FunctionImportName="InsertHeaderTop" FunctionName="PSESModel.Store.InsertHeaderTop" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -302,6 +302,67 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteHeaderMid", h2_IDParameter);
     }
 
+
+    public virtual int InsertHeaderBot(string text, Nullable<int> h2_ID)
+    {
+
+        var textParameter = text != null ?
+            new ObjectParameter("Text", text) :
+            new ObjectParameter("Text", typeof(string));
+
+
+        var h2_IDParameter = h2_ID.HasValue ?
+            new ObjectParameter("H2_ID", h2_ID) :
+            new ObjectParameter("H2_ID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertHeaderBot", textParameter, h2_IDParameter);
+    }
+
+
+    public virtual int InsertHeaderMid(string text, Nullable<int> hJ_ID, string text_Eng)
+    {
+
+        var textParameter = text != null ?
+            new ObjectParameter("Text", text) :
+            new ObjectParameter("Text", typeof(string));
+
+
+        var hJ_IDParameter = hJ_ID.HasValue ?
+            new ObjectParameter("HJ_ID", hJ_ID) :
+            new ObjectParameter("HJ_ID", typeof(int));
+
+
+        var text_EngParameter = text_Eng != null ?
+            new ObjectParameter("Text_Eng", text_Eng) :
+            new ObjectParameter("Text_Eng", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertHeaderMid", textParameter, hJ_IDParameter, text_EngParameter);
+    }
+
+
+    public virtual int InsertHeaderTop(string text, string alias, string text_Eng)
+    {
+
+        var textParameter = text != null ?
+            new ObjectParameter("Text", text) :
+            new ObjectParameter("Text", typeof(string));
+
+
+        var aliasParameter = alias != null ?
+            new ObjectParameter("Alias", alias) :
+            new ObjectParameter("Alias", typeof(string));
+
+
+        var text_EngParameter = text_Eng != null ?
+            new ObjectParameter("Text_Eng", text_Eng) :
+            new ObjectParameter("Text_Eng", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertHeaderTop", textParameter, aliasParameter, text_EngParameter);
+    }
+
 }
 
 }
