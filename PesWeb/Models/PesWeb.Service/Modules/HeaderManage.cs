@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -67,8 +68,8 @@ namespace PesWeb.Service.Modules
         public void InsertHeaderTop(string Text,string Text_Eng,string Alias,int JobID)
         {
             PSESEntities db = new PSESEntities();
-            int H1_ID = db.InsertHeaderTop(Text, Text_Eng, Alias);
-            db.SP_InsertHeaderJob(JobID, H1_ID);
+            var H1_ID = db.InsertHeaderTop(Text, Alias, Text_Eng);
+            db.SP_InsertHeaderJob(JobID, H1_ID.FirstOrDefault());
         }
 
         public void InsertHeaderMid(string Text, string Text_Eng, int H1_ID, int JobID)

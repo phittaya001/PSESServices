@@ -119,7 +119,11 @@
       <Parameter Name="JobID" Mode="In" Type="Int32" />
       <Parameter Name="Text_Eng" Mode="In" Type="String" />
     </FunctionImport>
-    <FunctionImport Name="InsertHeaderTop">
+    <FunctionImport Name="SP_InsertHeaderJob">
+      <Parameter Name="JobID" Mode="In" Type="Int32" />
+      <Parameter Name="H1_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="InsertHeaderTop" ReturnType="Collection(Int32)">
       <Parameter Name="Text" Mode="In" Type="String" />
       <Parameter Name="Alias" Mode="In" Type="String" />
       <Parameter Name="Text_Eng" Mode="In" Type="String" />

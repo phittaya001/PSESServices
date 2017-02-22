@@ -195,6 +195,7 @@
     <FunctionImportMapping FunctionImportName="SP_DeleteHeaderMid" FunctionName="PSESModel.Store.SP_DeleteHeaderMid" />
     <FunctionImportMapping FunctionImportName="InsertHeaderBot" FunctionName="PSESModel.Store.InsertHeaderBot" />
     <FunctionImportMapping FunctionImportName="InsertHeaderMid" FunctionName="PSESModel.Store.InsertHeaderMid" />
+    <FunctionImportMapping FunctionImportName="SP_InsertHeaderJob" FunctionName="PSESModel.Store.SP_InsertHeaderJob" />
     <FunctionImportMapping FunctionImportName="InsertHeaderTop" FunctionName="PSESModel.Store.InsertHeaderTop" />
   </EntityContainerMapping>
 </Mapping>

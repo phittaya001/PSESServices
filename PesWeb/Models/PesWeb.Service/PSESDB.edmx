@@ -279,14 +279,14 @@
             <Parameter Name="JobID" Mode="In" Type="Int32" />
             <Parameter Name="Text_Eng" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="InsertHeaderTop">
-            <Parameter Name="Text" Mode="In" Type="String" />
-            <Parameter Name="Alias" Mode="In" Type="String" />
-            <Parameter Name="Text_Eng" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="SP_InsertHeaderJob">
             <Parameter Name="JobID" Mode="In" Type="Int32" />
             <Parameter Name="H1_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="InsertHeaderTop" ReturnType="Collection(Int32)">
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="Alias" Mode="In" Type="String" />
+            <Parameter Name="Text_Eng" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -587,8 +587,8 @@
           <FunctionImportMapping FunctionImportName="SP_DeleteHeaderMid" FunctionName="PSESModel.Store.SP_DeleteHeaderMid" />
           <FunctionImportMapping FunctionImportName="InsertHeaderBot" FunctionName="PSESModel.Store.InsertHeaderBot" />
           <FunctionImportMapping FunctionImportName="InsertHeaderMid" FunctionName="PSESModel.Store.InsertHeaderMid" />
-          <FunctionImportMapping FunctionImportName="InsertHeaderTop" FunctionName="PSESModel.Store.InsertHeaderTop" />
           <FunctionImportMapping FunctionImportName="SP_InsertHeaderJob" FunctionName="PSESModel.Store.SP_InsertHeaderJob" />
+          <FunctionImportMapping FunctionImportName="InsertHeaderTop" FunctionName="PSESModel.Store.InsertHeaderTop" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

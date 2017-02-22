@@ -158,7 +158,12 @@ namespace PESproj.Controllers
         public void InsertHeaderTop([FromBody]JObject Data)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
-            header.InsertHeaderTop(Data["Text"].ToString(), Data["Alias"].ToString(), Data["Text_Eng"].ToString(),Convert.ToInt32(Data["JobID"].ToString()));
+            //tblHeaderTop top = new tblHeaderTop();
+            //top.Alias = Data["Alias"].ToString();
+            //top.Text = Data["Text"].ToString();
+            //top.Text_Eng = Data["Text_Eng"].ToString();
+
+            header.InsertHeaderTop(Data["Text"].ToString(), Data["Text_Eng"].ToString(), Data["Alias"].ToString(), Convert.ToInt32(Data["PositionID"].ToString()));
         }
 
         [Route("HeaderMid/Insert")]
