@@ -22,3 +22,15 @@ D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\Castle.Core.xml
 D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.csprojResolveAssemblyReference.cache
 D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.dll
 D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.Security.dll.config
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.Security.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.Security.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.ModelHelper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\AutoMapper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\Castle.Core.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\CSI.ModelHelper.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\AutoMapper.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Debug\Castle.Core.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.csprojResolveAssemblyReference.cache
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\obj\Debug\CSI.Security.pdb

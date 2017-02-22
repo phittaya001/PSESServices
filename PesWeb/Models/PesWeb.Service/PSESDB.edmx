@@ -64,6 +64,15 @@
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
           <Property Name="UpdateDate" Type="smalldatetime" />
         </EntityType>
+        <EntityType Name="tblScore">
+          <Key>
+            <PropertyRef Name="Score_ID" />
+          </Key>
+          <Property Name="Score_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="H3_ID" Type="int" />
+          <Property Name="point" Type="int" />
+          <Property Name="Eva_ID" Type="int" />
+        </EntityType>
         <Function Name="CreateForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpID" Type="char" Mode="In" />
           <Parameter Name="Evaluator" Type="char" Mode="In" />
@@ -82,8 +91,27 @@
           <Parameter Name="H2_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="GetHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_CreateEvaFormAndReturnPrimary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EmpID" Type="char" Mode="In" />
+          <Parameter Name="Evaluator" Type="char" Mode="In" />
+          <Parameter Name="JobID" Type="int" Mode="In" />
+          <Parameter Name="ProjectNO" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="SP_DeleteHeaderBot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="H3_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_DeleteHeaderMid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="H2_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_DeleteHeaderTop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="H1_ID" Type="int" Mode="In" />
+          <Parameter Name="JobID" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_GetAllHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetAllHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_GetEvaHeaderByEvaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EvaID" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_GetHeader2BYHJ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="HJ_ID" Type="int" Mode="In" />
         </Function>
@@ -94,6 +122,10 @@
         <Function Name="SP_GetJobDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_HeaderTopByJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_HeaderTopByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_InsertScore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EvaID" Type="int" Mode="In" />
+          <Parameter Name="H3_ID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="PSESModelStoreContainer">
           <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
@@ -101,6 +133,7 @@
           <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -193,6 +226,30 @@
             <Parameter Name="JobID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_HeaderTopByJobID" ReturnType="Collection(PSESModel.SP_HeaderTopByJobID_Result)" />
+          <FunctionImport Name="SP_CreateEvaFormAndReturnPrimary" ReturnType="Collection(Int32)">
+            <Parameter Name="EmpID" Mode="In" Type="String" />
+            <Parameter Name="Evaluator" Mode="In" Type="String" />
+            <Parameter Name="JobID" Mode="In" Type="Int32" />
+            <Parameter Name="ProjectNO" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tblScore" EntityType="PSESModel.tblScore" />
+          <FunctionImport Name="SP_InsertScore">
+            <Parameter Name="EvaID" Mode="In" Type="Int32" />
+            <Parameter Name="H3_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetEvaHeaderByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaHeaderByEvaID_Result)">
+          <Parameter Name="EvaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DeleteHeaderTop">
+            <Parameter Name="H1_ID" Mode="In" Type="Int32" />
+            <Parameter Name="JobID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DeleteHeaderBot">
+            <Parameter Name="H3_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DeleteHeaderMid">
+            <Parameter Name="H2_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -265,6 +322,31 @@
           <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="Alias" Nullable="true" MaxLength="1" />
           <Property Type="Int32" Name="HJ_ID" Nullable="false" />
+          <Property Type="Int32" Name="PositionNo" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="tblScore">
+          <Key>
+            <PropertyRef Name="Score_ID" />
+          </Key>
+          <Property Name="Score_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="H3_ID" Type="Int32" />
+          <Property Name="point" Type="Int32" />
+          <Property Name="Eva_ID" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="SP_GetEvaHeaderByEvaID_Result">
+          <Property Type="DateTime" Name="startdateplan" Nullable="true" Precision="23" />
+          <Property Type="String" Name="TitleNameThai" Nullable="false" MaxLength="15" />
+          <Property Type="DateTime" Name="FinishDatePlan" Nullable="true" Precision="23" />
+          <Property Type="String" Name="projectcode" Nullable="true" MaxLength="10" />
+          <Property Type="Int32" Name="projecttypeid" Nullable="true" />
+          <Property Type="String" Name="customercompanyalias" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="EmployeeNO" Nullable="false" MaxLength="10" />
+          <Property Type="Int32" Name="Eva_ID" Nullable="false" />
+          <Property Type="String" Name="EvaluatorNO" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="ProjectNO" Nullable="true" MaxLength="15" />
+          <Property Type="Byte" Name="TitleNo" Nullable="true" />
+          <Property Type="String" Name="EmployeeFirstNameThai" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="EmployeeLastNameThai" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="PositionNo" Nullable="true" />
         </ComplexType>
       </Schema>
@@ -430,6 +512,41 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_CreateEvaFormAndReturnPrimary" FunctionName="PSESModel.Store.SP_CreateEvaFormAndReturnPrimary" />
+          <EntitySetMapping Name="tblScore">
+            <EntityTypeMapping TypeName="PSESModel.tblScore">
+              <MappingFragment StoreEntitySet="tblScore">
+                <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+                <ScalarProperty Name="point" ColumnName="point" />
+                <ScalarProperty Name="H3_ID" ColumnName="H3_ID" />
+                <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertScore" FunctionName="PSESModel.Store.SP_InsertScore" />
+          <FunctionImportMapping FunctionImportName="SP_GetEvaHeaderByEvaID" FunctionName="PSESModel.Store.SP_GetEvaHeaderByEvaID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PSESModel.SP_GetEvaHeaderByEvaID_Result">
+                <ScalarProperty Name="startdateplan" ColumnName="startdateplan" />
+                <ScalarProperty Name="TitleNameThai" ColumnName="TitleNameThai" />
+                <ScalarProperty Name="FinishDatePlan" ColumnName="FinishDatePlan" />
+                <ScalarProperty Name="projectcode" ColumnName="projectcode" />
+                <ScalarProperty Name="projecttypeid" ColumnName="projecttypeid" />
+                <ScalarProperty Name="customercompanyalias" ColumnName="customercompanyalias" />
+                <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
+                <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+                <ScalarProperty Name="EvaluatorNO" ColumnName="EvaluatorNO" />
+                <ScalarProperty Name="ProjectNO" ColumnName="ProjectNO" />
+                <ScalarProperty Name="TitleNo" ColumnName="TitleNo" />
+                <ScalarProperty Name="EmployeeFirstNameThai" ColumnName="EmployeeFirstNameThai" />
+                <ScalarProperty Name="EmployeeLastNameThai" ColumnName="EmployeeLastNameThai" />
+                <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_DeleteHeaderTop" FunctionName="PSESModel.Store.SP_DeleteHeaderTop" />
+          <FunctionImportMapping FunctionImportName="SP_DeleteHeaderBot" FunctionName="PSESModel.Store.SP_DeleteHeaderBot" />
+          <FunctionImportMapping FunctionImportName="SP_DeleteHeaderMid" FunctionName="PSESModel.Store.SP_DeleteHeaderMid" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

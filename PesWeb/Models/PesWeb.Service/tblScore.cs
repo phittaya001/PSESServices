@@ -15,14 +15,16 @@ namespace PesWeb.Service
 using System;
     using System.Collections.Generic;
     
-public partial class tblHeaderJob
+public partial class tblScore
 {
 
-    public int HJ_ID { get; set; }
+    public int Score_ID { get; set; }
 
-    public Nullable<int> PositionNo { get; set; }
+    public Nullable<int> H3_ID { get; set; }
 
-    public Nullable<int> H1_ID { get; set; }
+    public Nullable<int> point { get; set; }
+
+    public Nullable<int> Eva_ID { get; set; }
 
 }
 

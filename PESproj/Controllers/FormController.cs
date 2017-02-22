@@ -17,7 +17,7 @@ namespace PESproj.Controllers
     {
         [Route("CreateEvaHeader")]
         [HttpPost]
-        public int createForm([FromBody]JObject Data)
+        public string createForm([FromBody]JObject Data)
         {
             tblEvaluation Eva = new tblEvaluation();
             Eva.EmployeeNO = Data["EmployeeNO"].ToString();
@@ -25,17 +25,29 @@ namespace PESproj.Controllers
             Eva.Job_ID = Convert.ToInt32(Data["JobID"].ToString());
             Eva.ProjectNO = Data["ProjectNO"].ToString();
             var svc = ServiceContainer.GetService<PesWeb.Service.Modules.FormManage>();
-            svc.createForm(Eva);
 
-            return svc.getEvaID(Eva);
+            PSESEntities db = new PSESEntities();
+            List<SP_GetAllHeaderByJobID_Result> AllHeader = db.SP_GetAllHeaderByJobID().Where(a => a.JobID == Convert.ToInt32(Data["JobID"].ToString())).ToList();
+
+            int EvaID = svc.createForm(Eva);
+            tblScore score = new tblScore();
+            foreach(SP_GetAllHeaderByJobID_Result temp in AllHeader)
+            {
+                score.Eva_ID = EvaID;
+                score.H3_ID = temp.H3_ID;
+                svc.InsertScore(score);
+            }
+            return "Success";
         }
 
-        [Route("CreateDataByEvaID/{EvaID}")]
+        [Route("EvaHeader/{EvaID}")]
         [HttpGet]
-        public int Evaluation(int EvaID)
+        public List<SP_GetEvaHeaderByEvaID_Result> GetEvaHeader(int EvaID)
         {
-
-            return 0;
+            var svc = ServiceContainer.GetService<PesWeb.Service.Modules.FormManage>();
+            
+            return svc.getEvaDataByEvaID(EvaID).ToList();
         }
+
     }
 }

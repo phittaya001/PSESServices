@@ -59,6 +59,15 @@
     <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
     <Property Name="UpdateDate" Type="smalldatetime" />
   </EntityType>
+  <EntityType Name="tblScore">
+    <Key>
+      <PropertyRef Name="Score_ID" />
+    </Key>
+    <Property Name="Score_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="H3_ID" Type="int" />
+    <Property Name="point" Type="int" />
+    <Property Name="Eva_ID" Type="int" />
+  </EntityType>
   <Function Name="CreateForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EmpID" Type="char" Mode="In" />
     <Parameter Name="Evaluator" Type="char" Mode="In" />
@@ -77,8 +86,17 @@
     <Parameter Name="H2_ID" Type="int" Mode="In" />
   </Function>
   <Function Name="GetHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_CreateEvaFormAndReturnPrimary" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EmpID" Type="char" Mode="In" />
+    <Parameter Name="Evaluator" Type="char" Mode="In" />
+    <Parameter Name="JobID" Type="int" Mode="In" />
+    <Parameter Name="ProjectNO" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SP_GetAllHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SP_GetAllHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_GetEvaHeaderByEvaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_GetHeader2BYHJ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="HJ_ID" Type="int" Mode="In" />
   </Function>
@@ -89,6 +107,10 @@
   <Function Name="SP_GetJobDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SP_HeaderTopByJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SP_HeaderTopByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_InsertScore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+    <Parameter Name="H3_ID" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="PSESModelStoreContainer">
     <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
@@ -96,5 +118,6 @@
     <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

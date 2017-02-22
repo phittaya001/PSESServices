@@ -48,5 +48,22 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.SP_GetHeaderMidByHeaderTopAndJobID(H1_ID,JobID).ToList();
         }
+
+        public void DeleteHeaderTop(int H1_ID,int JobID)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_DeleteHeaderTop(H1_ID, JobID);
+        }
+        public void DeleteHeaderMid(int H2_ID)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_DeleteHeaderMid(H2_ID);
+        }
+        public void DeleteHeaderBot(int H3_ID)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_DeleteHeaderBot(H3_ID);
+        }
+
     }
 }

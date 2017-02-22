@@ -20,3 +20,14 @@ D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Debug\Castle.Windsor.xm
 D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\obj\Debug\CSI.CastleWindsorHelper.csprojResolveAssemblyReference.cache
 D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\obj\Debug\CastleWindsorHelper.dll
 D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\obj\Debug\CastleWindsorHelper.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Debug\CastleWindsorHelper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Debug\CastleWindsorHelper.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Debug\Castle.Core.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Debug\Castle.Windsor.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Debug\CSI.Common.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Debug\CSI.Common.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Debug\Castle.Core.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Debug\Castle.Windsor.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\obj\Debug\CSI.CastleWindsorHelper.csprojResolveAssemblyReference.cache
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\obj\Debug\CastleWindsorHelper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\obj\Debug\CastleWindsorHelper.pdb

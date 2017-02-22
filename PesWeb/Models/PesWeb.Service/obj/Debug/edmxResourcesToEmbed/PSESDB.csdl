@@ -85,6 +85,20 @@
       <Parameter Name="JobID" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_HeaderTopByJobID" ReturnType="Collection(PSESModel.SP_HeaderTopByJobID_Result)" />
+    <FunctionImport Name="SP_CreateEvaFormAndReturnPrimary" ReturnType="Collection(Int32)">
+      <Parameter Name="EmpID" Mode="In" Type="String" />
+      <Parameter Name="Evaluator" Mode="In" Type="String" />
+      <Parameter Name="JobID" Mode="In" Type="Int32" />
+      <Parameter Name="ProjectNO" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="tblScore" EntityType="PSESModel.tblScore" />
+    <FunctionImport Name="SP_InsertScore">
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
+      <Parameter Name="H3_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetEvaHeaderByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaHeaderByEvaID_Result)">
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -157,6 +171,31 @@
     <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
     <Property Type="String" Name="Alias" Nullable="true" MaxLength="1" />
     <Property Type="Int32" Name="HJ_ID" Nullable="false" />
+    <Property Type="Int32" Name="PositionNo" Nullable="true" />
+  </ComplexType>
+  <EntityType Name="tblScore">
+    <Key>
+      <PropertyRef Name="Score_ID" />
+    </Key>
+    <Property Name="Score_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="H3_ID" Type="Int32" />
+    <Property Name="point" Type="Int32" />
+    <Property Name="Eva_ID" Type="Int32" />
+  </EntityType>
+  <ComplexType Name="SP_GetEvaHeaderByEvaID_Result">
+    <Property Type="DateTime" Name="startdateplan" Nullable="true" Precision="23" />
+    <Property Type="String" Name="TitleNameThai" Nullable="false" MaxLength="15" />
+    <Property Type="DateTime" Name="FinishDatePlan" Nullable="true" Precision="23" />
+    <Property Type="String" Name="projectcode" Nullable="true" MaxLength="10" />
+    <Property Type="Int32" Name="projecttypeid" Nullable="true" />
+    <Property Type="String" Name="customercompanyalias" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="EmployeeNO" Nullable="false" MaxLength="10" />
+    <Property Type="Int32" Name="Eva_ID" Nullable="false" />
+    <Property Type="String" Name="EvaluatorNO" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ProjectNO" Nullable="true" MaxLength="15" />
+    <Property Type="Byte" Name="TitleNo" Nullable="true" />
+    <Property Type="String" Name="EmployeeFirstNameThai" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="EmployeeLastNameThai" Nullable="true" MaxLength="30" />
     <Property Type="Int32" Name="PositionNo" Nullable="true" />
   </ComplexType>
 </Schema>

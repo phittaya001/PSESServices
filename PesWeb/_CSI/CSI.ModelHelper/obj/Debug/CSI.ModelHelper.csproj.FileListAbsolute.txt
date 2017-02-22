@@ -15,3 +15,12 @@ D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Debug\Castle.Core.xml
 D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.ModelHelper\obj\Debug\CSI.ModelHelper.csprojResolveAssemblyReference.cache
 D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.ModelHelper\obj\Debug\CSI.ModelHelper.dll
 D:\PesWeb\PesWeb\PesWeb\_CSI\CSI.ModelHelper\obj\Debug\CSI.ModelHelper.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Debug\CSI.ModelHelper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Debug\CSI.ModelHelper.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Debug\AutoMapper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Debug\Castle.Core.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Debug\AutoMapper.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Debug\Castle.Core.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\obj\Debug\CSI.ModelHelper.csprojResolveAssemblyReference.cache
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\obj\Debug\CSI.ModelHelper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\obj\Debug\CSI.ModelHelper.pdb

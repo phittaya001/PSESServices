@@ -127,5 +127,29 @@ namespace PESproj.Controllers
             return GetHeaderBot;
         }
 
+        [Route("HeaderTop/Delete/{HeaderTopID}/{JobID}")]
+        [HttpDelete]
+        public List<tblHeaderTop> DeleteHeaderTop(int HeaderTopID,int JobID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            header.DeleteHeaderTop(HeaderTopID, JobID);
+            return header.getAllHeaderTop().ToList();
+        }
+
+        [Route("HeaderMid/Delete/{HeaderMidID}")]
+        [HttpDelete]
+        public void DeleteHeaderMid(int HeaderMidID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            header.DeleteHeaderMid(HeaderMidID);
+        }
+
+        [Route("HeaderBot/Delete/{HeaderBotID}")]
+        [HttpDelete]
+        public void DeleteHeaderBot(int HeaderBotID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            header.DeleteHeaderBot(HeaderBotID);
+        }
     }
 }

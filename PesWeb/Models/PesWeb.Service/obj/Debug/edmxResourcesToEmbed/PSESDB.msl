@@ -158,5 +158,37 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_CreateEvaFormAndReturnPrimary" FunctionName="PSESModel.Store.SP_CreateEvaFormAndReturnPrimary" />
+    <EntitySetMapping Name="tblScore">
+      <EntityTypeMapping TypeName="PSESModel.tblScore">
+        <MappingFragment StoreEntitySet="tblScore">
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+          <ScalarProperty Name="point" ColumnName="point" />
+          <ScalarProperty Name="H3_ID" ColumnName="H3_ID" />
+          <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_InsertScore" FunctionName="PSESModel.Store.SP_InsertScore" />
+    <FunctionImportMapping FunctionImportName="SP_GetEvaHeaderByEvaID" FunctionName="PSESModel.Store.SP_GetEvaHeaderByEvaID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetEvaHeaderByEvaID_Result">
+          <ScalarProperty Name="startdateplan" ColumnName="startdateplan" />
+          <ScalarProperty Name="TitleNameThai" ColumnName="TitleNameThai" />
+          <ScalarProperty Name="FinishDatePlan" ColumnName="FinishDatePlan" />
+          <ScalarProperty Name="projectcode" ColumnName="projectcode" />
+          <ScalarProperty Name="projecttypeid" ColumnName="projecttypeid" />
+          <ScalarProperty Name="customercompanyalias" ColumnName="customercompanyalias" />
+          <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+          <ScalarProperty Name="EvaluatorNO" ColumnName="EvaluatorNO" />
+          <ScalarProperty Name="ProjectNO" ColumnName="ProjectNO" />
+          <ScalarProperty Name="TitleNo" ColumnName="TitleNo" />
+          <ScalarProperty Name="EmployeeFirstNameThai" ColumnName="EmployeeFirstNameThai" />
+          <ScalarProperty Name="EmployeeLastNameThai" ColumnName="EmployeeLastNameThai" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>
