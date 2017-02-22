@@ -64,15 +64,17 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             db.SP_DeleteHeaderBot(H3_ID);
         }
-        public void InsertHeaderTop(string Text,string Text_Eng,string Alias)
+        public void InsertHeaderTop(string Text,string Text_Eng,string Alias,int JobID)
         {
             PSESEntities db = new PSESEntities();
-            db.InsertHeaderTop(Text, Text_Eng, Alias);
+            int H1_ID = db.InsertHeaderTop(Text, Text_Eng, Alias);
+            db.SP_InsertHeaderJob(JobID, H1_ID);
         }
 
-        public void InsertHeaderMid(string Text,string Text_Eng,int HJ_ID)
-        {
-
-        }
+        //public void InsertHeaderMid(string Text,string Text_Eng,int H1_ID,int JobID)
+        //{
+        //    PSESEntities db = new PSESEntities();
+        //    db.InsertHeaderMid(Text,H1_ID,JobID,Text_Eng);
+        //}
     }
 }

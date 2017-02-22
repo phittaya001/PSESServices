@@ -153,12 +153,20 @@ namespace PESproj.Controllers
             header.DeleteHeaderBot(HeaderBotID);
         }
 
-        [Route("HeaderBot/HeaderTop/Insert")]
+        [Route("HeaderTop/Insert")]
         [HttpPut]
         public void InsertHeaderTop([FromBody]JObject Data)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
-            header.InsertHeaderTop(Data["Text"].ToString(), Data["Alias"].ToString(), Data["Text_Eng"].ToString());
+            header.InsertHeaderTop(Data["Text"].ToString(), Data["Alias"].ToString(), Data["Text_Eng"].ToString(),Convert.ToInt32(Data["JobID"].ToString()));
         }
+
+        //[Route("HeaderMid/Insert")]
+        //[HttpPut]
+        //public void InsertHeaderMid([FromBody]JObject Data)
+        //{
+        //    var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+        //    header.InsertHeaderMid(Data["Text"].ToString(), Data["Alias"].ToString(), Data["Text_Eng"].ToString());
+        //}
     }
 }

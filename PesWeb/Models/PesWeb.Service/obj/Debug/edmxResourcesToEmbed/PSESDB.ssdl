@@ -40,7 +40,7 @@
     <Key>
       <PropertyRef Name="H1_ID" />
     </Key>
-    <Property Name="H1_ID" Type="int" Nullable="false" />
+    <Property Name="H1_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="Text" Type="varchar" MaxLength="255" />
     <Property Name="Alias" Type="char" MaxLength="1" />
     <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
@@ -92,7 +92,8 @@
   </Function>
   <Function Name="InsertHeaderMid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Text" Type="varchar" Mode="In" />
-    <Parameter Name="HJ_ID" Type="int" Mode="In" />
+    <Parameter Name="H1_ID" Type="int" Mode="In" />
+    <Parameter Name="JobID" Type="int" Mode="In" />
     <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
   </Function>
   <Function Name="InsertHeaderTop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">

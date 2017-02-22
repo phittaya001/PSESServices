@@ -115,7 +115,8 @@
     </FunctionImport>
     <FunctionImport Name="InsertHeaderMid">
       <Parameter Name="Text" Mode="In" Type="String" />
-      <Parameter Name="HJ_ID" Mode="In" Type="Int32" />
+      <Parameter Name="H1_ID" Mode="In" Type="Int32" />
+      <Parameter Name="JobID" Mode="In" Type="Int32" />
       <Parameter Name="Text_Eng" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="InsertHeaderTop">

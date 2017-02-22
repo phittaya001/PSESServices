@@ -45,7 +45,7 @@
           <Key>
             <PropertyRef Name="H1_ID" />
           </Key>
-          <Property Name="H1_ID" Type="int" Nullable="false" />
+          <Property Name="H1_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="Text" Type="varchar" MaxLength="255" />
           <Property Name="Alias" Type="char" MaxLength="1" />
           <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
@@ -97,7 +97,8 @@
         </Function>
         <Function Name="InsertHeaderMid" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Text" Type="varchar" Mode="In" />
-          <Parameter Name="HJ_ID" Type="int" Mode="In" />
+          <Parameter Name="H1_ID" Type="int" Mode="In" />
+          <Parameter Name="JobID" Type="int" Mode="In" />
           <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
         </Function>
         <Function Name="InsertHeaderTop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -136,6 +137,10 @@
         <Function Name="SP_GetJobDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_HeaderTopByJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_HeaderTopByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_InsertHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="JobID" Type="int" Mode="In" />
+          <Parameter Name="H1_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_InsertScore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EvaID" Type="int" Mode="In" />
           <Parameter Name="H3_ID" Type="int" Mode="In" />
@@ -270,13 +275,18 @@
           </FunctionImport>
           <FunctionImport Name="InsertHeaderMid">
             <Parameter Name="Text" Mode="In" Type="String" />
-            <Parameter Name="HJ_ID" Mode="In" Type="Int32" />
+            <Parameter Name="H1_ID" Mode="In" Type="Int32" />
+            <Parameter Name="JobID" Mode="In" Type="Int32" />
             <Parameter Name="Text_Eng" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="InsertHeaderTop">
             <Parameter Name="Text" Mode="In" Type="String" />
             <Parameter Name="Alias" Mode="In" Type="String" />
             <Parameter Name="Text_Eng" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_InsertHeaderJob">
+            <Parameter Name="JobID" Mode="In" Type="Int32" />
+            <Parameter Name="H1_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -578,6 +588,7 @@
           <FunctionImportMapping FunctionImportName="InsertHeaderBot" FunctionName="PSESModel.Store.InsertHeaderBot" />
           <FunctionImportMapping FunctionImportName="InsertHeaderMid" FunctionName="PSESModel.Store.InsertHeaderMid" />
           <FunctionImportMapping FunctionImportName="InsertHeaderTop" FunctionName="PSESModel.Store.InsertHeaderTop" />
+          <FunctionImportMapping FunctionImportName="SP_InsertHeaderJob" FunctionName="PSESModel.Store.SP_InsertHeaderJob" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

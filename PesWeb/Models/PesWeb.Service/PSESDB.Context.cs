@@ -320,7 +320,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual int InsertHeaderMid(string text, Nullable<int> hJ_ID, string text_Eng)
+    public virtual int InsertHeaderMid(string text, Nullable<int> h1_ID, Nullable<int> jobID, string text_Eng)
     {
 
         var textParameter = text != null ?
@@ -328,9 +328,14 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("Text", typeof(string));
 
 
-        var hJ_IDParameter = hJ_ID.HasValue ?
-            new ObjectParameter("HJ_ID", hJ_ID) :
-            new ObjectParameter("HJ_ID", typeof(int));
+        var h1_IDParameter = h1_ID.HasValue ?
+            new ObjectParameter("H1_ID", h1_ID) :
+            new ObjectParameter("H1_ID", typeof(int));
+
+
+        var jobIDParameter = jobID.HasValue ?
+            new ObjectParameter("JobID", jobID) :
+            new ObjectParameter("JobID", typeof(int));
 
 
         var text_EngParameter = text_Eng != null ?
@@ -338,7 +343,7 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("Text_Eng", typeof(string));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertHeaderMid", textParameter, hJ_IDParameter, text_EngParameter);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertHeaderMid", textParameter, h1_IDParameter, jobIDParameter, text_EngParameter);
     }
 
 
@@ -361,6 +366,23 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("InsertHeaderTop", textParameter, aliasParameter, text_EngParameter);
+    }
+
+
+    public virtual int SP_InsertHeaderJob(Nullable<int> jobID, Nullable<int> h1_ID)
+    {
+
+        var jobIDParameter = jobID.HasValue ?
+            new ObjectParameter("JobID", jobID) :
+            new ObjectParameter("JobID", typeof(int));
+
+
+        var h1_IDParameter = h1_ID.HasValue ?
+            new ObjectParameter("H1_ID", h1_ID) :
+            new ObjectParameter("H1_ID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertHeaderJob", jobIDParameter, h1_IDParameter);
     }
 
 }
