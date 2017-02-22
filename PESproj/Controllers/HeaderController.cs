@@ -161,12 +161,20 @@ namespace PESproj.Controllers
             header.InsertHeaderTop(Data["Text"].ToString(), Data["Alias"].ToString(), Data["Text_Eng"].ToString(),Convert.ToInt32(Data["JobID"].ToString()));
         }
 
-        //[Route("HeaderMid/Insert")]
-        //[HttpPut]
-        //public void InsertHeaderMid([FromBody]JObject Data)
-        //{
-        //    var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
-        //    header.InsertHeaderMid(Data["Text"].ToString(), Data["Alias"].ToString(), Data["Text_Eng"].ToString());
-        //}
+        [Route("HeaderMid/Insert")]
+        [HttpPut]
+        public void InsertHeaderMid([FromBody]JObject Data)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            header.InsertHeaderMid(Data["Text"].ToString(), Data["Text_Eng"].ToString(), Convert.ToInt32(Data["H1_ID"].ToString()), Convert.ToInt32(Data["JobID"].ToString()));
+        }
+
+        [Route("HeaderBot/Insert")]
+        [HttpPut]
+        public void InsertHeaderBot([FromBody]JObject Data)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            header.InsertHeaderBot(Data["Text"].ToString(), Convert.ToInt32(Data["H2_ID"].ToString()));
+        }
     }
 }
