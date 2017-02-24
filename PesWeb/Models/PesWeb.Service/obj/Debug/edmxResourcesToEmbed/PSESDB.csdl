@@ -128,6 +128,7 @@
       <Parameter Name="Alias" Mode="In" Type="String" />
       <Parameter Name="Text_Eng" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="Period" EntityType="PSESModel.Period" />
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -227,4 +228,14 @@
     <Property Type="String" Name="EmployeeLastNameThai" Nullable="true" MaxLength="30" />
     <Property Type="Int32" Name="PositionNo" Nullable="true" />
   </ComplexType>
+  <EntityType Name="Period">
+    <Key>
+      <PropertyRef Name="Period_Id" />
+    </Key>
+    <Property Name="Period_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="FinishDate" Type="DateTime" Precision="0" />
+    <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Name="Status" Type="Int32" />
+  </EntityType>
 </Schema>

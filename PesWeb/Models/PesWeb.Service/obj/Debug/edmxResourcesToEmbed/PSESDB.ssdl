@@ -1,5 +1,15 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="PSESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="Period">
+    <Key>
+      <PropertyRef Name="Period_Id" />
+    </Key>
+    <Property Name="Period_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="StartDate" Type="date" />
+    <Property Name="FinishDate" Type="date" />
+    <Property Name="Code" Type="nchar" MaxLength="10" />
+    <Property Name="Status" Type="int" />
+  </EntityType>
   <EntityType Name="tblEvaluation">
     <Key>
       <PropertyRef Name="Eva_ID" />
@@ -141,6 +151,7 @@
     <Parameter Name="H3_ID" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="PSESModelStoreContainer">
+    <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />

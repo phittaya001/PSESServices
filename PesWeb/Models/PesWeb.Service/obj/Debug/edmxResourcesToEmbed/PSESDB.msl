@@ -197,5 +197,16 @@
     <FunctionImportMapping FunctionImportName="InsertHeaderMid" FunctionName="PSESModel.Store.InsertHeaderMid" />
     <FunctionImportMapping FunctionImportName="SP_InsertHeaderJob" FunctionName="PSESModel.Store.SP_InsertHeaderJob" />
     <FunctionImportMapping FunctionImportName="InsertHeaderTop" FunctionName="PSESModel.Store.InsertHeaderTop" />
+    <EntitySetMapping Name="Period">
+      <EntityTypeMapping TypeName="PSESModel.Period">
+        <MappingFragment StoreEntitySet="Period">
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="Code" ColumnName="Code" />
+          <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="Period_Id" ColumnName="Period_Id" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

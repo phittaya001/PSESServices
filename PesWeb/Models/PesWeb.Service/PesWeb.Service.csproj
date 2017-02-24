@@ -82,6 +82,7 @@
     <Compile Include="Modules\FormManage.cs" />
     <Compile Include="Modules\HeaderManage.cs" />
     <Compile Include="Modules\LDAPHelper.cs" />
+    <Compile Include="Modules\PeriodData.cs" />
     <Compile Include="Modules\UserLogSvr.cs" />
     <Compile Include="Period.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
