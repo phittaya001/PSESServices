@@ -69,6 +69,48 @@
     <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
     <Property Name="UpdateDate" Type="smalldatetime" />
   </EntityType>
+  <EntityType Name="tblProjectEmployee">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="EmployeeNO" Type="char" MaxLength="10" />
+    <Property Name="ProjectID" Type="varchar" MaxLength="15" />
+    <Property Name="Role" Type="int" />
+  </EntityType>
+  <EntityType Name="tblProjectMember">
+    <Key>
+      <PropertyRef Name="SeqID" />
+      <PropertyRef Name="ProjectID" />
+      <PropertyRef Name="VersionNo" />
+      <PropertyRef Name="Part2ID" />
+    </Key>
+    <Property Name="SeqID" Type="int" Nullable="false" />
+    <Property Name="ProjectID" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="VersionNo" Type="smallint" Nullable="false" />
+    <Property Name="Part2ID" Type="int" Nullable="false" />
+    <Property Name="StaffID" Type="varchar" MaxLength="10" />
+    <Property Name="StaffName" Type="varchar" MaxLength="100" />
+    <Property Name="MemberTypeCode" Type="varchar" MaxLength="1" />
+    <Property Name="PositionIncharge" Type="varchar" MaxLength="10" />
+    <Property Name="PlanStartDate" Type="datetime" />
+    <Property Name="PlanFinishDate" Type="datetime" />
+    <Property Name="PlanEffortRate" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="AcctualStartDate" Type="datetime" />
+    <Property Name="AcctualFinishDate" Type="datetime" />
+    <Property Name="AcctualEffortRate" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="TransportFee" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="OnSiteAllowance" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="SpecialistFee" Type="decimal" Precision="18" Scale="3" />
+    <Property Name="OtherExpense" Type="varchar" MaxLength="100" />
+    <Property Name="OnSiteStart" Type="datetime" />
+    <Property Name="OnSiteFinish" Type="datetime" />
+    <Property Name="Remark" Type="varchar" MaxLength="500" />
+    <Property Name="IsApproved" Type="bit" />
+    <Property Name="ApprovedDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+    <Property Name="CancelDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="tblScore">
     <Key>
       <PropertyRef Name="Score_ID" />
@@ -158,6 +200,8 @@
     <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectEmployee" EntityType="Self.tblProjectEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

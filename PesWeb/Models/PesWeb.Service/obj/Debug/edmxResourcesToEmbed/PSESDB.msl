@@ -208,5 +208,46 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectEmployee">
+      <EntityTypeMapping TypeName="PSESModel.tblProjectEmployee">
+        <MappingFragment StoreEntitySet="tblProjectEmployee">
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblProjectMember">
+      <EntityTypeMapping TypeName="PSESModel.tblProjectMember">
+        <MappingFragment StoreEntitySet="tblProjectMember">
+          <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+          <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="OnSiteFinish" ColumnName="OnSiteFinish" />
+          <ScalarProperty Name="OnSiteStart" ColumnName="OnSiteStart" />
+          <ScalarProperty Name="OtherExpense" ColumnName="OtherExpense" />
+          <ScalarProperty Name="SpecialistFee" ColumnName="SpecialistFee" />
+          <ScalarProperty Name="OnSiteAllowance" ColumnName="OnSiteAllowance" />
+          <ScalarProperty Name="TransportFee" ColumnName="TransportFee" />
+          <ScalarProperty Name="AcctualEffortRate" ColumnName="AcctualEffortRate" />
+          <ScalarProperty Name="AcctualFinishDate" ColumnName="AcctualFinishDate" />
+          <ScalarProperty Name="AcctualStartDate" ColumnName="AcctualStartDate" />
+          <ScalarProperty Name="PlanEffortRate" ColumnName="PlanEffortRate" />
+          <ScalarProperty Name="PlanFinishDate" ColumnName="PlanFinishDate" />
+          <ScalarProperty Name="PlanStartDate" ColumnName="PlanStartDate" />
+          <ScalarProperty Name="PositionIncharge" ColumnName="PositionIncharge" />
+          <ScalarProperty Name="MemberTypeCode" ColumnName="MemberTypeCode" />
+          <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+          <ScalarProperty Name="Part2ID" ColumnName="Part2ID" />
+          <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="SeqID" ColumnName="SeqID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

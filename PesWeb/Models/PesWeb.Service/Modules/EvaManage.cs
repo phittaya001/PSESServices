@@ -13,5 +13,17 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.Period.ToList();
         }
+
+        public List<Period> GetPeriod()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.Period.ToList();
+        }
+
+        public List<tblProjectMember> getProjectMember()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblProjectMember.ToList();
+        }
     }
 }

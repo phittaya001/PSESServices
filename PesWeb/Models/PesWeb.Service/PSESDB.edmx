@@ -74,6 +74,48 @@
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
           <Property Name="UpdateDate" Type="smalldatetime" />
         </EntityType>
+        <EntityType Name="tblProjectEmployee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="EmployeeNO" Type="char" MaxLength="10" />
+          <Property Name="ProjectID" Type="varchar" MaxLength="15" />
+          <Property Name="Role" Type="int" />
+        </EntityType>
+        <EntityType Name="tblProjectMember">
+          <Key>
+            <PropertyRef Name="SeqID" />
+            <PropertyRef Name="ProjectID" />
+            <PropertyRef Name="VersionNo" />
+            <PropertyRef Name="Part2ID" />
+          </Key>
+          <Property Name="SeqID" Type="int" Nullable="false" />
+          <Property Name="ProjectID" Type="varchar" MaxLength="15" Nullable="false" />
+          <Property Name="VersionNo" Type="smallint" Nullable="false" />
+          <Property Name="Part2ID" Type="int" Nullable="false" />
+          <Property Name="StaffID" Type="varchar" MaxLength="10" />
+          <Property Name="StaffName" Type="varchar" MaxLength="100" />
+          <Property Name="MemberTypeCode" Type="varchar" MaxLength="1" />
+          <Property Name="PositionIncharge" Type="varchar" MaxLength="10" />
+          <Property Name="PlanStartDate" Type="datetime" />
+          <Property Name="PlanFinishDate" Type="datetime" />
+          <Property Name="PlanEffortRate" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="AcctualStartDate" Type="datetime" />
+          <Property Name="AcctualFinishDate" Type="datetime" />
+          <Property Name="AcctualEffortRate" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="TransportFee" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="OnSiteAllowance" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="SpecialistFee" Type="decimal" Precision="18" Scale="3" />
+          <Property Name="OtherExpense" Type="varchar" MaxLength="100" />
+          <Property Name="OnSiteStart" Type="datetime" />
+          <Property Name="OnSiteFinish" Type="datetime" />
+          <Property Name="Remark" Type="varchar" MaxLength="500" />
+          <Property Name="IsApproved" Type="bit" />
+          <Property Name="ApprovedDate" Type="datetime" />
+          <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+          <Property Name="CancelDate" Type="datetime" />
+        </EntityType>
         <EntityType Name="tblScore">
           <Key>
             <PropertyRef Name="Score_ID" />
@@ -163,6 +205,8 @@
           <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectEmployee" EntityType="Self.tblProjectEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
         </EntityContainer>
       </Schema></edmx:StorageModels>
@@ -300,6 +344,8 @@
             <Parameter Name="Text_Eng" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="Period" EntityType="PSESModel.Period" />
+          <EntitySet Name="tblProjectEmployee" EntityType="PSESModel.tblProjectEmployee" />
+          <EntitySet Name="tblProjectMember" EntityType="PSESModel.tblProjectMember" />
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -408,6 +454,48 @@
           <Property Name="FinishDate" Type="DateTime" Precision="0" />
           <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
           <Property Name="Status" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblProjectEmployee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeNO" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="ProjectID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="Int32" />
+        </EntityType>
+        <EntityType Name="tblProjectMember">
+          <Key>
+            <PropertyRef Name="SeqID" />
+            <PropertyRef Name="ProjectID" />
+            <PropertyRef Name="VersionNo" />
+            <PropertyRef Name="Part2ID" />
+          </Key>
+          <Property Name="SeqID" Type="Int32" Nullable="false" />
+          <Property Name="ProjectID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="VersionNo" Type="Int16" Nullable="false" />
+          <Property Name="Part2ID" Type="Int32" Nullable="false" />
+          <Property Name="StaffID" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="StaffName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="MemberTypeCode" Type="String" MaxLength="1" FixedLength="false" Unicode="false" />
+          <Property Name="PositionIncharge" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="PlanStartDate" Type="DateTime" Precision="3" />
+          <Property Name="PlanFinishDate" Type="DateTime" Precision="3" />
+          <Property Name="PlanEffortRate" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="AcctualStartDate" Type="DateTime" Precision="3" />
+          <Property Name="AcctualFinishDate" Type="DateTime" Precision="3" />
+          <Property Name="AcctualEffortRate" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="TransportFee" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="OnSiteAllowance" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="SpecialistFee" Type="Decimal" Precision="18" Scale="3" />
+          <Property Name="OtherExpense" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="OnSiteStart" Type="DateTime" Precision="3" />
+          <Property Name="OnSiteFinish" Type="DateTime" Precision="3" />
+          <Property Name="Remark" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="IsApproved" Type="Boolean" />
+          <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="CancelDate" Type="DateTime" Precision="3" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -619,6 +707,47 @@
                 <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
                 <ScalarProperty Name="StartDate" ColumnName="StartDate" />
                 <ScalarProperty Name="Period_Id" ColumnName="Period_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjectEmployee">
+            <EntityTypeMapping TypeName="PSESModel.tblProjectEmployee">
+              <MappingFragment StoreEntitySet="tblProjectEmployee">
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblProjectMember">
+            <EntityTypeMapping TypeName="PSESModel.tblProjectMember">
+              <MappingFragment StoreEntitySet="tblProjectMember">
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="ApprovedDate" ColumnName="ApprovedDate" />
+                <ScalarProperty Name="IsApproved" ColumnName="IsApproved" />
+                <ScalarProperty Name="Remark" ColumnName="Remark" />
+                <ScalarProperty Name="OnSiteFinish" ColumnName="OnSiteFinish" />
+                <ScalarProperty Name="OnSiteStart" ColumnName="OnSiteStart" />
+                <ScalarProperty Name="OtherExpense" ColumnName="OtherExpense" />
+                <ScalarProperty Name="SpecialistFee" ColumnName="SpecialistFee" />
+                <ScalarProperty Name="OnSiteAllowance" ColumnName="OnSiteAllowance" />
+                <ScalarProperty Name="TransportFee" ColumnName="TransportFee" />
+                <ScalarProperty Name="AcctualEffortRate" ColumnName="AcctualEffortRate" />
+                <ScalarProperty Name="AcctualFinishDate" ColumnName="AcctualFinishDate" />
+                <ScalarProperty Name="AcctualStartDate" ColumnName="AcctualStartDate" />
+                <ScalarProperty Name="PlanEffortRate" ColumnName="PlanEffortRate" />
+                <ScalarProperty Name="PlanFinishDate" ColumnName="PlanFinishDate" />
+                <ScalarProperty Name="PlanStartDate" ColumnName="PlanStartDate" />
+                <ScalarProperty Name="PositionIncharge" ColumnName="PositionIncharge" />
+                <ScalarProperty Name="MemberTypeCode" ColumnName="MemberTypeCode" />
+                <ScalarProperty Name="StaffName" ColumnName="StaffName" />
+                <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+                <ScalarProperty Name="Part2ID" ColumnName="Part2ID" />
+                <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+                <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+                <ScalarProperty Name="SeqID" ColumnName="SeqID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

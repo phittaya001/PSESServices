@@ -83,6 +83,7 @@
     <Compile Include="Modules\HeaderManage.cs" />
     <Compile Include="Modules\LDAPHelper.cs" />
     <Compile Include="Modules\PeriodData.cs" />
+    <Compile Include="Modules\ProjectMember.cs" />
     <Compile Include="Modules\UserLogSvr.cs" />
     <Compile Include="Period.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
@@ -190,6 +191,12 @@
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="tblPosition.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblProjectEmployee.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblProjectMember.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="tblScore.cs">
