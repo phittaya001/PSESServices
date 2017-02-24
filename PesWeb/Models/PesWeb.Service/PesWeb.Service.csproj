@@ -78,10 +78,14 @@
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeData.cs" />
+    <Compile Include="Modules\EvaManage.cs" />
     <Compile Include="Modules\FormManage.cs" />
     <Compile Include="Modules\HeaderManage.cs" />
     <Compile Include="Modules\LDAPHelper.cs" />
     <Compile Include="Modules\UserLogSvr.cs" />
+    <Compile Include="Period.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="PSESDB.Context.cs">
       <AutoGen>True</AutoGen>

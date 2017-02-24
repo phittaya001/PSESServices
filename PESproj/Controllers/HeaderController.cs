@@ -22,7 +22,7 @@ namespace PESproj.Controllers
             return GetHeaderTop;
         }
 
-        [Route("HeaderTop/Job/{JobID}")]
+        [Route("HeaderTop/Job/{JobID}")] // 
         [HttpGet]
         public List<SP_HeaderTopByJobID_Result> GetHeaderTopByJobID(int JobID)
         {
@@ -155,15 +155,24 @@ namespace PESproj.Controllers
 
         [Route("HeaderTop/Insert")]
         [HttpPut]
-        public void InsertHeaderTop([FromBody]JObject Data)
+        public HttpResponseMessage InsertHeaderTop([FromBody]JObject Data)
         {
-            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
-            //tblHeaderTop top = new tblHeaderTop();
-            //top.Alias = Data["Alias"].ToString();
-            //top.Text = Data["Text"].ToString();
-            //top.Text_Eng = Data["Text_Eng"].ToString();
+            try
+            {
+                var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+                //tblHeaderTop top = new tblHeaderTop();
+                //top.Alias = Data["Alias"].ToString();
+                //top.Text = Data["Text"].ToString();
+                //top.Text_Eng = Data["Text_Eng"].ToString();
 
-            header.InsertHeaderTop(Data["Text"].ToString(), Data["Text_Eng"].ToString(), Data["Alias"].ToString(), Convert.ToInt32(Data["PositionID"].ToString()));
+                header.InsertHeaderTop(Data["Text"].ToString(), Data["Text_Eng"].ToString(), Data["Alias"].ToString(), Convert.ToInt32(Data["PositionId"].ToString()));
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.ExpectationFailed);
+            }
+            
         }
 
         [Route("HeaderMid/Insert")]

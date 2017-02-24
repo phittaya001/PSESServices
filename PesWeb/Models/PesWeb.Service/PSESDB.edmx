@@ -5,6 +5,16 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="PSESModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="Period_Id" />
+          </Key>
+          <Property Name="Period_Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="StartDate" Type="date" />
+          <Property Name="FinishDate" Type="date" />
+          <Property Name="Code" Type="nchar" MaxLength="10" />
+          <Property Name="Status" Type="int" />
+        </EntityType>
         <EntityType Name="tblEvaluation">
           <Key>
             <PropertyRef Name="Eva_ID" />
@@ -146,6 +156,7 @@
           <Parameter Name="H3_ID" Type="int" Mode="In" />
         </Function>
         <EntityContainer Name="PSESModelStoreContainer">
+          <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />
@@ -288,6 +299,7 @@
             <Parameter Name="Alias" Mode="In" Type="String" />
             <Parameter Name="Text_Eng" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="Period" EntityType="PSESModel.Period" />
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -387,6 +399,16 @@
           <Property Type="String" Name="EmployeeLastNameThai" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="PositionNo" Nullable="true" />
         </ComplexType>
+        <EntityType Name="Period">
+          <Key>
+            <PropertyRef Name="Period_Id" />
+          </Key>
+          <Property Name="Period_Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="FinishDate" Type="DateTime" Precision="0" />
+          <Property Name="Code" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="Status" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -589,6 +611,17 @@
           <FunctionImportMapping FunctionImportName="InsertHeaderMid" FunctionName="PSESModel.Store.InsertHeaderMid" />
           <FunctionImportMapping FunctionImportName="SP_InsertHeaderJob" FunctionName="PSESModel.Store.SP_InsertHeaderJob" />
           <FunctionImportMapping FunctionImportName="InsertHeaderTop" FunctionName="PSESModel.Store.InsertHeaderTop" />
+          <EntitySetMapping Name="Period">
+            <EntityTypeMapping TypeName="PSESModel.Period">
+              <MappingFragment StoreEntitySet="Period">
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Code" ColumnName="Code" />
+                <ScalarProperty Name="FinishDate" ColumnName="FinishDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="Period_Id" ColumnName="Period_Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

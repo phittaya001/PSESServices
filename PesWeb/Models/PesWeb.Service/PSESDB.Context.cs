@@ -49,6 +49,8 @@ public partial class PSESEntities : DbContext
 
     public virtual DbSet<tblScore> tblScore { get; set; }
 
+    public virtual DbSet<Period> Period { get; set; }
+
 
     public virtual int CreateForm(string empID, string evaluator, Nullable<int> jobID, string projectNO)
     {
