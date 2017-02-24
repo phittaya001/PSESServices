@@ -28,6 +28,7 @@ namespace PESproj.Controllers
                 newp.Period_Id = p.Period_Id;
                 newp.StartDate = p.StartDate.ToString().Replace('-', '/').Substring(0,10);
                 newp.FinishDate = p.FinishDate.ToString().Replace('-', '/').Substring(0, 10);
+                newp.Status = p.Status;
                 pd.Add(newp);
             }
             return pd;
@@ -52,14 +53,15 @@ namespace PESproj.Controllers
                     {
                         ProjectMember  resulttemp = new ProjectMember();
                         resulttemp.SeqID = temp.SeqID;
-                        resulttemp.ProjectID = temp.ProjectID;
+                        resulttemp.ProjectID = temp.ProjectID + "(" + temp.VersionNo.ToString() + ")";
                         resulttemp.VersionNo = temp.VersionNo;
                         resulttemp.Part2ID = temp.Part2ID;
+                        resulttemp.StaffName = temp.StaffName;
                         resulttemp.StaffID = temp.StaffID;
                         resulttemp.MemberTypeCode = temp.MemberTypeCode;
                         resulttemp.PositionIncharge = temp.PositionIncharge;
                         resulttemp.PlanStartDate = temp.PlanStartDate.ToString().Replace('-', '/').Substring(0,10);
-                        resulttemp.PlanFinishDate = temp.PlanFinishDate.ToString().Replace('-', '/').Substring(0, 10);
+                        resulttemp.PlanFinishDate = temp.PlanStartDate.ToString().Replace('-', '/').Substring(0, 10) + " - " + temp.PlanFinishDate.ToString().Replace('-', '/').Substring(0, 10);
                         resulttemp.PlanEffortRate = temp.PlanEffortRate;
                         resulttemp.AcctualStartDate = temp.AcctualStartDate.ToString().Replace('-', '/').Substring(0, 10);
                         resulttemp.AcctualFinishDate = temp.AcctualFinishDate.ToString().Replace('-', '/').Substring(0, 10);
