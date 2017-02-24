@@ -131,6 +131,12 @@
     <EntitySet Name="Period" EntityType="PSESModel.Period" />
     <EntitySet Name="tblProjectEmployee" EntityType="PSESModel.tblProjectEmployee" />
     <EntitySet Name="tblProjectMember" EntityType="PSESModel.tblProjectMember" />
+    <FunctionImport Name="SP_InsertEvaluation">
+      <Parameter Name="ProjectID" Mode="In" Type="String" />
+      <Parameter Name="EvaluatorID" Mode="In" Type="String" />
+      <Parameter Name="EmployeeID" Mode="In" Type="String" />
+      <Parameter Name="JobID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />

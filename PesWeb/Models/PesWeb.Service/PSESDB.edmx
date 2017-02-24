@@ -189,6 +189,12 @@
         <Function Name="SP_GetJobDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_HeaderTopByJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_HeaderTopByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_InsertEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ProjectID" Type="varchar" Mode="In" />
+          <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
+          <Parameter Name="EmployeeID" Type="varchar" Mode="In" />
+          <Parameter Name="JobID" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_InsertHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="JobID" Type="int" Mode="In" />
           <Parameter Name="H1_ID" Type="int" Mode="In" />
@@ -346,6 +352,12 @@
           <EntitySet Name="Period" EntityType="PSESModel.Period" />
           <EntitySet Name="tblProjectEmployee" EntityType="PSESModel.tblProjectEmployee" />
           <EntitySet Name="tblProjectMember" EntityType="PSESModel.tblProjectMember" />
+          <FunctionImport Name="SP_InsertEvaluation">
+            <Parameter Name="ProjectID" Mode="In" Type="String" />
+            <Parameter Name="EvaluatorID" Mode="In" Type="String" />
+            <Parameter Name="EmployeeID" Mode="In" Type="String" />
+            <Parameter Name="JobID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -751,6 +763,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertEvaluation" FunctionName="PSESModel.Store.SP_InsertEvaluation" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

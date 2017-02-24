@@ -73,9 +73,38 @@ namespace PESproj.Controllers
                 
             }
             return result;
-            
         }
 
+        [Route("InsertEva")]
+        [HttpPut]
+        public HttpResponseMessage InsertEva([FromBody]JObject Data)
+        {
+            try
+            {
+                var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+                tblEvaluation eva = new tblEvaluation();
+                eva.EmployeeNO = Data["EmployeeNO"].ToString();
+                eva.EvaluatorNO = Data["EvaluatorNO"].ToString();
+                eva.Job_ID = Convert.ToInt32(Data["PositionNO"].ToString());
+                eva.ProjectNO = Data["ProjectNO"].ToString();
+
+                header.InsertEvaData(eva);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.ExpectationFailed);
+            }
+        }
+
+        [Route("Eva/{EvaluatorID}")]
+        [HttpGet]
+        public List<tblEvaluation> getEvaData(string EvaluatorID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+
+            return header.getEvaData().Where(a=>a.EvaluatorNO==EvaluatorID).ToList();
+        }
 
     }
 }

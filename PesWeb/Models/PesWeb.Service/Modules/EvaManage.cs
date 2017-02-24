@@ -25,5 +25,17 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblProjectMember.ToList();
         }
+
+        public void InsertEvaData(tblEvaluation eva)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_InsertEvaluation(eva.ProjectNO, eva.EvaluatorNO, eva.EmployeeNO, eva.Job_ID);
+        }
+
+        public List<tblEvaluation> getEvaData()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblEvaluation.ToList();
+        }
     }
 }

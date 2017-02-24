@@ -391,6 +391,33 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("InsertHeaderTop", textParameter, aliasParameter, text_EngParameter);
     }
 
+
+    public virtual int SP_InsertEvaluation(string projectID, string evaluatorID, string employeeID, Nullable<int> jobID)
+    {
+
+        var projectIDParameter = projectID != null ?
+            new ObjectParameter("ProjectID", projectID) :
+            new ObjectParameter("ProjectID", typeof(string));
+
+
+        var evaluatorIDParameter = evaluatorID != null ?
+            new ObjectParameter("EvaluatorID", evaluatorID) :
+            new ObjectParameter("EvaluatorID", typeof(string));
+
+
+        var employeeIDParameter = employeeID != null ?
+            new ObjectParameter("EmployeeID", employeeID) :
+            new ObjectParameter("EmployeeID", typeof(string));
+
+
+        var jobIDParameter = jobID.HasValue ?
+            new ObjectParameter("JobID", jobID) :
+            new ObjectParameter("JobID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertEvaluation", projectIDParameter, evaluatorIDParameter, employeeIDParameter, jobIDParameter);
+    }
+
 }
 
 }

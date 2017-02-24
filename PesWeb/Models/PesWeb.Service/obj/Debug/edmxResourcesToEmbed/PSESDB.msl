@@ -249,5 +249,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_InsertEvaluation" FunctionName="PSESModel.Store.SP_InsertEvaluation" />
   </EntityContainerMapping>
 </Mapping>
