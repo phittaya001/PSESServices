@@ -49,6 +49,12 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblProject.ToList();
         }
+
+        public void DeleteEva(int EvaID)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_DeleteEva(EvaID);
+        }
         //GG
     }
 }

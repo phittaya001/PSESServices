@@ -132,6 +132,22 @@ namespace PESproj.Controllers
             }
             return EvaData;
         }
+
+        [Route("Delete/{EvaID}")]
+        [HttpDelete]
+        public HttpResponseMessage DeleteData(int EvaID)
+        {
+            try
+            {
+                var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+                header.DeleteEva(EvaID);
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            catch
+            {
+                return Request.CreateResponse(HttpStatusCode.ExpectationFailed);
+            }
+        }
         //GG
 
     }
