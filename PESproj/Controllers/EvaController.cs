@@ -46,10 +46,13 @@ namespace PESproj.Controllers
             if(pm.Count > 0)
             foreach (tblProjectMember epm in pm)
             {
+               
                 List<tblProjectMember> pmList = header.getProjectMember().Where(a => a.ProjectID == epm.ProjectID).ToList();
                 foreach(tblProjectMember temp in pmList)
                 {
-                    if(temp.StaffID != EmployeeId &&((temp.PlanStartDate>pr.StartDate && temp.PlanStartDate<pr.FinishDate)||(temp.PlanFinishDate > pr.StartDate && temp.PlanFinishDate < pr.FinishDate)|| (temp.PlanFinishDate < pr.StartDate && temp.PlanFinishDate > pr.FinishDate)))
+                    tblEvaluation eva = header.getEvaData().Where(a => a.EvaluatorNO == EmployeeId).Where(a => a.EmployeeNO == temp.StaffID).Where(a => a.ProjectNO == temp.ProjectID).FirstOrDefault();
+                    if(eva == null)
+                    if (temp.StaffID != EmployeeId &&((temp.PlanStartDate>pr.StartDate && temp.PlanStartDate<pr.FinishDate)||(temp.PlanFinishDate > pr.StartDate && temp.PlanFinishDate < pr.FinishDate)|| (temp.PlanFinishDate < pr.StartDate && temp.PlanFinishDate > pr.FinishDate)))
                     {
                         tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == temp.Part2ID).FirstOrDefault();
                         ProjectMember  resulttemp = new ProjectMember();
@@ -86,7 +89,7 @@ namespace PESproj.Controllers
             {
                 var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
                 tblEvaluation eva = new tblEvaluation();
-                tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a=>a.StaffID== Data["EmployeeID"].ToString()).FirstOrDefault();
+                tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a=>a.StaffID== Data["EmployeeNO"].ToString()).FirstOrDefault();
 
                 eva.EmployeeNO = Data["EmployeeNO"].ToString();
                 eva.EvaluatorNO = Data["EvaluatorNO"].ToString();
