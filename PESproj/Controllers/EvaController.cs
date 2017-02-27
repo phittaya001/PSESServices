@@ -54,14 +54,18 @@ namespace PESproj.Controllers
                     if(eva == null)
                     if (temp.StaffID != EmployeeId &&((temp.PlanStartDate>pr.StartDate && temp.PlanStartDate<pr.FinishDate)||(temp.PlanFinishDate > pr.StartDate && temp.PlanFinishDate < pr.FinishDate)|| (temp.PlanFinishDate < pr.StartDate && temp.PlanFinishDate > pr.FinishDate)))
                     {
+                        tblProject p = header.getProject().Where(a => a.ProjectID == temp.ProjectID).FirstOrDefault();
                         tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == temp.Part2ID).FirstOrDefault();
                         ProjectMember  resulttemp = new ProjectMember();
+                        tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo == temp.StaffID).FirstOrDefault();
                         resulttemp.SeqID = temp.SeqID;
                         resulttemp.ProjectID = (temp.ProjectID!=null)?temp.ProjectID:"0";
                         resulttemp.version = temp.VersionNo;
                         resulttemp.VersionNo = temp.VersionNo;
                         resulttemp.Part2ID = temp.Part2ID;
                         resulttemp.StaffName = temp.StaffName;
+                        resulttemp.Firstname = (emp!=null)?emp.EmployeeFirstName:" - ";
+                        resulttemp.Lastname = (emp != null) ? emp.EmployeeLastName:" - ";
                         resulttemp.StaffID = temp.StaffID;
                         resulttemp.MemberTypeCode = temp.MemberTypeCode;
                         resulttemp.PositionIncharge = temp.PositionIncharge;
@@ -72,6 +76,8 @@ namespace PESproj.Controllers
                         resulttemp.AcctualFinishDate = ((temp.AcctualFinishDate != null) ? temp.AcctualFinishDate.ToString().Replace('-', '/').Substring(0, 10):"No Data");
                         resulttemp.AcctualEffortRate = temp.AcctualEffortRate;
                         resulttemp.role = p2.Function;
+                        resulttemp.ProjectName = p.ProjectName;
+                        resulttemp.ProjectNameAlias = p.ProjectNameAlias;
                         result.Add(resulttemp);
                         Result_pm.Add(temp);
                     }
@@ -118,7 +124,11 @@ namespace PESproj.Controllers
                 EvaluationData newEva = new EvaluationData();
                 tblProject proj = header.getProject().Where(a => a.ProjectID == tmp.ProjectNO).FirstOrDefault();
                 tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == tmp.Job_ID).FirstOrDefault();
+                tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo == tmp.EmployeeNO).FirstOrDefault();
+                newEva.Firstname = (emp != null) ? emp.EmployeeFirstName : " - ";
+                newEva.Lastname = (emp != null) ? emp.EmployeeLastName : " - ";
                 newEva.Eva_ID = tmp.Eva_ID;
+                newEva.CustumerAlias = proj.CustomerCompanyAlias;
                 newEva.EmployeeNO = tmp.EmployeeNO;
                 newEva.EvaluatorNO = tmp.EvaluatorNO;
                 newEva.Date = tmp.Date.ToString().Replace('-', '/').Substring(0,10);
@@ -165,7 +175,11 @@ namespace PESproj.Controllers
                 EvaluationData newEva = new EvaluationData();
                 tblProject proj = header.getProject().Where(a => a.ProjectID == tmp.ProjectNO).FirstOrDefault();
                 tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == tmp.Job_ID).FirstOrDefault();
+                tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo == tmp.EmployeeNO).FirstOrDefault();
+                newEva.Firstname = (emp != null) ? emp.EmployeeFirstName : " - ";
+                newEva.Lastname = (emp != null) ? emp.EmployeeLastName : " - ";
                 newEva.Eva_ID = tmp.Eva_ID;
+                newEva.CustumerAlias = proj.CustomerCompanyAlias;
                 newEva.EmployeeNO = tmp.EmployeeNO;
                 newEva.EvaluatorNO = tmp.EvaluatorNO;
                 newEva.Date = tmp.Date.ToString().Replace('-', '/').Substring(0, 10);

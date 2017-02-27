@@ -15,6 +15,27 @@
           <Property Name="Code" Type="nchar" MaxLength="10" />
           <Property Name="Status" Type="int" />
         </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeNo" />
+          </Key>
+          <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="TitleNo" Type="tinyint" />
+          <Property Name="EmployeeFirstName" Type="nvarchar" MaxLength="30" />
+          <Property Name="EmployeeLastName" Type="nvarchar" MaxLength="30" />
+          <Property Name="EmployeeFirstNameThai" Type="nvarchar" MaxLength="30" />
+          <Property Name="EmployeeLastNameThai" Type="nvarchar" MaxLength="30" />
+          <Property Name="EmployeeNickName" Type="nvarchar" MaxLength="15" />
+          <Property Name="EmployeeType" Type="tinyint" />
+          <Property Name="CompanyNo" Type="int" />
+          <Property Name="OrganizationNo" Type="int" />
+          <Property Name="PositionNo" Type="int" />
+          <Property Name="StartWorkingDate" Type="datetime" />
+          <Property Name="EmployeeEMail" Type="nvarchar" MaxLength="50" />
+          <Property Name="QuitDate" Type="datetime" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
+          <Property Name="UpdateDate" Type="smalldatetime" />
+        </EntityType>
         <EntityType Name="tblEvaluation">
           <Key>
             <PropertyRef Name="Eva_ID" />
@@ -285,6 +306,7 @@
         </Function>
         <EntityContainer Name="PSESModelStoreContainer">
           <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
@@ -447,8 +469,9 @@
           <EntitySet Name="tblTitle" EntityType="PSESModel.tblTitle" />
           <EntitySet Name="tblHeader" EntityType="PSESModel.tblHeader" />
           <FunctionImport Name="SP_DeleteEva">
-            <Parameter Name="EvaID" Mode="In" Type="Int32" />
+          <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="tblEmployee" EntityType="PSESModel.tblEmployee" />
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -676,6 +699,27 @@
           <Property Name="Parent" Type="Int32" />
           <Property Name="PositionNo" Type="Int32" />
           <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblEmployee">
+          <Key>
+            <PropertyRef Name="EmployeeNo" />
+          </Key>
+          <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="TitleNo" Type="Byte" />
+          <Property Name="EmployeeFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeFirstNameThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeLastNameThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeNickName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+          <Property Name="EmployeeType" Type="Byte" />
+          <Property Name="CompanyNo" Type="Int32" />
+          <Property Name="OrganizationNo" Type="Int32" />
+          <Property Name="PositionNo" Type="Int32" />
+          <Property Name="StartWorkingDate" Type="DateTime" Precision="3" />
+          <Property Name="EmployeeEMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="QuitDate" Type="DateTime" Precision="3" />
+          <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="0" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1013,6 +1057,28 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_DeleteEva" FunctionName="PSESModel.Store.SP_DeleteEva" />
+          <EntitySetMapping Name="tblEmployee">
+            <EntityTypeMapping TypeName="PSESModel.tblEmployee">
+              <MappingFragment StoreEntitySet="tblEmployee">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="QuitDate" ColumnName="QuitDate" />
+                <ScalarProperty Name="EmployeeEMail" ColumnName="EmployeeEMail" />
+                <ScalarProperty Name="StartWorkingDate" ColumnName="StartWorkingDate" />
+                <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+                <ScalarProperty Name="OrganizationNo" ColumnName="OrganizationNo" />
+                <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
+                <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+                <ScalarProperty Name="EmployeeNickName" ColumnName="EmployeeNickName" />
+                <ScalarProperty Name="EmployeeLastNameThai" ColumnName="EmployeeLastNameThai" />
+                <ScalarProperty Name="EmployeeFirstNameThai" ColumnName="EmployeeFirstNameThai" />
+                <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+                <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
+                <ScalarProperty Name="TitleNo" ColumnName="TitleNo" />
+                <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

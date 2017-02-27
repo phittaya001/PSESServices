@@ -61,5 +61,9 @@ namespace PesWeb.Service.Modules
 
         public Nullable<int> version { get; set; }
         public string role { get; set; }
+        public string ProjectName { get; set; }
+        public string ProjectNameAlias { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
     }
 }

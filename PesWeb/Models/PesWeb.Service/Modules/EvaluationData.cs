@@ -28,5 +28,8 @@ namespace PesWeb.Service.Modules
         public string ProjectName { get; set; }
 
         public int VersionNO { get; set; }
+        public string Firstname { get; set; }
+        public string Lastname { get; set; }
+        public string CustumerAlias { get; set; }
     }
 }

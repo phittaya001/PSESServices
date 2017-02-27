@@ -56,5 +56,10 @@ namespace PesWeb.Service.Modules
             db.SP_DeleteEva(EvaID);
         }
         //GG
+        public List<tblEmployee> getEmployees()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblEmployee.ToList();
+        }
     }
 }
