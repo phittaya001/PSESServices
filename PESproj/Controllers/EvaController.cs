@@ -51,9 +51,11 @@ namespace PESproj.Controllers
                 {
                     if(temp.StaffID != EmployeeId &&((temp.PlanStartDate>pr.StartDate && temp.PlanStartDate<pr.FinishDate)||(temp.PlanFinishDate > pr.StartDate && temp.PlanFinishDate < pr.FinishDate)|| (temp.PlanFinishDate < pr.StartDate && temp.PlanFinishDate > pr.FinishDate)))
                     {
+                        tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == temp.Part2ID).FirstOrDefault();
                         ProjectMember  resulttemp = new ProjectMember();
                         resulttemp.SeqID = temp.SeqID;
-                        resulttemp.ProjectID = temp.ProjectID + "(" + temp.VersionNo.ToString() + ")";
+                        resulttemp.ProjectID = temp.ProjectID;
+                        resulttemp.version = temp.VersionNo;
                         resulttemp.VersionNo = temp.VersionNo;
                         resulttemp.Part2ID = temp.Part2ID;
                         resulttemp.StaffName = temp.StaffName;
@@ -66,6 +68,7 @@ namespace PESproj.Controllers
                         resulttemp.AcctualStartDate = temp.AcctualStartDate.ToString().Replace('-', '/').Substring(0, 10);
                         resulttemp.AcctualFinishDate = temp.AcctualFinishDate.ToString().Replace('-', '/').Substring(0, 10);
                         resulttemp.AcctualEffortRate = temp.AcctualEffortRate;
+                        resulttemp.role = p2.Function;
                         result.Add(resulttemp);
                         Result_pm.Add(temp);
                     }
@@ -83,9 +86,11 @@ namespace PESproj.Controllers
             {
                 var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
                 tblEvaluation eva = new tblEvaluation();
+                tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).FirstOrDefault();
+
                 eva.EmployeeNO = Data["EmployeeNO"].ToString();
                 eva.EvaluatorNO = Data["EvaluatorNO"].ToString();
-                eva.Job_ID = Convert.ToInt32(Data["PositionNO"].ToString());
+                eva.Job_ID = proj.Part2ID;
                 eva.ProjectNO = Data["ProjectNO"].ToString();
 
                 header.InsertEvaData(eva);
@@ -99,11 +104,28 @@ namespace PESproj.Controllers
 
         [Route("Eva/{EvaluatorID}")]
         [HttpGet]
-        public List<tblEvaluation> getEvaData(string EvaluatorID)
+        public List<EvaluationData> getEvaData(string EvaluatorID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
-
-            return header.getEvaData().Where(a=>a.EvaluatorNO==EvaluatorID).ToList();
+            List<EvaluationData> EvaData = new List<EvaluationData>();
+            List<tblEvaluation> Eva = header.getEvaData().Where(a => a.EvaluatorNO == EvaluatorID).ToList();
+            foreach(tblEvaluation tmp in Eva)
+            {
+                tblProjectMember mem = header.getProjectMember().Where(a => a.ProjectID == tmp.ProjectNO).FirstOrDefault();
+                EvaluationData newEva = new EvaluationData();
+                tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == tmp.Job_ID).FirstOrDefault();
+                newEva.Eva_ID = tmp.Eva_ID;
+                newEva.EmployeeNO = tmp.EmployeeNO;
+                newEva.EvaluatorNO = tmp.EvaluatorNO;
+                newEva.Date = tmp.Date.ToString().Substring(0,10);
+                newEva.Job_ID = tmp.Job_ID;
+                newEva.ProjectNO = tmp.ProjectNO;
+                newEva.name = mem.StaffName;
+                newEva.period = mem.PlanStartDate.ToString().Substring(0,10) + " - " + mem.PlanFinishDate.ToString().Substring(0,10);
+                newEva.Role = p2.Function;
+                EvaData.Add(newEva);
+            }
+            return EvaData;
         }
 
     }

@@ -58,5 +58,8 @@ namespace PesWeb.Service.Modules
         public System.DateTime UpdateDate { get; set; }
 
         public Nullable<System.DateTime> CancelDate { get; set; }
+
+        public Nullable<int> version { get; set; }
+        public string role { get; set; }
     }
 }

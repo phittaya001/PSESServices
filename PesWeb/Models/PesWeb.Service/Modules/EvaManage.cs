@@ -37,5 +37,17 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblEvaluation.ToList();
         }
+
+        public List<tblPart2Master> getRole()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblPart2Master.ToList();
+        }
+
+        public List<tblProject> getProject()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblProject.ToList();
+        }
     }
 }

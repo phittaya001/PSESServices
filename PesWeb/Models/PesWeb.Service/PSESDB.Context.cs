@@ -55,6 +55,12 @@ public partial class PSESEntities : DbContext
 
     public virtual DbSet<tblProjectMember> tblProjectMember { get; set; }
 
+    public virtual DbSet<tblProject> tblProject { get; set; }
+
+    public virtual DbSet<tblPart2Master> tblPart2Master { get; set; }
+
+    public virtual DbSet<tblTitle> tblTitle { get; set; }
+
 
     public virtual int CreateForm(string empID, string evaluator, Nullable<int> jobID, string projectNO)
     {
