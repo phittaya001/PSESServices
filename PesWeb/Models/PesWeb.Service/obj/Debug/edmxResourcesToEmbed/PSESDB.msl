@@ -250,5 +250,73 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_InsertEvaluation" FunctionName="PSESModel.Store.SP_InsertEvaluation" />
+    <EntitySetMapping Name="tblProject">
+      <EntityTypeMapping TypeName="PSESModel.tblProject">
+        <MappingFragment StoreEntitySet="tblProject">
+          <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="SMCProjectID" ColumnName="SMCProjectID" />
+          <ScalarProperty Name="ProjectRefDoc" ColumnName="ProjectRefDoc" />
+          <ScalarProperty Name="WaranteeFinishDateActual" ColumnName="WaranteeFinishDateActual" />
+          <ScalarProperty Name="WaranteeStartDateActual" ColumnName="WaranteeStartDateActual" />
+          <ScalarProperty Name="WaranteeFinishDatePlan" ColumnName="WaranteeFinishDatePlan" />
+          <ScalarProperty Name="WaranteeStartDatePlan" ColumnName="WaranteeStartDatePlan" />
+          <ScalarProperty Name="FinishDateActual" ColumnName="FinishDateActual" />
+          <ScalarProperty Name="StartDateActual" ColumnName="StartDateActual" />
+          <ScalarProperty Name="FinishDatePlan" ColumnName="FinishDatePlan" />
+          <ScalarProperty Name="StartDatePlan" ColumnName="StartDatePlan" />
+          <ScalarProperty Name="DefaultOnsiteWorkCalendarSeqNo" ColumnName="DefaultOnsiteWorkCalendarSeqNo" />
+          <ScalarProperty Name="OnSiteWorkHr" ColumnName="OnSiteWorkHr" />
+          <ScalarProperty Name="SiteName" ColumnName="SiteName" />
+          <ScalarProperty Name="ContractTypeNo" ColumnName="ContractTypeNo" />
+          <ScalarProperty Name="Remark" ColumnName="Remark" />
+          <ScalarProperty Name="StatusCode" ColumnName="StatusCode" />
+          <ScalarProperty Name="TravelingExpense" ColumnName="TravelingExpense" />
+          <ScalarProperty Name="HotelAllowance" ColumnName="HotelAllowance" />
+          <ScalarProperty Name="TransportationFee" ColumnName="TransportationFee" />
+          <ScalarProperty Name="EndUserCompanyID" ColumnName="EndUserCompanyID" />
+          <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
+          <ScalarProperty Name="CustomerCompanyID" ColumnName="CustomerCompanyID" />
+          <ScalarProperty Name="CSIGroupCompanyID" ColumnName="CSIGroupCompanyID" />
+          <ScalarProperty Name="GroupOwnerID" ColumnName="GroupOwnerID" />
+          <ScalarProperty Name="ProjectGroupID" ColumnName="ProjectGroupID" />
+          <ScalarProperty Name="ProjectTypeID" ColumnName="ProjectTypeID" />
+          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+          <ScalarProperty Name="CustomerCode" ColumnName="CustomerCode" />
+          <ScalarProperty Name="ProjectNameAlias" ColumnName="ProjectNameAlias" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="VersionNo" ColumnName="VersionNo" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblPart2Master">
+      <EntityTypeMapping TypeName="PSESModel.tblPart2Master">
+        <MappingFragment StoreEntitySet="tblPart2Master">
+          <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="CreateUser" ColumnName="CreateUser" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="CreateDate" ColumnName="CreateDate" />
+          <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="Function" ColumnName="Function" />
+          <ScalarProperty Name="FunctionCode" ColumnName="FunctionCode" />
+          <ScalarProperty Name="Part2ID" ColumnName="Part2ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblTitle">
+      <EntityTypeMapping TypeName="PSESModel.tblTitle">
+        <MappingFragment StoreEntitySet="tblTitle">
+          <ScalarProperty Name="TitleNameThai" ColumnName="TitleNameThai" />
+          <ScalarProperty Name="TitleName" ColumnName="TitleName" />
+          <ScalarProperty Name="TitleNo" ColumnName="TitleNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

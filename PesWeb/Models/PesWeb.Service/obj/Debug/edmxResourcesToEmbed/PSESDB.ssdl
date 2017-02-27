@@ -15,8 +15,8 @@
       <PropertyRef Name="Eva_ID" />
     </Key>
     <Property Name="Eva_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-    <Property Name="EmployeeNO" Type="char" MaxLength="10" />
-    <Property Name="EvaluatorNO" Type="char" MaxLength="10" />
+    <Property Name="EmployeeNO" Type="varchar" MaxLength="50" />
+    <Property Name="EvaluatorNO" Type="varchar" MaxLength="50" />
     <Property Name="Date" Type="datetime" />
     <Property Name="Job_ID" Type="int" />
     <Property Name="ProjectNO" Type="varchar" MaxLength="15" />
@@ -55,6 +55,21 @@
     <Property Name="Alias" Type="char" MaxLength="1" />
     <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="tblPart2Master">
+    <Key>
+      <PropertyRef Name="Part2ID" />
+    </Key>
+    <Property Name="Part2ID" Type="int" Nullable="false" />
+    <Property Name="FunctionCode" Type="varchar" MaxLength="10" />
+    <Property Name="Function" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="100" />
+    <Property Name="SeqNo" Type="int" />
+    <Property Name="CreateDate" Type="datetime" Nullable="false" />
+    <Property Name="UpdateDate" Type="datetime" Nullable="false" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="UpdateUser" Type="varchar" MaxLength="10" Nullable="false" />
+    <Property Name="CancelDate" Type="datetime" />
+  </EntityType>
   <EntityType Name="tblPosition">
     <Key>
       <PropertyRef Name="PositionNo" />
@@ -68,6 +83,49 @@
     <Property Name="PositionLevel" Type="tinyint" />
     <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
     <Property Name="UpdateDate" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="tblProject">
+    <Key>
+      <PropertyRef Name="ProjectID" />
+      <PropertyRef Name="VersionNo" />
+    </Key>
+    <Property Name="ProjectID" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="VersionNo" Type="smallint" Nullable="false" />
+    <Property Name="ProjectName" Type="varchar" MaxLength="255" Nullable="false" />
+    <Property Name="ProjectNameAlias" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="CustomerCode" Type="varchar" MaxLength="10" />
+    <Property Name="ProjectCode" Type="varchar" MaxLength="10" />
+    <Property Name="ProjectTypeID" Type="int" />
+    <Property Name="ProjectGroupID" Type="int" />
+    <Property Name="GroupOwnerID" Type="int" Nullable="false" />
+    <Property Name="CSIGroupCompanyID" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CustomerCompanyID" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="CustomerCompanyAlias" Type="varchar" MaxLength="20" />
+    <Property Name="EndUserCompanyID" Type="varchar" MaxLength="15" />
+    <Property Name="TransportationFee" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="HotelAllowance" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="TravelingExpense" Type="numeric" Precision="18" Scale="2" />
+    <Property Name="StatusCode" Type="varchar" MaxLength="2" Nullable="false" />
+    <Property Name="Remark" Type="varchar" MaxLength="4000" />
+    <Property Name="ContractTypeNo" Type="int" />
+    <Property Name="SiteName" Type="varchar" MaxLength="100" />
+    <Property Name="OnSiteWorkHr" Type="int" />
+    <Property Name="DefaultOnsiteWorkCalendarSeqNo" Type="int" />
+    <Property Name="StartDatePlan" Type="datetime" />
+    <Property Name="FinishDatePlan" Type="datetime" />
+    <Property Name="StartDateActual" Type="datetime" />
+    <Property Name="FinishDateActual" Type="datetime" />
+    <Property Name="WaranteeStartDatePlan" Type="datetime" />
+    <Property Name="WaranteeFinishDatePlan" Type="datetime" />
+    <Property Name="WaranteeStartDateActual" Type="datetime" />
+    <Property Name="WaranteeFinishDateActual" Type="datetime" />
+    <Property Name="ProjectRefDoc" Type="varchar" MaxLength="100" />
+    <Property Name="SMCProjectID" Type="int" />
+    <Property Name="CreateDate" Type="datetime" />
+    <Property Name="UpdateDate" Type="datetime" />
+    <Property Name="CreateUser" Type="varchar" MaxLength="10" />
+    <Property Name="UpdateUser" Type="varchar" MaxLength="10" />
+    <Property Name="CancelDate" Type="smalldatetime" />
   </EntityType>
   <EntityType Name="tblProjectEmployee">
     <Key>
@@ -119,6 +177,14 @@
     <Property Name="H3_ID" Type="int" />
     <Property Name="point" Type="int" />
     <Property Name="Eva_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="tblTitle">
+    <Key>
+      <PropertyRef Name="TitleNo" />
+    </Key>
+    <Property Name="TitleNo" Type="tinyint" Nullable="false" />
+    <Property Name="TitleName" Type="varchar" MaxLength="15" Nullable="false" />
+    <Property Name="TitleNameThai" Type="varchar" MaxLength="15" Nullable="false" />
   </EntityType>
   <Function Name="CreateForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EmpID" Type="char" Mode="In" />
@@ -205,9 +271,12 @@
     <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblPart2Master" EntityType="Self.tblPart2Master" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectEmployee" EntityType="Self.tblProjectEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblTitle" EntityType="Self.tblTitle" Schema="dbo" store:Type="Tables" />
   </EntityContainer>
 </Schema>

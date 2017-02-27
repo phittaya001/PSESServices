@@ -5,8 +5,8 @@
       <PropertyRef Name="Eva_ID" />
     </Key>
     <Property Name="Eva_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-    <Property Name="EmployeeNO" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
-    <Property Name="EvaluatorNO" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="EmployeeNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EvaluatorNO" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Date" Type="DateTime" Precision="3" />
     <Property Name="Job_ID" Type="Int32" />
     <Property Name="ProjectNO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
@@ -137,6 +137,9 @@
       <Parameter Name="EmployeeID" Mode="In" Type="String" />
       <Parameter Name="JobID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="tblProject" EntityType="PSESModel.tblProject" />
+    <EntitySet Name="tblPart2Master" EntityType="PSESModel.tblPart2Master" />
+    <EntitySet Name="tblTitle" EntityType="PSESModel.tblTitle" />
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -287,5 +290,71 @@
     <Property Name="ApprovedDate" Type="DateTime" Precision="3" />
     <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
     <Property Name="CancelDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblProject">
+    <Key>
+      <PropertyRef Name="ProjectID" />
+      <PropertyRef Name="VersionNo" />
+    </Key>
+    <Property Name="ProjectID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="VersionNo" Type="Int16" Nullable="false" />
+    <Property Name="ProjectName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectNameAlias" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="ProjectTypeID" Type="Int32" />
+    <Property Name="ProjectGroupID" Type="Int32" />
+    <Property Name="GroupOwnerID" Type="Int32" Nullable="false" />
+    <Property Name="CSIGroupCompanyID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerCompanyID" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="CustomerCompanyAlias" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="EndUserCompanyID" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TransportationFee" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="HotelAllowance" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="TravelingExpense" Type="Decimal" Precision="18" Scale="2" />
+    <Property Name="StatusCode" Type="String" Nullable="false" MaxLength="2" FixedLength="false" Unicode="false" />
+    <Property Name="Remark" Type="String" MaxLength="4000" FixedLength="false" Unicode="false" />
+    <Property Name="ContractTypeNo" Type="Int32" />
+    <Property Name="SiteName" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="OnSiteWorkHr" Type="Int32" />
+    <Property Name="DefaultOnsiteWorkCalendarSeqNo" Type="Int32" />
+    <Property Name="StartDatePlan" Type="DateTime" Precision="3" />
+    <Property Name="FinishDatePlan" Type="DateTime" Precision="3" />
+    <Property Name="StartDateActual" Type="DateTime" Precision="3" />
+    <Property Name="FinishDateActual" Type="DateTime" Precision="3" />
+    <Property Name="WaranteeStartDatePlan" Type="DateTime" Precision="3" />
+    <Property Name="WaranteeFinishDatePlan" Type="DateTime" Precision="3" />
+    <Property Name="WaranteeStartDateActual" Type="DateTime" Precision="3" />
+    <Property Name="WaranteeFinishDateActual" Type="DateTime" Precision="3" />
+    <Property Name="ProjectRefDoc" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SMCProjectID" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="3" />
+    <Property Name="CreateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CancelDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblPart2Master">
+    <Key>
+      <PropertyRef Name="Part2ID" />
+    </Key>
+    <Property Name="Part2ID" Type="Int32" Nullable="false" />
+    <Property Name="FunctionCode" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="Function" Type="String" Nullable="false" MaxLength="40" FixedLength="false" Unicode="false" />
+    <Property Name="Description" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="SeqNo" Type="Int32" />
+    <Property Name="CreateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="UpdateDate" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="CreateUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="UpdateUser" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+    <Property Name="CancelDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityType Name="tblTitle">
+    <Key>
+      <PropertyRef Name="TitleNo" />
+    </Key>
+    <Property Name="TitleNo" Type="Byte" Nullable="false" />
+    <Property Name="TitleName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="TitleNameThai" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>
