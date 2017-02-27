@@ -128,7 +128,7 @@ namespace PESproj.Controllers
                 newEva.period = (mem != null) ? mem.PlanStartDate.ToString().Substring(0,10) + " - " + mem.PlanFinishDate.ToString().Substring(0,10):"No Data";
                 newEva.Role = p2.Function;
                 newEva.ProjectName = proj.ProjectName;
-                newEva.VersionNO = proj.VersionNo;
+                newEva.VersionNO = mem.VersionNo;
                 EvaData.Add(newEva);
                 
             }
@@ -151,6 +151,36 @@ namespace PESproj.Controllers
             }
         }
         //GG
+
+        [Route("EvaData/{EvaID}")]
+        [HttpGet]
+        public List<EvaluationData> getEvaDataByEvaID(int EvaID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            List<EvaluationData> EvaData = new List<EvaluationData>();
+            List<tblEvaluation> Eva = header.getEvaData().Where(a => a.Eva_ID==EvaID).ToList();
+            foreach (tblEvaluation tmp in Eva)
+            {
+                tblProjectMember mem = header.getProjectMember().Where(a => a.StaffID == tmp.EmployeeNO.Replace("  ", "")).FirstOrDefault();
+                EvaluationData newEva = new EvaluationData();
+                tblProject proj = header.getProject().Where(a => a.ProjectID == tmp.ProjectNO).FirstOrDefault();
+                tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == tmp.Job_ID).FirstOrDefault();
+                newEva.Eva_ID = tmp.Eva_ID;
+                newEva.EmployeeNO = tmp.EmployeeNO;
+                newEva.EvaluatorNO = tmp.EvaluatorNO;
+                newEva.Date = tmp.Date.ToString().Replace('-', '/').Substring(0, 10);
+                newEva.Job_ID = tmp.Job_ID;
+                newEva.ProjectNO = tmp.ProjectNO;
+                newEva.name = (mem != null) ? mem.StaffName : "null";
+                newEva.period = (mem != null) ? mem.PlanStartDate.ToString().Substring(0, 10) + " - " + mem.PlanFinishDate.ToString().Substring(0, 10) : "No Data";
+                newEva.Role = p2.Function;
+                newEva.ProjectName = proj.ProjectName;
+                newEva.VersionNO = mem.VersionNo;
+                EvaData.Add(newEva);
+
+            }
+            return EvaData;
+        }
 
     }
 }
