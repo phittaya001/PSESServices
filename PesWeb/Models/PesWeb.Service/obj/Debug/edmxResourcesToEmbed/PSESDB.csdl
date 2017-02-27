@@ -140,6 +140,7 @@
     <EntitySet Name="tblProject" EntityType="PSESModel.tblProject" />
     <EntitySet Name="tblPart2Master" EntityType="PSESModel.tblPart2Master" />
     <EntitySet Name="tblTitle" EntityType="PSESModel.tblTitle" />
+    <EntitySet Name="tblHeader" EntityType="PSESModel.tblHeader" />
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -356,5 +357,16 @@
     <Property Name="TitleNo" Type="Byte" Nullable="false" />
     <Property Name="TitleName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="TitleNameThai" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblHeader">
+    <Key>
+      <PropertyRef Name="H_ID" />
+    </Key>
+    <Property Name="H_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Text_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Parent" Type="Int32" />
+    <Property Name="PositionNo" Type="Int32" />
+    <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
   </EntityType>
 </Schema>

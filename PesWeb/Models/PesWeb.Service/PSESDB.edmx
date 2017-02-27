@@ -26,6 +26,17 @@
           <Property Name="Job_ID" Type="int" />
           <Property Name="ProjectNO" Type="varchar" MaxLength="15" />
         </EntityType>
+        <EntityType Name="tblHeader">
+          <Key>
+            <PropertyRef Name="H_ID" />
+          </Key>
+          <Property Name="H_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Text" Type="varchar" MaxLength="255" />
+          <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
+          <Property Name="Parent" Type="int" />
+          <Property Name="PositionNo" Type="int" />
+          <Property Name="Alias" Type="varchar" MaxLength="5" />
+        </EntityType>
         <EntityType Name="tblHeaderBot">
           <Key>
             <PropertyRef Name="H3_ID" />
@@ -272,6 +283,7 @@
         <EntityContainer Name="PSESModelStoreContainer">
           <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
@@ -430,6 +442,7 @@
           <EntitySet Name="tblProject" EntityType="PSESModel.tblProject" />
           <EntitySet Name="tblPart2Master" EntityType="PSESModel.tblPart2Master" />
           <EntitySet Name="tblTitle" EntityType="PSESModel.tblTitle" />
+          <EntitySet Name="tblHeader" EntityType="PSESModel.tblHeader" />
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -646,6 +659,17 @@
           <Property Name="TitleNo" Type="Byte" Nullable="false" />
           <Property Name="TitleName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="TitleNameThai" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblHeader">
+          <Key>
+            <PropertyRef Name="H_ID" />
+          </Key>
+          <Property Name="H_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Text_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Parent" Type="Int32" />
+          <Property Name="PositionNo" Type="Int32" />
+          <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -967,6 +991,18 @@
                 <ScalarProperty Name="TitleNameThai" ColumnName="TitleNameThai" />
                 <ScalarProperty Name="TitleName" ColumnName="TitleName" />
                 <ScalarProperty Name="TitleNo" ColumnName="TitleNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHeader">
+            <EntityTypeMapping TypeName="PSESModel.tblHeader">
+              <MappingFragment StoreEntitySet="tblHeader">
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="H_ID" ColumnName="H_ID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

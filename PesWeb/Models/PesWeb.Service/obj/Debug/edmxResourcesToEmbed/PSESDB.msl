@@ -318,5 +318,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblHeader">
+      <EntityTypeMapping TypeName="PSESModel.tblHeader">
+        <MappingFragment StoreEntitySet="tblHeader">
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

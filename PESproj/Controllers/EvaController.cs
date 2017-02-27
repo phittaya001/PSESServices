@@ -43,7 +43,7 @@ namespace PESproj.Controllers
             List<tblProjectMember> pm = header.getProjectMember().Where(a => a.StaffID == EmployeeId).ToList();
             List<tblProjectMember> Result_pm = new List<tblProjectMember>();
             List<ProjectMember> result = new List<ProjectMember>();
-
+            if(pm.Count > 0)
             foreach (tblProjectMember epm in pm)
             {
                 List<tblProjectMember> pmList = header.getProjectMember().Where(a => a.ProjectID == epm.ProjectID).ToList();
@@ -108,11 +108,12 @@ namespace PESproj.Controllers
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<EvaluationData> EvaData = new List<EvaluationData>();
-            List<tblEvaluation> Eva = header.getEvaData().Where(a => a.EvaluatorNO == EvaluatorID).ToList();
+            List<tblEvaluation> Eva = header.getEvaData().Where(a => a.EvaluatorNO == EvaluatorID.Replace("  ", "")).ToList();
             foreach(tblEvaluation tmp in Eva)
             {
-                tblProjectMember mem = header.getProjectMember().Where(a => a.ProjectID == tmp.ProjectNO).FirstOrDefault();
+                tblProjectMember mem = header.getProjectMember().Where(a => a.StaffID == tmp.EmployeeNO.Replace("  ", "")).FirstOrDefault();
                 EvaluationData newEva = new EvaluationData();
+                tblProject proj = header.getProject().Where(a => a.ProjectID == tmp.ProjectNO).FirstOrDefault();
                 tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == tmp.Job_ID).FirstOrDefault();
                 newEva.Eva_ID = tmp.Eva_ID;
                 newEva.EmployeeNO = tmp.EmployeeNO;
@@ -120,13 +121,15 @@ namespace PESproj.Controllers
                 newEva.Date = tmp.Date.ToString().Substring(0,10);
                 newEva.Job_ID = tmp.Job_ID;
                 newEva.ProjectNO = tmp.ProjectNO;
-                newEva.name = mem.StaffName;
-                newEva.period = mem.PlanStartDate.ToString().Substring(0,10) + " - " + mem.PlanFinishDate.ToString().Substring(0,10);
+                newEva.name = (mem!=null)?mem.StaffName:"null";
+                newEva.period = (mem != null) ? mem.PlanStartDate.ToString().Substring(0,10) + " - " + mem.PlanFinishDate.ToString().Substring(0,10):"No Data";
                 newEva.Role = p2.Function;
+                newEva.ProjectName = proj.ProjectName;
                 EvaData.Add(newEva);
             }
             return EvaData;
         }
+        //GG
 
     }
 }

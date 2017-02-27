@@ -11,7 +11,7 @@ namespace PesWeb.Service.Modules
         public int Eva_ID { get; set; }
 
         public string EmployeeNO { get; set; }
-
+        //gg
         public string EvaluatorNO { get; set; }
 
         public string Date { get; set; }
@@ -25,5 +25,6 @@ namespace PesWeb.Service.Modules
         public string period { get; set; }
 
         public string Role { get; set; }
+        public string ProjectName { get; set; }
     }
 }
