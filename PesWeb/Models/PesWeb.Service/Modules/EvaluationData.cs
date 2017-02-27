@@ -26,5 +26,7 @@ namespace PesWeb.Service.Modules
 
         public string Role { get; set; }
         public string ProjectName { get; set; }
+
+        public int VersionNO { get; set; }
     }
 }

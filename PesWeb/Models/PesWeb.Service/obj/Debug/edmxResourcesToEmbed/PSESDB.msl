@@ -330,5 +330,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_DeleteEva" FunctionName="PSESModel.Store.SP_DeleteEva" />
   </EntityContainerMapping>
 </Mapping>

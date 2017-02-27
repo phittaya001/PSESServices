@@ -57,7 +57,7 @@ namespace PESproj.Controllers
                         tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == temp.Part2ID).FirstOrDefault();
                         ProjectMember  resulttemp = new ProjectMember();
                         resulttemp.SeqID = temp.SeqID;
-                        resulttemp.ProjectID = temp.ProjectID;
+                        resulttemp.ProjectID = (temp.ProjectID!=null)?temp.ProjectID:"0";
                         resulttemp.version = temp.VersionNo;
                         resulttemp.VersionNo = temp.VersionNo;
                         resulttemp.Part2ID = temp.Part2ID;
@@ -65,11 +65,11 @@ namespace PESproj.Controllers
                         resulttemp.StaffID = temp.StaffID;
                         resulttemp.MemberTypeCode = temp.MemberTypeCode;
                         resulttemp.PositionIncharge = temp.PositionIncharge;
-                        resulttemp.PlanStartDate = temp.PlanStartDate.ToString().Replace('-', '/').Substring(0,10);
-                        resulttemp.PlanFinishDate = temp.PlanStartDate.ToString().Replace('-', '/').Substring(0, 10) + " - " + temp.PlanFinishDate.ToString().Replace('-', '/').Substring(0, 10);
+                        resulttemp.PlanStartDate = (temp.PlanStartDate!=null)? temp.PlanStartDate.ToString().Replace('-', '/').Substring(0,10):"No Data";
+                        resulttemp.PlanFinishDate = ((temp.PlanStartDate != null) ? temp.PlanStartDate.ToString().Replace('-', '/').Substring(0, 10):"No Data") + " - " + ((temp.PlanFinishDate != null) ? temp.PlanFinishDate.ToString().Replace('-', '/').Substring(0, 10):"No Data");
                         resulttemp.PlanEffortRate = temp.PlanEffortRate;
-                        resulttemp.AcctualStartDate = temp.AcctualStartDate.ToString().Replace('-', '/').Substring(0, 10);
-                        resulttemp.AcctualFinishDate = temp.AcctualFinishDate.ToString().Replace('-', '/').Substring(0, 10);
+                        resulttemp.AcctualStartDate = ((temp.AcctualStartDate != null) ? temp.AcctualStartDate.ToString().Replace('-', '/').Substring(0, 10):"No Data");
+                        resulttemp.AcctualFinishDate = ((temp.AcctualFinishDate != null) ? temp.AcctualFinishDate.ToString().Replace('-', '/').Substring(0, 10):"No Data");
                         resulttemp.AcctualEffortRate = temp.AcctualEffortRate;
                         resulttemp.role = p2.Function;
                         result.Add(resulttemp);
@@ -121,14 +121,16 @@ namespace PESproj.Controllers
                 newEva.Eva_ID = tmp.Eva_ID;
                 newEva.EmployeeNO = tmp.EmployeeNO;
                 newEva.EvaluatorNO = tmp.EvaluatorNO;
-                newEva.Date = tmp.Date.ToString().Substring(0,10);
+                newEva.Date = tmp.Date.ToString().Replace('-', '/').Substring(0,10);
                 newEva.Job_ID = tmp.Job_ID;
                 newEva.ProjectNO = tmp.ProjectNO;
                 newEva.name = (mem!=null)?mem.StaffName:"null";
                 newEva.period = (mem != null) ? mem.PlanStartDate.ToString().Substring(0,10) + " - " + mem.PlanFinishDate.ToString().Substring(0,10):"No Data";
                 newEva.Role = p2.Function;
                 newEva.ProjectName = proj.ProjectName;
+                newEva.VersionNO = proj.VersionNo;
                 EvaData.Add(newEva);
+                
             }
             return EvaData;
         }

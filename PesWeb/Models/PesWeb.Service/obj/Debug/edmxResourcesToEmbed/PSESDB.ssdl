@@ -236,6 +236,9 @@
     <Parameter Name="JobID" Type="int" Mode="In" />
     <Parameter Name="ProjectNO" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="SP_DeleteEva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_DeleteHeaderBot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="H3_ID" Type="int" Mode="In" />
   </Function>

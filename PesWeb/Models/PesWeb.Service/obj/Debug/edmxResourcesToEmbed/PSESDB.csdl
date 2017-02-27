@@ -141,6 +141,9 @@
     <EntitySet Name="tblPart2Master" EntityType="PSESModel.tblPart2Master" />
     <EntitySet Name="tblTitle" EntityType="PSESModel.tblTitle" />
     <EntitySet Name="tblHeader" EntityType="PSESModel.tblHeader" />
+    <FunctionImport Name="SP_DeleteEva">
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
