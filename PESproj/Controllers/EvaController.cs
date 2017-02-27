@@ -86,7 +86,7 @@ namespace PESproj.Controllers
             {
                 var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
                 tblEvaluation eva = new tblEvaluation();
-                tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).FirstOrDefault();
+                tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a=>a.StaffID== Data["EmployeeID"].ToString()).FirstOrDefault();
 
                 eva.EmployeeNO = Data["EmployeeNO"].ToString();
                 eva.EvaluatorNO = Data["EvaluatorNO"].ToString();
