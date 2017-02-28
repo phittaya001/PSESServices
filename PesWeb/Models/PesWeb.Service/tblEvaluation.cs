@@ -30,6 +30,10 @@ public partial class tblEvaluation
 
     public string ProjectNO { get; set; }
 
+    public string period { get; set; }
+
+    public Nullable<int> PeriodID { get; set; }
+
 }
 
 }

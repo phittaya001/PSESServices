@@ -46,6 +46,8 @@
           <Property Name="Date" Type="datetime" />
           <Property Name="Job_ID" Type="int" />
           <Property Name="ProjectNO" Type="varchar" MaxLength="15" />
+          <Property Name="period" Type="varchar" MaxLength="25" />
+          <Property Name="PeriodID" Type="int" />
         </EntityType>
         <EntityType Name="tblHeader">
           <Key>
@@ -91,6 +93,20 @@
           <Property Name="Text" Type="varchar" MaxLength="255" />
           <Property Name="Alias" Type="char" MaxLength="1" />
           <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
+        </EntityType>
+        <EntityType Name="tblOrganization">
+          <Key>
+            <PropertyRef Name="OrganizationNo" />
+          </Key>
+          <Property Name="OrganizationNo" Type="int" Nullable="false" />
+          <Property Name="OrganizationAlias" Type="nvarchar" MaxLength="20" Nullable="false" />
+          <Property Name="OrganizationName" Type="nvarchar" MaxLength="100" />
+          <Property Name="StartDate" Type="smalldatetime" />
+          <Property Name="CancelDate" Type="smalldatetime" />
+          <Property Name="OrganizationCode" Type="nvarchar" MaxLength="4" />
+          <Property Name="OrganizationFlag" Type="int" Nullable="false" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
+          <Property Name="UpdateDate" Type="smalldatetime" />
         </EntityType>
         <EntityType Name="tblPart2Master">
           <Key>
@@ -223,6 +239,18 @@
           <Property Name="TitleName" Type="varchar" MaxLength="15" Nullable="false" />
           <Property Name="TitleNameThai" Type="varchar" MaxLength="15" Nullable="false" />
         </EntityType>
+        <Association Name="FK_tblProject2_tblOrganization">
+          <End Role="tblOrganization" Type="Self.tblOrganization" Multiplicity="1" />
+          <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrganization">
+              <PropertyRef Name="OrganizationNo" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="GroupOwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Function Name="CreateForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EmpID" Type="char" Mode="In" />
           <Parameter Name="Evaluator" Type="char" Mode="In" />
@@ -313,6 +341,7 @@
           <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblOrganization" EntityType="Self.tblOrganization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPart2Master" EntityType="Self.tblPart2Master" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
@@ -320,6 +349,10 @@
           <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTitle" EntityType="Self.tblTitle" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tblProject2_tblOrganization" Association="Self.FK_tblProject2_tblOrganization">
+            <End Role="tblOrganization" EntitySet="tblOrganization" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -335,6 +368,8 @@
           <Property Name="Date" Type="DateTime" Precision="3" />
           <Property Name="Job_ID" Type="Int32" />
           <Property Name="ProjectNO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="period" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+          <Property Name="PeriodID" Type="Int32" />
         </EntityType>
         <EntityType Name="tblHeaderBot">
           <Key>
@@ -472,6 +507,11 @@
           <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="tblEmployee" EntityType="PSESModel.tblEmployee" />
+          <EntitySet Name="tblOrganization" EntityType="PSESModel.tblOrganization" />
+          <AssociationSet Name="FK_tblProject2_tblOrganization" Association="PSESModel.FK_tblProject2_tblOrganization">
+            <End Role="tblOrganization" EntitySet="tblOrganization" />
+            <End Role="tblProject" EntitySet="tblProject" />
+          </AssociationSet>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -665,6 +705,7 @@
           <Property Name="CreateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
           <Property Name="CancelDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblOrganization" Relationship="PSESModel.FK_tblProject2_tblOrganization" FromRole="tblProject" ToRole="tblOrganization" />
         </EntityType>
         <EntityType Name="tblPart2Master">
           <Key>
@@ -721,6 +762,33 @@
           <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="UpdateDate" Type="DateTime" Precision="0" />
         </EntityType>
+        <EntityType Name="tblOrganization">
+          <Key>
+            <PropertyRef Name="OrganizationNo" />
+          </Key>
+          <Property Name="OrganizationNo" Type="Int32" Nullable="false" />
+          <Property Name="OrganizationAlias" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+          <Property Name="OrganizationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+          <Property Name="StartDate" Type="DateTime" Precision="0" />
+          <Property Name="CancelDate" Type="DateTime" Precision="0" />
+          <Property Name="OrganizationCode" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+          <Property Name="OrganizationFlag" Type="Int32" Nullable="false" />
+          <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="0" />
+          <NavigationProperty Name="tblProject" Relationship="PSESModel.FK_tblProject2_tblOrganization" FromRole="tblOrganization" ToRole="tblProject" />
+        </EntityType>
+        <Association Name="FK_tblProject2_tblOrganization">
+          <End Type="PSESModel.tblOrganization" Role="tblOrganization" Multiplicity="1" />
+          <End Type="PSESModel.tblProject" Role="tblProject" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblOrganization">
+              <PropertyRef Name="OrganizationNo" />
+            </Principal>
+            <Dependent Role="tblProject">
+              <PropertyRef Name="GroupOwnerID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -730,6 +798,8 @@
           <EntitySetMapping Name="tblEvaluation">
             <EntityTypeMapping TypeName="PSESModel.tblEvaluation">
               <MappingFragment StoreEntitySet="tblEvaluation">
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+                <ScalarProperty Name="period" ColumnName="period" />
                 <ScalarProperty Name="ProjectNO" ColumnName="ProjectNO" />
                 <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
                 <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
@@ -1076,6 +1146,21 @@
                 <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
                 <ScalarProperty Name="TitleNo" ColumnName="TitleNo" />
                 <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblOrganization">
+            <EntityTypeMapping TypeName="PSESModel.tblOrganization">
+              <MappingFragment StoreEntitySet="tblOrganization">
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="OrganizationFlag" ColumnName="OrganizationFlag" />
+                <ScalarProperty Name="OrganizationCode" ColumnName="OrganizationCode" />
+                <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+                <ScalarProperty Name="OrganizationAlias" ColumnName="OrganizationAlias" />
+                <ScalarProperty Name="OrganizationNo" ColumnName="OrganizationNo" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

@@ -92,6 +92,10 @@ public partial class tblProject
 
     public Nullable<System.DateTime> CancelDate { get; set; }
 
+
+
+    public virtual tblOrganization tblOrganization { get; set; }
+
 }
 
 }

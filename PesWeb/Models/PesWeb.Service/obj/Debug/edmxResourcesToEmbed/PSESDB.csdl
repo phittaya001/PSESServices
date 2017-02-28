@@ -10,6 +10,8 @@
     <Property Name="Date" Type="DateTime" Precision="3" />
     <Property Name="Job_ID" Type="Int32" />
     <Property Name="ProjectNO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="period" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
+    <Property Name="PeriodID" Type="Int32" />
   </EntityType>
   <EntityType Name="tblHeaderBot">
     <Key>
@@ -144,6 +146,12 @@
     <FunctionImport Name="SP_DeleteEva">
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="tblEmployee" EntityType="PSESModel.tblEmployee" />
+    <EntitySet Name="tblOrganization" EntityType="PSESModel.tblOrganization" />
+    <AssociationSet Name="FK_tblProject2_tblOrganization" Association="PSESModel.FK_tblProject2_tblOrganization">
+      <End Role="tblOrganization" EntitySet="tblOrganization" />
+      <End Role="tblProject" EntitySet="tblProject" />
+    </AssociationSet>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -337,6 +345,7 @@
     <Property Name="CreateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="CancelDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tblOrganization" Relationship="PSESModel.FK_tblProject2_tblOrganization" FromRole="tblProject" ToRole="tblOrganization" />
   </EntityType>
   <EntityType Name="tblPart2Master">
     <Key>
@@ -372,4 +381,52 @@
     <Property Name="PositionNo" Type="Int32" />
     <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
   </EntityType>
+  <EntityType Name="tblEmployee">
+    <Key>
+      <PropertyRef Name="EmployeeNo" />
+    </Key>
+    <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="TitleNo" Type="Byte" />
+    <Property Name="EmployeeFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeFirstNameThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeLastNameThai" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeNickName" Type="String" MaxLength="15" FixedLength="false" Unicode="true" />
+    <Property Name="EmployeeType" Type="Byte" />
+    <Property Name="CompanyNo" Type="Int32" />
+    <Property Name="OrganizationNo" Type="Int32" />
+    <Property Name="PositionNo" Type="Int32" />
+    <Property Name="StartWorkingDate" Type="DateTime" Precision="3" />
+    <Property Name="EmployeeEMail" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="QuitDate" Type="DateTime" Precision="3" />
+    <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="tblOrganization">
+    <Key>
+      <PropertyRef Name="OrganizationNo" />
+    </Key>
+    <Property Name="OrganizationNo" Type="Int32" Nullable="false" />
+    <Property Name="OrganizationAlias" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="OrganizationName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="StartDate" Type="DateTime" Precision="0" />
+    <Property Name="CancelDate" Type="DateTime" Precision="0" />
+    <Property Name="OrganizationCode" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="OrganizationFlag" Type="Int32" Nullable="false" />
+    <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="tblProject" Relationship="PSESModel.FK_tblProject2_tblOrganization" FromRole="tblOrganization" ToRole="tblProject" />
+  </EntityType>
+  <Association Name="FK_tblProject2_tblOrganization">
+    <End Type="PSESModel.tblOrganization" Role="tblOrganization" Multiplicity="1" />
+    <End Type="PSESModel.tblProject" Role="tblProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrganization">
+        <PropertyRef Name="OrganizationNo" />
+      </Principal>
+      <Dependent Role="tblProject">
+        <PropertyRef Name="GroupOwnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
 </Schema>

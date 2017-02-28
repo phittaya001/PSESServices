@@ -10,6 +10,27 @@
     <Property Name="Code" Type="nchar" MaxLength="10" />
     <Property Name="Status" Type="int" />
   </EntityType>
+  <EntityType Name="tblEmployee">
+    <Key>
+      <PropertyRef Name="EmployeeNo" />
+    </Key>
+    <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="TitleNo" Type="tinyint" />
+    <Property Name="EmployeeFirstName" Type="nvarchar" MaxLength="30" />
+    <Property Name="EmployeeLastName" Type="nvarchar" MaxLength="30" />
+    <Property Name="EmployeeFirstNameThai" Type="nvarchar" MaxLength="30" />
+    <Property Name="EmployeeLastNameThai" Type="nvarchar" MaxLength="30" />
+    <Property Name="EmployeeNickName" Type="nvarchar" MaxLength="15" />
+    <Property Name="EmployeeType" Type="tinyint" />
+    <Property Name="CompanyNo" Type="int" />
+    <Property Name="OrganizationNo" Type="int" />
+    <Property Name="PositionNo" Type="int" />
+    <Property Name="StartWorkingDate" Type="datetime" />
+    <Property Name="EmployeeEMail" Type="nvarchar" MaxLength="50" />
+    <Property Name="QuitDate" Type="datetime" />
+    <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
+    <Property Name="UpdateDate" Type="smalldatetime" />
+  </EntityType>
   <EntityType Name="tblEvaluation">
     <Key>
       <PropertyRef Name="Eva_ID" />
@@ -20,6 +41,8 @@
     <Property Name="Date" Type="datetime" />
     <Property Name="Job_ID" Type="int" />
     <Property Name="ProjectNO" Type="varchar" MaxLength="15" />
+    <Property Name="period" Type="varchar" MaxLength="25" />
+    <Property Name="PeriodID" Type="int" />
   </EntityType>
   <EntityType Name="tblHeader">
     <Key>
@@ -65,6 +88,20 @@
     <Property Name="Text" Type="varchar" MaxLength="255" />
     <Property Name="Alias" Type="char" MaxLength="1" />
     <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
+  </EntityType>
+  <EntityType Name="tblOrganization">
+    <Key>
+      <PropertyRef Name="OrganizationNo" />
+    </Key>
+    <Property Name="OrganizationNo" Type="int" Nullable="false" />
+    <Property Name="OrganizationAlias" Type="nvarchar" MaxLength="20" Nullable="false" />
+    <Property Name="OrganizationName" Type="nvarchar" MaxLength="100" />
+    <Property Name="StartDate" Type="smalldatetime" />
+    <Property Name="CancelDate" Type="smalldatetime" />
+    <Property Name="OrganizationCode" Type="nvarchar" MaxLength="4" />
+    <Property Name="OrganizationFlag" Type="int" Nullable="false" />
+    <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
+    <Property Name="UpdateDate" Type="smalldatetime" />
   </EntityType>
   <EntityType Name="tblPart2Master">
     <Key>
@@ -197,6 +234,18 @@
     <Property Name="TitleName" Type="varchar" MaxLength="15" Nullable="false" />
     <Property Name="TitleNameThai" Type="varchar" MaxLength="15" Nullable="false" />
   </EntityType>
+  <Association Name="FK_tblProject2_tblOrganization">
+    <End Role="tblOrganization" Type="Self.tblOrganization" Multiplicity="1" />
+    <End Role="tblProject" Type="Self.tblProject" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tblOrganization">
+        <PropertyRef Name="OrganizationNo" />
+      </Principal>
+      <Dependent Role="tblProject">
+        <PropertyRef Name="GroupOwnerID" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
   <Function Name="CreateForm" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EmpID" Type="char" Mode="In" />
     <Parameter Name="Evaluator" Type="char" Mode="In" />
@@ -280,12 +329,14 @@
   </Function>
   <EntityContainer Name="PSESModelStoreContainer">
     <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblOrganization" EntityType="Self.tblOrganization" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPart2Master" EntityType="Self.tblPart2Master" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
@@ -293,5 +344,9 @@
     <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTitle" EntityType="Self.tblTitle" Schema="dbo" store:Type="Tables" />
+    <AssociationSet Name="FK_tblProject2_tblOrganization" Association="Self.FK_tblProject2_tblOrganization">
+      <End Role="tblOrganization" EntitySet="tblOrganization" />
+      <End Role="tblProject" EntitySet="tblProject" />
+    </AssociationSet>
   </EntityContainer>
 </Schema>

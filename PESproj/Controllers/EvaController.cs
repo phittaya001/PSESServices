@@ -52,7 +52,7 @@ namespace PESproj.Controllers
                 {
                     tblEvaluation eva = header.getEvaData().Where(a => a.EvaluatorNO == EmployeeId).Where(a => a.EmployeeNO == temp.StaffID).Where(a => a.ProjectNO == temp.ProjectID).FirstOrDefault();
                     if(eva == null)
-                    if (temp.StaffID != EmployeeId &&((temp.PlanStartDate>pr.StartDate && temp.PlanStartDate<pr.FinishDate)||(temp.PlanFinishDate > pr.StartDate && temp.PlanFinishDate < pr.FinishDate)|| (temp.PlanFinishDate < pr.StartDate && temp.PlanFinishDate > pr.FinishDate)))
+                    if (temp.StaffID != EmployeeId &&((temp.PlanStartDate>=pr.StartDate && temp.PlanStartDate<=pr.FinishDate)||(temp.PlanFinishDate >= pr.StartDate && temp.PlanFinishDate <= pr.FinishDate)|| (temp.PlanFinishDate <= pr.StartDate && temp.PlanFinishDate >= pr.FinishDate)))
                     {
                         tblProject p = header.getProject().Where(a => a.ProjectID == temp.ProjectID).FirstOrDefault();
                         tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == temp.Part2ID).FirstOrDefault();
@@ -96,10 +96,12 @@ namespace PESproj.Controllers
                 var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
                 tblEvaluation eva = new tblEvaluation();
                 tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a=>a.StaffID== Data["EmployeeNO"].ToString()).FirstOrDefault();
-
+                Period p = header.GetPeriod().Where(a => a.Period_Id == Convert.ToInt32(Data["PeriodID"].ToString())).FirstOrDefault();
                 eva.EmployeeNO = Data["EmployeeNO"].ToString();
                 eva.EvaluatorNO = Data["EvaluatorNO"].ToString();
                 eva.Job_ID = proj.Part2ID;
+                eva.PeriodID = p.Period_Id;
+                eva.period = p.StartDate.ToString().Substring(0, 5);
                 eva.ProjectNO = Data["ProjectNO"].ToString();
 
                 header.InsertEvaData(eva);
@@ -124,7 +126,26 @@ namespace PESproj.Controllers
                 EvaluationData newEva = new EvaluationData();
                 tblProject proj = header.getProject().Where(a => a.ProjectID == tmp.ProjectNO).FirstOrDefault();
                 tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == tmp.Job_ID).FirstOrDefault();
-                tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo == tmp.EmployeeNO).FirstOrDefault();
+                tblEmployee emp = new tblEmployee();
+                Period p = header.GetPeriod().Where(a => a.Period_Id == tmp.PeriodID).FirstOrDefault();
+                emp = header.getEmployees().Where(a => a.EmployeeNo == tmp.EmployeeNO).FirstOrDefault();
+                if (emp != null)
+                {
+                    
+                    emp.OrganizationNo = (emp.OrganizationNo != null) ? emp.OrganizationNo : 1;
+                    tblOrganization org = header.getOrganization().Where(a => a.OrganizationNo == (emp.OrganizationNo)).FirstOrDefault();
+                    newEva.GroupOfStaff = org.OrganizationAlias;
+                }
+
+                tblEmployee emp2 = new tblEmployee();
+                emp2 = header.getEmployees().Where(a => a.EmployeeNo == tmp.EvaluatorNO).FirstOrDefault();
+                if (emp2 != null)
+                {
+                    newEva.evaluatorFirstname = emp2.EmployeeFirstName;
+                    newEva.evaluatorLastname = emp2.EmployeeLastName;
+                }
+                //newEva.evaluatoFirstname = (emp2.EmployeeFirstName != null) ? emp2.EmployeeFirstName : " - ";
+                //newEva.evaluatorLastname = (emp2.EmployeeLastName != null)?emp2.EmployeeLastName:" - ";
                 newEva.Firstname = (emp != null) ? emp.EmployeeFirstName : " - ";
                 newEva.Lastname = (emp != null) ? emp.EmployeeLastName : " - ";
                 newEva.Eva_ID = tmp.Eva_ID;
@@ -139,6 +160,9 @@ namespace PESproj.Controllers
                 newEva.Role = p2.Function;
                 newEva.ProjectName = proj.ProjectName;
                 newEva.VersionNO = mem.VersionNo;
+                newEva.evaTerm = p.StartDate.ToString().Substring(0, 5);
+                newEva.ProjectCode = proj.CustomerCompanyAlias + "-" + proj.ProjectNameAlias;
+                newEva.ProjectType = "Man Base";
                 EvaData.Add(newEva);
                 
             }
@@ -175,7 +199,16 @@ namespace PESproj.Controllers
                 EvaluationData newEva = new EvaluationData();
                 tblProject proj = header.getProject().Where(a => a.ProjectID == tmp.ProjectNO).FirstOrDefault();
                 tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == tmp.Job_ID).FirstOrDefault();
-                tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo == tmp.EmployeeNO).FirstOrDefault();
+                tblEmployee emp = new tblEmployee();
+                Period p = header.GetPeriod().Where(a => a.Period_Id == tmp.PeriodID).FirstOrDefault();
+                emp = header.getEmployees().Where(a => a.EmployeeNo == tmp.EmployeeNO).FirstOrDefault();
+                if (emp != null)
+                {
+
+                    emp.OrganizationNo = (emp.OrganizationNo != null) ? emp.OrganizationNo : 1;
+                    tblOrganization org = header.getOrganization().Where(a => a.OrganizationNo == (emp.OrganizationNo)).FirstOrDefault();
+                    newEva.GroupOfStaff = org.OrganizationAlias;
+                }
                 newEva.Firstname = (emp != null) ? emp.EmployeeFirstName : " - ";
                 newEva.Lastname = (emp != null) ? emp.EmployeeLastName : " - ";
                 newEva.Eva_ID = tmp.Eva_ID;
@@ -190,6 +223,9 @@ namespace PESproj.Controllers
                 newEva.Role = p2.Function;
                 newEva.ProjectName = proj.ProjectName;
                 newEva.VersionNO = mem.VersionNo;
+                newEva.evaTerm = p.StartDate.ToString().Substring(0, 5);
+                newEva.ProjectCode = proj.CustomerCompanyAlias + "-" + proj.ProjectNameAlias;
+                newEva.ProjectType = "Man Base";
                 EvaData.Add(newEva);
 
             }

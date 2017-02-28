@@ -61,5 +61,11 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblEmployee.ToList();
         }
+
+        public List<tblOrganization> getOrganization()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblOrganization.ToList();
+        }
     }
 }

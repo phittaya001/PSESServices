@@ -176,6 +176,9 @@
     <Compile Include="SP_HeaderTopByJob_Result.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblEmployee.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblEvaluation.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
@@ -192,6 +195,9 @@
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="tblHeaderTop.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblOrganization.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="tblPart2Master.cs">

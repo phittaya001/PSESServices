@@ -4,6 +4,8 @@
     <EntitySetMapping Name="tblEvaluation">
       <EntityTypeMapping TypeName="PSESModel.tblEvaluation">
         <MappingFragment StoreEntitySet="tblEvaluation">
+          <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+          <ScalarProperty Name="period" ColumnName="period" />
           <ScalarProperty Name="ProjectNO" ColumnName="ProjectNO" />
           <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
           <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
@@ -331,5 +333,42 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_DeleteEva" FunctionName="PSESModel.Store.SP_DeleteEva" />
+    <EntitySetMapping Name="tblEmployee">
+      <EntityTypeMapping TypeName="PSESModel.tblEmployee">
+        <MappingFragment StoreEntitySet="tblEmployee">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="QuitDate" ColumnName="QuitDate" />
+          <ScalarProperty Name="EmployeeEMail" ColumnName="EmployeeEMail" />
+          <ScalarProperty Name="StartWorkingDate" ColumnName="StartWorkingDate" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+          <ScalarProperty Name="OrganizationNo" ColumnName="OrganizationNo" />
+          <ScalarProperty Name="CompanyNo" ColumnName="CompanyNo" />
+          <ScalarProperty Name="EmployeeType" ColumnName="EmployeeType" />
+          <ScalarProperty Name="EmployeeNickName" ColumnName="EmployeeNickName" />
+          <ScalarProperty Name="EmployeeLastNameThai" ColumnName="EmployeeLastNameThai" />
+          <ScalarProperty Name="EmployeeFirstNameThai" ColumnName="EmployeeFirstNameThai" />
+          <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+          <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
+          <ScalarProperty Name="TitleNo" ColumnName="TitleNo" />
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblOrganization">
+      <EntityTypeMapping TypeName="PSESModel.tblOrganization">
+        <MappingFragment StoreEntitySet="tblOrganization">
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="OrganizationFlag" ColumnName="OrganizationFlag" />
+          <ScalarProperty Name="OrganizationCode" ColumnName="OrganizationCode" />
+          <ScalarProperty Name="CancelDate" ColumnName="CancelDate" />
+          <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+          <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
+          <ScalarProperty Name="OrganizationAlias" ColumnName="OrganizationAlias" />
+          <ScalarProperty Name="OrganizationNo" ColumnName="OrganizationNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

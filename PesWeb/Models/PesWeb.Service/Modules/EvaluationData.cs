@@ -31,5 +31,13 @@ namespace PesWeb.Service.Modules
         public string Firstname { get; set; }
         public string Lastname { get; set; }
         public string CustumerAlias { get; set; }
+
+        public string GroupOfStaff { get; set; }
+        public string ProjectType { get; set; }
+        public string ProjectCode { get; set; }
+        public string evaTerm { get; set; }
+        public string evaluatorFirstname { get; set; }
+        public string evaluatorLastname { get; set; }
+
     }
 }
