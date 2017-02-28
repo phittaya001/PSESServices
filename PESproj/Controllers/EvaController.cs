@@ -43,14 +43,17 @@ namespace PESproj.Controllers
             List<tblProjectMember> pm = header.getProjectMember().Where(a => a.StaffID == EmployeeId).ToList();
             List<tblProjectMember> Result_pm = new List<tblProjectMember>();
             List<ProjectMember> result = new List<ProjectMember>();
-            if(pm.Count > 0)
+            if (pm.Count > 0)
             foreach (tblProjectMember epm in pm)
             {
                
                 List<tblProjectMember> pmList = header.getProjectMember().Where(a => a.ProjectID == epm.ProjectID).ToList();
-                foreach(tblProjectMember temp in pmList)
+                    tblProjectMember role = header.getProjectMember().Where(a=>a.StaffID == EmployeeId).FirstOrDefault();
+                    if(role.Part2ID == 30)
+                    foreach (tblProjectMember temp in pmList)
                 {
-                    tblEvaluation eva = header.getEvaData().Where(a => a.EvaluatorNO == EmployeeId).Where(a => a.EmployeeNO == temp.StaffID).Where(a => a.ProjectNO == temp.ProjectID).FirstOrDefault();
+                        
+                        tblEvaluation eva = header.getEvaData().Where(a => a.EvaluatorNO == EmployeeId).Where(a => a.EmployeeNO == temp.StaffID).Where(a => a.ProjectNO == temp.ProjectID).FirstOrDefault();
                     if(eva == null)
                     if (temp.StaffID != EmployeeId &&((temp.PlanStartDate>=pr.StartDate && temp.PlanStartDate<=pr.FinishDate)||(temp.PlanFinishDate >= pr.StartDate && temp.PlanFinishDate <= pr.FinishDate)|| (temp.PlanFinishDate <= pr.StartDate && temp.PlanFinishDate >= pr.FinishDate)))
                     {
