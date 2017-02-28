@@ -370,5 +370,17 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <EntitySetMapping Name="tblHeaderLevel">
+      <EntityTypeMapping TypeName="PSESModel.tblHeaderLevel">
+        <MappingFragment StoreEntitySet="tblHeaderLevel">
+          <ScalarProperty Name="seq" ColumnName="seq" />
+          <ScalarProperty Name="Different" ColumnName="Different" />
+          <ScalarProperty Name="CurrentLevel" ColumnName="CurrentLevel" />
+          <ScalarProperty Name="CurrentID" ColumnName="CurrentID" />
+          <ScalarProperty Name="ParentLevel" ColumnName="ParentLevel" />
+          <ScalarProperty Name="ParentID" ColumnName="ParentID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

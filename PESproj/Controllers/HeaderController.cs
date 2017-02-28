@@ -190,5 +190,16 @@ namespace PESproj.Controllers
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
             header.InsertHeaderBot(Data["Text"].ToString(), Convert.ToInt32(Data["H2_ID"].ToString()));
         }
+
+        /////////////////////////////////////////new Tale
+
+        [Route("Level/{HeaderLevel}")]
+        [HttpGet]
+        public List<tblHeaderLevel> GetHeaderByLevel(int HeaderLevel)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            return header.getHeaderLevel().Where(a => a.CurrentLevel == HeaderLevel).ToList();
+
+        }
     }
 }

@@ -65,5 +65,6 @@ namespace PesWeb.Service.Modules
         public string ProjectNameAlias { get; set; }
         public string Firstname { get; set; }
         public string Lastname { get; set; }
+        public string ProjectCode { get; set; }
     }
 }

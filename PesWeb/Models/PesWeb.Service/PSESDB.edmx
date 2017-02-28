@@ -19,7 +19,7 @@
           <Key>
             <PropertyRef Name="EmployeeNo" />
           </Key>
-          <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="EmployeeNo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TitleNo" Type="tinyint" />
           <Property Name="EmployeeFirstName" Type="nvarchar" MaxLength="30" />
           <Property Name="EmployeeLastName" Type="nvarchar" MaxLength="30" />
@@ -75,6 +75,17 @@
           <Property Name="HJ_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="PositionNo" Type="int" />
           <Property Name="H1_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblHeaderLevel">
+          <Key>
+            <PropertyRef Name="seq" />
+          </Key>
+          <Property Name="ParentID" Type="int" />
+          <Property Name="ParentLevel" Type="int" />
+          <Property Name="CurrentID" Type="int" />
+          <Property Name="CurrentLevel" Type="int" />
+          <Property Name="Different" Type="int" />
+          <Property Name="seq" Type="int" Nullable="false" />
         </EntityType>
         <EntityType Name="tblHeaderMid">
           <Key>
@@ -323,6 +334,8 @@
           <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
           <Parameter Name="EmployeeID" Type="varchar" Mode="In" />
           <Parameter Name="JobID" Type="int" Mode="In" />
+          <Parameter Name="period" Type="varchar" Mode="In" />
+          <Parameter Name="periodID" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_InsertHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="JobID" Type="int" Mode="In" />
@@ -339,6 +352,7 @@
           <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHeaderLevel" EntityType="Self.tblHeaderLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOrganization" EntityType="Self.tblOrganization" Schema="dbo" store:Type="Tables" />
@@ -498,6 +512,8 @@
             <Parameter Name="EvaluatorID" Mode="In" Type="String" />
             <Parameter Name="EmployeeID" Mode="In" Type="String" />
             <Parameter Name="JobID" Mode="In" Type="Int32" />
+            <Parameter Name="period" Mode="In" Type="String" />
+            <Parameter Name="periodID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="tblProject" EntityType="PSESModel.tblProject" />
           <EntitySet Name="tblPart2Master" EntityType="PSESModel.tblPart2Master" />
@@ -512,6 +528,7 @@
             <End Role="tblOrganization" EntitySet="tblOrganization" />
             <End Role="tblProject" EntitySet="tblProject" />
           </AssociationSet>
+          <EntitySet Name="tblHeaderLevel" EntityType="PSESModel.tblHeaderLevel" />
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -745,7 +762,7 @@
           <Key>
             <PropertyRef Name="EmployeeNo" />
           </Key>
-          <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TitleNo" Type="Byte" />
           <Property Name="EmployeeFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -789,6 +806,17 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <EntityType Name="tblHeaderLevel">
+          <Key>
+            <PropertyRef Name="seq" />
+          </Key>
+          <Property Name="ParentID" Type="Int32" />
+          <Property Name="ParentLevel" Type="Int32" />
+          <Property Name="CurrentID" Type="Int32" />
+          <Property Name="CurrentLevel" Type="Int32" />
+          <Property Name="Different" Type="Int32" />
+          <Property Name="seq" Type="Int32" Nullable="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1161,6 +1189,18 @@
                 <ScalarProperty Name="OrganizationName" ColumnName="OrganizationName" />
                 <ScalarProperty Name="OrganizationAlias" ColumnName="OrganizationAlias" />
                 <ScalarProperty Name="OrganizationNo" ColumnName="OrganizationNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblHeaderLevel">
+            <EntityTypeMapping TypeName="PSESModel.tblHeaderLevel">
+              <MappingFragment StoreEntitySet="tblHeaderLevel">
+                <ScalarProperty Name="seq" ColumnName="seq" />
+                <ScalarProperty Name="Different" ColumnName="Different" />
+                <ScalarProperty Name="CurrentLevel" ColumnName="CurrentLevel" />
+                <ScalarProperty Name="CurrentID" ColumnName="CurrentID" />
+                <ScalarProperty Name="ParentLevel" ColumnName="ParentLevel" />
+                <ScalarProperty Name="ParentID" ColumnName="ParentID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

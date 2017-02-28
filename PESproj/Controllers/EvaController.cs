@@ -81,6 +81,7 @@ namespace PESproj.Controllers
                         resulttemp.role = p2.Function;
                         resulttemp.ProjectName = p.ProjectName;
                         resulttemp.ProjectNameAlias = p.ProjectNameAlias;
+                        resulttemp.ProjectCode = p.CustomerCompanyAlias + "-" + p.ProjectNameAlias;
                         result.Add(resulttemp);
                         Result_pm.Add(temp);
                     }
@@ -137,6 +138,7 @@ namespace PESproj.Controllers
                     
                     emp.OrganizationNo = (emp.OrganizationNo != null) ? emp.OrganizationNo : 1;
                     tblOrganization org = header.getOrganization().Where(a => a.OrganizationNo == (emp.OrganizationNo)).FirstOrDefault();
+                    if(org!=null)
                     newEva.GroupOfStaff = org.OrganizationAlias;
                 }
 
@@ -159,7 +161,7 @@ namespace PESproj.Controllers
                 newEva.Job_ID = tmp.Job_ID;
                 newEva.ProjectNO = tmp.ProjectNO;
                 newEva.name = (mem!=null)?mem.StaffName:"null";
-                newEva.period = (mem != null) ? mem.PlanStartDate.ToString().Substring(0,10) + " - " + mem.PlanFinishDate.ToString().Substring(0,10):"No Data";
+                newEva.period = (mem != null) ? mem.PlanStartDate.ToString().Replace('-', '/').Substring(0,10) + " - " + mem.PlanFinishDate.ToString().Replace('-', '/').Substring(0,10):"No Data";
                 newEva.Role = p2.Function;
                 newEva.ProjectName = proj.ProjectName;
                 newEva.VersionNO = mem.VersionNo;
@@ -204,13 +206,21 @@ namespace PESproj.Controllers
                 tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == tmp.Job_ID).FirstOrDefault();
                 tblEmployee emp = new tblEmployee();
                 Period p = header.GetPeriod().Where(a => a.Period_Id == tmp.PeriodID).FirstOrDefault();
-                emp = header.getEmployees().Where(a => a.EmployeeNo == tmp.EmployeeNO).FirstOrDefault();
+                emp = header.getEmployees().Where(a => a.EmployeeNo.Contains(tmp.EmployeeNO)).FirstOrDefault();
                 if (emp != null)
                 {
 
                     emp.OrganizationNo = (emp.OrganizationNo != null) ? emp.OrganizationNo : 1;
                     tblOrganization org = header.getOrganization().Where(a => a.OrganizationNo == (emp.OrganizationNo)).FirstOrDefault();
+                    if(org!=null)
                     newEva.GroupOfStaff = org.OrganizationAlias;
+                }
+                tblEmployee emp2 = new tblEmployee();
+                emp2 = header.getEmployees().Where(a => a.EmployeeNo.Contains(tmp.EvaluatorNO)).FirstOrDefault();
+                if (emp2 != null)
+                {
+                    newEva.evaluatorFirstname = emp2.EmployeeFirstName;
+                    newEva.evaluatorLastname = emp2.EmployeeLastName;
                 }
                 newEva.Firstname = (emp != null) ? emp.EmployeeFirstName : " - ";
                 newEva.Lastname = (emp != null) ? emp.EmployeeLastName : " - ";
@@ -222,7 +232,7 @@ namespace PESproj.Controllers
                 newEva.Job_ID = tmp.Job_ID;
                 newEva.ProjectNO = tmp.ProjectNO;
                 newEva.name = (mem != null) ? mem.StaffName : "null";
-                newEva.period = (mem != null) ? mem.PlanStartDate.ToString().Substring(0, 10) + " - " + mem.PlanFinishDate.ToString().Substring(0, 10) : "No Data";
+                newEva.period = (mem != null) ? mem.PlanStartDate.ToString().Replace('-', '/').Substring(0, 10) + " - " + mem.PlanFinishDate.ToString().Replace('-', '/').Substring(0, 10) : "No Data";
                 newEva.Role = p2.Function;
                 newEva.ProjectName = proj.ProjectName;
                 newEva.VersionNO = mem.VersionNo;

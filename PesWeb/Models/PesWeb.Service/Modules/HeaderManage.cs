@@ -83,5 +83,16 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             db.InsertHeaderBot(Text, H2_ID);
         }
+
+        public List<tblHeader> getHeaderData()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblHeader.ToList();
+        }
+        public List<tblHeaderLevel> getHeaderLevel()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblHeaderLevel.ToList();
+        }
     }
 }

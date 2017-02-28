@@ -67,6 +67,8 @@ public partial class PSESEntities : DbContext
 
     public virtual DbSet<tblOrganization> tblOrganization { get; set; }
 
+    public virtual DbSet<tblHeaderLevel> tblHeaderLevel { get; set; }
+
 
     public virtual int CreateForm(string empID, string evaluator, Nullable<int> jobID, string projectNO)
     {
@@ -404,7 +406,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual int SP_InsertEvaluation(string projectID, string evaluatorID, string employeeID, Nullable<int> jobID)
+    public virtual int SP_InsertEvaluation(string projectID, string evaluatorID, string employeeID, Nullable<int> jobID, string period, Nullable<int> periodID)
     {
 
         var projectIDParameter = projectID != null ?
@@ -427,7 +429,17 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("JobID", typeof(int));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertEvaluation", projectIDParameter, evaluatorIDParameter, employeeIDParameter, jobIDParameter);
+        var periodParameter = period != null ?
+            new ObjectParameter("period", period) :
+            new ObjectParameter("period", typeof(string));
+
+
+        var periodIDParameter = periodID.HasValue ?
+            new ObjectParameter("periodID", periodID) :
+            new ObjectParameter("periodID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertEvaluation", projectIDParameter, evaluatorIDParameter, employeeIDParameter, jobIDParameter, periodParameter, periodIDParameter);
     }
 
 

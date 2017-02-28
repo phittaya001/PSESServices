@@ -22,6 +22,7 @@
         <EntityTypeShape EntityType="PSESModel.tblEmployee" Width="1.5" PointX="9.375" PointY="3.75" />
         <EntityTypeShape EntityType="PSESModel.tblOrganization" Width="1.5" PointX="3.125" PointY="14.5" />
         <AssociationConnector Association="PSESModel.FK_tblProject2_tblOrganization" />
+        <EntityTypeShape EntityType="PSESModel.tblHeaderLevel" Width="1.5" PointX="9.375" PointY="8.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

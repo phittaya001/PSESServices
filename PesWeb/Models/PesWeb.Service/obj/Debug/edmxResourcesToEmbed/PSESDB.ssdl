@@ -14,7 +14,7 @@
     <Key>
       <PropertyRef Name="EmployeeNo" />
     </Key>
-    <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="EmployeeNo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="TitleNo" Type="tinyint" />
     <Property Name="EmployeeFirstName" Type="nvarchar" MaxLength="30" />
     <Property Name="EmployeeLastName" Type="nvarchar" MaxLength="30" />
@@ -70,6 +70,17 @@
     <Property Name="HJ_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="PositionNo" Type="int" />
     <Property Name="H1_ID" Type="int" />
+  </EntityType>
+  <EntityType Name="tblHeaderLevel">
+    <Key>
+      <PropertyRef Name="seq" />
+    </Key>
+    <Property Name="ParentID" Type="int" />
+    <Property Name="ParentLevel" Type="int" />
+    <Property Name="CurrentID" Type="int" />
+    <Property Name="CurrentLevel" Type="int" />
+    <Property Name="Different" Type="int" />
+    <Property Name="seq" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="tblHeaderMid">
     <Key>
@@ -318,6 +329,8 @@
     <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
     <Parameter Name="EmployeeID" Type="varchar" Mode="In" />
     <Parameter Name="JobID" Type="int" Mode="In" />
+    <Parameter Name="period" Type="varchar" Mode="In" />
+    <Parameter Name="periodID" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_InsertHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="JobID" Type="int" Mode="In" />
@@ -334,6 +347,7 @@
     <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHeaderLevel" EntityType="Self.tblHeaderLevel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOrganization" EntityType="Self.tblOrganization" Schema="dbo" store:Type="Tables" />

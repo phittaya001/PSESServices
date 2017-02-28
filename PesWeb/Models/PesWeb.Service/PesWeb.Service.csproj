@@ -191,6 +191,9 @@
     <Compile Include="tblHeaderJob.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblHeaderLevel.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblHeaderMid.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
