@@ -316,6 +316,10 @@
         </Function>
         <Function Name="SP_GetAllHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetAllHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_GetEmployeeListByPeriod" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PeriodID" Type="int" Mode="In" />
+          <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_GetEvaHeaderByEvaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EvaID" Type="int" Mode="In" />
         </Function>
@@ -529,6 +533,10 @@
             <End Role="tblProject" EntitySet="tblProject" />
           </AssociationSet>
           <EntitySet Name="tblHeaderLevel" EntityType="PSESModel.tblHeaderLevel" />
+          <FunctionImport Name="SP_GetEmployeeListByPeriod" ReturnType="Collection(PSESModel.SP_GetEmployeeListByPeriod_Result)">
+            <Parameter Name="PeriodID" Mode="In" Type="Int32" />
+            <Parameter Name="EvaluatorID" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -817,6 +825,20 @@
           <Property Name="Different" Type="Int32" />
           <Property Name="seq" Type="Int32" Nullable="false" />
         </EntityType>
+        <ComplexType Name="SP_GetEmployeeListByPeriod_Result">
+          <Property Type="String" Name="ProjectName" Nullable="false" MaxLength="255" />
+          <Property Type="String" Name="EmployeeFirstName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="EmployeeLastName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="CustomerCompanyAlias" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ProjectCode" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="ProjectType" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="EvaTerm" Nullable="true" MaxLength="5" />
+          <Property Type="DateTime" Name="PlanStartDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="PlanFinishDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="Role" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="EvaluatorFirstname" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="EvaluatorLastname" Nullable="true" MaxLength="30" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1204,6 +1226,24 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetEmployeeListByPeriod" FunctionName="PSESModel.Store.SP_GetEmployeeListByPeriod">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PSESModel.SP_GetEmployeeListByPeriod_Result">
+                <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+                <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
+                <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+                <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+                <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />
+                <ScalarProperty Name="PlanStartDate" ColumnName="PlanStartDate" />
+                <ScalarProperty Name="PlanFinishDate" ColumnName="PlanFinishDate" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="EvaluatorFirstname" ColumnName="EvaluatorFirstname" />
+                <ScalarProperty Name="EvaluatorLastname" ColumnName="EvaluatorLastname" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

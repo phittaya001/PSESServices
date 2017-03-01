@@ -454,6 +454,23 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteEva", evaIDParameter);
     }
 
+
+    public virtual ObjectResult<SP_GetEmployeeListByPeriod_Result> SP_GetEmployeeListByPeriod(Nullable<int> periodID, string evaluatorID)
+    {
+
+        var periodIDParameter = periodID.HasValue ?
+            new ObjectParameter("PeriodID", periodID) :
+            new ObjectParameter("PeriodID", typeof(int));
+
+
+        var evaluatorIDParameter = evaluatorID != null ?
+            new ObjectParameter("EvaluatorID", evaluatorID) :
+            new ObjectParameter("EvaluatorID", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEmployeeListByPeriod_Result>("SP_GetEmployeeListByPeriod", periodIDParameter, evaluatorIDParameter);
+    }
+
 }
 
 }
