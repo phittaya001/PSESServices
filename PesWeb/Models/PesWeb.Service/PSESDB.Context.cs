@@ -467,18 +467,6 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_GetEvaListByEvaluatorID_Result> SP_GetEvaListByEvaluatorID(string evaluatorID)
-    {
-
-        var evaluatorIDParameter = evaluatorID != null ?
-            new ObjectParameter("EvaluatorID", evaluatorID) :
-            new ObjectParameter("EvaluatorID", typeof(string));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaListByEvaluatorID_Result>("SP_GetEvaListByEvaluatorID", evaluatorIDParameter);
-    }
-
-
     public virtual ObjectResult<SP_GetEmployeesListByPeriod_Result> SP_GetEmployeesListByPeriod(Nullable<int> periodID, string evaluatorID)
     {
 
@@ -510,6 +498,18 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEmployeeListByPeriodID_Result>("SP_GetEmployeeListByPeriodID", periodIDParameter, evaluatorIDParameter);
+    }
+
+
+    public virtual ObjectResult<SP_GetEvaListByEvaluatorID_Result> SP_GetEvaListByEvaluatorID(string evaluatorID)
+    {
+
+        var evaluatorIDParameter = evaluatorID != null ?
+            new ObjectParameter("EvaluatorID", evaluatorID) :
+            new ObjectParameter("EvaluatorID", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaListByEvaluatorID_Result>("SP_GetEvaListByEvaluatorID", evaluatorIDParameter);
     }
 
 }

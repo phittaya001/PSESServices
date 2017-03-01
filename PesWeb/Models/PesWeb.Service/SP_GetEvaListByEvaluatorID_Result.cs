@@ -31,17 +31,15 @@ public partial class SP_GetEvaListByEvaluatorID_Result
 
     public string EvaTerm { get; set; }
 
-    public Nullable<System.DateTime> StartDatePlan { get; set; }
+    public string StartDatePlan { get; set; }
 
-    public Nullable<System.DateTime> FinishDatePlan { get; set; }
+    public string FinishDatePlan { get; set; }
 
     public string Function { get; set; }
 
     public string EvaluatorFirstName { get; set; }
 
     public string EvaluatorLastName { get; set; }
-
-    public int Eva_ID { get; set; }
 
 }
 
