@@ -164,7 +164,13 @@
     <Compile Include="SP_GetEmployeeListByPeriod_Result.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_GetEvaDataByEvaID_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_GetEvaHeaderByEvaID_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GetEvaListByEvaluatorID_Result.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_GetHeaderMidByHeaderTopAndJobID_Result.cs">

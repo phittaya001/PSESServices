@@ -159,6 +159,12 @@
       <Parameter Name="PeriodID" Mode="In" Type="Int32" />
       <Parameter Name="EvaluatorID" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="SP_GetEvaDataByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaDataByEvaID_Result)">
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetEvaListByEvaluatorID" ReturnType="Collection(PSESModel.SP_GetEvaListByEvaluatorID_Result)">
+      <Parameter Name="EvaluatorID" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -392,7 +398,7 @@
     <Key>
       <PropertyRef Name="EmployeeNo" />
     </Key>
-    <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
     <Property Name="TitleNo" Type="Byte" />
     <Property Name="EmployeeFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="EmployeeLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -460,5 +466,35 @@
     <Property Type="String" Name="Role" Nullable="false" MaxLength="40" />
     <Property Type="String" Name="EvaluatorFirstname" Nullable="true" MaxLength="30" />
     <Property Type="String" Name="EvaluatorLastname" Nullable="true" MaxLength="30" />
+  </ComplexType>
+  <ComplexType Name="SP_GetEvaDataByEvaID_Result">
+    <Property Type="String" Name="EmployeeFirstName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="EmployeeLastName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="GroupOfStaff" Nullable="false" MaxLength="4" />
+    <Property Type="String" Name="CustomerCompanyAlias" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="ProjectCode" Nullable="true" MaxLength="41" />
+    <Property Type="String" Name="ProjectType" Nullable="false" MaxLength="8" />
+    <Property Type="String" Name="EvaTerm" Nullable="true" MaxLength="25" />
+    <Property Type="DateTime" Name="StartDatePlan" Nullable="true" />
+    <Property Type="DateTime" Name="FinishDatePlan" Nullable="true" />
+    <Property Type="String" Name="Function" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="EvaluatorFirstName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="EvaluatorLastName" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="Eva_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SP_GetEvaListByEvaluatorID_Result">
+    <Property Type="String" Name="EmployeeFirstName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="EmployeeLastName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="GroupOfStaff" Nullable="false" MaxLength="4" />
+    <Property Type="String" Name="CustomerCompanyAlias" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="ProjectCode" Nullable="true" MaxLength="41" />
+    <Property Type="String" Name="ProjectType" Nullable="false" MaxLength="8" />
+    <Property Type="String" Name="EvaTerm" Nullable="true" MaxLength="25" />
+    <Property Type="DateTime" Name="StartDatePlan" Nullable="true" />
+    <Property Type="DateTime" Name="FinishDatePlan" Nullable="true" />
+    <Property Type="String" Name="Function" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="EvaluatorFirstName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="EvaluatorLastName" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="Eva_ID" Nullable="false" />
   </ComplexType>
 </Schema>

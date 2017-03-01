@@ -73,5 +73,17 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.SP_GetEmployeeListByPeriod(PeriodID, evaluatorID).ToList();
         }
+
+        public List<SP_GetEvaListByEvaluatorID_Result> getEvaListByEvaluatorID(string evaluatorID)
+        {
+            PSESEntities db = new PSESEntities();
+            return db.SP_GetEvaListByEvaluatorID(evaluatorID).ToList();
+        }
+
+        public List<SP_GetEvaDataByEvaID_Result> getEvaDataByEvaID(int EvaID)
+        {
+            PSESEntities db = new PSESEntities();
+            return db.SP_GetEvaDataByEvaID(EvaID).ToList();
+        }
     }
 }

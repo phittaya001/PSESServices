@@ -14,7 +14,7 @@
     <Key>
       <PropertyRef Name="EmployeeNo" />
     </Key>
-    <Property Name="EmployeeNo" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
     <Property Name="TitleNo" Type="tinyint" />
     <Property Name="EmployeeFirstName" Type="nvarchar" MaxLength="30" />
     <Property Name="EmployeeLastName" Type="nvarchar" MaxLength="30" />
@@ -315,8 +315,14 @@
     <Parameter Name="PeriodID" Type="int" Mode="In" />
     <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="SP_GetEvaDataByEvaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_GetEvaHeaderByEvaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GetEvaListByEvaluatorID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SP_GetHeader2BYHJ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="HJ_ID" Type="int" Mode="In" />
