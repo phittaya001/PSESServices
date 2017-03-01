@@ -456,6 +456,7 @@
           <ScalarProperty Name="Function" ColumnName="Function" />
           <ScalarProperty Name="EvaluatorFirstName" ColumnName="EvaluatorFirstName" />
           <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

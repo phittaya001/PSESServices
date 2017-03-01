@@ -41,6 +41,8 @@ public partial class SP_GetEvaListByEvaluatorID_Result
 
     public string EvaluatorLastName { get; set; }
 
+    public int Eva_ID { get; set; }
+
 }
 
 }

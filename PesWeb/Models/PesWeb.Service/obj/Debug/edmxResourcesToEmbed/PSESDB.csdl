@@ -517,5 +517,6 @@
     <Property Type="String" Name="Function" Nullable="false" MaxLength="40" />
     <Property Type="String" Name="EvaluatorFirstName" Nullable="true" MaxLength="30" />
     <Property Type="String" Name="EvaluatorLastName" Nullable="true" MaxLength="30" />
+    <Property Type="Int32" Name="Eva_ID" Nullable="false" />
   </ComplexType>
 </Schema>
