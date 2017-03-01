@@ -155,7 +155,7 @@
       <End Role="tblProject" EntitySet="tblProject" />
     </AssociationSet>
     <EntitySet Name="tblHeaderLevel" EntityType="PSESModel.tblHeaderLevel" />
-    <FunctionImport Name="SP_GetEmployeeListByPeriod" ReturnType="Collection(PSESModel.SP_GetEmployeeListByPeriod_Result)">
+    <FunctionImport Name="SP_GetEmployeeListByPeriod">
       <Parameter Name="PeriodID" Mode="In" Type="Int32" />
       <Parameter Name="EvaluatorID" Mode="In" Type="String" />
     </FunctionImport>
@@ -163,6 +163,10 @@
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
     </FunctionImport>
     <FunctionImport Name="SP_GetEvaListByEvaluatorID" ReturnType="Collection(PSESModel.SP_GetEvaListByEvaluatorID_Result)">
+      <Parameter Name="EvaluatorID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetEmployeeListByPeriod1" ReturnType="Collection(PSESModel.SP_GetEmployeeListByPeriod1_Result)">
+      <Parameter Name="PeriodID" Mode="In" Type="Int32" />
       <Parameter Name="EvaluatorID" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
@@ -453,20 +457,6 @@
     <Property Name="Different" Type="Int32" />
     <Property Name="seq" Type="Int32" Nullable="false" />
   </EntityType>
-  <ComplexType Name="SP_GetEmployeeListByPeriod_Result">
-    <Property Type="String" Name="ProjectName" Nullable="false" MaxLength="255" />
-    <Property Type="String" Name="EmployeeFirstName" Nullable="true" MaxLength="30" />
-    <Property Type="String" Name="EmployeeLastName" Nullable="true" MaxLength="30" />
-    <Property Type="String" Name="CustomerCompanyAlias" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="ProjectCode" Nullable="true" MaxLength="41" />
-    <Property Type="String" Name="ProjectType" Nullable="false" MaxLength="8" />
-    <Property Type="String" Name="EvaTerm" Nullable="true" MaxLength="5" />
-    <Property Type="DateTime" Name="PlanStartDate" Nullable="true" Precision="23" />
-    <Property Type="DateTime" Name="PlanFinishDate" Nullable="true" Precision="23" />
-    <Property Type="String" Name="Role" Nullable="false" MaxLength="40" />
-    <Property Type="String" Name="EvaluatorFirstname" Nullable="true" MaxLength="30" />
-    <Property Type="String" Name="EvaluatorLastname" Nullable="true" MaxLength="30" />
-  </ComplexType>
   <ComplexType Name="SP_GetEvaDataByEvaID_Result">
     <Property Type="String" Name="EmployeeFirstName" Nullable="true" MaxLength="30" />
     <Property Type="String" Name="EmployeeLastName" Nullable="true" MaxLength="30" />
@@ -496,5 +486,21 @@
     <Property Type="String" Name="EvaluatorFirstName" Nullable="true" MaxLength="30" />
     <Property Type="String" Name="EvaluatorLastName" Nullable="true" MaxLength="30" />
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SP_GetEmployeeListByPeriod1_Result">
+    <Property Type="String" Name="ProjectName" Nullable="false" MaxLength="255" />
+    <Property Type="String" Name="EmployeeFirstName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="EmployeeLastName" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="CustomerCompanyAlias" Nullable="true" MaxLength="20" />
+    <Property Type="String" Name="ProjectCode" Nullable="true" MaxLength="41" />
+    <Property Type="String" Name="ProjectType" Nullable="false" MaxLength="8" />
+    <Property Type="String" Name="EvaTerm" Nullable="true" MaxLength="5" />
+    <Property Type="DateTime" Name="PlanStartDate" Nullable="true" Precision="23" />
+    <Property Type="DateTime" Name="PlanFinishDate" Nullable="true" Precision="23" />
+    <Property Type="String" Name="Role" Nullable="false" MaxLength="40" />
+    <Property Type="String" Name="EvaluatorFirstname" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="EvaluatorLastname" Nullable="true" MaxLength="30" />
+    <Property Type="String" Name="StaffID" Nullable="true" MaxLength="10" />
+    <Property Type="String" Name="ProjectID" Nullable="false" MaxLength="15" />
   </ComplexType>
 </Schema>

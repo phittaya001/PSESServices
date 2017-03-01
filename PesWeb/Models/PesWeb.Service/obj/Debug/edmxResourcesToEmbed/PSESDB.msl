@@ -382,24 +382,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SP_GetEmployeeListByPeriod" FunctionName="PSESModel.Store.SP_GetEmployeeListByPeriod">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="PSESModel.SP_GetEmployeeListByPeriod_Result">
-          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-          <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
-          <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
-          <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
-          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
-          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
-          <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />
-          <ScalarProperty Name="PlanStartDate" ColumnName="PlanStartDate" />
-          <ScalarProperty Name="PlanFinishDate" ColumnName="PlanFinishDate" />
-          <ScalarProperty Name="Role" ColumnName="Role" />
-          <ScalarProperty Name="EvaluatorFirstname" ColumnName="EvaluatorFirstname" />
-          <ScalarProperty Name="EvaluatorLastname" ColumnName="EvaluatorLastname" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_GetEvaDataByEvaID" FunctionName="PSESModel.Store.SP_GetEvaDataByEvaID">
       <ResultMapping>
         <ComplexTypeMapping TypeName="PSESModel.SP_GetEvaDataByEvaID_Result">
@@ -435,6 +417,26 @@
           <ScalarProperty Name="EvaluatorFirstName" ColumnName="EvaluatorFirstName" />
           <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
           <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetEmployeeListByPeriod1" FunctionName="PSESModel.Store.SP_GetEmployeeListByPeriod">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetEmployeeListByPeriod1_Result">
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
+          <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+          <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
+          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+          <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />
+          <ScalarProperty Name="PlanStartDate" ColumnName="PlanStartDate" />
+          <ScalarProperty Name="PlanFinishDate" ColumnName="PlanFinishDate" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="EvaluatorFirstname" ColumnName="EvaluatorFirstname" />
+          <ScalarProperty Name="EvaluatorLastname" ColumnName="EvaluatorLastname" />
+          <ScalarProperty Name="StaffID" ColumnName="StaffID" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

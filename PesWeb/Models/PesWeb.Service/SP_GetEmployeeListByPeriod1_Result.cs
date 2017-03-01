@@ -14,7 +14,7 @@ namespace PesWeb.Service
 
 using System;
     
-public partial class SP_GetEmployeeListByPeriod_Result
+public partial class SP_GetEmployeeListByPeriod1_Result
 {
 
     public string ProjectName { get; set; }
@@ -40,6 +40,10 @@ public partial class SP_GetEmployeeListByPeriod_Result
     public string EvaluatorFirstname { get; set; }
 
     public string EvaluatorLastname { get; set; }
+
+    public string StaffID { get; set; }
+
+    public string ProjectID { get; set; }
 
 }
 

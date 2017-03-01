@@ -68,10 +68,10 @@ namespace PesWeb.Service.Modules
             return db.tblOrganization.ToList();
         }
 
-        public List<SP_GetEmployeeListByPeriod_Result> getEmpListByPeriod(int PeriodID,string evaluatorID)
+        public List<SP_GetEmployeeListByPeriod1_Result> getEmpListByPeriod(int PeriodID,string evaluatorID)
         {
             PSESEntities db = new PSESEntities();
-            return db.SP_GetEmployeeListByPeriod(PeriodID, evaluatorID).ToList();
+            return db.SP_GetEmployeeListByPeriod1(PeriodID, evaluatorID).ToList();
         }
 
         public List<SP_GetEvaListByEvaluatorID_Result> getEvaListByEvaluatorID(string evaluatorID)
