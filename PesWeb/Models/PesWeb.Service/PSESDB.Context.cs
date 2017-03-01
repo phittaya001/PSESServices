@@ -455,23 +455,6 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual int SP_GetEmployeeListByPeriod(Nullable<int> periodID, string evaluatorID)
-    {
-
-        var periodIDParameter = periodID.HasValue ?
-            new ObjectParameter("PeriodID", periodID) :
-            new ObjectParameter("PeriodID", typeof(int));
-
-
-        var evaluatorIDParameter = evaluatorID != null ?
-            new ObjectParameter("EvaluatorID", evaluatorID) :
-            new ObjectParameter("EvaluatorID", typeof(string));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_GetEmployeeListByPeriod", periodIDParameter, evaluatorIDParameter);
-    }
-
-
     public virtual ObjectResult<SP_GetEvaDataByEvaID_Result> SP_GetEvaDataByEvaID(Nullable<int> evaID)
     {
 
@@ -496,7 +479,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_GetEmployeeListByPeriod1_Result> SP_GetEmployeeListByPeriod1(Nullable<int> periodID, string evaluatorID)
+    public virtual ObjectResult<SP_GetEmployeesListByPeriod_Result> SP_GetEmployeesListByPeriod(Nullable<int> periodID, string evaluatorID)
     {
 
         var periodIDParameter = periodID.HasValue ?
@@ -509,7 +492,24 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("EvaluatorID", typeof(string));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEmployeeListByPeriod1_Result>("SP_GetEmployeeListByPeriod1", periodIDParameter, evaluatorIDParameter);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEmployeesListByPeriod_Result>("SP_GetEmployeesListByPeriod", periodIDParameter, evaluatorIDParameter);
+    }
+
+
+    public virtual ObjectResult<SP_GetEmployeeListByPeriodID_Result> SP_GetEmployeeListByPeriodID(Nullable<int> periodID, string evaluatorID)
+    {
+
+        var periodIDParameter = periodID.HasValue ?
+            new ObjectParameter("PeriodID", periodID) :
+            new ObjectParameter("PeriodID", typeof(int));
+
+
+        var evaluatorIDParameter = evaluatorID != null ?
+            new ObjectParameter("EvaluatorID", evaluatorID) :
+            new ObjectParameter("EvaluatorID", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEmployeeListByPeriodID_Result>("SP_GetEmployeeListByPeriodID", periodIDParameter, evaluatorIDParameter);
     }
 
 }

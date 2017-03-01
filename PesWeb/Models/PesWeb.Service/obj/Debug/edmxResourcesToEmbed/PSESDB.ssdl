@@ -311,7 +311,11 @@
   </Function>
   <Function Name="SP_GetAllHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SP_GetAllHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
-  <Function Name="SP_GetEmployeeListByPeriod" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+  <Function Name="SP_GetEmployeeListByPeriodID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PeriodID" Type="int" Mode="In" />
+    <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_GetEmployeesListByPeriod" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PeriodID" Type="int" Mode="In" />
     <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
   </Function>

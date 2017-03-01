@@ -36,7 +36,7 @@ namespace PESproj.Controllers
 
         [Route("GetEvaList/{EmployeeID}/{Period_ID}")]
         [HttpGet]
-        public List<SP_GetEmployeeListByPeriod1_Result> GetEvaList(string EmployeeId,int Period_ID)
+        public List<SP_GetEmployeeListByPeriodID_Result> GetEvaList(string EmployeeId,int Period_ID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             //Period pr = header.GetAllPeriod().Where(a => a.Period_Id == Period_ID).FirstOrDefault();
@@ -89,7 +89,7 @@ namespace PESproj.Controllers
 
             //}
             //return result;
-            return header.getEmpListByPeriod(Period_ID, EmployeeId).ToList();
+            return header.getEmpListByPeriod(Period_ID, EmployeeId);
         }
 
         [Route("InsertEva")]
