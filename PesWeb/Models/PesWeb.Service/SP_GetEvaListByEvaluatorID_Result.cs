@@ -43,6 +43,8 @@ public partial class SP_GetEvaListByEvaluatorID_Result
 
     public int Eva_ID { get; set; }
 
+    public Nullable<int> PeriodID { get; set; }
+
 }
 
 }

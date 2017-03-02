@@ -118,61 +118,20 @@ namespace PESproj.Controllers
             }
         }
 
-        [Route("Eva/{EvaluatorID}")]
+        [Route("Eva/All/{EvaluatorID}")]
         [HttpGet]
         public List<SP_GetEvaListByEvaluatorID_Result> getEvaData(string EvaluatorID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
-            //    List<EvaluationData> EvaData = new List<EvaluationData>();
-            //    List<tblEvaluation> Eva = header.getEvaData().Where(a => a.EvaluatorNO == EvaluatorID.Replace("  ", "")).ToList();
-            //    foreach(tblEvaluation tmp in Eva)
-            //    {
-            //        tblProjectMember mem = header.getProjectMember().Where(a => a.StaffID == tmp.EmployeeNO.Replace("  ", "")).FirstOrDefault();
-            //        EvaluationData newEva = new EvaluationData();
-            //        tblProject proj = header.getProject().Where(a => a.ProjectID == tmp.ProjectNO).FirstOrDefault();
-            //        tblPart2Master p2 = header.getRole().Where(a => a.Part2ID == tmp.Job_ID).FirstOrDefault();
-            //        tblEmployee emp = new tblEmployee();
-            //        Period p = header.GetPeriod().Where(a => a.Period_Id == tmp.PeriodID).FirstOrDefault();
-            //        emp = header.getEmployees().Where(a => a.EmployeeNo == tmp.EmployeeNO).FirstOrDefault();
-            //        if (emp != null)
-            //        {
-
-            //            emp.OrganizationNo = (emp.OrganizationNo != null) ? emp.OrganizationNo : 1;
-            //            tblOrganization org = header.getOrganization().Where(a => a.OrganizationNo == (emp.OrganizationNo)).FirstOrDefault();
-            //            if(org!=null)
-            //            newEva.GroupOfStaff = org.OrganizationAlias;
-            //        }
-
-            //        tblEmployee emp2 = new tblEmployee();
-            //        emp2 = header.getEmployees().Where(a => a.EmployeeNo == tmp.EvaluatorNO).FirstOrDefault();
-            //        if (emp2 != null)
-            //        {
-            //            newEva.evaluatorFirstname = emp2.EmployeeFirstName;
-            //            newEva.evaluatorLastname = emp2.EmployeeLastName;
-            //        }
-            //        //newEva.evaluatoFirstname = (emp2.EmployeeFirstName != null) ? emp2.EmployeeFirstName : " - ";
-            //        //newEva.evaluatorLastname = (emp2.EmployeeLastName != null)?emp2.EmployeeLastName:" - ";
-            //        newEva.Firstname = (emp != null) ? emp.EmployeeFirstName : " - ";
-            //        newEva.Lastname = (emp != null) ? emp.EmployeeLastName : " - ";
-            //        newEva.Eva_ID = tmp.Eva_ID;
-            //        newEva.CustumerAlias = proj.CustomerCompanyAlias;
-            //        newEva.EmployeeNO = tmp.EmployeeNO;
-            //        newEva.EvaluatorNO = tmp.EvaluatorNO;
-            //        newEva.Date = tmp.Date.ToString().Replace('-', '/').Substring(0,10);
-            //        newEva.Job_ID = tmp.Job_ID;
-            //        newEva.ProjectNO = tmp.ProjectNO;
-            //        newEva.name = (mem!=null)?mem.StaffName:"null";
-            //        newEva.period = (mem != null) ? mem.PlanStartDate.ToString().Replace('-', '/').Substring(0,10) + " - " + mem.PlanFinishDate.ToString().Replace('-', '/').Substring(0,10):"No Data";
-            //        newEva.Role = p2.Function;
-            //        newEva.ProjectName = proj.ProjectName;
-            //        newEva.VersionNO = mem.VersionNo;
-            //        newEva.evaTerm = p.StartDate.ToString().Substring(0, 5);
-            //        newEva.ProjectCode = proj.CustomerCompanyAlias + "-" + proj.ProjectNameAlias;
-            //        newEva.ProjectType = "Man Base";
-            //        EvaData.Add(newEva);
-
-            //}
             return header.getEvaListByEvaluatorID(EvaluatorID).ToList();
+        }
+
+        [Route("Eva/{EvaluatorID}/{periodID}")]
+        [HttpGet]
+        public List<SP_GetEvaListByEvaluatorID_Result> getEvaDataByPeriod(string EvaluatorID,int periodID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            return header.getEvaListByEvaluatorID(EvaluatorID).Where(a=>a.PeriodID==periodID).ToList();
         }
 
         [Route("Delete/{EvaID}")]
