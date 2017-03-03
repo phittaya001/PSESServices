@@ -118,7 +118,7 @@ namespace PESproj.Controllers
             }
         }
 
-        [Route("Eva/All/{EvaluatorID}")]
+        [Route("Eva/{EvaluatorID}/All")]
         [HttpGet]
         public List<SP_GetEvaListByEvaluatorID_Result> getEvaData(string EvaluatorID)
         {

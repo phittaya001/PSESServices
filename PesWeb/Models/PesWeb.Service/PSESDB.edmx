@@ -59,6 +59,7 @@
           <Property Name="Parent" Type="int" />
           <Property Name="PositionNo" Type="int" />
           <Property Name="Alias" Type="varchar" MaxLength="5" />
+          <Property Name="H_Level" Type="int" />
         </EntityType>
         <EntityType Name="tblHeaderBot">
           <Key>
@@ -336,6 +337,9 @@
         <Function Name="SP_GetHeader2BYHJ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="HJ_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_GetHeaderByPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PositionNO" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_GetHeaderMidByHeaderTopAndJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="H1_ID" Type="int" Mode="In" />
           <Parameter Name="JobID" Type="int" Mode="In" />
@@ -532,7 +536,6 @@
           <EntitySet Name="tblProject" EntityType="PSESModel.tblProject" />
           <EntitySet Name="tblPart2Master" EntityType="PSESModel.tblPart2Master" />
           <EntitySet Name="tblTitle" EntityType="PSESModel.tblTitle" />
-          <EntitySet Name="tblHeader" EntityType="PSESModel.tblHeader" />
           <FunctionImport Name="SP_DeleteEva">
           <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
@@ -555,7 +558,11 @@
           <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GetEvaListByEvaluatorID" ReturnType="Collection(PSESModel.SP_GetEvaListByEvaluatorID_Result)">
-            <Parameter Name="EvaluatorID" Mode="In" Type="String" />
+          <Parameter Name="EvaluatorID" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tblHeader" EntityType="PSESModel.tblHeader" />
+          <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
+            <Parameter Name="PositionNO" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -775,17 +782,6 @@
           <Property Name="TitleName" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="TitleNameThai" Type="String" Nullable="false" MaxLength="15" FixedLength="false" Unicode="false" />
         </EntityType>
-        <EntityType Name="tblHeader">
-          <Key>
-            <PropertyRef Name="H_ID" />
-          </Key>
-          <Property Name="H_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Text_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
-          <Property Name="Parent" Type="Int32" />
-          <Property Name="PositionNo" Type="Int32" />
-          <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
-        </EntityType>
         <EntityType Name="tblEmployee">
           <Key>
             <PropertyRef Name="EmployeeNo" />
@@ -907,6 +903,27 @@
           <Property Type="String" Name="EvaluatorLastName" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
           <Property Type="Int32" Name="PeriodID" Nullable="true" />
+        </ComplexType>
+        <EntityType Name="tblHeader">
+          <Key>
+            <PropertyRef Name="H_ID" />
+          </Key>
+          <Property Name="H_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Text_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Parent" Type="Int32" />
+          <Property Name="PositionNo" Type="Int32" />
+          <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="H_Level" Type="Int32" />
+        </EntityType>
+        <ComplexType Name="SP_GetHeaderByPosition_Result">
+          <Property Type="Int32" Name="H_ID" Nullable="false" />
+          <Property Type="Int32" Name="PositionNO" Nullable="true" />
+          <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Parent" Nullable="true" />
+          <Property Type="String" Name="Alias" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="H_Level" Nullable="true" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -1233,18 +1250,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="tblHeader">
-            <EntityTypeMapping TypeName="PSESModel.tblHeader">
-              <MappingFragment StoreEntitySet="tblHeader">
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
-                <ScalarProperty Name="Parent" ColumnName="Parent" />
-                <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="H_ID" ColumnName="H_ID" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_DeleteEva" FunctionName="PSESModel.Store.SP_DeleteEva" />
           <EntitySetMapping Name="tblEmployee">
             <EntityTypeMapping TypeName="PSESModel.tblEmployee">
@@ -1371,6 +1376,32 @@
                 <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
                 <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
                 <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <EntitySetMapping Name="tblHeader">
+            <EntityTypeMapping TypeName="PSESModel.tblHeader">
+              <MappingFragment StoreEntitySet="tblHeader">
+                <ScalarProperty Name="H_Level" ColumnName="H_Level" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
+                <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+                <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="H_Level" ColumnName="H_Level" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

@@ -320,18 +320,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <EntitySetMapping Name="tblHeader">
-      <EntityTypeMapping TypeName="PSESModel.tblHeader">
-        <MappingFragment StoreEntitySet="tblHeader">
-          <ScalarProperty Name="Alias" ColumnName="Alias" />
-          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
-          <ScalarProperty Name="Parent" ColumnName="Parent" />
-          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
-        </MappingFragment>
-      </EntityTypeMapping>
-    </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_DeleteEva" FunctionName="PSESModel.Store.SP_DeleteEva" />
     <EntitySetMapping Name="tblEmployee">
       <EntityTypeMapping TypeName="PSESModel.tblEmployee">
@@ -458,6 +446,32 @@
           <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
           <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
           <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <EntitySetMapping Name="tblHeader">
+      <EntityTypeMapping TypeName="PSESModel.tblHeader">
+        <MappingFragment StoreEntitySet="tblHeader">
+          <ScalarProperty Name="H_Level" ColumnName="H_Level" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
+          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+          <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="H_Level" ColumnName="H_Level" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>

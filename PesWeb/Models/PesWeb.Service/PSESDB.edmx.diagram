@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="354ea39c94e84eebbbde8c5f1cb9a572" Name="Diagram1">
+      <Diagram DiagramId="354ea39c94e84eebbbde8c5f1cb9a572" Name="Diagram1" ZoomLevel="105">
         <EntityTypeShape EntityType="PSESModel.tblEvaluation" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PSESModel.tblHeaderBot" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PSESModel.tblHeaderJob" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
@@ -18,11 +18,11 @@
         <EntityTypeShape EntityType="PSESModel.tblProject" Width="1.5" PointX="5.375" PointY="7.75" />
         <EntityTypeShape EntityType="PSESModel.tblPart2Master" Width="1.5" PointX="7.375" PointY="6.75" />
         <EntityTypeShape EntityType="PSESModel.tblTitle" Width="1.5" PointX="9.375" PointY="0.75" />
-        <EntityTypeShape EntityType="PSESModel.tblHeader" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="PSESModel.tblEmployee" Width="1.5" PointX="9.375" PointY="3.75" />
         <EntityTypeShape EntityType="PSESModel.tblOrganization" Width="1.5" PointX="3.125" PointY="14.5" />
         <AssociationConnector Association="PSESModel.FK_tblProject2_tblOrganization" />
         <EntityTypeShape EntityType="PSESModel.tblHeaderLevel" Width="1.5" PointX="9.375" PointY="8.75" />
+        <EntityTypeShape EntityType="PSESModel.tblHeader" Width="1.5" PointX="0.75" PointY="9.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

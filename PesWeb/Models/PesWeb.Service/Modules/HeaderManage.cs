@@ -94,5 +94,11 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblHeaderLevel.ToList();
         }
+
+        public List<SP_GetHeaderByPosition_Result> getHeaderByPosition(int positionID)
+        {
+            PSESEntities db = new PSESEntities();
+            return db.SP_GetHeaderByPosition(positionID).ToList();
+        }
     }
 }

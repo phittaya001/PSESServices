@@ -13,20 +13,19 @@ namespace PesWeb.Service
 {
 
 using System;
-    using System.Collections.Generic;
     
-public partial class tblHeader
+public partial class SP_GetHeaderByPosition_Result
 {
 
     public int H_ID { get; set; }
+
+    public Nullable<int> PositionNO { get; set; }
 
     public string Text { get; set; }
 
     public string Text_Eng { get; set; }
 
     public Nullable<int> Parent { get; set; }
-
-    public Nullable<int> PositionNo { get; set; }
 
     public string Alias { get; set; }
 

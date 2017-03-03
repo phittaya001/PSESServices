@@ -1,6 +1,7 @@
 ﻿using CSI.CastleWindsorHelper;
 using Newtonsoft.Json.Linq;
 using PesWeb.Service;
+using PesWeb.Service.Modules;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,38 @@ namespace PESproj.Controllers
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
             List<tblHeaderTop> GetHeaderTop = header.getAllHeaderTop().ToList();
+            
             return GetHeaderTop;
+        }
+
+        [Route("All/{PositionID}")]
+        [HttpGet]
+        public List<SP_GetHeaderByPosition_Result> GetAllHeader(int PositionID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            List<SP_GetHeaderByPosition_Result> GetHeader = header.getHeaderByPosition(PositionID).ToList();
+            int level = 0;
+            tblHeader t = new tblHeader();
+            List<SP_GetHeaderByPosition_Result> H = new List<SP_GetHeaderByPosition_Result>();
+            foreach(SP_GetHeaderByPosition_Result a in GetHeader)
+            {
+                if (a.Parent == 0)
+                {
+                    H.Add(a);
+                }
+                else
+                {
+                    int parent = (int)a.Parent;
+                    for(int i = 0; i < H.Count; i++)
+                    {
+                        if (H[i].H_ID == parent)
+                        {
+                            H.Insert(i+1, a);
+                        }
+                    }
+                }
+            }
+            return H;
         }
 
         [Route("HeaderTop/Job/{JobID}")] // 

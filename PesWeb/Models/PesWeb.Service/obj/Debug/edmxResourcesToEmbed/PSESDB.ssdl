@@ -54,6 +54,7 @@
     <Property Name="Parent" Type="int" />
     <Property Name="PositionNo" Type="int" />
     <Property Name="Alias" Type="varchar" MaxLength="5" />
+    <Property Name="H_Level" Type="int" />
   </EntityType>
   <EntityType Name="tblHeaderBot">
     <Key>
@@ -330,6 +331,9 @@
   </Function>
   <Function Name="SP_GetHeader2BYHJ" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="HJ_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_GetHeaderByPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PositionNO" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_GetHeaderMidByHeaderTopAndJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="H1_ID" Type="int" Mode="In" />

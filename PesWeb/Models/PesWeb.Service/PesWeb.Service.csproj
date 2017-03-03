@@ -82,6 +82,7 @@
     <Compile Include="Modules\EvaManage.cs" />
     <Compile Include="Modules\FormManage.cs" />
     <Compile Include="Modules\HeaderManage.cs" />
+    <Compile Include="Modules\HeaderOutputData.cs" />
     <Compile Include="Modules\LDAPHelper.cs" />
     <Compile Include="Modules\PeriodData.cs" />
     <Compile Include="Modules\ProjectMember.cs" />
@@ -174,6 +175,9 @@
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_GetEvaListByEvaluatorID_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="SP_GetHeaderByPosition_Result.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_GetHeaderMidByHeaderTopAndJobID_Result.cs">

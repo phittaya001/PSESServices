@@ -61,13 +61,13 @@ public partial class PSESEntities : DbContext
 
     public virtual DbSet<tblTitle> tblTitle { get; set; }
 
-    public virtual DbSet<tblHeader> tblHeader { get; set; }
-
     public virtual DbSet<tblEmployee> tblEmployee { get; set; }
 
     public virtual DbSet<tblOrganization> tblOrganization { get; set; }
 
     public virtual DbSet<tblHeaderLevel> tblHeaderLevel { get; set; }
+
+    public virtual DbSet<tblHeader> tblHeader { get; set; }
 
 
     public virtual int CreateForm(string empID, string evaluator, Nullable<int> jobID, string projectNO)
@@ -510,6 +510,18 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaListByEvaluatorID_Result>("SP_GetEvaListByEvaluatorID", evaluatorIDParameter);
+    }
+
+
+    public virtual ObjectResult<SP_GetHeaderByPosition_Result> SP_GetHeaderByPosition(Nullable<int> positionNO)
+    {
+
+        var positionNOParameter = positionNO.HasValue ?
+            new ObjectParameter("PositionNO", positionNO) :
+            new ObjectParameter("PositionNO", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHeaderByPosition_Result>("SP_GetHeaderByPosition", positionNOParameter);
     }
 
 }
