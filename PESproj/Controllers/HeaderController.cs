@@ -51,7 +51,26 @@ namespace PESproj.Controllers
                     }
                 }
             }
-            return H;
+            List<SP_GetHeaderByPosition_Result> H_new = new List<SP_GetHeaderByPosition_Result>();
+            foreach (SP_GetHeaderByPosition_Result a in H)
+            {
+                if (a.Parent == 0)
+                {
+                    H_new.Add(a);
+                }
+                else
+                {
+                    int parent = (int)a.Parent;
+                    for (int i = 0; i < H_new.Count; i++)
+                    {
+                        if (H_new[i].H_ID == parent)
+                        {
+                            H_new.Insert(i + 1, a);
+                        }
+                    }
+                }
+            }
+            return H_new;
         }
 
         [Route("HeaderTop/Job/{JobID}")] // 
