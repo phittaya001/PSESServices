@@ -30,8 +30,6 @@ namespace PESproj.Controllers
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
             List<SP_GetHeaderByPosition_Result> GetHeader = header.getHeaderByPosition(PositionID).ToList();
-            int level = 0;
-            tblHeader t = new tblHeader();
             List<SP_GetHeaderByPosition_Result> H = new List<SP_GetHeaderByPosition_Result>();
             foreach(SP_GetHeaderByPosition_Result a in GetHeader)
             {
@@ -92,7 +90,7 @@ namespace PESproj.Controllers
 
         [Route("position")]
         [HttpGet]
-        public List<tblPosition> getJobDetail()
+        public List<tblPart2Master> getJobDetail()
         {
             var svc = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
             return svc.getJobDetail();

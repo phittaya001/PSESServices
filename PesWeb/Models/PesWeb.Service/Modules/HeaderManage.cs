@@ -14,10 +14,10 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblHeaderTop.ToList();
         }
-        public List<tblPosition> getJobDetail()
+        public List<tblPart2Master> getJobDetail()
         {
             PSESEntities db = new PSESEntities();
-            return db.tblPosition.ToList();
+            return db.tblPart2Master.ToList();
         }
         public List<tblHeaderJob> getAllHeaderJob()
         {
