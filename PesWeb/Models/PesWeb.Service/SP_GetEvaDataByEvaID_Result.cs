@@ -17,6 +17,8 @@ using System;
 public partial class SP_GetEvaDataByEvaID_Result
 {
 
+    public int Part2ID { get; set; }
+
     public string EmployeeFirstName { get; set; }
 
     public string EmployeeLastName { get; set; }

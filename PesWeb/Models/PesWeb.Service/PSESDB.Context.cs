@@ -489,18 +489,6 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_GetEvaDataByEvaID_Result> SP_GetEvaDataByEvaID(Nullable<int> evaID)
-    {
-
-        var evaIDParameter = evaID.HasValue ?
-            new ObjectParameter("EvaID", evaID) :
-            new ObjectParameter("EvaID", typeof(int));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaDataByEvaID_Result>("SP_GetEvaDataByEvaID", evaIDParameter);
-    }
-
-
     public virtual ObjectResult<SP_GetEvaListByEvaluatorID_Result> SP_GetEvaListByEvaluatorID(string evaluatorID)
     {
 
@@ -522,6 +510,18 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHeaderByPosition_Result>("SP_GetHeaderByPosition", positionNOParameter);
+    }
+
+
+    public virtual ObjectResult<SP_GetEvaDataByEvaID_Result> SP_GetEvaDataByEvaID(Nullable<int> evaID)
+    {
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaDataByEvaID_Result>("SP_GetEvaDataByEvaID", evaIDParameter);
     }
 
 }

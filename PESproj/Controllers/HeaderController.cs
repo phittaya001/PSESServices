@@ -31,7 +31,9 @@ namespace PESproj.Controllers
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
             List<SP_GetHeaderByPosition_Result> GetHeader = header.getHeaderByPosition(PositionID).ToList();
             List<SP_GetHeaderByPosition_Result> H = new List<SP_GetHeaderByPosition_Result>();
-            foreach(SP_GetHeaderByPosition_Result a in GetHeader)
+            List<SP_GetHeaderByPosition_Result> H2 = new List<SP_GetHeaderByPosition_Result>();
+           // GetHeader.Reverse(0,GetHeader.Count);
+            foreach (SP_GetHeaderByPosition_Result a in GetHeader)
             {
                 if (a.Parent == 0)
                 {
