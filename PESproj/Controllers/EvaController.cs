@@ -59,7 +59,8 @@ namespace PESproj.Controllers
             List<tblHeader> Result = new List<tblHeader>();
             foreach(tblHeader res in ListAll.Where(a => a.Parent == parent.H_ID).ToList())
             {
-                Result.Union(FinalHeader(res, ListAll)).OrderBy(a=>a.H_ID);
+                foreach(tblHeader a in FinalHeader(res, ListAll))
+                Result.Insert(Result.Count,a);
             }
             return Result;
         }
@@ -85,7 +86,7 @@ namespace PESproj.Controllers
                 List<tblHeader> Ans = new List<tblHeader>();
                 foreach(tblHeaderJob tmp in hj)
                 {
-                    foreach(tblHeader hd2 in hd.Where(a=>a.Parent == tmp.H1_ID))
+                    foreach(tblHeader hd2 in hd.Where(a=>a.H_ID == tmp.H1_ID))
                     {
                         foreach(tblHeader hd3 in FinalHeader(hd2, hd))
                         {
