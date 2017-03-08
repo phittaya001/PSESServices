@@ -26,10 +26,10 @@ namespace PesWeb.Service.Modules
             return db.tblProjectMember.ToList();
         }
 
-        public void InsertEvaData(tblEvaluation eva)
+        public int InsertEvaData(tblEvaluation eva)
         {
             PSESEntities db = new PSESEntities();
-            db.SP_InsertEvaluation(eva.ProjectNO, eva.EvaluatorNO, eva.EmployeeNO, eva.Job_ID,eva.period,eva.PeriodID);
+            return db.SP_InsertEvaluation(eva.ProjectNO, eva.EvaluatorNO, eva.EmployeeNO, eva.Job_ID,eva.period,eva.PeriodID);
         }
 
         public List<tblEvaluation> getEvaData()
@@ -85,7 +85,16 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.SP_GetEvaDataByEvaID(EvaID).ToList();
         }
-
         
+        public void InsertSCORE(int EvaID,int H_ID)
+        {
+            PSESEntities DB = new PSESEntities();
+            DB.SP_InsertScore(EvaID, H_ID);
+        }
+        public List<tblHeader> GetAllHeader()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblHeader.ToList();
+        }
     }
 }

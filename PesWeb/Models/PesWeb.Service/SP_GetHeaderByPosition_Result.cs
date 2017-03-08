@@ -31,6 +31,14 @@ public partial class SP_GetHeaderByPosition_Result
 
     public Nullable<int> H_Level { get; set; }
 
+    public Nullable<int> Score_ID { get; set; }
+
+    public Nullable<int> H3_ID { get; set; }
+
+    public Nullable<int> point { get; set; }
+
+    public Nullable<int> Eva_ID { get; set; }
+
 }
 
 }
