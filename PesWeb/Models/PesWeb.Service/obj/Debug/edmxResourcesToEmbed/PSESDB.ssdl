@@ -334,6 +334,7 @@
   </Function>
   <Function Name="SP_GetHeaderByPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="PositionNO" Type="int" Mode="In" />
+    <Parameter Name="EvaID" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_GetHeaderMidByHeaderTopAndJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="H1_ID" Type="int" Mode="In" />

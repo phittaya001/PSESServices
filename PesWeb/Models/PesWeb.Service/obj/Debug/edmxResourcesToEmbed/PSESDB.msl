@@ -466,7 +466,6 @@
     <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
       <ResultMapping>
         <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
-          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
           <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
           <ScalarProperty Name="Text" ColumnName="Text" />
           <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
@@ -474,7 +473,7 @@
           <ScalarProperty Name="Alias" ColumnName="Alias" />
           <ScalarProperty Name="H_Level" ColumnName="H_Level" />
           <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
-          <ScalarProperty Name="H3_ID" ColumnName="H3_ID" />
+          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
           <ScalarProperty Name="point" ColumnName="point" />
           <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
         </ComplexTypeMapping>

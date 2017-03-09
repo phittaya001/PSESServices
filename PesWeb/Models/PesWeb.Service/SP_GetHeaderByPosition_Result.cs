@@ -17,8 +17,6 @@ using System;
 public partial class SP_GetHeaderByPosition_Result
 {
 
-    public int H_ID { get; set; }
-
     public Nullable<int> PositionNO { get; set; }
 
     public string Text { get; set; }
@@ -33,7 +31,7 @@ public partial class SP_GetHeaderByPosition_Result
 
     public Nullable<int> Score_ID { get; set; }
 
-    public Nullable<int> H_ID1 { get; set; }
+    public Nullable<int> H_ID { get; set; }
 
     public Nullable<int> point { get; set; }
 

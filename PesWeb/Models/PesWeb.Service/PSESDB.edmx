@@ -920,7 +920,6 @@
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
         </ComplexType>
         <ComplexType Name="SP_GetHeaderByPosition_Result">
-          <Property Type="Int32" Name="H_ID" Nullable="false" />
           <Property Type="Int32" Name="PositionNO" Nullable="true" />
           <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
           <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
@@ -928,7 +927,7 @@
           <Property Type="String" Name="Alias" Nullable="true" MaxLength="5" />
           <Property Type="Int32" Name="H_Level" Nullable="true" />
           <Property Type="Int32" Name="Score_ID" Nullable="true" />
-          <Property Type="Int32" Name="H_ID1" Nullable="true" />
+          <Property Type="Int32" Name="H_ID" Nullable="true" />
           <Property Type="Int32" Name="point" Nullable="true" />
           <Property Type="Int32" Name="Eva_ID" Nullable="true" />
         </ComplexType>
@@ -1403,7 +1402,6 @@
           <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
-                <ScalarProperty Name="H_ID" ColumnName="H_ID" />
                 <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
                 <ScalarProperty Name="Text" ColumnName="Text" />
                 <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
@@ -1411,7 +1409,7 @@
                 <ScalarProperty Name="Alias" ColumnName="Alias" />
                 <ScalarProperty Name="H_Level" ColumnName="H_Level" />
                 <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
-                <ScalarProperty Name="H_ID1" ColumnName="H_ID1" />
+                <ScalarProperty Name="H_ID" ColumnName="H_ID" />
                 <ScalarProperty Name="point" ColumnName="point" />
                 <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
               </ComplexTypeMapping>

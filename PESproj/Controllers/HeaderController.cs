@@ -56,13 +56,14 @@ namespace PESproj.Controllers
             List<tblHeaderJob> hj = header.getAllHeaderJob().Where(a => a.PositionNo == eva.Part2ID).ToList();
             List<SP_GetHeaderByPosition_Result> GetHeader = header.getHeaderByPosition(PositionID, EvaID).ToList();
             List<tblHeader> Ans = new List<tblHeader>();
-            
-            if(GetHeader.Count==0)
-            foreach (tblHeaderJob tmp in hj)
+
+            if (GetHeader.Count == GetHeader.Where(a=>a.point==null).ToList().Count)
+                foreach (tblHeaderJob tmp in hj)
             {
                 foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmp.H1_ID))
                 {
-                    foreach (tblHeader hd3 in FinalHeader(hd2, hd))
+                    
+                        foreach (tblHeader hd3 in FinalHeader(hd2, hd))
                     {
                         if (sc.Where(a => a.Eva_ID == EvaID && a.H3_ID == hd3.H_ID).ToList().Count==0)
                             if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
@@ -75,7 +76,7 @@ namespace PESproj.Controllers
                 header2.InsertSCORE(EvaID, h.H_ID);
             }
 
-            
+            GetHeader = header.getHeaderByPosition(PositionID, EvaID).ToList();
             List<SP_GetHeaderByPosition_Result> H = new List<SP_GetHeaderByPosition_Result>();
             List<SP_GetHeaderByPosition_Result> H2 = new List<SP_GetHeaderByPosition_Result>();
            // GetHeader.Reverse(0,GetHeader.Count);
@@ -118,6 +119,7 @@ namespace PESproj.Controllers
             }
             return H_new;
         }
+
 
         [Route("HeaderTop/Job/{JobID}")] // 
         [HttpGet]
