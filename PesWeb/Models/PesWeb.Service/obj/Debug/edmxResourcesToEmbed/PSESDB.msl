@@ -479,5 +479,19 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <EntitySetMapping Name="tblHeaderAdditional">
+      <EntityTypeMapping TypeName="PSESModel.tblHeaderAdditional">
+        <MappingFragment StoreEntitySet="tblHeaderAdditional">
+          <ScalarProperty Name="H_Level" ColumnName="H_Level" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="parent" ColumnName="parent" />
+          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
   </EntityContainerMapping>
 </Mapping>

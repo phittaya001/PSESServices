@@ -173,6 +173,15 @@
       <Parameter Name="PositionNO" Mode="In" Type="Int32" />
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="tblHeaderAdditional" EntityType="PSESModel.tblHeaderAdditional" />
+    <FunctionImport Name="SP_InsertAdditionalHeader">
+      <Parameter Name="parent" Mode="In" Type="Int32" />
+      <Parameter Name="Text" Mode="In" Type="String" />
+      <Parameter Name="Text_Eng" Mode="In" Type="String" />
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
+      <Parameter Name="Alias" Mode="In" Type="String" />
+      <Parameter Name="H_Level" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -538,4 +547,16 @@
     <Property Type="Int32" Name="point" Nullable="true" />
     <Property Type="Int32" Name="Eva_ID" Nullable="true" />
   </ComplexType>
+  <EntityType Name="tblHeaderAdditional">
+    <Key>
+      <PropertyRef Name="H_ID" />
+    </Key>
+    <Property Name="H_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="parent" Type="Int32" />
+    <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Text_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="Eva_ID" Type="Int32" />
+    <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+    <Property Name="H_Level" Type="Int32" />
+  </EntityType>
 </Schema>

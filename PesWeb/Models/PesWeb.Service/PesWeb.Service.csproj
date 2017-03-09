@@ -201,6 +201,9 @@
     <Compile Include="tblHeader.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblHeaderAdditional.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblHeaderBot.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>

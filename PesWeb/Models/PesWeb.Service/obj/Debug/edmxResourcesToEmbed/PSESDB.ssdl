@@ -56,6 +56,18 @@
     <Property Name="Alias" Type="varchar" MaxLength="5" />
     <Property Name="H_Level" Type="int" />
   </EntityType>
+  <EntityType Name="tblHeaderAdditional">
+    <Key>
+      <PropertyRef Name="H_ID" />
+    </Key>
+    <Property Name="H_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="parent" Type="int" />
+    <Property Name="Text" Type="varchar" MaxLength="255" />
+    <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
+    <Property Name="Eva_ID" Type="int" />
+    <Property Name="Alias" Type="varchar" MaxLength="5" />
+    <Property Name="H_Level" Type="int" />
+  </EntityType>
   <EntityType Name="tblHeaderBot">
     <Key>
       <PropertyRef Name="H3_ID" />
@@ -343,6 +355,14 @@
   <Function Name="SP_GetJobDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SP_HeaderTopByJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SP_HeaderTopByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+  <Function Name="SP_InsertAdditionalHeader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="parent" Type="int" Mode="In" />
+    <Parameter Name="Text" Type="varchar" Mode="In" />
+    <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+    <Parameter Name="Alias" Type="varchar" Mode="In" />
+    <Parameter Name="H_Level" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_InsertEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProjectID" Type="varchar" Mode="In" />
     <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
@@ -364,6 +384,7 @@
     <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblHeaderAdditional" EntityType="Self.tblHeaderAdditional" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderLevel" EntityType="Self.tblHeaderLevel" Schema="dbo" store:Type="Tables" />

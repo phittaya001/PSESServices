@@ -79,7 +79,23 @@ namespace PESproj.Controllers
             GetHeader = header.getHeaderByPosition(PositionID, EvaID).ToList();
             List<SP_GetHeaderByPosition_Result> H = new List<SP_GetHeaderByPosition_Result>();
             List<SP_GetHeaderByPosition_Result> H2 = new List<SP_GetHeaderByPosition_Result>();
-           // GetHeader.Reverse(0,GetHeader.Count);
+            // GetHeader.Reverse(0,GetHeader.Count);
+
+            List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID).ToList();
+            foreach(tblHeaderAdditional HdATemp in HdA)
+            {
+                SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
+                newHeader.Alias = HdATemp.Alias;
+                newHeader.H_Level = HdATemp.H_Level;
+                newHeader.Parent = HdATemp.parent;
+                newHeader.Text = HdATemp.Text;
+                newHeader.Text_Eng = HdATemp.Text_Eng;
+                newHeader.Eva_ID = HdATemp.Eva_ID;
+                newHeader.H_ID = (-1)*HdATemp.H_ID;
+                newHeader.PositionNO = PositionID;
+                GetHeader.Add(newHeader);
+            }
+
             foreach (SP_GetHeaderByPosition_Result a in GetHeader)
             {
                 if (a.Parent == 0)
@@ -300,5 +316,25 @@ namespace PESproj.Controllers
             return header.getHeaderLevel().Where(a => a.CurrentLevel == HeaderLevel).ToList();
 
         }
+
+        [Route("Insert")]
+        [HttpGet]
+        public void InsertAdditionalHeader([FromBody]JObject Data)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            tblHeaderAdditional H = new tblHeaderAdditional();
+            int positionNo = Convert.ToInt32(Data["PositionNo"].ToString());
+            H.Eva_ID = Convert.ToInt32(Data["Eva_Id"].ToString());
+            
+            H.parent = Convert.ToInt32(Data["H_ID"].ToString());
+            tblHeader hd = header.GetAllHeader().Where(a => a.H_ID == H.parent).FirstOrDefault();
+            H.H_Level = hd.H_Level + 1;
+            H.Text = Data["Text"].ToString(); 
+            H.Text_Eng = Data["Text_Eng"].ToString(); 
+            H.Alias = Data["Alias"].ToString();
+
+            header.InsertAdditionalHeader(H);
+        }
+
     }
 }

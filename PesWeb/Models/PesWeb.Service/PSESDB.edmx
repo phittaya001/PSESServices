@@ -61,6 +61,18 @@
           <Property Name="Alias" Type="varchar" MaxLength="5" />
           <Property Name="H_Level" Type="int" />
         </EntityType>
+        <EntityType Name="tblHeaderAdditional">
+          <Key>
+            <PropertyRef Name="H_ID" />
+          </Key>
+          <Property Name="H_ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="parent" Type="int" />
+          <Property Name="Text" Type="varchar" MaxLength="255" />
+          <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
+          <Property Name="Eva_ID" Type="int" />
+          <Property Name="Alias" Type="varchar" MaxLength="5" />
+          <Property Name="H_Level" Type="int" />
+        </EntityType>
         <EntityType Name="tblHeaderBot">
           <Key>
             <PropertyRef Name="H3_ID" />
@@ -348,6 +360,14 @@
         <Function Name="SP_GetJobDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_HeaderTopByJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_HeaderTopByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="SP_InsertAdditionalHeader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parent" Type="int" Mode="In" />
+          <Parameter Name="Text" Type="varchar" Mode="In" />
+          <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
+          <Parameter Name="EvaID" Type="int" Mode="In" />
+          <Parameter Name="Alias" Type="varchar" Mode="In" />
+          <Parameter Name="H_Level" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_InsertEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProjectID" Type="varchar" Mode="In" />
           <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
@@ -369,6 +389,7 @@
           <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblHeaderAdditional" EntityType="Self.tblHeaderAdditional" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderJob" EntityType="Self.tblHeaderJob" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderLevel" EntityType="Self.tblHeaderLevel" Schema="dbo" store:Type="Tables" />
@@ -565,6 +586,15 @@
           <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
             <Parameter Name="PositionNO" Mode="In" Type="Int32" />
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <EntitySet Name="tblHeaderAdditional" EntityType="PSESModel.tblHeaderAdditional" />
+          <FunctionImport Name="SP_InsertAdditionalHeader">
+            <Parameter Name="parent" Mode="In" Type="Int32" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="Text_Eng" Mode="In" Type="String" />
+            <Parameter Name="EvaID" Mode="In" Type="Int32" />
+            <Parameter Name="Alias" Mode="In" Type="String" />
+            <Parameter Name="H_Level" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -931,6 +961,18 @@
           <Property Type="Int32" Name="point" Nullable="true" />
           <Property Type="Int32" Name="Eva_ID" Nullable="true" />
         </ComplexType>
+        <EntityType Name="tblHeaderAdditional">
+          <Key>
+            <PropertyRef Name="H_ID" />
+          </Key>
+          <Property Name="H_ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="parent" Type="Int32" />
+          <Property Name="Text" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Text_Eng" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Eva_ID" Type="Int32" />
+          <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="H_Level" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1415,6 +1457,20 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <EntitySetMapping Name="tblHeaderAdditional">
+            <EntityTypeMapping TypeName="PSESModel.tblHeaderAdditional">
+              <MappingFragment StoreEntitySet="tblHeaderAdditional">
+                <ScalarProperty Name="H_Level" ColumnName="H_Level" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+                <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="parent" ColumnName="parent" />
+                <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

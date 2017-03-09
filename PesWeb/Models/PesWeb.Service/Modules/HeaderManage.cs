@@ -106,5 +106,17 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblHeader.ToList();
         }
+
+        public void InsertAdditionalHeader(tblHeaderAdditional H)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_InsertAdditionalHeader(H.parent, H.Text, H.Text_Eng, H.Eva_ID, H.Alias, H.H_Level);
+        }
+
+        public List<tblHeaderAdditional> getHeaderAdditional()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblHeaderAdditional.ToList();
+        }
     }
 }
