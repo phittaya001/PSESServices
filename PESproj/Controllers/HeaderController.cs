@@ -24,12 +24,58 @@ namespace PESproj.Controllers
             return GetHeaderTop;
         }
 
-        [Route("All/{PositionID}")]
-        [HttpGet]
-        public List<SP_GetHeaderByPosition_Result> GetAllHeader(int PositionID)
+        public List<tblHeader> FinalHeader(tblHeader parent, List<tblHeader> ListAll)
         {
+            List<tblHeader> ListResult = new List<tblHeader>();
+            if (ListAll.Where(a => a.Parent == parent.H_ID).ToList().Count == 0)
+            {
+                ListResult.Add(parent);
+                return ListResult;
+            }
+            List<tblHeader> Result = new List<tblHeader>();
+            foreach (tblHeader res in ListAll.Where(a => a.Parent == parent.H_ID).ToList())
+            {
+                foreach (tblHeader a in FinalHeader(res, ListAll))
+                    Result.Insert(Result.Count, a);
+            }
+            return Result;
+        }
+
+        [Route("All/{PositionID}/{EvaID}")]
+        [HttpGet]
+        public List<SP_GetHeaderByPosition_Result> GetAllHeader(int PositionID,int EvaID)
+        {
+
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
-            List<SP_GetHeaderByPosition_Result> GetHeader = header.getHeaderByPosition(PositionID).ToList();
+            var header2 = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            List<tblScore> sc = header2.GetAllScore();
+            List<tblHeader> hd = header.GetAllHeader().ToList();
+            List<tblHeaderJob> Allhj = header.getAllHeaderJob().ToList();
+            // tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a => a.StaffID == Data["EmployeeNO"].ToString()).FirstOrDefault();
+            SP_GetEvaDataByEvaID_Result eva = header2.getEvaDataByEvaID(EvaID).Where(a=>a.Part2ID == PositionID).FirstOrDefault();
+            List<tblHeaderJob> hj = header.getAllHeaderJob().Where(a => a.PositionNo == eva.Part2ID).ToList();
+            List<SP_GetHeaderByPosition_Result> GetHeader = header.getHeaderByPosition(PositionID, EvaID).ToList();
+            List<tblHeader> Ans = new List<tblHeader>();
+            
+            if(GetHeader.Count==0)
+            foreach (tblHeaderJob tmp in hj)
+            {
+                foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmp.H1_ID))
+                {
+                    foreach (tblHeader hd3 in FinalHeader(hd2, hd))
+                    {
+                        if (sc.Where(a => a.Eva_ID == EvaID && a.H3_ID == hd3.H_ID).ToList().Count==0)
+                            if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
+                            Ans.Add(hd3);
+                    }
+                }
+            }
+            foreach (tblHeader h in Ans)
+            {
+                header2.InsertSCORE(EvaID, h.H_ID);
+            }
+
+            
             List<SP_GetHeaderByPosition_Result> H = new List<SP_GetHeaderByPosition_Result>();
             List<SP_GetHeaderByPosition_Result> H2 = new List<SP_GetHeaderByPosition_Result>();
            // GetHeader.Reverse(0,GetHeader.Count);

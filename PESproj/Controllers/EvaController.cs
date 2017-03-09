@@ -48,22 +48,7 @@ namespace PESproj.Controllers
 
         }
 
-        public List<tblHeader> FinalHeader(tblHeader parent,List<tblHeader> ListAll)
-        {
-            List<tblHeader> ListResult = new List<tblHeader>();
-            if(ListAll.Where(a=>a.Parent==parent.H_ID).ToList().Count == 0)
-            {
-                ListResult.Add(parent);
-                return ListResult;
-            }
-            List<tblHeader> Result = new List<tblHeader>();
-            foreach(tblHeader res in ListAll.Where(a => a.Parent == parent.H_ID).ToList())
-            {
-                foreach(tblHeader a in FinalHeader(res, ListAll))
-                Result.Insert(Result.Count,a);
-            }
-            return Result;
-        }
+       
         [Route("InsertEva")]
         [HttpPut]
         public HttpResponseMessage InsertEva([FromBody]JObject Data)
@@ -80,25 +65,8 @@ namespace PESproj.Controllers
                 eva.PeriodID = p.Period_Id;
                 eva.period = p.StartDate.ToString().Substring(0, 5);
                 eva.ProjectNO = Data["ProjectNO"].ToString();
-                int id = header.InsertEvaData(eva);
-                List<tblHeader> hd = header.GetAllHeader().ToList();
-                List<tblHeaderJob> hj = header2.getAllHeaderJob().Where(a => a.PositionNo == proj.Part2ID).ToList();
-                List<tblHeader> Ans = new List<tblHeader>();
-                foreach(tblHeaderJob tmp in hj)
-                {
-                    foreach(tblHeader hd2 in hd.Where(a=>a.H_ID == tmp.H1_ID))
-                    {
-                        foreach(tblHeader hd3 in FinalHeader(hd2, hd))
-                        {
-                            if(Ans.Where(a=>a.H_ID==hd3.H_ID).ToList().Count==0)
-                            Ans.Add(hd3);
-                        }
-                    }
-                }
-                foreach(tblHeader h in Ans)
-                {
-                    header.InsertSCORE(id, h.H_ID);
-                }
+                header.InsertEvaData(eva);
+
                 return Request.CreateResponse(HttpStatusCode.OK);
   
         }

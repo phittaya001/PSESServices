@@ -91,10 +91,11 @@ namespace PesWeb.Service.Modules
             PSESEntities DB = new PSESEntities();
             DB.SP_InsertScore(EvaID, H_ID);
         }
-        public List<tblHeader> GetAllHeader()
+        
+        public List<tblScore> GetAllScore()
         {
             PSESEntities db = new PSESEntities();
-            return db.tblHeader.ToList();
+            return db.tblScore.ToList();
         }
     }
 }

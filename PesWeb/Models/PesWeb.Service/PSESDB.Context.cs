@@ -513,7 +513,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_GetHeaderByPosition_Result> SP_GetHeaderByPosition(Nullable<int> positionNO)
+    public virtual ObjectResult<SP_GetHeaderByPosition_Result> SP_GetHeaderByPosition(Nullable<int> positionNO, Nullable<int> evaID)
     {
 
         var positionNOParameter = positionNO.HasValue ?
@@ -521,7 +521,12 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("PositionNO", typeof(int));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHeaderByPosition_Result>("SP_GetHeaderByPosition", positionNOParameter);
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHeaderByPosition_Result>("SP_GetHeaderByPosition", positionNOParameter, evaIDParameter);
     }
 
 }
