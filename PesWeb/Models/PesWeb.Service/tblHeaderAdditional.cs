@@ -32,6 +32,8 @@ public partial class tblHeaderAdditional
 
     public Nullable<int> H_Level { get; set; }
 
+    public Nullable<int> point { get; set; }
+
 }
 
 }

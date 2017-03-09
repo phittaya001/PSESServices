@@ -93,6 +93,7 @@ namespace PESproj.Controllers
                 newHeader.Eva_ID = HdATemp.Eva_ID;
                 newHeader.H_ID = (-1)*HdATemp.H_ID;
                 newHeader.PositionNO = PositionID;
+
                 GetHeader.Add(newHeader);
             }
 
@@ -318,7 +319,7 @@ namespace PESproj.Controllers
         }
 
         [Route("Insert")]
-        [HttpGet]
+        [HttpPut]
         public void InsertAdditionalHeader([FromBody]JObject Data)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
@@ -332,7 +333,7 @@ namespace PESproj.Controllers
             H.Text = Data["Text"].ToString(); 
             H.Text_Eng = Data["Text_Eng"].ToString(); 
             H.Alias = Data["Alias"].ToString();
-
+            H.point = 0;
             header.InsertAdditionalHeader(H);
         }
 
