@@ -67,6 +67,7 @@
     <Property Name="Eva_ID" Type="int" />
     <Property Name="Alias" Type="varchar" MaxLength="5" />
     <Property Name="H_Level" Type="int" />
+    <Property Name="point" Type="int" />
   </EntityType>
   <EntityType Name="tblHeaderBot">
     <Key>

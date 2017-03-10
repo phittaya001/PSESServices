@@ -558,5 +558,6 @@
     <Property Name="Eva_ID" Type="Int32" />
     <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Name="H_Level" Type="Int32" />
+    <Property Name="point" Type="Int32" />
   </EntityType>
 </Schema>

@@ -482,6 +482,7 @@
     <EntitySetMapping Name="tblHeaderAdditional">
       <EntityTypeMapping TypeName="PSESModel.tblHeaderAdditional">
         <MappingFragment StoreEntitySet="tblHeaderAdditional">
+          <ScalarProperty Name="point" ColumnName="point" />
           <ScalarProperty Name="H_Level" ColumnName="H_Level" />
           <ScalarProperty Name="Alias" ColumnName="Alias" />
           <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />

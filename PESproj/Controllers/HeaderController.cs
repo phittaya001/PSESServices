@@ -93,7 +93,7 @@ namespace PESproj.Controllers
                 newHeader.Eva_ID = HdATemp.Eva_ID;
                 newHeader.H_ID = (-1)*HdATemp.H_ID;
                 newHeader.PositionNO = PositionID;
-
+                newHeader.point = HdATemp.point;
                 GetHeader.Add(newHeader);
             }
 
@@ -328,8 +328,8 @@ namespace PESproj.Controllers
             H.Eva_ID = Convert.ToInt32(Data["Eva_Id"].ToString());
             
             H.parent = Convert.ToInt32(Data["H_ID"].ToString());
-            tblHeader hd = header.GetAllHeader().Where(a => a.H_ID == H.parent).FirstOrDefault();
-            H.H_Level = hd.H_Level + 1;
+            //tblHeader hd = header.GetAllHeader().Where(a => a.H_ID == H.parent).FirstOrDefault();
+            H.H_Level = (Convert.ToInt32(Data["H_ID"].ToString())>0)? header.GetAllHeader().Where(a => a.H_ID == H.parent).FirstOrDefault().H_Level + 1 : header.getHeaderAdditional().Where(a => a.H_ID == (-1)*H.parent).FirstOrDefault().H_Level+1;
             H.Text = Data["Text"].ToString(); 
             H.Text_Eng = Data["Text_Eng"].ToString(); 
             H.Alias = Data["Alias"].ToString();
