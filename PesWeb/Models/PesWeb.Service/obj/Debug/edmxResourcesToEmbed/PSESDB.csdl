@@ -181,6 +181,7 @@
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
       <Parameter Name="Alias" Mode="In" Type="String" />
       <Parameter Name="H_Level" Mode="In" Type="Int32" />
+      <Parameter Name="PositionNo" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
@@ -559,5 +560,6 @@
     <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Name="H_Level" Type="Int32" />
     <Property Name="point" Type="Int32" />
+    <Property Name="Part2ID" Type="Int32" />
   </EntityType>
 </Schema>

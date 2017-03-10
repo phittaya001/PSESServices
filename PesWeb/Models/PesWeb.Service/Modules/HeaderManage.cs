@@ -110,7 +110,7 @@ namespace PesWeb.Service.Modules
         public void InsertAdditionalHeader(tblHeaderAdditional H)
         {
             PSESEntities db = new PSESEntities();
-            db.SP_InsertAdditionalHeader(H.parent, H.Text, H.Text_Eng, H.Eva_ID, H.Alias, H.H_Level);
+            db.SP_InsertAdditionalHeader(H.parent, H.Text, H.Text_Eng, H.Eva_ID, H.Alias, H.H_Level,H.Part2ID);
         }
 
         public List<tblHeaderAdditional> getHeaderAdditional()

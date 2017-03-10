@@ -34,6 +34,8 @@ public partial class tblHeaderAdditional
 
     public Nullable<int> point { get; set; }
 
+    public Nullable<int> Part2ID { get; set; }
+
 }
 
 }

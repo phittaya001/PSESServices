@@ -532,7 +532,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual int SP_InsertAdditionalHeader(Nullable<int> parent, string text, string text_Eng, Nullable<int> evaID, string alias, Nullable<int> h_Level)
+    public virtual int SP_InsertAdditionalHeader(Nullable<int> parent, string text, string text_Eng, Nullable<int> evaID, string alias, Nullable<int> h_Level, Nullable<int> positionNo)
     {
 
         var parentParameter = parent.HasValue ?
@@ -565,7 +565,12 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("H_Level", typeof(int));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertAdditionalHeader", parentParameter, textParameter, text_EngParameter, evaIDParameter, aliasParameter, h_LevelParameter);
+        var positionNoParameter = positionNo.HasValue ?
+            new ObjectParameter("PositionNo", positionNo) :
+            new ObjectParameter("PositionNo", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertAdditionalHeader", parentParameter, textParameter, text_EngParameter, evaIDParameter, aliasParameter, h_LevelParameter, positionNoParameter);
     }
 
 }

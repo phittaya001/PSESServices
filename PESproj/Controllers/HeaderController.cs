@@ -81,7 +81,7 @@ namespace PESproj.Controllers
             List<SP_GetHeaderByPosition_Result> H2 = new List<SP_GetHeaderByPosition_Result>();
             // GetHeader.Reverse(0,GetHeader.Count);
 
-            List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID).ToList();
+            List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).ToList();
             foreach(tblHeaderAdditional HdATemp in HdA)
             {
                 SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
@@ -324,16 +324,17 @@ namespace PESproj.Controllers
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
             tblHeaderAdditional H = new tblHeaderAdditional();
-            int positionNo = Convert.ToInt32(Data["PositionNo"].ToString());
+           H.Part2ID = Convert.ToInt32(Data["PositionNo"].ToString());
             H.Eva_ID = Convert.ToInt32(Data["Eva_Id"].ToString());
             
             H.parent = Convert.ToInt32(Data["H_ID"].ToString());
             //tblHeader hd = header.GetAllHeader().Where(a => a.H_ID == H.parent).FirstOrDefault();
-            H.H_Level = (Convert.ToInt32(Data["H_ID"].ToString())>0)? header.GetAllHeader().Where(a => a.H_ID == H.parent).FirstOrDefault().H_Level + 1 : header.getHeaderAdditional().Where(a => a.H_ID == (-1)*H.parent).FirstOrDefault().H_Level+1;
+            H.H_Level = (Convert.ToInt32(Data["H_ID"].ToString()) == 0)? 1: (Convert.ToInt32(Data["H_ID"].ToString())>0)? header.GetAllHeader().Where(a => a.H_ID == H.parent).FirstOrDefault().H_Level + 1 : header.getHeaderAdditional().Where(a => a.H_ID == (-1)*H.parent).FirstOrDefault().H_Level+1;
             H.Text = Data["Text"].ToString(); 
             H.Text_Eng = Data["Text_Eng"].ToString(); 
             H.Alias = Data["Alias"].ToString();
             H.point = 0;
+
             header.InsertAdditionalHeader(H);
         }
 

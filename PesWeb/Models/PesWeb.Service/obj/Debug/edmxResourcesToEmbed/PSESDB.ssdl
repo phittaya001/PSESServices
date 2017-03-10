@@ -68,6 +68,7 @@
     <Property Name="Alias" Type="varchar" MaxLength="5" />
     <Property Name="H_Level" Type="int" />
     <Property Name="point" Type="int" />
+    <Property Name="Part2ID" Type="int" />
   </EntityType>
   <EntityType Name="tblHeaderBot">
     <Key>
@@ -363,6 +364,7 @@
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="Alias" Type="varchar" Mode="In" />
     <Parameter Name="H_Level" Type="int" Mode="In" />
+    <Parameter Name="PositionNo" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_InsertEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProjectID" Type="varchar" Mode="In" />
