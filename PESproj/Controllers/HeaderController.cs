@@ -53,7 +53,7 @@ namespace PESproj.Controllers
             List<tblHeaderJob> Allhj = header.getAllHeaderJob().ToList();
             // tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a => a.StaffID == Data["EmployeeNO"].ToString()).FirstOrDefault();
             SP_GetEvaDataByEvaID_Result eva = header2.getEvaDataByEvaID(EvaID).Where(a=>a.Part2ID == PositionID).FirstOrDefault();
-            List<tblHeaderJob> hj = header.getAllHeaderJob().Where(a => a.PositionNo == eva.Part2ID).ToList();
+            List<tblHeaderJob> hj = header.getAllHeaderJob().Where(a => a.PositionNo == ((eva!=null)? eva.Part2ID: PositionID)).ToList();
             List<SP_GetHeaderByPosition_Result> GetHeader = header.getHeaderByPosition(PositionID, EvaID).ToList();
             List<tblHeader> Ans = new List<tblHeader>();
 
