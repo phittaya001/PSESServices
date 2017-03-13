@@ -382,6 +382,16 @@
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="H3_ID" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_UpdateAdditional" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+    <Parameter Name="point" Type="int" Mode="In" />
+    <Parameter Name="H_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_UpdateData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+    <Parameter Name="point" Type="int" Mode="In" />
+    <Parameter Name="H_ID" Type="int" Mode="In" />
+  </Function>
   <EntityContainer Name="PSESModelStoreContainer">
     <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />

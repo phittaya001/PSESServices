@@ -387,6 +387,16 @@
           <Parameter Name="EvaID" Type="int" Mode="In" />
           <Parameter Name="H3_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_UpdateAdditional" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EvaID" Type="int" Mode="In" />
+          <Parameter Name="point" Type="int" Mode="In" />
+          <Parameter Name="H_ID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_UpdateData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EvaID" Type="int" Mode="In" />
+          <Parameter Name="point" Type="int" Mode="In" />
+          <Parameter Name="H_ID" Type="int" Mode="In" />
+        </Function>
         <EntityContainer Name="PSESModelStoreContainer">
           <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
@@ -599,6 +609,16 @@
             <Parameter Name="Alias" Mode="In" Type="String" />
             <Parameter Name="H_Level" Mode="In" Type="Int32" />
             <Parameter Name="PositionNo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateData">
+            <Parameter Name="EvaID" Mode="In" Type="Int32" />
+            <Parameter Name="point" Mode="In" Type="Int32" />
+            <Parameter Name="H_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateAdditional">
+            <Parameter Name="EvaID" Mode="In" Type="Int32" />
+            <Parameter Name="point" Mode="In" Type="Int32" />
+            <Parameter Name="H_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -1479,6 +1499,8 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateData" FunctionName="PSESModel.Store.SP_UpdateData" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateAdditional" FunctionName="PSESModel.Store.SP_UpdateAdditional" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

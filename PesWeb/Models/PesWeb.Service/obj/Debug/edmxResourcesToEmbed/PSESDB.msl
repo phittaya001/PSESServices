@@ -495,5 +495,7 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
+    <FunctionImportMapping FunctionImportName="SP_UpdateData" FunctionName="PSESModel.Store.SP_UpdateData" />
+    <FunctionImportMapping FunctionImportName="SP_UpdateAdditional" FunctionName="PSESModel.Store.SP_UpdateAdditional" />
   </EntityContainerMapping>
 </Mapping>

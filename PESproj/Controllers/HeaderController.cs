@@ -338,5 +338,18 @@ namespace PESproj.Controllers
             header.InsertAdditionalHeader(H);
         }
 
+
+        [Route("Update")]
+        [HttpPut]
+        public void UpdateAdditionalHeader([FromBody]List<JObject> Data)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            foreach(JObject jo in Data)
+            {
+                header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), Convert.ToInt32(jo["Score"].ToString()), Convert.ToInt32(jo["Id"].ToString()));
+            }
+            
+
+        }
     }
 }

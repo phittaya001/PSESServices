@@ -573,6 +573,50 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertAdditionalHeader", parentParameter, textParameter, text_EngParameter, evaIDParameter, aliasParameter, h_LevelParameter, positionNoParameter);
     }
 
+
+    public virtual int SP_UpdateData(Nullable<int> evaID, Nullable<int> point, Nullable<int> h_ID)
+    {
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        var pointParameter = point.HasValue ?
+            new ObjectParameter("point", point) :
+            new ObjectParameter("point", typeof(int));
+
+
+        var h_IDParameter = h_ID.HasValue ?
+            new ObjectParameter("H_ID", h_ID) :
+            new ObjectParameter("H_ID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateData", evaIDParameter, pointParameter, h_IDParameter);
+    }
+
+
+    public virtual int SP_UpdateAdditional(Nullable<int> evaID, Nullable<int> point, Nullable<int> h_ID)
+    {
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        var pointParameter = point.HasValue ?
+            new ObjectParameter("point", point) :
+            new ObjectParameter("point", typeof(int));
+
+
+        var h_IDParameter = h_ID.HasValue ?
+            new ObjectParameter("H_ID", h_ID) :
+            new ObjectParameter("H_ID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateAdditional", evaIDParameter, pointParameter, h_IDParameter);
+    }
+
 }
 
 }

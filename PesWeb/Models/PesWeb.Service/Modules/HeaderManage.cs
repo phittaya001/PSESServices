@@ -118,5 +118,19 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblHeaderAdditional.ToList();
         }
+
+        public void UpdateScoreData(int EvaID, int point, int H_ID)
+        {
+            PSESEntities db = new PSESEntities();
+            if (H_ID >= 0)
+            {
+                db.SP_UpdateData(EvaID, point, H_ID);
+            }
+            else
+            {
+                db.SP_UpdateAdditional(EvaID, point, (-1)*H_ID);
+            }
+            
+        }  
     }
 }
