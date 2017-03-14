@@ -407,10 +407,11 @@ namespace PESproj.Controllers
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
 
             H.Parent = Convert.ToInt32(Data["H_ID"].ToString());
-            H.H_Level = header.GetAllHeader().Where(a => a.H_ID == H.Parent).FirstOrDefault().H_Level + 1;
+            H.H_Level = (H.Parent==0)?1 : header.GetAllHeader().Where(a => a.H_ID == H.Parent).FirstOrDefault().H_Level + 1;
             H.Text = Data["Text"].ToString();
             H.Text_Eng = Data["Text_Eng"].ToString();
             H.Alias = Data["Alias"].ToString();
+            H.PositionNo = Convert.ToInt32( Data["PositionNo"].ToString());
 
             header.insertHeader(H);
         }

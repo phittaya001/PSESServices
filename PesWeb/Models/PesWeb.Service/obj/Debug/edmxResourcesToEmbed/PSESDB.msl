@@ -505,5 +505,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_InsertHeaderPosition" FunctionName="PSESModel.Store.SP_InsertHeaderPosition" />
   </EntityContainerMapping>
 </Mapping>

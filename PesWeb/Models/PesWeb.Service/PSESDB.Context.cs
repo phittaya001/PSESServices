@@ -618,7 +618,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_InsertHeader_Result> SP_InsertHeader(Nullable<int> parent, string text, string text_Eng, string alias, Nullable<int> h_Level)
+    public virtual ObjectResult<SP_InsertHeader_Result> SP_InsertHeader(Nullable<int> parent, string text, string text_Eng, string alias, Nullable<int> h_Level, Nullable<int> positionNO)
     {
 
         var parentParameter = parent.HasValue ?
@@ -646,7 +646,29 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("H_Level", typeof(int));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertHeader_Result>("SP_InsertHeader", parentParameter, textParameter, text_EngParameter, aliasParameter, h_LevelParameter);
+        var positionNOParameter = positionNO.HasValue ?
+            new ObjectParameter("PositionNO", positionNO) :
+            new ObjectParameter("PositionNO", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertHeader_Result>("SP_InsertHeader", parentParameter, textParameter, text_EngParameter, aliasParameter, h_LevelParameter, positionNOParameter);
+    }
+
+
+    public virtual int SP_InsertHeaderPosition(Nullable<int> positionNo, Nullable<int> headerID)
+    {
+
+        var positionNoParameter = positionNo.HasValue ?
+            new ObjectParameter("PositionNo", positionNo) :
+            new ObjectParameter("PositionNo", typeof(int));
+
+
+        var headerIDParameter = headerID.HasValue ?
+            new ObjectParameter("HeaderID", headerID) :
+            new ObjectParameter("HeaderID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertHeaderPosition", positionNoParameter, headerIDParameter);
     }
 
 }

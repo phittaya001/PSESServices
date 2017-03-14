@@ -199,6 +199,11 @@
       <Parameter Name="Text_Eng" Mode="In" Type="String" />
       <Parameter Name="Alias" Mode="In" Type="String" />
       <Parameter Name="H_Level" Mode="In" Type="Int32" />
+      <Parameter Name="PositionNO" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_InsertHeaderPosition">
+      <Parameter Name="PositionNo" Mode="In" Type="Int32" />
+      <Parameter Name="HeaderID" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">

@@ -381,10 +381,15 @@
     <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
     <Parameter Name="Alias" Type="varchar" Mode="In" />
     <Parameter Name="H_Level" Type="int" Mode="In" />
+    <Parameter Name="PositionNO" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_InsertHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="JobID" Type="int" Mode="In" />
     <Parameter Name="H1_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_InsertHeaderPosition" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="PositionNo" Type="int" Mode="In" />
+    <Parameter Name="HeaderID" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_InsertScore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
