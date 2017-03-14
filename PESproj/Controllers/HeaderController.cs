@@ -80,8 +80,8 @@ namespace PESproj.Controllers
             List<SP_GetHeaderByPosition_Result> H = new List<SP_GetHeaderByPosition_Result>();
             //List<SP_GetHeaderByPosition_Result> H2 = new List<SP_GetHeaderByPosition_Result>();
             // GetHeader.Reverse(0,GetHeader.Count);
-
-            List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).ToList();
+            List<SP_GetHeaderByPosition_Result> GetHeader2 = new List<SP_GetHeaderByPosition_Result>();
+            List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).OrderBy(p=>p.H_ID).ToList();
             foreach(tblHeaderAdditional HdATemp in HdA)
             {
                 SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
@@ -96,8 +96,8 @@ namespace PESproj.Controllers
                 newHeader.point = HdATemp.point;
                 GetHeader.Add(newHeader);
             }
-            int j = 0;
-            List<SP_GetHeaderByPosition_Result> tmp = GetHeader.Where(a => a.Parent == 0).ToList();
+            int j = 1;
+            List<SP_GetHeaderByPosition_Result> tmp = GetHeader.Where(a => a.Parent == 0).OrderBy(p => p.H_ID).ToList();
             while (tmp.Count > 0)
             {
                 foreach(SP_GetHeaderByPosition_Result a in tmp)
@@ -109,12 +109,13 @@ namespace PESproj.Controllers
                     else
                     {
                         int parent = (int)a.Parent;
+                        if (parent < 0) { }
                         int index = H.FindIndex(p => p.H_ID == parent);
                         H.Insert(index + 1, a);
                     }
                 }
                 j++;
-                tmp = GetHeader.Where(p => p.Parent == j).ToList();
+                tmp = GetHeader.Where(p => p.H_Level == j).OrderBy(p => p.H_ID).ToList();
             }
             List<SP_GetHeaderByPosition_Result> H_new = new List<SP_GetHeaderByPosition_Result>();
             foreach (SP_GetHeaderByPosition_Result a in H)
