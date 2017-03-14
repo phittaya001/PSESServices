@@ -348,8 +348,65 @@ namespace PESproj.Controllers
             {
                 header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), Convert.ToInt32(jo["Score"].ToString()), Convert.ToInt32(jo["Id"].ToString()));
             }
-            
+        }
 
+        [Route("GetHeader/{PositionID}")]
+        [HttpGet]
+        public List<tblHeader> GetHeaderByPosition(int PositionID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            List<tblHeader> GetHeader = header.getHeaderData().ToList();
+            List<tblHeader> H = new List<tblHeader>();
+            foreach (tblHeader a in GetHeader)
+            {
+                if (a.Parent == 0)
+                {
+                    H.Add(a);
+                }
+                else
+                {
+                    int parent = (int)a.Parent;
+                    for (int i = 0; i < H.Count; i++)
+                    {
+                        if (H[i].H_ID == parent)
+                        {
+                            H.Insert(i + 1, a);
+                        }
+                    }
+                }
+            }
+            List<tblHeader> H_new = new List<tblHeader>();
+            foreach (tblHeader a in H)
+            {
+                if (a.Parent == 0)
+                {
+                    H_new.Add(a);
+                }
+                else
+                {
+                    int parent = (int)a.Parent;
+                    for (int i = 0; i < H_new.Count; i++)
+                    {
+                        if (H_new[i].H_ID == parent)
+                        {
+                            H_new.Insert(i + 1, a);
+                        }
+                    }
+                }
+            }
+
+            return H_new;
+        }
+
+        
+        [Route("InsertHeader")]
+        [HttpPut]
+        public void InsertHeader([FromBody]JObject Data)
+        {
+            tblHeader H = new tblHeader();
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            H.Alias = Data["Alias"].ToString();
+            header.insertHeader(H);
         }
     }
 }

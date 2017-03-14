@@ -26,6 +26,8 @@ public partial class tblScore
 
     public Nullable<int> Eva_ID { get; set; }
 
+    public string Comment { get; set; }
+
 }
 
 }

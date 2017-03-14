@@ -256,6 +256,7 @@
           <Property Name="H3_ID" Type="int" />
           <Property Name="point" Type="int" />
           <Property Name="Eva_ID" Type="int" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="tblTitle">
           <Key>
@@ -378,6 +379,13 @@
           <Parameter Name="JobID" Type="int" Mode="In" />
           <Parameter Name="period" Type="varchar" Mode="In" />
           <Parameter Name="periodID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_InsertHeader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="parent" Type="int" Mode="In" />
+          <Parameter Name="Text" Type="varchar" Mode="In" />
+          <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
+          <Parameter Name="Alias" Type="varchar" Mode="In" />
+          <Parameter Name="H_Level" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_InsertHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="JobID" Type="int" Mode="In" />
@@ -620,6 +628,13 @@
             <Parameter Name="point" Mode="In" Type="Int32" />
             <Parameter Name="H_ID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_InsertHeader">
+            <Parameter Name="parent" Mode="In" Type="Int32" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="Text_Eng" Mode="In" Type="String" />
+            <Parameter Name="Alias" Mode="In" Type="String" />
+            <Parameter Name="H_Level" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -702,6 +717,7 @@
           <Property Name="H3_ID" Type="Int32" />
           <Property Name="point" Type="Int32" />
           <Property Name="Eva_ID" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <ComplexType Name="SP_GetEvaHeaderByEvaID_Result">
           <Property Type="DateTime" Name="startdateplan" Nullable="true" Precision="23" />
@@ -1168,6 +1184,7 @@
           <EntitySetMapping Name="tblScore">
             <EntityTypeMapping TypeName="PSESModel.tblScore">
               <MappingFragment StoreEntitySet="tblScore">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
                 <ScalarProperty Name="point" ColumnName="point" />
                 <ScalarProperty Name="H3_ID" ColumnName="H3_ID" />
@@ -1501,6 +1518,7 @@
           <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
           <FunctionImportMapping FunctionImportName="SP_UpdateData" FunctionName="PSESModel.Store.SP_UpdateData" />
           <FunctionImportMapping FunctionImportName="SP_UpdateAdditional" FunctionName="PSESModel.Store.SP_UpdateAdditional" />
+          <FunctionImportMapping FunctionImportName="SP_InsertHeader" FunctionName="PSESModel.Store.SP_InsertHeader" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

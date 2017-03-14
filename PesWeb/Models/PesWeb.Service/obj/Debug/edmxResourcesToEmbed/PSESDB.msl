@@ -164,6 +164,7 @@
     <EntitySetMapping Name="tblScore">
       <EntityTypeMapping TypeName="PSESModel.tblScore">
         <MappingFragment StoreEntitySet="tblScore">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
           <ScalarProperty Name="point" ColumnName="point" />
           <ScalarProperty Name="H3_ID" ColumnName="H3_ID" />
@@ -497,5 +498,6 @@
     <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
     <FunctionImportMapping FunctionImportName="SP_UpdateData" FunctionName="PSESModel.Store.SP_UpdateData" />
     <FunctionImportMapping FunctionImportName="SP_UpdateAdditional" FunctionName="PSESModel.Store.SP_UpdateAdditional" />
+    <FunctionImportMapping FunctionImportName="SP_InsertHeader" FunctionName="PSESModel.Store.SP_InsertHeader" />
   </EntityContainerMapping>
 </Mapping>

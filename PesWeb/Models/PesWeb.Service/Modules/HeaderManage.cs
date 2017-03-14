@@ -132,5 +132,11 @@ namespace PesWeb.Service.Modules
             }
             
         }  
+
+        public void insertHeader(tblHeader Header)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_InsertHeader(Header.Parent, Header.Text, Header.Text_Eng, Header.Alias, Header.H_Level);
+        }
     }
 }

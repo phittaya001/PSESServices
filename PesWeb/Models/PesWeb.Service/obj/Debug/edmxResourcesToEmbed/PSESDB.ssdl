@@ -251,6 +251,7 @@
     <Property Name="H3_ID" Type="int" />
     <Property Name="point" Type="int" />
     <Property Name="Eva_ID" Type="int" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="tblTitle">
     <Key>
@@ -373,6 +374,13 @@
     <Parameter Name="JobID" Type="int" Mode="In" />
     <Parameter Name="period" Type="varchar" Mode="In" />
     <Parameter Name="periodID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_InsertHeader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="parent" Type="int" Mode="In" />
+    <Parameter Name="Text" Type="varchar" Mode="In" />
+    <Parameter Name="Text_Eng" Type="varchar" Mode="In" />
+    <Parameter Name="Alias" Type="varchar" Mode="In" />
+    <Parameter Name="H_Level" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_InsertHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="JobID" Type="int" Mode="In" />

@@ -617,6 +617,38 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateAdditional", evaIDParameter, pointParameter, h_IDParameter);
     }
 
+
+    public virtual int SP_InsertHeader(Nullable<int> parent, string text, string text_Eng, string alias, Nullable<int> h_Level)
+    {
+
+        var parentParameter = parent.HasValue ?
+            new ObjectParameter("parent", parent) :
+            new ObjectParameter("parent", typeof(int));
+
+
+        var textParameter = text != null ?
+            new ObjectParameter("Text", text) :
+            new ObjectParameter("Text", typeof(string));
+
+
+        var text_EngParameter = text_Eng != null ?
+            new ObjectParameter("Text_Eng", text_Eng) :
+            new ObjectParameter("Text_Eng", typeof(string));
+
+
+        var aliasParameter = alias != null ?
+            new ObjectParameter("Alias", alias) :
+            new ObjectParameter("Alias", typeof(string));
+
+
+        var h_LevelParameter = h_Level.HasValue ?
+            new ObjectParameter("H_Level", h_Level) :
+            new ObjectParameter("H_Level", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertHeader", parentParameter, textParameter, text_EngParameter, aliasParameter, h_LevelParameter);
+    }
+
 }
 
 }
