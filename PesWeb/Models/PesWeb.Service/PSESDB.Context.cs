@@ -618,7 +618,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual int SP_InsertHeader(Nullable<int> parent, string text, string text_Eng, string alias, Nullable<int> h_Level)
+    public virtual ObjectResult<SP_InsertHeader_Result> SP_InsertHeader(Nullable<int> parent, string text, string text_Eng, string alias, Nullable<int> h_Level)
     {
 
         var parentParameter = parent.HasValue ?
@@ -646,7 +646,7 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("H_Level", typeof(int));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertHeader", parentParameter, textParameter, text_EngParameter, aliasParameter, h_LevelParameter);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertHeader_Result>("SP_InsertHeader", parentParameter, textParameter, text_EngParameter, aliasParameter, h_LevelParameter);
     }
 
 }

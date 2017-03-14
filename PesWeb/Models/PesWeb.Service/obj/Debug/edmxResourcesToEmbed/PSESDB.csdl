@@ -193,7 +193,7 @@
       <Parameter Name="point" Mode="In" Type="Int32" />
       <Parameter Name="H_ID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="SP_InsertHeader">
+    <FunctionImport Name="SP_InsertHeader" ReturnType="Collection(PSESModel.SP_InsertHeader_Result)">
       <Parameter Name="parent" Mode="In" Type="Int32" />
       <Parameter Name="Text" Mode="In" Type="String" />
       <Parameter Name="Text_Eng" Mode="In" Type="String" />
@@ -580,4 +580,7 @@
     <Property Name="point" Type="Int32" />
     <Property Name="Part2ID" Type="Int32" />
   </EntityType>
+  <ComplexType Name="SP_InsertHeader_Result">
+    <Property Type="Int32" Name="H_id" Nullable="false" />
+  </ComplexType>
 </Schema>

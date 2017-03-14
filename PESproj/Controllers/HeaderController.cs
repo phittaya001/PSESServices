@@ -50,7 +50,7 @@ namespace PESproj.Controllers
             var header2 = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<tblScore> sc = header2.GetAllScore();
             List<tblHeader> hd = header.GetAllHeader().ToList();
-            List<tblHeaderJob> Allhj = header.getAllHeaderJob().ToList();
+            //List<tblHeaderJob> Allhj = header.getAllHeaderJob().ToList();
             // tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a => a.StaffID == Data["EmployeeNO"].ToString()).FirstOrDefault();
             SP_GetEvaDataByEvaID_Result eva = header2.getEvaDataByEvaID(EvaID).Where(a=>a.Part2ID == PositionID).FirstOrDefault();
             List<tblHeaderJob> hj = header.getAllHeaderJob().Where(a => a.PositionNo == ((eva!=null)? eva.Part2ID: PositionID)).ToList();
@@ -78,7 +78,7 @@ namespace PESproj.Controllers
 
             GetHeader = header.getHeaderByPosition(PositionID, EvaID).ToList();
             List<SP_GetHeaderByPosition_Result> H = new List<SP_GetHeaderByPosition_Result>();
-            List<SP_GetHeaderByPosition_Result> H2 = new List<SP_GetHeaderByPosition_Result>();
+            //List<SP_GetHeaderByPosition_Result> H2 = new List<SP_GetHeaderByPosition_Result>();
             // GetHeader.Reverse(0,GetHeader.Count);
 
             List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).ToList();
@@ -405,7 +405,13 @@ namespace PESproj.Controllers
         {
             tblHeader H = new tblHeader();
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+
+            H.Parent = Convert.ToInt32(Data["H_ID"].ToString());
+            H.H_Level = header.GetAllHeader().Where(a => a.H_ID == H.Parent).FirstOrDefault().H_Level + 1;
+            H.Text = Data["Text"].ToString();
+            H.Text_Eng = Data["Text_Eng"].ToString();
             H.Alias = Data["Alias"].ToString();
+
             header.insertHeader(H);
         }
     }
