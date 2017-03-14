@@ -58,9 +58,9 @@ namespace PESproj.Controllers
             List<tblHeader> Ans = new List<tblHeader>();
 
             if (GetHeader.Count == GetHeader.Where(a=>a.point==null).ToList().Count)
-                foreach (tblHeaderJob tmp in hj)
+                foreach (tblHeaderJob tmpHJ in hj)
             {
-                foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmp.H1_ID))
+                foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmpHJ.H1_ID))
                 {
                     
                         foreach (tblHeader hd3 in FinalHeader(hd2, hd))
@@ -96,24 +96,25 @@ namespace PESproj.Controllers
                 newHeader.point = HdATemp.point;
                 GetHeader.Add(newHeader);
             }
-
-            foreach (SP_GetHeaderByPosition_Result a in GetHeader)
+            int j = 0;
+            List<SP_GetHeaderByPosition_Result> tmp = GetHeader.Where(a => a.Parent == 0).ToList();
+            while (tmp.Count > 0)
             {
-                if (a.Parent == 0)
+                foreach(SP_GetHeaderByPosition_Result a in tmp)
                 {
-                    H.Add(a);
-                }
-                else
-                {
-                    int parent = (int)a.Parent;
-                    for(int i = 0; i < H.Count; i++)
+                    if (a.Parent == 0)
                     {
-                        if (H[i].H_ID == parent)
-                        {
-                            H.Insert(i+1, a);
-                        }
+                        H.Add(a);
+                    }
+                    else
+                    {
+                        int parent = (int)a.Parent;
+                        int index = H.FindIndex(p => p.H_ID == parent);
+                        H.Insert(index + 1, a);
                     }
                 }
+                j++;
+                tmp = GetHeader.Where(p => p.Parent == j).ToList();
             }
             List<SP_GetHeaderByPosition_Result> H_new = new List<SP_GetHeaderByPosition_Result>();
             foreach (SP_GetHeaderByPosition_Result a in H)
