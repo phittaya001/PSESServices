@@ -54,7 +54,7 @@ namespace PESproj.Controllers
             // tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a => a.StaffID == Data["EmployeeNO"].ToString()).FirstOrDefault();
             SP_GetEvaDataByEvaID_Result eva = header2.getEvaDataByEvaID(EvaID).Where(a=>a.Part2ID == PositionID).FirstOrDefault();
             List<tblHeaderJob> hj = header.getAllHeaderJob().Where(a => a.PositionNo == ((eva!=null)? eva.Part2ID: PositionID)).ToList();
-            List<SP_GetHeaderByPosition_Result> GetHeader = header.getHeaderByPosition(PositionID, EvaID).ToList();
+            List<SP_GetHeaderByPosition_Result> GetHeader = header.getHeaderByPosition(PositionID, EvaID).OrderBy(a=>a.H_ID).ToList();
             List<tblHeader> Ans = new List<tblHeader>();
 
             if (GetHeader.Count == GetHeader.Where(a=>a.point==null).ToList().Count)
@@ -76,12 +76,12 @@ namespace PESproj.Controllers
                 header2.InsertSCORE(EvaID, h.H_ID);
             }
 
-            GetHeader = header.getHeaderByPosition(PositionID, EvaID).ToList();
+            GetHeader = header.getHeaderByPosition(PositionID, EvaID).OrderBy(a=>a.H_ID).ToList();
             List<SP_GetHeaderByPosition_Result> H = new List<SP_GetHeaderByPosition_Result>();
             //List<SP_GetHeaderByPosition_Result> H2 = new List<SP_GetHeaderByPosition_Result>();
             // GetHeader.Reverse(0,GetHeader.Count);
             List<SP_GetHeaderByPosition_Result> GetHeader2 = new List<SP_GetHeaderByPosition_Result>();
-            List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).OrderBy(p=>p.H_ID).ToList();
+            List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).ToList();
             foreach(tblHeaderAdditional HdATemp in HdA)
             {
                 SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
@@ -97,28 +97,9 @@ namespace PESproj.Controllers
                 GetHeader.Add(newHeader);
             }
             int j = 1;
-            List<SP_GetHeaderByPosition_Result> tmp = GetHeader.Where(a => a.Parent == 0).OrderBy(p => p.H_ID).ToList();
-            while (tmp.Count > 0)
-            {
-                foreach(SP_GetHeaderByPosition_Result a in tmp)
-                {
-                    if (a.Parent == 0)
-                    {
-                        H.Add(a);
-                    }
-                    else
-                    {
-                        int parent = (int)a.Parent;
-                        if (parent < 0) { }
-                        int index = H.FindIndex(p => p.H_ID == parent);
-                        H.Insert(index + 1, a);
-                    }
-                }
-                j++;
-                tmp = GetHeader.Where(p => p.H_Level == j).OrderBy(p => p.H_ID).ToList();
-            }
             List<SP_GetHeaderByPosition_Result> H_new = new List<SP_GetHeaderByPosition_Result>();
-            foreach (SP_GetHeaderByPosition_Result a in H)
+
+            foreach (SP_GetHeaderByPosition_Result a in GetHeader.Where(a => a.H_ID > 0).OrderBy(a => a.H_ID))
             {
                 if (a.Parent == 0)
                 {
@@ -136,7 +117,48 @@ namespace PESproj.Controllers
                     }
                 }
             }
-            return H_new;
+
+            foreach (SP_GetHeaderByPosition_Result a in GetHeader.Where(a => a.H_ID < 0))
+            {
+                if (a.Parent == 0)
+                {
+                    H_new.Add(a);
+                }
+                else
+                {
+                    int parent = (int)a.Parent;
+                    for (int i = 0; i < H_new.Count; i++)
+                    {
+                        if (H_new[i].H_ID == parent)
+                        {
+                            H_new.Insert(i + 1, a);
+                        }
+                    }
+                }
+            }
+
+            List<SP_GetHeaderByPosition_Result> H_new2 = new List<SP_GetHeaderByPosition_Result>();
+            foreach (SP_GetHeaderByPosition_Result a in H_new)
+            {
+                if (a.Parent == 0)
+                {
+                    H_new2.Add(a);
+                }
+                else
+                {
+                    int parent = (int)a.Parent;
+                    for (int i = 0; i < H_new2.Count; i++)
+                    {
+                        if (H_new2[i].H_ID == parent)
+                        {
+                            H_new2.Insert(i + 1, a);
+                        }
+                    }
+                }
+            }
+            
+
+            return H_new2;
         }
 
 
