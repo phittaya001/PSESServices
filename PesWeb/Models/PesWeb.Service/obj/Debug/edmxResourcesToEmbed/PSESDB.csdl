@@ -205,6 +205,7 @@
       <Parameter Name="PositionNo" Mode="In" Type="Int32" />
       <Parameter Name="HeaderID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="tbllHeaderPosition" EntityType="PSESModel.tbllHeaderPosition" />
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -588,4 +589,12 @@
   <ComplexType Name="SP_InsertHeader_Result">
     <Property Type="Int32" Name="H_id" Nullable="false" />
   </ComplexType>
+  <EntityType Name="tbllHeaderPosition">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="HeaderID" Type="Int32" />
+    <Property Name="PositionNO" Type="Int32" />
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+  </EntityType>
 </Schema>

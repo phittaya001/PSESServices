@@ -357,7 +357,18 @@ namespace PESproj.Controllers
         public List<tblHeader> GetHeaderByPosition(int PositionID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
-            List<tblHeader> GetHeader = header.getHeaderData().ToList();
+            List<tblHeader> result = header.getHeaderData().ToList();
+            List<tblHeader> GetHeader = new List<tblHeader>();
+            List<tbllHeaderPosition> Hp = header.getHeaderPosition().Where(a=>a.PositionNO==PositionID).ToList();
+            if(Hp.ToList().Count()>0)
+            foreach (tblHeader hd in result)
+            {
+                if(Hp.Where(a=>a.HeaderID == hd.H_ID).ToList().Count == 1)
+                {
+                        GetHeader.Add(hd);
+                }
+            }
+
             List<tblHeader> H = new List<tblHeader>();
             foreach (tblHeader a in GetHeader)
             {

@@ -120,6 +120,14 @@
           <Property Name="Alias" Type="char" MaxLength="1" />
           <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
         </EntityType>
+        <EntityType Name="tbllHeaderPosition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="HeaderID" Type="int" />
+          <Property Name="PositionNO" Type="int" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
         <EntityType Name="tblOrganization">
           <Key>
             <PropertyRef Name="OrganizationNo" />
@@ -421,6 +429,7 @@
           <EntitySet Name="tblHeaderLevel" EntityType="Self.tblHeaderLevel" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbllHeaderPosition" EntityType="Self.tbllHeaderPosition" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblOrganization" EntityType="Self.tblOrganization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPart2Master" EntityType="Self.tblPart2Master" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />
@@ -645,6 +654,7 @@
             <Parameter Name="PositionNo" Mode="In" Type="Int32" />
             <Parameter Name="HeaderID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="tbllHeaderPosition" EntityType="PSESModel.tbllHeaderPosition" />
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -1028,6 +1038,14 @@
         <ComplexType Name="SP_InsertHeader_Result">
           <Property Type="Int32" Name="H_id" Nullable="false" />
         </ComplexType>
+        <EntityType Name="tbllHeaderPosition">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="HeaderID" Type="Int32" />
+          <Property Name="PositionNO" Type="Int32" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1539,6 +1557,15 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_InsertHeaderPosition" FunctionName="PSESModel.Store.SP_InsertHeaderPosition" />
+          <EntitySetMapping Name="tbllHeaderPosition">
+            <EntityTypeMapping TypeName="PSESModel.tbllHeaderPosition">
+              <MappingFragment StoreEntitySet="tbllHeaderPosition">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
+                <ScalarProperty Name="HeaderID" ColumnName="HeaderID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

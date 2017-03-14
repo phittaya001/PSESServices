@@ -506,5 +506,14 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_InsertHeaderPosition" FunctionName="PSESModel.Store.SP_InsertHeaderPosition" />
+    <EntitySetMapping Name="tbllHeaderPosition">
+      <EntityTypeMapping TypeName="PSESModel.tbllHeaderPosition">
+        <MappingFragment StoreEntitySet="tbllHeaderPosition">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+          <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
+          <ScalarProperty Name="HeaderID" ColumnName="HeaderID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

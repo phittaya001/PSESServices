@@ -222,6 +222,9 @@
     <Compile Include="tblHeaderTop.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="tbllHeaderPosition.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblOrganization.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>

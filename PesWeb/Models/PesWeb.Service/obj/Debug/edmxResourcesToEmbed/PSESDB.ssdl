@@ -115,6 +115,14 @@
     <Property Name="Alias" Type="char" MaxLength="1" />
     <Property Name="Text_Eng" Type="varchar" MaxLength="255" />
   </EntityType>
+  <EntityType Name="tbllHeaderPosition">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="HeaderID" Type="int" />
+    <Property Name="PositionNO" Type="int" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+  </EntityType>
   <EntityType Name="tblOrganization">
     <Key>
       <PropertyRef Name="OrganizationNo" />
@@ -416,6 +424,7 @@
     <EntitySet Name="tblHeaderLevel" EntityType="Self.tblHeaderLevel" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderMid" EntityType="Self.tblHeaderMid" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderTop" EntityType="Self.tblHeaderTop" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbllHeaderPosition" EntityType="Self.tbllHeaderPosition" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblOrganization" EntityType="Self.tblOrganization" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPart2Master" EntityType="Self.tblPart2Master" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblPosition" EntityType="Self.tblPosition" Schema="dbo" store:Type="Tables" />

@@ -143,5 +143,11 @@ namespace PesWeb.Service.Modules
                 db.SP_InsertHeaderJob(Header.PositionNo,Convert.ToInt32( a.H_id));
             }
         }
+
+        public List<tbllHeaderPosition> getHeaderPosition()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tbllHeaderPosition.ToList();
+        }
     }
 }
