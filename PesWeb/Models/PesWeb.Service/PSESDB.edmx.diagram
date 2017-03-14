@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="354ea39c94e84eebbbde8c5f1cb9a572" Name="Diagram1" ZoomLevel="105">
+      <Diagram DiagramId="354ea39c94e84eebbbde8c5f1cb9a572" Name="Diagram1" ZoomLevel="86">
         <EntityTypeShape EntityType="PSESModel.tblEvaluation" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PSESModel.tblHeaderBot" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="PSESModel.tblHeaderJob" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
