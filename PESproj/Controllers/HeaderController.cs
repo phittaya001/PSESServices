@@ -461,11 +461,11 @@ namespace PESproj.Controllers
         }
 
         [Route("Delete/{H_ID}")]
-        [HttpPut]
+        [HttpDelete]
         public void DeleteHeader(int H_ID)
         {
-            
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+
             header.DeleteHeader(H_ID);
         }
     }

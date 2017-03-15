@@ -331,6 +331,9 @@
         <Function Name="SP_DeleteHeader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="H_ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_DeleteHeaderAdditional" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="H_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_DeleteHeaderBot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="H3_ID" Type="int" Mode="In" />
         </Function>
@@ -659,6 +662,9 @@
           </FunctionImport>
           <EntitySet Name="tbllHeaderPosition" EntityType="PSESModel.tbllHeaderPosition" />
           <FunctionImport Name="SP_DeleteHeader">
+          <Parameter Name="H_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DeleteHeaderAdditional">
             <Parameter Name="H_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
@@ -1582,6 +1588,7 @@
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_DeleteHeader" FunctionName="PSESModel.Store.SP_DeleteHeader" />
+          <FunctionImportMapping FunctionImportName="SP_DeleteHeaderAdditional" FunctionName="PSESModel.Store.SP_DeleteHeaderAdditional" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

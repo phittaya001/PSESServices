@@ -685,6 +685,18 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteHeader", h_IDParameter);
     }
 
+
+    public virtual int SP_DeleteHeaderAdditional(Nullable<int> h_ID)
+    {
+
+        var h_IDParameter = h_ID.HasValue ?
+            new ObjectParameter("H_ID", h_ID) :
+            new ObjectParameter("H_ID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteHeaderAdditional", h_IDParameter);
+    }
+
 }
 
 }

@@ -153,7 +153,15 @@ namespace PesWeb.Service.Modules
         public void DeleteHeader(int H_ID)
         {
             PSESEntities db = new PSESEntities();
-            db.SP_DeleteHeader(H_ID);
+            if(H_ID > 0)
+            {
+                db.SP_DeleteHeader(H_ID);
+            }
+            else
+            {
+                db.SP_DeleteHeaderAdditional(H_ID);
+            }
+            
         }
     }
 }
