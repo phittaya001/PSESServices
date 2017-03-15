@@ -252,7 +252,13 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SP_InsertEvaluation" FunctionName="PSESModel.Store.SP_InsertEvaluation" />
+    <FunctionImportMapping FunctionImportName="SP_InsertEvaluation" FunctionName="PSESModel.Store.SP_InsertEvaluation">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_InsertEvaluation_Result">
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <EntitySetMapping Name="tblProject">
       <EntityTypeMapping TypeName="PSESModel.tblProject">
         <MappingFragment StoreEntitySet="tblProject">
@@ -515,5 +521,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_DeleteHeader" FunctionName="PSESModel.Store.SP_DeleteHeader" />
   </EntityContainerMapping>
 </Mapping>

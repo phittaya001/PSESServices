@@ -192,6 +192,9 @@
     <Compile Include="SP_HeaderTopByJob_Result.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_InsertEvaluation_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_InsertHeader_Result.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>

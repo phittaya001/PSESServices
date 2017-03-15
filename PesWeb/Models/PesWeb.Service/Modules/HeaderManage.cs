@@ -149,5 +149,11 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tbllHeaderPosition.ToList();
         }
+
+        public void DeleteHeader(int H_ID)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_DeleteHeader(H_ID);
+        }
     }
 }

@@ -133,7 +133,7 @@
     <EntitySet Name="Period" EntityType="PSESModel.Period" />
     <EntitySet Name="tblProjectEmployee" EntityType="PSESModel.tblProjectEmployee" />
     <EntitySet Name="tblProjectMember" EntityType="PSESModel.tblProjectMember" />
-    <FunctionImport Name="SP_InsertEvaluation">
+    <FunctionImport Name="SP_InsertEvaluation" ReturnType="Collection(PSESModel.SP_InsertEvaluation_Result)">
       <Parameter Name="ProjectID" Mode="In" Type="String" />
       <Parameter Name="EvaluatorID" Mode="In" Type="String" />
       <Parameter Name="EmployeeID" Mode="In" Type="String" />
@@ -206,6 +206,9 @@
       <Parameter Name="HeaderID" Mode="In" Type="Int32" />
     </FunctionImport>
     <EntitySet Name="tbllHeaderPosition" EntityType="PSESModel.tbllHeaderPosition" />
+    <FunctionImport Name="SP_DeleteHeader">
+      <Parameter Name="H_ID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -597,4 +600,7 @@
     <Property Name="PositionNO" Type="Int32" />
     <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
   </EntityType>
+  <ComplexType Name="SP_InsertEvaluation_Result">
+    <Property Type="Int32" Name="Eva_ID" Nullable="false" />
+  </ComplexType>
 </Schema>

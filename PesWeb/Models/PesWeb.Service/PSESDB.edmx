@@ -328,6 +328,9 @@
         <Function Name="SP_DeleteEva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EvaID" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_DeleteHeader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="H_ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_DeleteHeaderBot" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="H3_ID" Type="int" Mode="In" />
         </Function>
@@ -582,7 +585,7 @@
           <EntitySet Name="Period" EntityType="PSESModel.Period" />
           <EntitySet Name="tblProjectEmployee" EntityType="PSESModel.tblProjectEmployee" />
           <EntitySet Name="tblProjectMember" EntityType="PSESModel.tblProjectMember" />
-          <FunctionImport Name="SP_InsertEvaluation">
+          <FunctionImport Name="SP_InsertEvaluation" ReturnType="Collection(PSESModel.SP_InsertEvaluation_Result)">
             <Parameter Name="ProjectID" Mode="In" Type="String" />
             <Parameter Name="EvaluatorID" Mode="In" Type="String" />
             <Parameter Name="EmployeeID" Mode="In" Type="String" />
@@ -655,6 +658,9 @@
             <Parameter Name="HeaderID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="tbllHeaderPosition" EntityType="PSESModel.tbllHeaderPosition" />
+          <FunctionImport Name="SP_DeleteHeader">
+            <Parameter Name="H_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -1046,6 +1052,9 @@
           <Property Name="PositionNO" Type="Int32" />
           <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
         </EntityType>
+        <ComplexType Name="SP_InsertEvaluation_Result">
+          <Property Type="Int32" Name="Eva_ID" Nullable="false" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1303,7 +1312,13 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_InsertEvaluation" FunctionName="PSESModel.Store.SP_InsertEvaluation" />
+          <FunctionImportMapping FunctionImportName="SP_InsertEvaluation" FunctionName="PSESModel.Store.SP_InsertEvaluation" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PSESModel.SP_InsertEvaluation_Result">
+                <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
           <EntitySetMapping Name="tblProject">
             <EntityTypeMapping TypeName="PSESModel.tblProject">
               <MappingFragment StoreEntitySet="tblProject">
@@ -1566,6 +1581,7 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_DeleteHeader" FunctionName="PSESModel.Store.SP_DeleteHeader" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

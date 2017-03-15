@@ -410,7 +410,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual int SP_InsertEvaluation(string projectID, string evaluatorID, string employeeID, Nullable<int> jobID, string period, Nullable<int> periodID)
+    public virtual ObjectResult<SP_InsertEvaluation_Result> SP_InsertEvaluation(string projectID, string evaluatorID, string employeeID, Nullable<int> jobID, string period, Nullable<int> periodID)
     {
 
         var projectIDParameter = projectID != null ?
@@ -443,7 +443,7 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("periodID", typeof(int));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertEvaluation", projectIDParameter, evaluatorIDParameter, employeeIDParameter, jobIDParameter, periodParameter, periodIDParameter);
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertEvaluation_Result>("SP_InsertEvaluation", projectIDParameter, evaluatorIDParameter, employeeIDParameter, jobIDParameter, periodParameter, periodIDParameter);
     }
 
 
@@ -671,6 +671,18 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertHeaderPosition", positionNoParameter, headerIDParameter);
+    }
+
+
+    public virtual int SP_DeleteHeader(Nullable<int> h_ID)
+    {
+
+        var h_IDParameter = h_ID.HasValue ?
+            new ObjectParameter("H_ID", h_ID) :
+            new ObjectParameter("H_ID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteHeader", h_IDParameter);
     }
 
 }

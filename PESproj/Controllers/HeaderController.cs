@@ -56,8 +56,17 @@ namespace PESproj.Controllers
             List<tblHeaderJob> hj = header.getAllHeaderJob().Where(a => a.PositionNo == ((eva!=null)? eva.Part2ID: PositionID)).ToList();
             List<SP_GetHeaderByPosition_Result> GetHeader = header.getHeaderByPosition(PositionID, EvaID).OrderBy(a=>a.H_ID).ToList();
             List<tblHeader> Ans = new List<tblHeader>();
-
-            if (GetHeader.Count == GetHeader.Where(a=>a.point==null).ToList().Count)
+            tblHeader p = new tblHeader();
+            int sum = 0;
+            foreach(tblHeaderJob hh in hj)
+            {
+                if(hd.Where(a => a.H_ID == hh.H1_ID).FirstOrDefault() != null)
+                sum += FinalHeader(hd.Where(a=>a.H_ID==hh.H1_ID).FirstOrDefault() , hd).ToList().Count;
+            }
+            p.H_ID = 0;
+            int a1 = GetHeader.Where(a => a.Eva_ID == EvaID).ToList().Count;
+            int a2 = GetHeader.Where(a => a.Score_ID > 0).Where(a => a.Eva_ID == EvaID).ToList().Count;
+            if (a2 < sum)
                 foreach (tblHeaderJob tmpHJ in hj)
             {
                 foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmpHJ.H1_ID))
@@ -449,6 +458,15 @@ namespace PESproj.Controllers
             H.PositionNo = Convert.ToInt32( Data["PositionNo"].ToString());
 
             header.insertHeader(H);
+        }
+
+        [Route("Delete/{H_ID}")]
+        [HttpPut]
+        public void DeleteHeader(int H_ID)
+        {
+            
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            header.DeleteHeader(H_ID);
         }
     }
 }
