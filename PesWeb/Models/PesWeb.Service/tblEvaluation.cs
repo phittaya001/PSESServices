@@ -34,6 +34,10 @@ public partial class tblEvaluation
 
     public Nullable<int> PeriodID { get; set; }
 
+    public Nullable<System.DateTime> StartEvaDate { get; set; }
+
+    public Nullable<System.DateTime> FinishEvaDate { get; set; }
+
 }
 
 }

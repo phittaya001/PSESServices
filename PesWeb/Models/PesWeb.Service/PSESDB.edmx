@@ -48,6 +48,8 @@
           <Property Name="ProjectNO" Type="varchar" MaxLength="15" />
           <Property Name="period" Type="varchar" MaxLength="25" />
           <Property Name="PeriodID" Type="int" />
+          <Property Name="StartEvaDate" Type="date" />
+          <Property Name="FinishEvaDate" Type="date" />
         </EntityType>
         <EntityType Name="tblHeader">
           <Key>
@@ -465,6 +467,8 @@
           <Property Name="ProjectNO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="period" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
           <Property Name="PeriodID" Type="Int32" />
+          <Property Name="StartEvaDate" Type="DateTime" Precision="0" />
+          <Property Name="FinishEvaDate" Type="DateTime" Precision="0" />
         </EntityType>
         <EntityType Name="tblHeaderBot">
           <Key>
@@ -665,7 +669,7 @@
           <Parameter Name="H_ID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_DeleteHeaderAdditional">
-            <Parameter Name="H_ID" Mode="In" Type="Int32" />
+          <Parameter Name="H_ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -1070,6 +1074,8 @@
           <EntitySetMapping Name="tblEvaluation">
             <EntityTypeMapping TypeName="PSESModel.tblEvaluation">
               <MappingFragment StoreEntitySet="tblEvaluation">
+                <ScalarProperty Name="FinishEvaDate" ColumnName="FinishEvaDate" />
+                <ScalarProperty Name="StartEvaDate" ColumnName="StartEvaDate" />
                 <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
                 <ScalarProperty Name="period" ColumnName="period" />
                 <ScalarProperty Name="ProjectNO" ColumnName="ProjectNO" />
