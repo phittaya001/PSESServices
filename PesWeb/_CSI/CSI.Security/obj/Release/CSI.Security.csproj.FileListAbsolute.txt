@@ -1,0 +1,12 @@
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Release\CSI.Security.dll.config
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Release\CSI.Security.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Release\CSI.Security.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Release\CSI.ModelHelper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Release\AutoMapper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Release\Castle.Core.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Release\CSI.ModelHelper.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Release\AutoMapper.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\bin\Release\Castle.Core.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\obj\Release\CSI.Security.csprojResolveAssemblyReference.cache
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\obj\Release\CSI.Security.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Security\obj\Release\CSI.Security.pdb

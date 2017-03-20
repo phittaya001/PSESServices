@@ -1,0 +1,11 @@
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Release\CastleWindsorHelper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Release\CastleWindsorHelper.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Release\Castle.Core.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Release\Castle.Windsor.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Release\CSI.Common.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Release\CSI.Common.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Release\Castle.Core.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\bin\Release\Castle.Windsor.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\obj\Release\CSI.CastleWindsorHelper.csprojResolveAssemblyReference.cache
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\obj\Release\CastleWindsorHelper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.CastleWindsorHelper\obj\Release\CastleWindsorHelper.pdb

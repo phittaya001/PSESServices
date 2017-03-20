@@ -67,19 +67,19 @@ namespace PESproj.Controllers
             int a1 = GetHeader.Where(a => a.Eva_ID == EvaID).ToList().Count;
             int a2 = GetHeader.Where(a => a.Score_ID > 0).Where(a => a.Eva_ID == EvaID).ToList().Count;
             if (a2 < sum)
-                foreach (tblHeaderJob tmpHJ in hj)
-            {
-                foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmpHJ.H1_ID))
-                {
+            //    foreach (tblHeaderJob tmpHJ in hj)
+            //{
+            //    foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmpHJ.H1_ID))
+            //    {
                     
-                        foreach (tblHeader hd3 in FinalHeader(hd2, hd))
-                    {
-                        if (sc.Where(a => a.Eva_ID == EvaID && a.H3_ID == hd3.H_ID).ToList().Count==0)
-                            if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
-                            Ans.Add(hd3);
-                    }
-                }
-            }
+            //            foreach (tblHeader hd3 in FinalHeader(hd2, hd))
+            //        {
+            //            if (sc.Where(a => a.Eva_ID == EvaID && a.H3_ID == hd3.H_ID).ToList().Count==0)
+            //                if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
+            //                Ans.Add(hd3);
+            //        }
+            //    }
+            //}
             foreach (tblHeader h in Ans)
             {
                 header2.InsertSCORE(EvaID, h.H_ID);
@@ -467,6 +467,43 @@ namespace PESproj.Controllers
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
 
             header.DeleteHeader(H_ID);
+        }
+
+        [Route("Average/")]
+        [HttpPost]
+        public List<SP_GetHeaderByPosition_Result> AvgScore([FromBody]List< JObject> Data)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            List<SP_GetHeaderByPosition_Result> sc = new List<SP_GetHeaderByPosition_Result>();
+            int i = 0;
+            foreach (JObject j in Data)
+            {
+                SP_GetHeaderByPosition_Result c = new SP_GetHeaderByPosition_Result();
+                c.H_ID = Convert.ToInt32(j["H_ID"].ToString());
+                c.point = Convert.ToInt32(j["point"].ToString());
+                c.Parent = Convert.ToInt32(j["Parent"].ToString());
+                //c.Score_ID = Convert.ToInt32(j["Score_ID"].ToString());
+                c.Eva_ID = i;
+                i++;
+                sc.Add(c);
+            }
+            foreach(SP_GetHeaderByPosition_Result g in sc)
+            {
+
+                if(sc.Where(a=>a.Parent == g.H_ID).ToList().Count > 0)
+                {
+                    List<SP_GetHeaderByPosition_Result> tmp = sc.Where(a => a.Parent == g.H_ID).ToList();
+                    int sum = 0;
+                    foreach(SP_GetHeaderByPosition_Result tmp2 in tmp)
+                    {
+                        if(tmp2.point!=null)
+                        sum += (int)tmp2.point;
+                    }
+                    sc[sc.IndexOf(g)].point = sum / tmp.Count;
+                }
+            }
+
+            return sc;
         }
     }
 }

@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SecurityModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="tbs_Group">
+    <Key>
+      <PropertyRef Name="GroupCode" />
+    </Key>
+    <Property Name="GroupCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GroupName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tbs_Permission">
+    <Key>
+      <PropertyRef Name="PermissionCode" />
+    </Key>
+    <Property Name="PermissionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+    <Property Name="Sequence" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbs_PermissionGroupMap">
+    <Key>
+      <PropertyRef Name="PermissionMapId" />
+    </Key>
+    <Property Name="PermissionMapId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AcResourceName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="GroupCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PermissionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbs_PermissionUserMap">
+    <Key>
+      <PropertyRef Name="PermissionMapId" />
+    </Key>
+    <Property Name="PermissionMapId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AcResourceName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="UserCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PermissionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbs_RestrictControlItem">
+    <Key>
+      <PropertyRef Name="RestrictItemId" />
+    </Key>
+    <Property Name="RestrictItemId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="AcResourceName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="FullClassName" Type="nvarchar" MaxLength="500" Nullable="false" />
+    <Property Name="ControlId" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="PermissionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="AccessControlAction" Type="nvarchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbs_ScreenItem">
+    <Key>
+      <PropertyRef Name="ScreenCode" />
+    </Key>
+    <Property Name="ScreenCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="ScreenName" Type="nvarchar" MaxLength="255" Nullable="false" />
+    <Property Name="AcResourceName" Type="nvarchar" MaxLength="500" />
+    <Property Name="ManuGroupCode" Type="nvarchar" MaxLength="50" />
+    <Property Name="ItemSequence" Type="int" Nullable="false" />
+    <Property Name="IsSingleton" Type="bit" />
+    <Property Name="AllowAnonymous" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbs_ScreenPermission">
+    <Key>
+      <PropertyRef Name="ScreenCode" />
+      <PropertyRef Name="PermissionCode" />
+    </Key>
+    <Property Name="ScreenCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="PermissionCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="IsActive" Type="bit" />
+  </EntityType>
+  <EntityType Name="tbs_User">
+    <Key>
+      <PropertyRef Name="UserCode" />
+    </Key>
+    <Property Name="UserCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="LoginName" Type="nvarchar" MaxLength="100" Nullable="false" />
+    <Property Name="Password" Type="nvarchar" MaxLength="100" />
+    <Property Name="IsActive" Type="bit" Nullable="false" />
+    <Property Name="Description" Type="nvarchar" MaxLength="200" />
+  </EntityType>
+  <EntityType Name="tbs_UserGroup">
+    <Key>
+      <PropertyRef Name="UserCode" />
+      <PropertyRef Name="GroupCode" />
+    </Key>
+    <Property Name="UserCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="GroupCode" Type="nvarchar" MaxLength="50" Nullable="false" />
+    <Property Name="CreatedDate" Type="datetime" />
+  </EntityType>
+  <EntityContainer Name="SecurityModelStoreContainer">
+    <EntitySet Name="tbs_Group" EntityType="Self.tbs_Group" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbs_Permission" EntityType="Self.tbs_Permission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbs_PermissionGroupMap" EntityType="Self.tbs_PermissionGroupMap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbs_PermissionUserMap" EntityType="Self.tbs_PermissionUserMap" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbs_RestrictControlItem" EntityType="Self.tbs_RestrictControlItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbs_ScreenItem" EntityType="Self.tbs_ScreenItem" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbs_ScreenPermission" EntityType="Self.tbs_ScreenPermission" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbs_User" EntityType="Self.tbs_User" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tbs_UserGroup" EntityType="Self.tbs_UserGroup" Schema="dbo" store:Type="Tables" />
+  </EntityContainer>
+</Schema>

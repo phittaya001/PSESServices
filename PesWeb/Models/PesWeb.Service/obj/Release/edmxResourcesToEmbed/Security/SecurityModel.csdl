@@ -1,0 +1,100 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="SecurityModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="tbs_Group">
+    <Key>
+      <PropertyRef Name="GroupCode" />
+    </Key>
+    <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GroupName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbs_PermissionGroupMap">
+    <Key>
+      <PropertyRef Name="PermissionMapId" />
+    </Key>
+    <Property Name="PermissionMapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AcResourceName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PermissionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbs_PermissionUserMap">
+    <Key>
+      <PropertyRef Name="PermissionMapId" />
+    </Key>
+    <Property Name="PermissionMapId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AcResourceName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PermissionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbs_RestrictControlItem">
+    <Key>
+      <PropertyRef Name="RestrictItemId" />
+    </Key>
+    <Property Name="RestrictItemId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="AcResourceName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="FullClassName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="ControlId" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PermissionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="AccessControlAction" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbs_ScreenPermission">
+    <Key>
+      <PropertyRef Name="ScreenCode" />
+      <PropertyRef Name="PermissionCode" />
+    </Key>
+    <Property Name="ScreenCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="PermissionCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="IsActive" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="tbs_User">
+    <Key>
+      <PropertyRef Name="UserCode" />
+    </Key>
+    <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="LoginName" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="Password" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <Property Name="IsActive" Type="Boolean" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+  </EntityType>
+  <EntityType Name="tbs_UserGroup">
+    <Key>
+      <PropertyRef Name="UserCode" />
+      <PropertyRef Name="GroupCode" />
+    </Key>
+    <Property Name="UserCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="GroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="3" />
+  </EntityType>
+  <EntityContainer Name="SecurityEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="tbs_Group" EntityType="Self.tbs_Group" />
+    <EntitySet Name="tbs_PermissionGroupMap" EntityType="Self.tbs_PermissionGroupMap" />
+    <EntitySet Name="tbs_PermissionUserMap" EntityType="Self.tbs_PermissionUserMap" />
+    <EntitySet Name="tbs_RestrictControlItem" EntityType="Self.tbs_RestrictControlItem" />
+    <EntitySet Name="tbs_ScreenPermission" EntityType="Self.tbs_ScreenPermission" />
+    <EntitySet Name="tbs_User" EntityType="Self.tbs_User" />
+    <EntitySet Name="tbs_UserGroup" EntityType="Self.tbs_UserGroup" />
+    <EntitySet Name="tbs_Permission" EntityType="SecurityModel.tbs_Permission" />
+    <EntitySet Name="tbs_ScreenItem" EntityType="SecurityModel.tbs_ScreenItem" />
+  </EntityContainer>
+  <EntityType Name="tbs_Permission">
+    <Key>
+      <PropertyRef Name="PermissionCode" />
+    </Key>
+    <Property Name="PermissionCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="Description" Type="String" MaxLength="200" FixedLength="false" Unicode="true" />
+    <Property Name="Sequence" Type="Int32" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tbs_ScreenItem">
+    <Key>
+      <PropertyRef Name="ScreenCode" />
+    </Key>
+    <Property Name="ScreenCode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ScreenName" Type="String" Nullable="false" MaxLength="255" FixedLength="false" Unicode="true" />
+    <Property Name="AcResourceName" Type="String" MaxLength="500" FixedLength="false" Unicode="true" />
+    <Property Name="ManuGroupCode" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <Property Name="ItemSequence" Type="Int32" Nullable="false" />
+    <Property Name="IsSingleton" Type="Boolean" />
+    <Property Name="AllowAnonymous" Type="Boolean" />
+  </EntityType>
+</Schema>

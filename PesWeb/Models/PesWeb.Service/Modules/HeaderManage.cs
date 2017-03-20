@@ -159,7 +159,7 @@ namespace PesWeb.Service.Modules
             }
             else
             {
-                db.SP_DeleteHeaderAdditional(H_ID);
+                db.SP_DeleteHeaderAdditional(H_ID*(-1));
             }
             
         }

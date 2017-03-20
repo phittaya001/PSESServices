@@ -1,0 +1,9 @@
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Release\CSI.ModelHelper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Release\CSI.ModelHelper.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Release\AutoMapper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Release\Castle.Core.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Release\AutoMapper.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\bin\Release\Castle.Core.xml
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\obj\Release\CSI.ModelHelper.csprojResolveAssemblyReference.cache
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\obj\Release\CSI.ModelHelper.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.ModelHelper\obj\Release\CSI.ModelHelper.pdb

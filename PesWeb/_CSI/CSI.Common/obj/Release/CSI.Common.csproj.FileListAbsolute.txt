@@ -1,0 +1,6 @@
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Common\bin\Release\CSI.Common.dll.config
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Common\bin\Release\CSI.Common.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Common\bin\Release\CSI.Common.pdb
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Common\obj\Release\CSI.Common.csprojResolveAssemblyReference.cache
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Common\obj\Release\CSI.Common.dll
+D:\PsesServices\PesWeb\PesWeb\_CSI\CSI.Common\obj\Release\CSI.Common.pdb

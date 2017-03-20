@@ -1,0 +1,98 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="SecurityModelStoreContainer" CdmEntityContainer="SecurityEntities">
+    <EntitySetMapping Name="tbs_Group">
+      <EntityTypeMapping TypeName="SecurityModel.tbs_Group">
+        <MappingFragment StoreEntitySet="tbs_Group">
+          <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+          <ScalarProperty Name="GroupName" ColumnName="GroupName" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbs_PermissionGroupMap">
+      <EntityTypeMapping TypeName="SecurityModel.tbs_PermissionGroupMap">
+        <MappingFragment StoreEntitySet="tbs_PermissionGroupMap">
+          <ScalarProperty Name="PermissionMapId" ColumnName="PermissionMapId" />
+          <ScalarProperty Name="AcResourceName" ColumnName="AcResourceName" />
+          <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+          <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbs_PermissionUserMap">
+      <EntityTypeMapping TypeName="SecurityModel.tbs_PermissionUserMap">
+        <MappingFragment StoreEntitySet="tbs_PermissionUserMap">
+          <ScalarProperty Name="PermissionMapId" ColumnName="PermissionMapId" />
+          <ScalarProperty Name="AcResourceName" ColumnName="AcResourceName" />
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbs_RestrictControlItem">
+      <EntityTypeMapping TypeName="SecurityModel.tbs_RestrictControlItem">
+        <MappingFragment StoreEntitySet="tbs_RestrictControlItem">
+          <ScalarProperty Name="RestrictItemId" ColumnName="RestrictItemId" />
+          <ScalarProperty Name="AcResourceName" ColumnName="AcResourceName" />
+          <ScalarProperty Name="FullClassName" ColumnName="FullClassName" />
+          <ScalarProperty Name="ControlId" ColumnName="ControlId" />
+          <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+          <ScalarProperty Name="AccessControlAction" ColumnName="AccessControlAction" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbs_ScreenPermission">
+      <EntityTypeMapping TypeName="SecurityModel.tbs_ScreenPermission">
+        <MappingFragment StoreEntitySet="tbs_ScreenPermission">
+          <ScalarProperty Name="ScreenCode" ColumnName="ScreenCode" />
+          <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbs_User">
+      <EntityTypeMapping TypeName="SecurityModel.tbs_User">
+        <MappingFragment StoreEntitySet="tbs_User">
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="LoginName" ColumnName="LoginName" />
+          <ScalarProperty Name="Password" ColumnName="Password" />
+          <ScalarProperty Name="IsActive" ColumnName="IsActive" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbs_UserGroup">
+      <EntityTypeMapping TypeName="SecurityModel.tbs_UserGroup">
+        <MappingFragment StoreEntitySet="tbs_UserGroup">
+          <ScalarProperty Name="UserCode" ColumnName="UserCode" />
+          <ScalarProperty Name="GroupCode" ColumnName="GroupCode" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbs_Permission">
+      <EntityTypeMapping TypeName="SecurityModel.tbs_Permission">
+        <MappingFragment StoreEntitySet="tbs_Permission">
+          <ScalarProperty Name="Sequence" ColumnName="Sequence" />
+          <ScalarProperty Name="Description" ColumnName="Description" />
+          <ScalarProperty Name="PermissionCode" ColumnName="PermissionCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tbs_ScreenItem">
+      <EntityTypeMapping TypeName="SecurityModel.tbs_ScreenItem">
+        <MappingFragment StoreEntitySet="tbs_ScreenItem">
+          <ScalarProperty Name="AllowAnonymous" ColumnName="AllowAnonymous" />
+          <ScalarProperty Name="IsSingleton" ColumnName="IsSingleton" />
+          <ScalarProperty Name="ItemSequence" ColumnName="ItemSequence" />
+          <ScalarProperty Name="ManuGroupCode" ColumnName="ManuGroupCode" />
+          <ScalarProperty Name="AcResourceName" ColumnName="AcResourceName" />
+          <ScalarProperty Name="ScreenName" ColumnName="ScreenName" />
+          <ScalarProperty Name="ScreenCode" ColumnName="ScreenCode" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

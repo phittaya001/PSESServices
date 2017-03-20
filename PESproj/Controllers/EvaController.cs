@@ -39,8 +39,14 @@ namespace PESproj.Controllers
         public List<SP_GetEmployeeListByPeriodID_Result> GetEvaList(string EmployeeId,int Period_ID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
-            
-            return header.getEmpListByPeriod(Period_ID, EmployeeId);
+            List<SP_GetEmployeeListByPeriodID_Result> Emp = new List<SP_GetEmployeeListByPeriodID_Result>();
+            Emp = header.getEmpListByPeriod(Period_ID, EmployeeId).ToList();
+            for(int i = 0; i < Emp.Count; i++)
+            {
+                Emp[i].PlanStartDate = Emp[i].PlanStartDate.Substring(0, 10).Replace('/', '-');
+                Emp[i].PlanFinishDate = Emp[i].PlanFinishDate.Substring(0, 10).Replace('/', '-');
+            }
+            return Emp;
         }
 
         public void InsertEvaDefaultForm()
@@ -100,7 +106,7 @@ namespace PESproj.Controllers
                             foreach (tblHeader hd3 in FinalHeader(hd2, hd))
                             {
                                 if (sc.Where(a => a.Eva_ID == eva_ID && a.H3_ID == hd3.H_ID).ToList().Count == 0)
-                                    if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
+                                    //if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
                                         Ans.Add(hd3);
                             }
                         }
