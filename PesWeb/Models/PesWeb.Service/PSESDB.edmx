@@ -395,6 +395,8 @@
           <Parameter Name="JobID" Type="int" Mode="In" />
           <Parameter Name="period" Type="varchar" Mode="In" />
           <Parameter Name="periodID" Type="int" Mode="In" />
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="FinishDate" Type="date" Mode="In" />
         </Function>
         <Function Name="SP_InsertHeader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="parent" Type="int" Mode="In" />
@@ -599,6 +601,8 @@
             <Parameter Name="JobID" Mode="In" Type="Int32" />
             <Parameter Name="period" Mode="In" Type="String" />
             <Parameter Name="periodID" Mode="In" Type="Int32" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="FinishDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <EntitySet Name="tblProject" EntityType="PSESModel.tblProject" />
           <EntitySet Name="tblPart2Master" EntityType="PSESModel.tblPart2Master" />

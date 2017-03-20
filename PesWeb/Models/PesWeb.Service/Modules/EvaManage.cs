@@ -29,7 +29,7 @@ namespace PesWeb.Service.Modules
         public SP_InsertEvaluation_Result InsertEvaData(tblEvaluation eva)
         {
             PSESEntities db = new PSESEntities();
-            return db.SP_InsertEvaluation(eva.ProjectNO, eva.EvaluatorNO, eva.EmployeeNO, eva.Job_ID,eva.period,eva.PeriodID).FirstOrDefault();
+            return db.SP_InsertEvaluation(eva.ProjectNO, eva.EvaluatorNO, eva.EmployeeNO, eva.Job_ID,eva.period,eva.PeriodID,eva.StartEvaDate,eva.FinishEvaDate).FirstOrDefault();
         }
 
         public List<tblEvaluation> getEvaData()

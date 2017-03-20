@@ -43,6 +43,8 @@
     <Property Name="ProjectNO" Type="varchar" MaxLength="15" />
     <Property Name="period" Type="varchar" MaxLength="25" />
     <Property Name="PeriodID" Type="int" />
+    <Property Name="StartEvaDate" Type="date" />
+    <Property Name="FinishEvaDate" Type="date" />
   </EntityType>
   <EntityType Name="tblHeader">
     <Key>
@@ -388,6 +390,8 @@
     <Parameter Name="JobID" Type="int" Mode="In" />
     <Parameter Name="period" Type="varchar" Mode="In" />
     <Parameter Name="periodID" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="date" Mode="In" />
+    <Parameter Name="FinishDate" Type="date" Mode="In" />
   </Function>
   <Function Name="SP_InsertHeader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="parent" Type="int" Mode="In" />

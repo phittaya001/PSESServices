@@ -12,6 +12,8 @@
     <Property Name="ProjectNO" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="period" Type="String" MaxLength="25" FixedLength="false" Unicode="false" />
     <Property Name="PeriodID" Type="Int32" />
+    <Property Name="StartEvaDate" Type="DateTime" Precision="0" />
+    <Property Name="FinishEvaDate" Type="DateTime" Precision="0" />
   </EntityType>
   <EntityType Name="tblHeaderBot">
     <Key>
@@ -140,6 +142,8 @@
       <Parameter Name="JobID" Mode="In" Type="Int32" />
       <Parameter Name="period" Mode="In" Type="String" />
       <Parameter Name="periodID" Mode="In" Type="Int32" />
+      <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+      <Parameter Name="FinishDate" Mode="In" Type="DateTime" />
     </FunctionImport>
     <EntitySet Name="tblProject" EntityType="PSESModel.tblProject" />
     <EntitySet Name="tblPart2Master" EntityType="PSESModel.tblPart2Master" />
