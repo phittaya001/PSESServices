@@ -41,6 +41,15 @@ namespace PESproj.Controllers
             return Result;
         }
 
+        [Route("Delete/{H_ID}")]
+        [HttpDelete]
+        public void DeleteHeader(int H_ID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+
+            header.DeleteHeader(H_ID);
+        }
+
         [Route("All/{PositionID}/{EvaID}")]
         [HttpGet]
         public List<SP_GetHeaderByPosition_Result> GetAllHeader(int PositionID,int EvaID)
@@ -93,17 +102,25 @@ namespace PESproj.Controllers
             List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).ToList();
             foreach(tblHeaderAdditional HdATemp in HdA)
             {
-                SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
-                newHeader.Alias = HdATemp.Alias;
-                newHeader.H_Level = HdATemp.H_Level;
-                newHeader.Parent = HdATemp.parent;
-                newHeader.Text = HdATemp.Text;
-                newHeader.Text_Eng = HdATemp.Text_Eng;
-                newHeader.Eva_ID = HdATemp.Eva_ID;
-                newHeader.H_ID = (-1)*HdATemp.H_ID;
-                newHeader.PositionNO = PositionID;
-                newHeader.point = HdATemp.point;
-                GetHeader.Add(newHeader);
+                if (HdATemp.H_status == 1)
+                {
+                    SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
+                    newHeader.Alias = HdATemp.Alias;
+                    newHeader.H_Level = HdATemp.H_Level;
+                    newHeader.Parent = HdATemp.parent;
+                    newHeader.Text = HdATemp.Text;
+                    newHeader.Text_Eng = HdATemp.Text_Eng;
+                    newHeader.Eva_ID = HdATemp.Eva_ID;
+                    newHeader.H_ID = (-1) * HdATemp.H_ID;
+                    newHeader.PositionNO = PositionID;
+                    newHeader.point = HdATemp.point;
+                    GetHeader.Add(newHeader);
+                }
+                else
+                {
+                    DeleteHeader((-1)*HdATemp.H_ID);
+                }
+               
             }
             int j = 1;
             List<SP_GetHeaderByPosition_Result> H_new = new List<SP_GetHeaderByPosition_Result>();
@@ -460,14 +477,7 @@ namespace PESproj.Controllers
             header.insertHeader(H);
         }
 
-        [Route("Delete/{H_ID}")]
-        [HttpDelete]
-        public void DeleteHeader(int H_ID)
-        {
-            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
-
-            header.DeleteHeader(H_ID);
-        }
+       
 
         [Route("Average/")]
         [HttpPost]

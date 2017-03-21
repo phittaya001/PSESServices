@@ -38,6 +38,8 @@ public partial class tblEvaluation
 
     public Nullable<System.DateTime> FinishEvaDate { get; set; }
 
+    public Nullable<int> EvaStatus { get; set; }
+
 }
 
 }

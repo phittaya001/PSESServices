@@ -36,6 +36,8 @@ public partial class tblHeaderAdditional
 
     public Nullable<int> Part2ID { get; set; }
 
+    public Nullable<int> H_status { get; set; }
+
 }
 
 }

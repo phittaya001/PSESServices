@@ -85,7 +85,7 @@ namespace PESproj.Controllers
                 eva.EvaluatorNO = Data["EvaluatorNO"].ToString();
                 eva.Job_ID = proj.Part2ID;
                 eva.PeriodID = p.Period_Id;
-                eva.period = p.StartDate.ToString().Substring(0, 5);
+                eva.period = p.StartDate.ToString().Substring(3, 7);
                 eva.ProjectNO = Data["ProjectNO"].ToString();
                 eva.StartEvaDate = Convert.ToDateTime(Data["StartDate"].ToString());
                 eva.FinishEvaDate = Convert.ToDateTime(Data["FinishDate"].ToString());
@@ -187,6 +187,8 @@ namespace PESproj.Controllers
             
             return header.getEvaDataByEvaID(EvaID).ToList();
         }
+
+
 
     }
 }
