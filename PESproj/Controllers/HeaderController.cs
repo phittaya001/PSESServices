@@ -50,9 +50,9 @@ namespace PESproj.Controllers
             header.DeleteHeader(H_ID);
         }
 
-        [Route("All/{PositionID}/{EvaID}")]
+        [Route("All/{PositionID}/{EvaID}/{ID}")]
         [HttpGet]
-        public List<SP_GetHeaderByPosition_Result> GetAllHeader(int PositionID,int EvaID)
+        public List<SP_GetHeaderByPosition_Result> GetAllHeader(int PositionID,int EvaID,int ID)
         {
 
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
@@ -102,7 +102,7 @@ namespace PESproj.Controllers
             List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).ToList();
             foreach(tblHeaderAdditional HdATemp in HdA)
             {
-                if (HdATemp.H_status == 1)
+                if (HdATemp.H_status == 1 || ID == 1)
                 {
                     SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
                     newHeader.Alias = HdATemp.Alias;
@@ -116,7 +116,7 @@ namespace PESproj.Controllers
                     newHeader.point = HdATemp.point;
                     GetHeader.Add(newHeader);
                 }
-                else
+                else if(ID == 1)
                 {
                     DeleteHeader((-1)*HdATemp.H_ID);
                 }
@@ -389,15 +389,156 @@ namespace PESproj.Controllers
         }
 
 
-        [Route("Update")]
-        [HttpPut]
-        public void UpdateAdditionalHeader([FromBody]List<JObject> Data)
+        [Route("Average/")]
+        [HttpPost]
+        public List<SP_GetHeaderByPosition_Result> AvgScore([FromBody]List<JObject> Data)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            List<SP_GetHeaderByPosition_Result> sc = new List<SP_GetHeaderByPosition_Result>();
+            int i = 0;
+            foreach (JObject j in Data)
+            {
+                SP_GetHeaderByPosition_Result c = new SP_GetHeaderByPosition_Result();
+                c.H_ID = Convert.ToInt32(j["H_ID"].ToString());
+                c.point = Convert.ToInt32(j["point"].ToString());
+                c.Parent = Convert.ToInt32(j["Parent"].ToString());
+                //c.Score_ID = Convert.ToInt32(j["Score_ID"].ToString());
+                c.Eva_ID = i;
+                i++;
+                sc.Add(c);
+            }
+            foreach (SP_GetHeaderByPosition_Result g in sc)
+            {
+
+                if (sc.Where(a => a.Parent == g.H_ID).ToList().Count > 0)
+                {
+                    List<SP_GetHeaderByPosition_Result> tmp = sc.Where(a => a.Parent == g.H_ID).ToList();
+                    int sum = 0;
+                    foreach (SP_GetHeaderByPosition_Result tmp2 in tmp)
+                    {
+                        if (tmp2.point != null)
+                            sum += (int)tmp2.point;
+                    }
+                    sc[sc.IndexOf(g)].point = sum / tmp.Count;
+                }
+            }
+
+            return sc;
+        }
+
+        public List<tblHeaderAdditional> FinalHeader(tblHeaderAdditional parent, List<tblHeaderAdditional> ListAll)
+        {
+            List<tblHeaderAdditional> ListResult = new List<tblHeaderAdditional>();
+            if (ListAll.Where(a => a.parent == parent.H_ID * (-1)).ToList().Count == 0)
+            {
+                ListResult.Add(parent);
+                return ListResult;
+            }
+            List<tblHeaderAdditional> Result = new List<tblHeaderAdditional>();
+            foreach (tblHeaderAdditional res in ListAll.Where(a => a.parent == parent.H_ID * (-1)).ToList())
+            {
+                foreach (tblHeaderAdditional a in FinalHeader(res, ListAll))
+                {
+                    Result.Insert(Result.Count, a);
+                    
+                }
+                    
+            }
+            return Result;
+        }
+
+        [Route("Update")]
+        [HttpPut]
+        public void UpdateHeader([FromBody]List<JObject> Data)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            var header2 = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            int EvaID = 0;
             foreach(JObject jo in Data)
             {
-                header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), Convert.ToInt32(jo["Score"].ToString()), Convert.ToInt32(jo["Id"].ToString()));
+                if (jo["Score"].ToString() == "N/A"){
+                    header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), 0, Convert.ToInt32(jo["Id"].ToString()));
+                }
+                else
+                {
+                    header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), Convert.ToInt32(jo["Score"].ToString()), Convert.ToInt32(jo["Id"].ToString()));
+                }
+                EvaID = Convert.ToInt32(jo["EvaId"].ToString());
             }
+            int sum = 0, sum2 = 0;
+            List<tblScore> score = header2.GetAllScore().Where(a => a.Eva_ID == EvaID).ToList();
+            List<tblHeader> hd = header.GetAllHeader().ToList();
+            foreach (tblScore sc in score)
+            {
+                tblHeader HdScore = hd.Where(a => a.H_ID == sc.H3_ID && a.Parent == 0).FirstOrDefault();
+                if(HdScore != null)
+                {
+                    List<tblHeader> hdTemp = hd.Where(a => a.Parent == HdScore.H_ID).ToList();
+                    foreach(tblHeader h2 in hdTemp)
+                    {
+                        List<tblHeader> hdTemp2 = hd.Where(a => a.Parent == h2.H_ID).ToList();
+                        foreach(tblHeader h3 in hdTemp2)
+                        {
+                            sum += (int)score.Where(a => a.H3_ID == h3.H_ID).FirstOrDefault().point;
+                        }
+                        sum = sum / hdTemp2.Count;
+                        sum2 += sum;
+                        sum = 0;
+                        header.UpdateScoreData(EvaID, sum, h2.H_ID);
+                    }
+                    sum2 = sum2 / hdTemp.Count;
+                    header.UpdateScoreData(EvaID, sum2, HdScore.H_ID);
+                    sum2 = 0;
+                }
+                
+            }
+
+
+
+
+
+            sum = 0; sum2 = 0;
+            List<tblHeaderAdditional> hdaList = header.getHeaderAdditional().Where(a=>a.Eva_ID==EvaID).ToList();
+            List<tblHeaderAdditional> hh = hdaList.Where(a => a.parent == 0 && a.Eva_ID == EvaID).ToList();
+            foreach (tblHeaderAdditional tmp in hh )
+            {
+                List<tblHeaderAdditional> h1 = hdaList.Where(a => a.parent == (-1) * tmp.H_ID).ToList();
+                foreach (tblHeaderAdditional tmp2 in h1)
+                {
+                    List<tblHeaderAdditional> h2 = hdaList.Where(a => a.parent == (-1) * tmp2.H_ID).ToList();
+                    foreach (tblHeaderAdditional tmp3 in h2)
+                    {
+                        sum += (int)tmp3.point;
+                    }
+                    sum = sum / (h2.Count);
+                    header.UpdateScoreData(EvaID, sum, tmp2.H_ID);
+                    sum2 += sum;
+                    sum = 0;
+                    
+                }
+                sum2 = sum2 / (h1.Count);
+                header.UpdateScoreData(EvaID, sum2, tmp.H_ID);
+            }
+                if (EvaID>0)
+                header.UpdateEvaluationStatus(EvaID, 1);
+        }
+
+        [Route("EvaStatus/{EvaID}")]
+        [HttpPut]
+        public void EditEvaluationStatus(int EvaID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            var header2 = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            tblEvaluation ev = header2.getEvaData().Where(a => a.Eva_ID == EvaID).FirstOrDefault();
+            if (ev.EvaStatus == 1)
+            {
+                header.UpdateEvaluationStatus(EvaID, 2);
+            }
+            else if (ev.EvaStatus == 2)
+            {
+                header.UpdateEvaluationStatus(EvaID, 1);
+            }
+
         }
 
         [Route("GetHeader/{PositionID}")]
@@ -479,41 +620,6 @@ namespace PESproj.Controllers
 
        
 
-        [Route("Average/")]
-        [HttpPost]
-        public List<SP_GetHeaderByPosition_Result> AvgScore([FromBody]List< JObject> Data)
-        {
-            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
-            List<SP_GetHeaderByPosition_Result> sc = new List<SP_GetHeaderByPosition_Result>();
-            int i = 0;
-            foreach (JObject j in Data)
-            {
-                SP_GetHeaderByPosition_Result c = new SP_GetHeaderByPosition_Result();
-                c.H_ID = Convert.ToInt32(j["H_ID"].ToString());
-                c.point = Convert.ToInt32(j["point"].ToString());
-                c.Parent = Convert.ToInt32(j["Parent"].ToString());
-                //c.Score_ID = Convert.ToInt32(j["Score_ID"].ToString());
-                c.Eva_ID = i;
-                i++;
-                sc.Add(c);
-            }
-            foreach(SP_GetHeaderByPosition_Result g in sc)
-            {
-
-                if(sc.Where(a=>a.Parent == g.H_ID).ToList().Count > 0)
-                {
-                    List<SP_GetHeaderByPosition_Result> tmp = sc.Where(a => a.Parent == g.H_ID).ToList();
-                    int sum = 0;
-                    foreach(SP_GetHeaderByPosition_Result tmp2 in tmp)
-                    {
-                        if(tmp2.point!=null)
-                        sum += (int)tmp2.point;
-                    }
-                    sc[sc.IndexOf(g)].point = sum / tmp.Count;
-                }
-            }
-
-            return sc;
-        }
+        
     }
 }

@@ -162,6 +162,14 @@ namespace PESproj.Controllers
             return header.getEvaListByEvaluatorID(EvaluatorID).Where(a=>a.PeriodID==periodID).ToList();
         }
 
+        [Route("Eva/{EvaluatorID}/History")]
+        [HttpGet]
+        public List<SP_GetEvaListByEvaluatorID_Result> getEvaListHistory(string EvaluatorID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            return header.getEvaListByEvaluatorID(EvaluatorID).Where(a=>a.EvaStatus==1).ToList();
+        }
+
         [Route("Delete/{EvaID}")]
         [HttpDelete]
         public HttpResponseMessage DeleteData(int EvaID)

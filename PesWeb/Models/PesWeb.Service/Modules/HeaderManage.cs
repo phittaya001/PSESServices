@@ -163,5 +163,11 @@ namespace PesWeb.Service.Modules
             }
             
         }
+
+        public void UpdateEvaluationStatus(int EvaID,int Status)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_UpdateEvaluationStatus(EvaID, Status);
+        }
     }
 }

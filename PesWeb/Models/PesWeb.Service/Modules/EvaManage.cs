@@ -97,5 +97,11 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblScore.ToList();
         }
+
+        public List<tblEvaluation> GetAllEvaluation()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblEvaluation.ToList();
+        }
     }
 }

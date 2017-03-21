@@ -19,6 +19,12 @@ public partial class SP_GetEvaListByEvaluatorID_Result
 
     public string EmployeeFirstName { get; set; }
 
+    public Nullable<int> EvaStatus { get; set; }
+
+    public Nullable<System.DateTime> FinishEvaDate { get; set; }
+
+    public Nullable<System.DateTime> StartEvaDate { get; set; }
+
     public string EmployeeLastName { get; set; }
 
     public string GroupOfStaff { get; set; }

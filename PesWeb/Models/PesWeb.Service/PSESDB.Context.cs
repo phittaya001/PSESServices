@@ -503,18 +503,6 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_GetEvaListByEvaluatorID_Result> SP_GetEvaListByEvaluatorID(string evaluatorID)
-    {
-
-        var evaluatorIDParameter = evaluatorID != null ?
-            new ObjectParameter("EvaluatorID", evaluatorID) :
-            new ObjectParameter("EvaluatorID", typeof(string));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaListByEvaluatorID_Result>("SP_GetEvaListByEvaluatorID", evaluatorIDParameter);
-    }
-
-
     public virtual ObjectResult<SP_GetEvaDataByEvaID_Result> SP_GetEvaDataByEvaID(Nullable<int> evaID)
     {
 
@@ -705,6 +693,35 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteHeaderAdditional", h_IDParameter);
+    }
+
+
+    public virtual ObjectResult<SP_GetEvaListByEvaluatorID_Result> SP_GetEvaListByEvaluatorID(string evaluatorID)
+    {
+
+        var evaluatorIDParameter = evaluatorID != null ?
+            new ObjectParameter("EvaluatorID", evaluatorID) :
+            new ObjectParameter("EvaluatorID", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaListByEvaluatorID_Result>("SP_GetEvaListByEvaluatorID", evaluatorIDParameter);
+    }
+
+
+    public virtual int SP_UpdateEvaluationStatus(Nullable<int> evaID, Nullable<int> evaStatus)
+    {
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        var evaStatusParameter = evaStatus.HasValue ?
+            new ObjectParameter("EvaStatus", evaStatus) :
+            new ObjectParameter("EvaStatus", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateEvaluationStatus", evaIDParameter, evaStatusParameter);
     }
 
 }
