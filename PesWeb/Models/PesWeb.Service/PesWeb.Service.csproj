@@ -78,6 +78,7 @@
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EmployeeData.cs" />
+    <Compile Include="Modules\ApproveData.cs" />
     <Compile Include="Modules\EvaluationData.cs" />
     <Compile Include="Modules\EvaManage.cs" />
     <Compile Include="Modules\FormManage.cs" />
@@ -198,7 +199,13 @@
     <Compile Include="SP_InsertHeader_Result.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblApprove.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblEmployee.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblEmployeeOrganization.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="tblEvaluation.cs">

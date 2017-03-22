@@ -43,6 +43,9 @@
     <Property Name="ProjectNO" Type="varchar" MaxLength="15" />
     <Property Name="period" Type="varchar" MaxLength="25" />
     <Property Name="PeriodID" Type="int" />
+    <Property Name="StartEvaDate" Type="date" />
+    <Property Name="FinishEvaDate" Type="date" />
+    <Property Name="EvaStatus" Type="int" />
   </EntityType>
   <EntityType Name="tblHeader">
     <Key>
@@ -69,6 +72,7 @@
     <Property Name="H_Level" Type="int" />
     <Property Name="point" Type="int" />
     <Property Name="Part2ID" Type="int" />
+    <Property Name="H_status" Type="int" />
   </EntityType>
   <EntityType Name="tblHeaderBot">
     <Key>
@@ -388,6 +392,8 @@
     <Parameter Name="JobID" Type="int" Mode="In" />
     <Parameter Name="period" Type="varchar" Mode="In" />
     <Parameter Name="periodID" Type="int" Mode="In" />
+    <Parameter Name="StartDate" Type="date" Mode="In" />
+    <Parameter Name="FinishDate" Type="date" Mode="In" />
   </Function>
   <Function Name="SP_InsertHeader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="parent" Type="int" Mode="In" />
@@ -418,6 +424,10 @@
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="point" Type="int" Mode="In" />
     <Parameter Name="H_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_UpdateEvaluationStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+    <Parameter Name="EvaStatus" Type="int" Mode="In" />
   </Function>
   <EntityContainer Name="PSESModelStoreContainer">
     <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />

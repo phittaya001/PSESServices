@@ -102,7 +102,7 @@ namespace PESproj.Controllers
             List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).ToList();
             foreach(tblHeaderAdditional HdATemp in HdA)
             {
-                if (HdATemp.H_status == 1 || ID == 1)
+                if (HdATemp.H_status == 1 || ID == 2)
                 {
                     SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
                     newHeader.Alias = HdATemp.Alias;
@@ -523,9 +523,9 @@ namespace PESproj.Controllers
                 header.UpdateEvaluationStatus(EvaID, 1);
         }
 
-        [Route("EvaStatus/{EvaID}")]
+        [Route("EvaStatus")]
         [HttpPut]
-        public void EditEvaluationStatus(int EvaID)
+        public void EditEvaluationStatus([FromBody]int EvaID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
             var header2 = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();

@@ -531,5 +531,42 @@
       </ResultMapping>
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationStatus" FunctionName="PSESModel.Store.SP_UpdateEvaluationStatus" />
+    <EntitySetMapping Name="tblApprove">
+      <EntityTypeMapping TypeName="PSESModel.tblApprove">
+        <MappingFragment StoreEntitySet="tblApprove">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+          <ScalarProperty Name="ST" ColumnName="ST" />
+          <ScalarProperty Name="PM" ColumnName="PM" />
+          <ScalarProperty Name="GM" ColumnName="GM" />
+          <ScalarProperty Name="HR" ColumnName="HR" />
+          <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="ApproveState" ColumnName="ApproveState" />
+          <ScalarProperty Name="ApproverID" ColumnName="ApproverID" />
+          <ScalarProperty Name="EvaID" ColumnName="EvaID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmployeeOrganization">
+      <EntityTypeMapping TypeName="PSESModel.tblEmployeeOrganization">
+        <MappingFragment StoreEntitySet="tblEmployeeOrganization">
+          <ScalarProperty Name="PrevEmployeeNo" ColumnName="PrevEmployeeNo" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="EmployeeOrganizationFlag" ColumnName="EmployeeOrganizationFlag" />
+          <ScalarProperty Name="EndEffectiveDate" ColumnName="EndEffectiveDate" />
+          <ScalarProperty Name="StartEffectiveDate" ColumnName="StartEffectiveDate" />
+          <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+          <ScalarProperty Name="EmployeeOrganizationRate" ColumnName="EmployeeOrganizationRate" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+          <ScalarProperty Name="OrganizationNo" ColumnName="OrganizationNo" />
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_InsertApproveState" FunctionName="PSESModel.Store.SP_InsertApproveState" />
   </EntityContainerMapping>
 </Mapping>

@@ -103,5 +103,34 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblEvaluation.ToList();
         }
+
+        public List<tblApprove> GetAllApprove()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblApprove.ToList();
+        }
+
+        public List<tblPosition> getPosition()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblPosition.ToList();
+        }
+
+        public List<tblPart2Master> getPart2Data()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblPart2Master.ToList();
+        }
+        public void insertApprove(tblApprove ap)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_InsertApproveState(ap.EvaID, ap.Position, ap.PositionID, ap.ProjectCode, ap.Role,ap.Name);
+        }
+
+        public List<tblEmployeeOrganization> getEmployeeOrganization()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblEmployeeOrganization.ToList();
+        }
     }
 }

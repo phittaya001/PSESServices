@@ -25,6 +25,8 @@
         <EntityTypeShape EntityType="PSESModel.tblHeader" Width="1.5" PointX="0.75" PointY="9.75" />
         <EntityTypeShape EntityType="PSESModel.tblHeaderAdditional" Width="1.5" PointX="11.375" PointY="0.75" />
         <EntityTypeShape EntityType="PSESModel.tbllHeaderPosition" Width="1.5" PointX="11.375" PointY="4.75" />
+        <EntityTypeShape EntityType="PSESModel.tblApprove" Width="1.5" PointX="11.375" PointY="7.75" />
+        <EntityTypeShape EntityType="PSESModel.tblEmployeeOrganization" Width="1.5" PointX="7.375" PointY="11.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

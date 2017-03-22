@@ -75,11 +75,16 @@ namespace PESproj.Controllers
         [HttpPut]
         public HttpResponseMessage InsertEva([FromBody]JObject Data)
         {
-
+                
                 var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
                 var header2 = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            List<tblEvaluation> evaAll = header.GetAllEvaluation().Where(a => a.EvaluatorNO == Data["EvaluatorNO"].ToString() && a.EmployeeNO == Data["EmployeeNO"].ToString() && a.ProjectNO == Data["ProjectNO"].ToString()).ToList();
+            if (evaAll.Count == 0)
+            {
+
+
                 tblEvaluation eva = new tblEvaluation();
-                tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a=>a.StaffID== Data["EmployeeNO"].ToString()).FirstOrDefault();
+                tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a => a.StaffID == Data["EmployeeNO"].ToString()).FirstOrDefault();
                 Period p = header.GetPeriod().Where(a => a.Period_Id == Convert.ToInt32(Data["PeriodID"].ToString())).FirstOrDefault();
                 eva.EmployeeNO = Data["EmployeeNO"].ToString();
                 eva.EvaluatorNO = Data["EvaluatorNO"].ToString();
@@ -91,35 +96,52 @@ namespace PESproj.Controllers
                 eva.FinishEvaDate = Convert.ToDateTime(Data["FinishDate"].ToString());
                 SP_InsertEvaluation_Result evaid = header.InsertEvaData(eva);
                 int eva_ID = evaid.Eva_ID;
-                
-                List<tblHeaderJob> hj = header2.getAllHeaderJob().Where(a => a.PositionNo == proj.Part2ID).ToList();
-            List<tblHeader> Ans = new List<tblHeader>();
-            List<tblScore> sc = header.GetAllScore();
-            List<SP_GetHeaderByPosition_Result> GetHeader = header2.getHeaderByPosition(proj.Part2ID, eva_ID).OrderBy(a => a.H_ID).ToList();
-                List<tblHeader> hd = header2.GetAllHeader().ToList();
-            tblHeader H_test = new tblHeader();
-                H_test.H_ID = 0;
-              //  if (GetHeader.Count - GetHeader.Where(a => a.point).ToList().Count < FinalHeader(H_test, hd).ToList().Count)
-                    foreach (tblHeaderJob tmpHJ in hj)
-                    {
-                        foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmpHJ.H1_ID))
-                        {
 
-                            foreach (tblHeader hd3 in FinalHeader(hd2, hd))
-                            {
-                                if (sc.Where(a => a.Eva_ID == eva_ID && a.H3_ID == hd3.H_ID).ToList().Count == 0)
-                                    //if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
-                                        Ans.Add(hd3);
-                            }
+
+                List<tblHeaderJob> hj = header2.getAllHeaderJob().Where(a => a.PositionNo == proj.Part2ID).ToList();
+                List<tblHeader> Ans = new List<tblHeader>();
+                List<tblScore> sc = header.GetAllScore();
+                List<SP_GetHeaderByPosition_Result> GetHeader = header2.getHeaderByPosition(proj.Part2ID, eva_ID).OrderBy(a => a.H_ID).ToList();
+                List<tblHeader> hd = header2.GetAllHeader().ToList();
+                tblHeader H_test = new tblHeader();
+                H_test.H_ID = 0;
+                //  if (GetHeader.Count - GetHeader.Where(a => a.point).ToList().Count < FinalHeader(H_test, hd).ToList().Count)
+                foreach (tblHeaderJob tmpHJ in hj)
+                {
+                    foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmpHJ.H1_ID))
+                    {
+
+                        foreach (tblHeader hd3 in FinalHeader(hd2, hd))
+                        {
+                            if (sc.Where(a => a.Eva_ID == eva_ID && a.H3_ID == hd3.H_ID).ToList().Count == 0)
+                                //if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
+                                Ans.Add(hd3);
                         }
                     }
+                }
                 foreach (tblHeader h in Ans)
                 {
                     header.InsertSCORE(eva_ID, h.H_ID);
                 }
+                int num = header.GetAllApprove().Where(a => a.EvaID == eva_ID).ToList().Count;
+                if (num == 0)
+                {
+                    tblApprove ap = new tblApprove();
+                    ap.EvaID = eva_ID;
+                    ap.PositionID = header.getEmployees().Where(a => a.EmployeeNo.Replace(" ", "") == Data["EmployeeNO"].ToString()).FirstOrDefault().PositionNo;
+                    ap.Position = header.getPosition().Where(a => a.PositionNo == ap.PositionID).FirstOrDefault().PositionName;
+                    tblProjectMember pm = header.getProjectMember().Where(a => a.StaffID == Data["EmployeeNO"].ToString() && a.ProjectID == Data["ProjectNO"].ToString()).FirstOrDefault();
+                    string role = header.getPart2Data().Where(a => a.Part2ID == pm.Part2ID).FirstOrDefault().Function;
+                    ap.Role = role;
+                    ap.Name = pm.StaffName;
+                    tblProject pj = header.getProject().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).FirstOrDefault();
+                    ap.ProjectCode = pj.CustomerCode + " " + pj.ProjectNameAlias;
+                    header.insertApprove(ap);
+                }
 
-            return Request.CreateResponse(HttpStatusCode.OK);
-  
+                return Request.CreateResponse(HttpStatusCode.OK);
+            }
+            return Request.CreateResponse(HttpStatusCode.BadRequest);
         }
 
         [Route("InsertScore")]
@@ -196,7 +218,96 @@ namespace PESproj.Controllers
             return header.getEvaDataByEvaID(EvaID).ToList();
         }
 
+        [Route("Approve/{EmpID}/{EvaID}")]
+        [HttpGet]
+        public List<SP_GetEvaDataByEvaID_Result> getApprove(string EmpID,int EvaID)
+        {
+            //string EmpIDs = EmpID.ToString();
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            tblEmployee em = header.getEmployees().Where(a => a.EmployeeNo == EmpID).FirstOrDefault();
+            if (em != null){
+                if(em.PositionNo == 23)
+                {
 
+                }
+            }
+            List<tblEvaluation> eva = header.GetAllEvaluation().Where(a => a.EvaStatus == 1).ToList();
+            return header.getEvaDataByEvaID(EvaID).ToList();
+        }
+
+        [Route("ApproveList/{EmpID}")]
+        [HttpGet]
+        public List<tblApprove> getApproveList(string EmpID)
+        {
+            //string EmpIDs = EmpID.ToString();
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            List<tblEmployee> ListEmp = header.getEmployees();
+            tblEmployee em = ListEmp.Where(a => a.EmployeeNo.Replace(" ","") == EmpID).FirstOrDefault();
+            List<tblApprove> ListApp = header.GetAllApprove().Where(a => a.ApproveState == 1).ToList();
+            List<tblApprove> app = new List<tblApprove>();
+
+            if (em != null)
+            {
+                if (em.PositionNo == 23)
+                {
+                    return ListApp;
+                }
+                if(em.PositionNo == 21)
+                {
+                    List<tblEmployeeOrganization> ListEmO = header.getEmployeeOrganization().Where(a => a.OrganizationNo == em.OrganizationNo && a.OrganizationNo != 21).ToList();
+                    List<tblEvaluation> eva = header.GetAllEvaluation();
+                    List<tblEvaluation> data = new List<tblEvaluation>();
+                    List<tblApprove> appData = new List<tblApprove>();
+                    
+                    foreach(tblEmployeeOrganization tmp in ListEmO)
+                    {
+                        List<tblEvaluation> evaTemp = eva.Where(a => a.EmployeeNO == tmp.EmployeeNo && a.EvaStatus == 1).ToList();
+                        foreach(tblEvaluation ev in evaTemp)
+                        {
+                            if(appData.Where(a => a.EvaID == ev.Eva_ID).ToList().Count==0)
+                            app.Add(ListApp.Where(a => a.EvaID == ev.Eva_ID).FirstOrDefault());
+                        }
+                    }
+                    return appData;
+                }
+                if (true) { 
+                    List<tblProjectMember> ListPm = header.getProjectMember();
+                    List<tblProjectMember> me = ListPm.Where(a => a.StaffID == EmpID).ToList();
+                    List<tblEvaluation> eva = header.GetAllEvaluation();
+
+                    List<tblApprove> App = new List<tblApprove>();
+                    foreach(tblProjectMember curr in me)
+                    {
+                        if(curr.Part2ID == 30)
+                        {
+                            List<tblEvaluation> eva2 = eva.Where(a => a.ProjectNO == curr.ProjectID).ToList();
+                            foreach(tblEvaluation ev3 in eva2)
+                            {
+                                if ((App.Count==0 || App.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count == 0)&& ListApp.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count==1)
+                                {
+                                    app.Add(ListApp.Where(a => a.EvaID == ev3.Eva_ID).FirstOrDefault());
+                                }
+                            }
+                           
+                        }
+                    }
+                    return app;
+
+                }
+                
+                {
+                    List<tblEvaluation> eva = header.GetAllEvaluation().Where(a => a.EmployeeNO == EmpID).ToList();
+                    
+                    foreach (tblEvaluation e in eva)
+                    {
+                        app.Add(ListApp.Where(a => a.EvaID == e.Eva_ID).FirstOrDefault());
+                    }
+                    return app;
+                }
+            }
+            return null;
+           
+        }
 
     }
 }

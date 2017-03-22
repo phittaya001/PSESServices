@@ -10,11 +10,29 @@
     <Property Name="Code" Type="nchar" MaxLength="10" />
     <Property Name="Status" Type="int" />
   </EntityType>
+  <EntityType Name="tblApprove">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="EvaID" Type="int" />
+    <Property Name="ApproverID" Type="int" />
+    <Property Name="ApproveState" Type="int" />
+    <Property Name="Position" Type="varchar" MaxLength="30" />
+    <Property Name="PositionID" Type="int" />
+    <Property Name="HR" Type="int" />
+    <Property Name="GM" Type="int" />
+    <Property Name="PM" Type="int" />
+    <Property Name="ST" Type="int" />
+    <Property Name="ProjectCode" Type="varchar" MaxLength="15" />
+    <Property Name="Role" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+  </EntityType>
   <EntityType Name="tblEmployee">
     <Key>
       <PropertyRef Name="EmployeeNo" />
     </Key>
-    <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="EmployeeNo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="TitleNo" Type="tinyint" />
     <Property Name="EmployeeFirstName" Type="nvarchar" MaxLength="30" />
     <Property Name="EmployeeLastName" Type="nvarchar" MaxLength="30" />
@@ -30,6 +48,24 @@
     <Property Name="QuitDate" Type="datetime" />
     <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
     <Property Name="UpdateDate" Type="smalldatetime" />
+  </EntityType>
+  <EntityType Name="tblEmployeeOrganization">
+    <Key>
+      <PropertyRef Name="EmployeeNo" />
+      <PropertyRef Name="OrganizationNo" />
+      <PropertyRef Name="PositionNo" />
+    </Key>
+    <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="OrganizationNo" Type="int" Nullable="false" />
+    <Property Name="PositionNo" Type="int" Nullable="false" />
+    <Property Name="EmployeeOrganizationRate" Type="tinyint" />
+    <Property Name="IsMain" Type="bit" />
+    <Property Name="StartEffectiveDate" Type="smalldatetime" />
+    <Property Name="EndEffectiveDate" Type="smalldatetime" />
+    <Property Name="EmployeeOrganizationFlag" Type="bit" />
+    <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
+    <Property Name="UpdateDate" Type="smalldatetime" />
+    <Property Name="PrevEmployeeNo" Type="char" MaxLength="10" />
   </EntityType>
   <EntityType Name="tblEvaluation">
     <Key>
@@ -385,6 +421,14 @@
     <Parameter Name="H_Level" Type="int" Mode="In" />
     <Parameter Name="PositionNo" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_InsertApproveState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+    <Parameter Name="Position" Type="varchar" Mode="In" />
+    <Parameter Name="PositionID" Type="int" Mode="In" />
+    <Parameter Name="ProjectCode" Type="varchar" Mode="In" />
+    <Parameter Name="Role" Type="varchar" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SP_InsertEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProjectID" Type="varchar" Mode="In" />
     <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
@@ -431,7 +475,9 @@
   </Function>
   <EntityContainer Name="PSESModelStoreContainer">
     <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblApprove" EntityType="Self.tblApprove" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmployeeOrganization" EntityType="Self.tblEmployeeOrganization" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderAdditional" EntityType="Self.tblHeaderAdditional" Schema="dbo" store:Type="Tables" />

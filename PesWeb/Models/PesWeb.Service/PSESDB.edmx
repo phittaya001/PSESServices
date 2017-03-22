@@ -15,11 +15,29 @@
           <Property Name="Code" Type="nchar" MaxLength="10" />
           <Property Name="Status" Type="int" />
         </EntityType>
+        <EntityType Name="tblApprove">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="EvaID" Type="int" />
+          <Property Name="ApproverID" Type="int" />
+          <Property Name="ApproveState" Type="int" />
+          <Property Name="Position" Type="varchar" MaxLength="30" />
+          <Property Name="PositionID" Type="int" />
+          <Property Name="HR" Type="int" />
+          <Property Name="GM" Type="int" />
+          <Property Name="PM" Type="int" />
+          <Property Name="ST" Type="int" />
+          <Property Name="ProjectCode" Type="varchar" MaxLength="15" />
+          <Property Name="Role" Type="varchar" MaxLength="50" />
+          <Property Name="Name" Type="varchar" MaxLength="100" />
+        </EntityType>
         <EntityType Name="tblEmployee">
           <Key>
             <PropertyRef Name="EmployeeNo" />
           </Key>
-          <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="EmployeeNo" Type="varchar" MaxLength="50" Nullable="false" />
           <Property Name="TitleNo" Type="tinyint" />
           <Property Name="EmployeeFirstName" Type="nvarchar" MaxLength="30" />
           <Property Name="EmployeeLastName" Type="nvarchar" MaxLength="30" />
@@ -35,6 +53,24 @@
           <Property Name="QuitDate" Type="datetime" />
           <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
           <Property Name="UpdateDate" Type="smalldatetime" />
+        </EntityType>
+        <EntityType Name="tblEmployeeOrganization">
+          <Key>
+            <PropertyRef Name="EmployeeNo" />
+            <PropertyRef Name="OrganizationNo" />
+            <PropertyRef Name="PositionNo" />
+          </Key>
+          <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
+          <Property Name="OrganizationNo" Type="int" Nullable="false" />
+          <Property Name="PositionNo" Type="int" Nullable="false" />
+          <Property Name="EmployeeOrganizationRate" Type="tinyint" />
+          <Property Name="IsMain" Type="bit" />
+          <Property Name="StartEffectiveDate" Type="smalldatetime" />
+          <Property Name="EndEffectiveDate" Type="smalldatetime" />
+          <Property Name="EmployeeOrganizationFlag" Type="bit" />
+          <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
+          <Property Name="UpdateDate" Type="smalldatetime" />
+          <Property Name="PrevEmployeeNo" Type="char" MaxLength="10" />
         </EntityType>
         <EntityType Name="tblEvaluation">
           <Key>
@@ -390,6 +426,14 @@
           <Parameter Name="H_Level" Type="int" Mode="In" />
           <Parameter Name="PositionNo" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_InsertApproveState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EvaID" Type="int" Mode="In" />
+          <Parameter Name="Position" Type="varchar" Mode="In" />
+          <Parameter Name="PositionID" Type="int" Mode="In" />
+          <Parameter Name="ProjectCode" Type="varchar" Mode="In" />
+          <Parameter Name="Role" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_InsertEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProjectID" Type="varchar" Mode="In" />
           <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
@@ -436,7 +480,9 @@
         </Function>
         <EntityContainer Name="PSESModelStoreContainer">
           <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblApprove" EntityType="Self.tblApprove" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblEmployeeOrganization" EntityType="Self.tblEmployeeOrganization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderAdditional" EntityType="Self.tblHeaderAdditional" Schema="dbo" store:Type="Tables" />
@@ -686,6 +732,16 @@
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
             <Parameter Name="EvaStatus" Mode="In" Type="Int32" />
           </FunctionImport>
+          <EntitySet Name="tblApprove" EntityType="PSESModel.tblApprove" />
+          <EntitySet Name="tblEmployeeOrganization" EntityType="PSESModel.tblEmployeeOrganization" />
+          <FunctionImport Name="SP_InsertApproveState">
+            <Parameter Name="EvaID" Mode="In" Type="Int32" />
+            <Parameter Name="Position" Mode="In" Type="String" />
+            <Parameter Name="PositionID" Mode="In" Type="Int32" />
+            <Parameter Name="ProjectCode" Mode="In" Type="String" />
+            <Parameter Name="Role" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -909,7 +965,7 @@
           <Key>
             <PropertyRef Name="EmployeeNo" />
           </Key>
-          <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="TitleNo" Type="Byte" />
           <Property Name="EmployeeFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
           <Property Name="EmployeeLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -1084,6 +1140,42 @@
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
           <Property Type="Int32" Name="PeriodID" Nullable="true" />
         </ComplexType>
+        <EntityType Name="tblApprove">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="EvaID" Type="Int32" />
+          <Property Name="ApproverID" Type="Int32" />
+          <Property Name="ApproveState" Type="Int32" />
+          <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+          <Property Name="PositionID" Type="Int32" />
+          <Property Name="HR" Type="Int32" />
+          <Property Name="GM" Type="Int32" />
+          <Property Name="PM" Type="Int32" />
+          <Property Name="ST" Type="Int32" />
+          <Property Name="ProjectCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblEmployeeOrganization">
+          <Key>
+            <PropertyRef Name="EmployeeNo" />
+            <PropertyRef Name="OrganizationNo" />
+            <PropertyRef Name="PositionNo" />
+          </Key>
+          <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+          <Property Name="OrganizationNo" Type="Int32" Nullable="false" />
+          <Property Name="PositionNo" Type="Int32" Nullable="false" />
+          <Property Name="EmployeeOrganizationRate" Type="Byte" />
+          <Property Name="IsMain" Type="Boolean" />
+          <Property Name="StartEffectiveDate" Type="DateTime" Precision="0" />
+          <Property Name="EndEffectiveDate" Type="DateTime" Precision="0" />
+          <Property Name="EmployeeOrganizationFlag" Type="Boolean" />
+          <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="UpdateDate" Type="DateTime" Precision="0" />
+          <Property Name="PrevEmployeeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1620,6 +1712,43 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationStatus" FunctionName="PSESModel.Store.SP_UpdateEvaluationStatus" />
+          <EntitySetMapping Name="tblApprove">
+            <EntityTypeMapping TypeName="PSESModel.tblApprove">
+              <MappingFragment StoreEntitySet="tblApprove">
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Role" ColumnName="Role" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+                <ScalarProperty Name="ST" ColumnName="ST" />
+                <ScalarProperty Name="PM" ColumnName="PM" />
+                <ScalarProperty Name="GM" ColumnName="GM" />
+                <ScalarProperty Name="HR" ColumnName="HR" />
+                <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+                <ScalarProperty Name="Position" ColumnName="Position" />
+                <ScalarProperty Name="ApproveState" ColumnName="ApproveState" />
+                <ScalarProperty Name="ApproverID" ColumnName="ApproverID" />
+                <ScalarProperty Name="EvaID" ColumnName="EvaID" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblEmployeeOrganization">
+            <EntityTypeMapping TypeName="PSESModel.tblEmployeeOrganization">
+              <MappingFragment StoreEntitySet="tblEmployeeOrganization">
+                <ScalarProperty Name="PrevEmployeeNo" ColumnName="PrevEmployeeNo" />
+                <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+                <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+                <ScalarProperty Name="EmployeeOrganizationFlag" ColumnName="EmployeeOrganizationFlag" />
+                <ScalarProperty Name="EndEffectiveDate" ColumnName="EndEffectiveDate" />
+                <ScalarProperty Name="StartEffectiveDate" ColumnName="StartEffectiveDate" />
+                <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+                <ScalarProperty Name="EmployeeOrganizationRate" ColumnName="EmployeeOrganizationRate" />
+                <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+                <ScalarProperty Name="OrganizationNo" ColumnName="OrganizationNo" />
+                <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertApproveState" FunctionName="PSESModel.Store.SP_InsertApproveState" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

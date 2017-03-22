@@ -73,6 +73,10 @@ public partial class PSESEntities : DbContext
 
     public virtual DbSet<tbllHeaderPosition> tbllHeaderPosition { get; set; }
 
+    public virtual DbSet<tblApprove> tblApprove { get; set; }
+
+    public virtual DbSet<tblEmployeeOrganization> tblEmployeeOrganization { get; set; }
+
 
     public virtual int CreateForm(string empID, string evaluator, Nullable<int> jobID, string projectNO)
     {
@@ -722,6 +726,43 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateEvaluationStatus", evaIDParameter, evaStatusParameter);
+    }
+
+
+    public virtual int SP_InsertApproveState(Nullable<int> evaID, string position, Nullable<int> positionID, string projectCode, string role, string name)
+    {
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        var positionParameter = position != null ?
+            new ObjectParameter("Position", position) :
+            new ObjectParameter("Position", typeof(string));
+
+
+        var positionIDParameter = positionID.HasValue ?
+            new ObjectParameter("PositionID", positionID) :
+            new ObjectParameter("PositionID", typeof(int));
+
+
+        var projectCodeParameter = projectCode != null ?
+            new ObjectParameter("ProjectCode", projectCode) :
+            new ObjectParameter("ProjectCode", typeof(string));
+
+
+        var roleParameter = role != null ?
+            new ObjectParameter("Role", role) :
+            new ObjectParameter("Role", typeof(string));
+
+
+        var nameParameter = name != null ?
+            new ObjectParameter("name", name) :
+            new ObjectParameter("name", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertApproveState", evaIDParameter, positionParameter, positionIDParameter, projectCodeParameter, roleParameter, nameParameter);
     }
 
 }

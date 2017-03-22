@@ -221,6 +221,16 @@
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
       <Parameter Name="EvaStatus" Mode="In" Type="Int32" />
     </FunctionImport>
+    <EntitySet Name="tblApprove" EntityType="PSESModel.tblApprove" />
+    <EntitySet Name="tblEmployeeOrganization" EntityType="PSESModel.tblEmployeeOrganization" />
+    <FunctionImport Name="SP_InsertApproveState">
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
+      <Parameter Name="Position" Mode="In" Type="String" />
+      <Parameter Name="PositionID" Mode="In" Type="Int32" />
+      <Parameter Name="ProjectCode" Mode="In" Type="String" />
+      <Parameter Name="Role" Mode="In" Type="String" />
+      <Parameter Name="name" Mode="In" Type="String" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -444,7 +454,7 @@
     <Key>
       <PropertyRef Name="EmployeeNo" />
     </Key>
-    <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="TitleNo" Type="Byte" />
     <Property Name="EmployeeFirstName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
     <Property Name="EmployeeLastName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
@@ -619,4 +629,40 @@
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
     <Property Type="Int32" Name="PeriodID" Nullable="true" />
   </ComplexType>
+  <EntityType Name="tblApprove">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" />
+    <Property Name="EvaID" Type="Int32" />
+    <Property Name="ApproverID" Type="Int32" />
+    <Property Name="ApproveState" Type="Int32" />
+    <Property Name="Position" Type="String" MaxLength="30" FixedLength="false" Unicode="false" />
+    <Property Name="PositionID" Type="Int32" />
+    <Property Name="HR" Type="Int32" />
+    <Property Name="GM" Type="Int32" />
+    <Property Name="PM" Type="Int32" />
+    <Property Name="ST" Type="Int32" />
+    <Property Name="ProjectCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+    <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="tblEmployeeOrganization">
+    <Key>
+      <PropertyRef Name="EmployeeNo" />
+      <PropertyRef Name="OrganizationNo" />
+      <PropertyRef Name="PositionNo" />
+    </Key>
+    <Property Name="EmployeeNo" Type="String" Nullable="false" MaxLength="10" FixedLength="true" Unicode="false" />
+    <Property Name="OrganizationNo" Type="Int32" Nullable="false" />
+    <Property Name="PositionNo" Type="Int32" Nullable="false" />
+    <Property Name="EmployeeOrganizationRate" Type="Byte" />
+    <Property Name="IsMain" Type="Boolean" />
+    <Property Name="StartEffectiveDate" Type="DateTime" Precision="0" />
+    <Property Name="EndEffectiveDate" Type="DateTime" Precision="0" />
+    <Property Name="EmployeeOrganizationFlag" Type="Boolean" />
+    <Property Name="UpdateUser" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
+    <Property Name="UpdateDate" Type="DateTime" Precision="0" />
+    <Property Name="PrevEmployeeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
+  </EntityType>
 </Schema>
