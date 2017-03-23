@@ -283,6 +283,7 @@ namespace PESproj.Controllers
                             List<tblEvaluation> eva2 = eva.Where(a => a.ProjectNO == curr.ProjectID).ToList();
                             foreach(tblEvaluation ev3 in eva2)
                             {
+                                if(ev3.EvaStatus == 1)
                                 if ((App.Count==0 || App.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count == 0)&& ListApp.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count==1)
                                 {
                                     app.Add(ListApp.Where(a => a.EvaID == ev3.Eva_ID).FirstOrDefault());

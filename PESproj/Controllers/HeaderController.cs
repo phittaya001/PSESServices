@@ -76,19 +76,19 @@ namespace PESproj.Controllers
             int a1 = GetHeader.Where(a => a.Eva_ID == EvaID).ToList().Count;
             int a2 = GetHeader.Where(a => a.Score_ID > 0).Where(a => a.Eva_ID == EvaID).ToList().Count;
             if (a2 < sum)
-            //    foreach (tblHeaderJob tmpHJ in hj)
-            //{
-            //    foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmpHJ.H1_ID))
-            //    {
-                    
-            //            foreach (tblHeader hd3 in FinalHeader(hd2, hd))
-            //        {
-            //            if (sc.Where(a => a.Eva_ID == EvaID && a.H3_ID == hd3.H_ID).ToList().Count==0)
-            //                if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
-            //                Ans.Add(hd3);
-            //        }
-            //    }
-            //}
+                foreach (tblHeaderJob tmpHJ in hj)
+                {
+                    foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmpHJ.H1_ID))
+                    {
+
+                        foreach (tblHeader hd3 in FinalHeader(hd2, hd))
+                        {
+                            if (sc.Where(a => a.Eva_ID == EvaID && a.H3_ID == hd3.H_ID).ToList().Count == 0)
+                                if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
+                                    Ans.Add(hd3);
+                        }
+                    }
+                }
             foreach (tblHeader h in Ans)
             {
                 header2.InsertSCORE(EvaID, h.H_ID);
@@ -114,6 +114,12 @@ namespace PESproj.Controllers
                     newHeader.H_ID = (-1) * HdATemp.H_ID;
                     newHeader.PositionNO = PositionID;
                     newHeader.point = HdATemp.point;
+                    //if (HdATemp.point ==null && HdATemp.point != 0)
+                    //{
+                    //    header.UpdateScoreData(EvaID, 0, (-1)*HdATemp.H_ID);
+                    //    newHeader.point = 0;
+                    //}
+                    
                     GetHeader.Add(newHeader);
                 }
                 else if(ID == 1)
