@@ -278,7 +278,7 @@ namespace PESproj.Controllers
                     List<tblApprove> App = new List<tblApprove>();
                     foreach(tblProjectMember curr in me)
                     {
-                        if(curr.Part2ID == 30)
+                        if(curr.Part2ID == 30 && curr.StaffID != EmpID)
                         {
                             List<tblEvaluation> eva2 = eva.Where(a => a.ProjectNO == curr.ProjectID).ToList();
                             foreach(tblEvaluation ev3 in eva2)
@@ -292,7 +292,7 @@ namespace PESproj.Controllers
                            
                         }
                     }
-                    return app;
+                    //return app;
 
                 }
                 
@@ -310,5 +310,46 @@ namespace PESproj.Controllers
            
         }
 
+        [Route("ApproveStatus")]
+        [HttpPut]
+        void ApproveState([FromBody]JObject Data)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            List<tblEmployee> ListEmp = header.getEmployees();
+            tblEmployee em = ListEmp.Where(a => a.EmployeeNo.Replace(" ", "") == Data["EmpID"].ToString()).FirstOrDefault();
+            tblApprove App = header.GetAllApprove().Where(a => a.EvaID == Convert.ToInt32(Data["EvaID"].ToString())).FirstOrDefault();
+            tblEvaluation eva = header.GetAllEvaluation().Where(a => a.Eva_ID == Convert.ToInt32(Data["EvaID"].ToString())).FirstOrDefault();
+            tblProjectMember pm = new tblProjectMember();
+            if (eva!=null)
+            pm = header.getProjectMember().Where(a => a.ProjectID == eva.ProjectNO).FirstOrDefault();
+
+            if (em != null)
+            {
+                if (em.PositionNo == 23)
+                {
+                    App.HR = 1;
+                    header.UpdateApproveData(App);
+                }
+                else if(pm!=null)
+                {
+                    if (pm.Part2ID == 30)
+                    {
+                        App.PM = 1;
+                    }
+                    else
+                    {
+                        App.ST = 1;
+                    }
+                    
+                    header.UpdateApproveData(App);
+                }
+                else
+                {
+                    App.GM = 1;
+                    header.UpdateApproveData(App);
+                }
+                
+            }
+        }
     }
 }

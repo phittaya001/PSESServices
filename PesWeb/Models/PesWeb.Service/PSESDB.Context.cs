@@ -765,6 +765,43 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertApproveState", evaIDParameter, positionParameter, positionIDParameter, projectCodeParameter, roleParameter, nameParameter);
     }
 
+
+    public virtual int SP_UpdateApprove(Nullable<int> value, Nullable<int> appID, Nullable<int> hR, Nullable<int> gM, Nullable<int> pM, Nullable<int> sT)
+    {
+
+        var valueParameter = value.HasValue ?
+            new ObjectParameter("value", value) :
+            new ObjectParameter("value", typeof(int));
+
+
+        var appIDParameter = appID.HasValue ?
+            new ObjectParameter("AppID", appID) :
+            new ObjectParameter("AppID", typeof(int));
+
+
+        var hRParameter = hR.HasValue ?
+            new ObjectParameter("HR", hR) :
+            new ObjectParameter("HR", typeof(int));
+
+
+        var gMParameter = gM.HasValue ?
+            new ObjectParameter("GM", gM) :
+            new ObjectParameter("GM", typeof(int));
+
+
+        var pMParameter = pM.HasValue ?
+            new ObjectParameter("PM", pM) :
+            new ObjectParameter("PM", typeof(int));
+
+
+        var sTParameter = sT.HasValue ?
+            new ObjectParameter("ST", sT) :
+            new ObjectParameter("ST", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateApprove", valueParameter, appIDParameter, hRParameter, gMParameter, pMParameter, sTParameter);
+    }
+
 }
 
 }

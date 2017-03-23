@@ -231,6 +231,14 @@
       <Parameter Name="Role" Mode="In" Type="String" />
       <Parameter Name="name" Mode="In" Type="String" />
     </FunctionImport>
+    <FunctionImport Name="SP_UpdateApprove">
+      <Parameter Name="value" Mode="In" Type="Int32" />
+      <Parameter Name="AppID" Mode="In" Type="Int32" />
+      <Parameter Name="HR" Mode="In" Type="Int32" />
+      <Parameter Name="GM" Mode="In" Type="Int32" />
+      <Parameter Name="PM" Mode="In" Type="Int32" />
+      <Parameter Name="ST" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />

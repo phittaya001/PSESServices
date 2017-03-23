@@ -14,7 +14,7 @@
     <Key>
       <PropertyRef Name="ID" />
     </Key>
-    <Property Name="ID" Type="int" Nullable="false" />
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="EvaID" Type="int" />
     <Property Name="ApproverID" Type="int" />
     <Property Name="ApproveState" Type="int" />
@@ -463,6 +463,14 @@
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="point" Type="int" Mode="In" />
     <Parameter Name="H_ID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_UpdateApprove" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="value" Type="int" Mode="In" />
+    <Parameter Name="AppID" Type="int" Mode="In" />
+    <Parameter Name="HR" Type="int" Mode="In" />
+    <Parameter Name="GM" Type="int" Mode="In" />
+    <Parameter Name="PM" Type="int" Mode="In" />
+    <Parameter Name="ST" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_UpdateData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />

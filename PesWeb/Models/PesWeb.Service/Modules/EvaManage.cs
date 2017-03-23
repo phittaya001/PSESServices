@@ -132,5 +132,21 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblEmployeeOrganization.ToList();
         }
+        public List<tblApprove> getApprove()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblApprove.ToList();
+        }
+        public void UpdateApproveData(tblApprove ap)
+        {
+            PSESEntities db = new PSESEntities();
+            // tblApprove tmp = GetAllApprove().Where(a => a.ID == ap.ID).FirstOrDefault();
+            int number = 0;
+            if (ap.GM + ap.HR + ap.PM + ap.ST == 4)
+            {
+                number = 1;   
+            }
+            db.SP_UpdateApprove(number, ap.ID, ap.HR, ap.GM, ap.PM, ap.ST);
+        }
     }
 }

@@ -568,5 +568,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_InsertApproveState" FunctionName="PSESModel.Store.SP_InsertApproveState" />
+    <FunctionImportMapping FunctionImportName="SP_UpdateApprove" FunctionName="PSESModel.Store.SP_UpdateApprove" />
   </EntityContainerMapping>
 </Mapping>
