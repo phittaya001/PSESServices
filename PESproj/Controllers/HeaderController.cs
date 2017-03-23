@@ -130,8 +130,8 @@ namespace PESproj.Controllers
             }
             int j = 1;
             List<SP_GetHeaderByPosition_Result> H_new = new List<SP_GetHeaderByPosition_Result>();
-
-            foreach (SP_GetHeaderByPosition_Result a in GetHeader.Where(a => a.H_ID > 0).OrderBy(a => a.H_ID))
+            List<SP_GetHeaderByPosition_Result> hder = GetHeader.Where(a => a.H_ID > 0).OrderBy(a => a.H_ID).ToList();
+            foreach (SP_GetHeaderByPosition_Result a in hder )
             {
                 if (a.Parent == 0)
                 {

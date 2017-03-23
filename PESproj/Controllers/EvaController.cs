@@ -63,6 +63,7 @@ namespace PESproj.Controllers
                 return ListResult;
             }
             List<tblHeader> Result = new List<tblHeader>();
+            Result.Add(parent);
             foreach (tblHeader res in ListAll.Where(a => a.Parent == parent.H_ID).ToList())
             {
                 foreach (tblHeader a in FinalHeader(res, ListAll))
