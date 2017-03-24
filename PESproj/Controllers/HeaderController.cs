@@ -462,7 +462,7 @@ namespace PESproj.Controllers
             int EvaID = 0;
             foreach(JObject jo in Data)
             {
-                if (jo["Score"].ToString() == "N/A"){
+                if (jo.Count>2 && jo["Score"].ToString() == "N/A"){
                     header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), 0, Convert.ToInt32(jo["Id"].ToString()));
                 }
                 else
@@ -472,32 +472,41 @@ namespace PESproj.Controllers
                 EvaID = Convert.ToInt32(jo["EvaId"].ToString());
             }
             int sum = 0, sum2 = 0;
-            List<tblScore> score = header2.GetAllScore().Where(a => a.Eva_ID == EvaID).ToList();
+            List<tblHeaderAdditional> hAd = header.getHeaderAdditional().ToList();
+            List<tblScore> score = header2.GetAllScore().Where(a => a.Eva_ID == EvaID).OrderBy(a=>a.H3_ID).ToList();
             List<tblHeader> hd = header.GetAllHeader().ToList();
-            foreach (tblScore sc in score)
+            tblEvaluation eva = header2.GetAllEvaluation().Where(a => a.Eva_ID == EvaID).FirstOrDefault();
+            List<tblHeaderJob> hj = header.getAllHeaderJob().Where(a => a.PositionNo == eva.Job_ID).ToList();
+            foreach(tblHeaderJob th in hj)
             {
-                tblHeader HdScore = hd.Where(a => a.H_ID == sc.H3_ID && a.Parent == 0).FirstOrDefault();
-                if(HdScore != null)
+                if(hd.Where(a=>a.H_ID == th.H1_ID).ToList().Count > 0)
                 {
-                    List<tblHeader> hdTemp = hd.Where(a => a.Parent == HdScore.H_ID).ToList();
-                    foreach(tblHeader h2 in hdTemp)
+                    List<tblHeader> H1 = hd.Where(a => a.Parent == th.H1_ID).ToList();
+                    foreach (tblHeader th2 in H1)
                     {
-                        List<tblHeader> hdTemp2 = hd.Where(a => a.Parent == h2.H_ID).ToList();
-                        foreach(tblHeader h3 in hdTemp2)
+                        List<tblHeader> H2 = hd.Where(a => a.Parent == th2.H_ID).ToList();
+                        foreach (tblHeader th3 in H2)
                         {
-                            sum += (int)score.Where(a => a.H3_ID == h3.H_ID).FirstOrDefault().point;
+
+                            sum += (int)score.Where(a => a.H3_ID == th3.H_ID).FirstOrDefault().point;
                         }
-                        sum = sum / hdTemp2.Count;
-                        sum2 += sum;
+                        List<tblHeaderAdditional> Hd1 = hAd.Where(a => a.parent == th2.H_ID).ToList();
+                        foreach (tblHeaderAdditional thA in Hd1)
+                        {
+                            sum += (int)thA.point;
+                        }
+
+                        header.UpdateScoreData(EvaID, sum / H2.Count, th2.H_ID);
+                        sum2 += sum / H2.Count;
                         sum = 0;
-                        header.UpdateScoreData(EvaID, sum, h2.H_ID);
                     }
-                    sum2 = sum2 / hdTemp.Count;
-                    header.UpdateScoreData(EvaID, sum2, HdScore.H_ID);
+                    header.UpdateScoreData(EvaID, sum2 / H1.Count, (int)th.H1_ID);
                     sum2 = 0;
                 }
                 
             }
+                
+            
 
 
 

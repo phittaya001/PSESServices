@@ -141,10 +141,10 @@ namespace PesWeb.Service.Modules
         {
             PSESEntities db = new PSESEntities();
             // tblApprove tmp = GetAllApprove().Where(a => a.ID == ap.ID).FirstOrDefault();
-            int number = 0;
+            int number = 1;
             if (ap.GM + ap.HR + ap.PM + ap.ST == 4)
             {
-                number = 1;   
+                number = 0;   
             }
             db.SP_UpdateApprove(number, ap.ID, ap.HR, ap.GM, ap.PM, ap.ST);
         }

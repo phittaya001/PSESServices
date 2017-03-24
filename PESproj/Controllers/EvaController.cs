@@ -279,15 +279,15 @@ namespace PESproj.Controllers
                     List<tblApprove> App = new List<tblApprove>();
                     foreach(tblProjectMember curr in me)
                     {
-                        if(curr.Part2ID == 30 && curr.StaffID != EmpID)
+                        if(curr.Part2ID == 30)
                         {
                             List<tblEvaluation> eva2 = eva.Where(a => a.ProjectNO == curr.ProjectID).ToList();
                             foreach(tblEvaluation ev3 in eva2)
                             {
-                                if(ev3.EvaStatus == 1)
+                                if(ev3.EvaStatus == 1 && ev3.EmployeeNO!=EmpID)
                                 if ((App.Count==0 || App.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count == 0)&& ListApp.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count==1)
                                 {
-                                    app.Add(ListApp.Where(a => a.EvaID == ev3.Eva_ID).FirstOrDefault());
+                                    app.Add(ListApp.Where(a => a.EvaID == ev3.Eva_ID).OrderByDescending(a=>a.ID).FirstOrDefault());
                                 }
                             }
                            
@@ -313,16 +313,16 @@ namespace PESproj.Controllers
 
         [Route("ApproveStatus")]
         [HttpPut]
-        void ApproveState([FromBody]JObject Data)
+        public void ApproveState([FromBody]JObject Data)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<tblEmployee> ListEmp = header.getEmployees();
             tblEmployee em = ListEmp.Where(a => a.EmployeeNo.Replace(" ", "") == Data["EmpID"].ToString()).FirstOrDefault();
-            tblApprove App = header.GetAllApprove().Where(a => a.EvaID == Convert.ToInt32(Data["EvaID"].ToString())).FirstOrDefault();
+            tblApprove App = header.GetAllApprove().Where(a => a.EvaID == Convert.ToInt32(Data["EvaID"].ToString())).OrderByDescending(a=>a.ID).FirstOrDefault();
             tblEvaluation eva = header.GetAllEvaluation().Where(a => a.Eva_ID == Convert.ToInt32(Data["EvaID"].ToString())).FirstOrDefault();
             tblProjectMember pm = new tblProjectMember();
             if (eva!=null)
-            pm = header.getProjectMember().Where(a => a.ProjectID == eva.ProjectNO).FirstOrDefault();
+            pm = header.getProjectMember().Where(a => a.ProjectID == eva.ProjectNO && a.StaffID == Data["EmpID"].ToString()).FirstOrDefault();
 
             if (em != null)
             {
