@@ -261,14 +261,14 @@ namespace PESproj.Controllers
                     List<tblApprove> appData = new List<tblApprove>();
                     foreach (tblEmployeeOrganization tmp in ListEmO)
                     {
-                        List<tblEvaluation> evaTemp = eva.Where(a => a.EmployeeNO == tmp.EmployeeNo && a.EvaStatus == 1).ToList();
+                        List<tblEvaluation> evaTemp = eva.Where(a => a.EmployeeNO.Replace(" ", "") == tmp.EmployeeNo.Replace(" ","") && a.EvaStatus == 1).ToList();
                         foreach(tblEvaluation ev in evaTemp)
                         {
                             if(appData.Where(a => a.EvaID == ev.Eva_ID).ToList().Count==0)
                             app.Add(ListApp.Where(a => a.EvaID == ev.Eva_ID).FirstOrDefault());
                         }
                     }
-                    return appData.Where(a=>a.PM==1).Where(a => a.ST + a.PM + a.HR + a.GM == 2).ToList();
+                    return app.Where(a=>a.PM==1).Where(a => a.ST + a.PM + a.HR + a.GM == 2).ToList();
                 }
                 if (true) { 
                     List<tblProjectMember> ListPm = header.getProjectMember();
