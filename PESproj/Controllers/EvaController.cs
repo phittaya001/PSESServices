@@ -246,21 +246,20 @@ namespace PESproj.Controllers
             tblEmployee em = ListEmp.Where(a => a.EmployeeNo.Replace(" ","") == EmpID).FirstOrDefault();
             List<tblApprove> ListApp = header.GetAllApprove().Where(a => a.ApproveState == 1).ToList();
             List<tblApprove> app = new List<tblApprove>();
-
             if (em != null)
             {
                 if (em.PositionNo == 23)
                 {
-                    return ListApp;
+                    return ListApp.Where(a=>a.GM==1).Where(a => a.ST + a.PM + a.HR + a.GM == 3).ToList();
                 }
                 if(em.PositionNo == 21)
                 {
                     List<tblEmployeeOrganization> ListEmO = header.getEmployeeOrganization().Where(a => a.OrganizationNo == em.OrganizationNo && a.OrganizationNo != 21).ToList();
                     List<tblEvaluation> eva = header.GetAllEvaluation();
                     List<tblEvaluation> data = new List<tblEvaluation>();
+
                     List<tblApprove> appData = new List<tblApprove>();
-                    
-                    foreach(tblEmployeeOrganization tmp in ListEmO)
+                    foreach (tblEmployeeOrganization tmp in ListEmO)
                     {
                         List<tblEvaluation> evaTemp = eva.Where(a => a.EmployeeNO == tmp.EmployeeNo && a.EvaStatus == 1).ToList();
                         foreach(tblEvaluation ev in evaTemp)
@@ -269,7 +268,7 @@ namespace PESproj.Controllers
                             app.Add(ListApp.Where(a => a.EvaID == ev.Eva_ID).FirstOrDefault());
                         }
                     }
-                    return appData;
+                    return appData.Where(a=>a.PM==1).Where(a => a.ST + a.PM + a.HR + a.GM == 2).ToList();
                 }
                 if (true) { 
                     List<tblProjectMember> ListPm = header.getProjectMember();
@@ -293,18 +292,24 @@ namespace PESproj.Controllers
                            
                         }
                     }
+                    if (app.Where(a => a.ST == 1).ToList().Count > 0)
+                    {
+                        return app.Where(a => a.ST == 1).Where(a => a.ST + a.PM + a.HR + a.GM == 1).ToList();
+                    }
                     //return app;
 
                 }
                 
                 {
                     List<tblEvaluation> eva = header.GetAllEvaluation().Where(a => a.EmployeeNO == EmpID).ToList();
-                    
+                    List<tblApprove> appData = new List<tblApprove>();
                     foreach (tblEvaluation e in eva)
                     {
-                        app.Add(ListApp.Where(a => a.EvaID == e.Eva_ID).FirstOrDefault());
+                        
+                        appData.Add(ListApp.Where(a => a.EvaID == e.Eva_ID).FirstOrDefault());
                     }
-                    return app;
+                    
+                    return appData.Where(a=>a.ST+a.PM+a.HR+a.GM==0).ToList();
                 }
             }
             return null;
@@ -323,17 +328,18 @@ namespace PESproj.Controllers
             tblProjectMember pm = new tblProjectMember();
             if (eva!=null)
             pm = header.getProjectMember().Where(a => a.ProjectID == eva.ProjectNO && a.StaffID == Data["EmpID"].ToString()).FirstOrDefault();
+            
 
             if (em != null)
             {
-                if (em.PositionNo == 23)
+                if (em.PositionNo == 23 && App.GM == 1)
                 {
                     App.HR = 1;
                     header.UpdateApproveData(App);
                 }
-                else if(pm!=null)
+                else if( pm!=null)
                 {
-                    if (pm.Part2ID == 30)
+                    if (App.ST == 1 && pm.Part2ID == 30)
                     {
                         App.PM = 1;
                     }
@@ -344,7 +350,7 @@ namespace PESproj.Controllers
                     
                     header.UpdateApproveData(App);
                 }
-                else
+                else if(App.PM == 1)
                 {
                     App.GM = 1;
                     header.UpdateApproveData(App);
