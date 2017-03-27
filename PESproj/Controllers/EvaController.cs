@@ -264,8 +264,8 @@ namespace PESproj.Controllers
                         List<tblEvaluation> evaTemp = eva.Where(a => a.EmployeeNO.Replace(" ", "") == tmp.EmployeeNo.Replace(" ","") && a.EvaStatus == 1).ToList();
                         foreach(tblEvaluation ev in evaTemp)
                         {
-                            if(appData.Where(a => a.EvaID == ev.Eva_ID).ToList().Count==0)
-                            app.Add(ListApp.Where(a => a.EvaID == ev.Eva_ID).FirstOrDefault());
+                            if (ListApp.Where(a => a.EvaID == ev.Eva_ID).ToList().Count > 0)
+                                app.Add(ListApp.Where(a => a.EvaID == ev.Eva_ID).FirstOrDefault());
                         }
                     }
                     return app.Where(a=>a.PM==1).Where(a => a.ST + a.PM + a.HR + a.GM == 2).ToList();
@@ -286,14 +286,16 @@ namespace PESproj.Controllers
                                 if(ev3.EvaStatus == 1 && ev3.EmployeeNO!=EmpID)
                                 if ((App.Count==0 || App.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count == 0)&& ListApp.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count==1)
                                 {
-                                    app.Add(ListApp.Where(a => a.EvaID == ev3.Eva_ID).OrderByDescending(a=>a.ID).FirstOrDefault());
+                                        if (ListApp.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count > 0)
+                                            app.Add(ListApp.Where(a => a.EvaID == ev3.Eva_ID).OrderByDescending(a=>a.ID).FirstOrDefault());
                                 }
                             }
                            
                         }
                     }
-                    if (app.Where(a => a.ST == 1).ToList().Count > 0)
+                    if (app.Count>0 && app.Where(a => a.ST == 1).ToList().Count > 0)
                     {
+
                         return app.Where(a => a.ST == 1).Where(a => a.ST + a.PM + a.HR + a.GM == 1).ToList();
                     }
                     //return app;
@@ -305,11 +307,11 @@ namespace PESproj.Controllers
                     List<tblApprove> appData = new List<tblApprove>();
                     foreach (tblEvaluation e in eva)
                     {
-                        
+                        if(ListApp.Where(a => a.EvaID == e.Eva_ID).ToList().Count>0)
                         appData.Add(ListApp.Where(a => a.EvaID == e.Eva_ID).FirstOrDefault());
                     }
-                    
-                    return appData.Where(a=>a.ST+a.PM+a.HR+a.GM==0).ToList();
+                    if(appData.Count > 0)
+                    return appData.Where(a=>a.ST+a.PM+a.HR+a.GM==0 && a.ApproveState==1).ToList();
                 }
             }
             return null;
