@@ -109,6 +109,7 @@
     <Property Name="point" Type="int" />
     <Property Name="Part2ID" Type="int" />
     <Property Name="H_status" Type="int" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="tblHeaderBot">
     <Key>
@@ -463,6 +464,7 @@
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="point" Type="int" Mode="In" />
     <Parameter Name="H_ID" Type="int" Mode="In" />
+    <Parameter Name="comment" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SP_UpdateApprove" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="value" Type="int" Mode="In" />
@@ -476,6 +478,7 @@
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="point" Type="int" Mode="In" />
     <Parameter Name="H_ID" Type="int" Mode="In" />
+    <Parameter Name="comment" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SP_UpdateEvaluationStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />

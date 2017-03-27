@@ -469,6 +469,7 @@
           <Parameter Name="EvaID" Type="int" Mode="In" />
           <Parameter Name="point" Type="int" Mode="In" />
           <Parameter Name="H_ID" Type="int" Mode="In" />
+          <Parameter Name="comment" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_UpdateApprove" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="value" Type="int" Mode="In" />
@@ -692,10 +693,6 @@
           <FunctionImport Name="SP_GetEvaDataByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaDataByEvaID_Result)">
           <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
-            <Parameter Name="PositionNO" Mode="In" Type="Int32" />
-            <Parameter Name="EvaID" Mode="In" Type="Int32" />
-          </FunctionImport>
           <EntitySet Name="tblHeaderAdditional" EntityType="PSESModel.tblHeaderAdditional" />
           <FunctionImport Name="SP_InsertAdditionalHeader">
             <Parameter Name="parent" Mode="In" Type="Int32" />
@@ -716,6 +713,7 @@
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
             <Parameter Name="point" Mode="In" Type="Int32" />
             <Parameter Name="H_ID" Mode="In" Type="Int32" />
+            <Parameter Name="comment" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_InsertHeader" ReturnType="Collection(PSESModel.SP_InsertHeader_Result)">
             <Parameter Name="parent" Mode="In" Type="Int32" />
@@ -760,6 +758,10 @@
             <Parameter Name="GM" Mode="In" Type="Int32" />
             <Parameter Name="PM" Mode="In" Type="Int32" />
             <Parameter Name="ST" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
+            <Parameter Name="PositionNO" Mode="In" Type="Int32" />
+            <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -1099,18 +1101,6 @@
           <Property Type="String" Name="EvaluatorLastName" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="SP_GetHeaderByPosition_Result">
-          <Property Type="Int32" Name="PositionNO" Nullable="true" />
-          <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
-          <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
-          <Property Type="Int32" Name="Parent" Nullable="true" />
-          <Property Type="String" Name="Alias" Nullable="true" MaxLength="5" />
-          <Property Type="Int32" Name="H_Level" Nullable="true" />
-          <Property Type="Int32" Name="Score_ID" Nullable="true" />
-          <Property Type="Int32" Name="H_ID" Nullable="true" />
-          <Property Type="Int32" Name="point" Nullable="true" />
-          <Property Type="Int32" Name="Eva_ID" Nullable="true" />
-        </ComplexType>
         <EntityType Name="tblHeaderAdditional">
           <Key>
             <PropertyRef Name="H_ID" />
@@ -1196,6 +1186,19 @@
           <Property Name="UpdateDate" Type="DateTime" Precision="0" />
           <Property Name="PrevEmployeeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
         </EntityType>
+        <ComplexType Name="SP_GetHeaderByPosition_Result">
+          <Property Type="Int32" Name="PositionNO" Nullable="true" />
+          <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+          <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="Parent" Nullable="true" />
+          <Property Type="String" Name="Alias" Nullable="true" MaxLength="5" />
+          <Property Type="Int32" Name="H_Level" Nullable="true" />
+          <Property Type="Int32" Name="Score_ID" Nullable="true" />
+          <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+          <Property Type="Int32" Name="H_ID" Nullable="false" />
+          <Property Type="Int32" Name="point" Nullable="true" />
+          <Property Type="Int32" Name="Eva_ID" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1654,22 +1657,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
-                <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
-                <ScalarProperty Name="Text" ColumnName="Text" />
-                <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
-                <ScalarProperty Name="Parent" ColumnName="Parent" />
-                <ScalarProperty Name="Alias" ColumnName="Alias" />
-                <ScalarProperty Name="H_Level" ColumnName="H_Level" />
-                <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
-                <ScalarProperty Name="H_ID" ColumnName="H_ID" />
-                <ScalarProperty Name="point" ColumnName="point" />
-                <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <EntitySetMapping Name="tblHeaderAdditional">
             <EntityTypeMapping TypeName="PSESModel.tblHeaderAdditional">
               <MappingFragment StoreEntitySet="tblHeaderAdditional">
@@ -1771,6 +1758,23 @@
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_InsertApproveState" FunctionName="PSESModel.Store.SP_InsertApproveState" />
           <FunctionImportMapping FunctionImportName="SP_UpdateApprove" FunctionName="PSESModel.Store.SP_UpdateApprove" />
+          <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
+                <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
+                <ScalarProperty Name="Text" ColumnName="Text" />
+                <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+                <ScalarProperty Name="Parent" ColumnName="Parent" />
+                <ScalarProperty Name="Alias" ColumnName="Alias" />
+                <ScalarProperty Name="H_Level" ColumnName="H_Level" />
+                <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+                <ScalarProperty Name="point" ColumnName="point" />
+                <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

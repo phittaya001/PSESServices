@@ -519,23 +519,6 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_GetHeaderByPosition_Result> SP_GetHeaderByPosition(Nullable<int> positionNO, Nullable<int> evaID)
-    {
-
-        var positionNOParameter = positionNO.HasValue ?
-            new ObjectParameter("PositionNO", positionNO) :
-            new ObjectParameter("PositionNO", typeof(int));
-
-
-        var evaIDParameter = evaID.HasValue ?
-            new ObjectParameter("EvaID", evaID) :
-            new ObjectParameter("EvaID", typeof(int));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHeaderByPosition_Result>("SP_GetHeaderByPosition", positionNOParameter, evaIDParameter);
-    }
-
-
     public virtual int SP_InsertAdditionalHeader(Nullable<int> parent, string text, string text_Eng, Nullable<int> evaID, string alias, Nullable<int> h_Level, Nullable<int> positionNo)
     {
 
@@ -605,7 +588,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual int SP_UpdateAdditional(Nullable<int> evaID, Nullable<int> point, Nullable<int> h_ID)
+    public virtual int SP_UpdateAdditional(Nullable<int> evaID, Nullable<int> point, Nullable<int> h_ID, string comment)
     {
 
         var evaIDParameter = evaID.HasValue ?
@@ -623,7 +606,12 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("H_ID", typeof(int));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateAdditional", evaIDParameter, pointParameter, h_IDParameter);
+        var commentParameter = comment != null ?
+            new ObjectParameter("comment", comment) :
+            new ObjectParameter("comment", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateAdditional", evaIDParameter, pointParameter, h_IDParameter, commentParameter);
     }
 
 
@@ -805,6 +793,23 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateApprove", valueParameter, appIDParameter, hRParameter, gMParameter, pMParameter, sTParameter);
+    }
+
+
+    public virtual ObjectResult<SP_GetHeaderByPosition_Result> SP_GetHeaderByPosition(Nullable<int> positionNO, Nullable<int> evaID)
+    {
+
+        var positionNOParameter = positionNO.HasValue ?
+            new ObjectParameter("PositionNO", positionNO) :
+            new ObjectParameter("PositionNO", typeof(int));
+
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHeaderByPosition_Result>("SP_GetHeaderByPosition", positionNOParameter, evaIDParameter);
     }
 
 }

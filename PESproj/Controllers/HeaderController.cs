@@ -462,8 +462,8 @@ namespace PESproj.Controllers
             int EvaID = 0;
             foreach(JObject jo in Data)
             {
-                if (jo.Count>2 && jo["Score"].ToString() == "N/A"){
-                    header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), 0, Convert.ToInt32(jo["Id"].ToString()),string.IsNullOrEmpty(jo["Comment"].ToString())? "": jo["Comment"].ToString());
+                if (jo.Count>3){
+                    header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), 0, Convert.ToInt32(jo["Id"].ToString()),jo["Comment"].ToString());
                 }
                 else
                 {

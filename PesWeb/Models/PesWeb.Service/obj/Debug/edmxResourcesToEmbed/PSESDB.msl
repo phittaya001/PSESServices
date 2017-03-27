@@ -453,25 +453,10 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
-          <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
-          <ScalarProperty Name="Parent" ColumnName="Parent" />
-          <ScalarProperty Name="Alias" ColumnName="Alias" />
-          <ScalarProperty Name="H_Level" ColumnName="H_Level" />
-          <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
-          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
-          <ScalarProperty Name="point" ColumnName="point" />
-          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <EntitySetMapping Name="tblHeaderAdditional">
       <EntityTypeMapping TypeName="PSESModel.tblHeaderAdditional">
         <MappingFragment StoreEntitySet="tblHeaderAdditional">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="H_status" ColumnName="H_status" />
           <ScalarProperty Name="Part2ID" ColumnName="Part2ID" />
           <ScalarProperty Name="point" ColumnName="point" />
@@ -569,5 +554,22 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_InsertApproveState" FunctionName="PSESModel.Store.SP_InsertApproveState" />
     <FunctionImportMapping FunctionImportName="SP_UpdateApprove" FunctionName="PSESModel.Store.SP_UpdateApprove" />
+    <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
+          <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="H_Level" ColumnName="H_Level" />
+          <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+          <ScalarProperty Name="point" ColumnName="point" />
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

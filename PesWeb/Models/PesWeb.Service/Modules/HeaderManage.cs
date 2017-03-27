@@ -128,7 +128,7 @@ namespace PesWeb.Service.Modules
             }
             else
             {
-                db.SP_UpdateAdditional(EvaID, point, (-1)*H_ID);
+                db.SP_UpdateAdditional(EvaID, point, (-1)*H_ID,comment);
             }
             
         }  

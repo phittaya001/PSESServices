@@ -31,7 +31,9 @@ public partial class SP_GetHeaderByPosition_Result
 
     public Nullable<int> Score_ID { get; set; }
 
-    public Nullable<int> H_ID { get; set; }
+    public string Comment { get; set; }
+
+    public int H_ID { get; set; }
 
     public Nullable<int> point { get; set; }
 

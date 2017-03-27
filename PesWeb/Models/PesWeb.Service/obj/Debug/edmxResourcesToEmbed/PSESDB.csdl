@@ -171,10 +171,6 @@
     <FunctionImport Name="SP_GetEvaDataByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaDataByEvaID_Result)">
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
-      <Parameter Name="PositionNO" Mode="In" Type="Int32" />
-      <Parameter Name="EvaID" Mode="In" Type="Int32" />
-    </FunctionImport>
     <EntitySet Name="tblHeaderAdditional" EntityType="PSESModel.tblHeaderAdditional" />
     <FunctionImport Name="SP_InsertAdditionalHeader">
       <Parameter Name="parent" Mode="In" Type="Int32" />
@@ -189,11 +185,13 @@
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
       <Parameter Name="point" Mode="In" Type="Int32" />
       <Parameter Name="H_ID" Mode="In" Type="Int32" />
+      <Parameter Name="comment" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_UpdateAdditional">
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
       <Parameter Name="point" Mode="In" Type="Int32" />
       <Parameter Name="H_ID" Mode="In" Type="Int32" />
+      <Parameter Name="comment" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_InsertHeader" ReturnType="Collection(PSESModel.SP_InsertHeader_Result)">
       <Parameter Name="parent" Mode="In" Type="Int32" />
@@ -238,6 +236,10 @@
       <Parameter Name="GM" Mode="In" Type="Int32" />
       <Parameter Name="PM" Mode="In" Type="Int32" />
       <Parameter Name="ST" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
+      <Parameter Name="PositionNO" Mode="In" Type="Int32" />
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
@@ -577,18 +579,6 @@
     <Property Type="String" Name="EvaluatorLastName" Nullable="true" MaxLength="30" />
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
   </ComplexType>
-  <ComplexType Name="SP_GetHeaderByPosition_Result">
-    <Property Type="Int32" Name="PositionNO" Nullable="true" />
-    <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
-    <Property Type="Int32" Name="Parent" Nullable="true" />
-    <Property Type="String" Name="Alias" Nullable="true" MaxLength="5" />
-    <Property Type="Int32" Name="H_Level" Nullable="true" />
-    <Property Type="Int32" Name="Score_ID" Nullable="true" />
-    <Property Type="Int32" Name="H_ID" Nullable="true" />
-    <Property Type="Int32" Name="point" Nullable="true" />
-    <Property Type="Int32" Name="Eva_ID" Nullable="true" />
-  </ComplexType>
   <EntityType Name="tblHeaderAdditional">
     <Key>
       <PropertyRef Name="H_ID" />
@@ -603,6 +593,7 @@
     <Property Name="point" Type="Int32" />
     <Property Name="Part2ID" Type="Int32" />
     <Property Name="H_status" Type="Int32" />
+    <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
   </EntityType>
   <ComplexType Name="SP_InsertHeader_Result">
     <Property Type="Int32" Name="H_id" Nullable="false" />
@@ -673,4 +664,17 @@
     <Property Name="UpdateDate" Type="DateTime" Precision="0" />
     <Property Name="PrevEmployeeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
   </EntityType>
+  <ComplexType Name="SP_GetHeaderByPosition_Result">
+    <Property Type="Int32" Name="PositionNO" Nullable="true" />
+    <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+    <Property Type="String" Name="Alias" Nullable="true" MaxLength="5" />
+    <Property Type="Int32" Name="H_Level" Nullable="true" />
+    <Property Type="Int32" Name="Score_ID" Nullable="true" />
+    <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="H_ID" Nullable="false" />
+    <Property Type="Int32" Name="point" Nullable="true" />
+    <Property Type="Int32" Name="Eva_ID" Nullable="true" />
+  </ComplexType>
 </Schema>
