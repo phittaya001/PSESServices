@@ -119,12 +119,12 @@ namespace PesWeb.Service.Modules
             return db.tblHeaderAdditional.ToList();
         }
 
-        public void UpdateScoreData(int EvaID, int point, int H_ID)
+        public void UpdateScoreData(int EvaID, int point, int H_ID,string comment)
         {
             PSESEntities db = new PSESEntities();
             if (H_ID >= 0)
             {
-                db.SP_UpdateData(EvaID, point, H_ID);
+                db.SP_UpdateData(EvaID, point, H_ID,comment);
             }
             else
             {

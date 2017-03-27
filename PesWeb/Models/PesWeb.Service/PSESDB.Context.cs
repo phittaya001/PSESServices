@@ -578,7 +578,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual int SP_UpdateData(Nullable<int> evaID, Nullable<int> point, Nullable<int> h_ID)
+    public virtual int SP_UpdateData(Nullable<int> evaID, Nullable<int> point, Nullable<int> h_ID, string comment)
     {
 
         var evaIDParameter = evaID.HasValue ?
@@ -596,7 +596,12 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("H_ID", typeof(int));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateData", evaIDParameter, pointParameter, h_IDParameter);
+        var commentParameter = comment != null ?
+            new ObjectParameter("comment", comment) :
+            new ObjectParameter("comment", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateData", evaIDParameter, pointParameter, h_IDParameter, commentParameter);
     }
 
 

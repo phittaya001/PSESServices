@@ -114,6 +114,7 @@
           <Property Name="point" Type="int" />
           <Property Name="Part2ID" Type="int" />
           <Property Name="H_status" Type="int" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
         </EntityType>
         <EntityType Name="tblHeaderBot">
           <Key>
@@ -481,6 +482,7 @@
           <Parameter Name="EvaID" Type="int" Mode="In" />
           <Parameter Name="point" Type="int" Mode="In" />
           <Parameter Name="H_ID" Type="int" Mode="In" />
+          <Parameter Name="comment" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_UpdateEvaluationStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EvaID" Type="int" Mode="In" />
@@ -708,6 +710,7 @@
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
             <Parameter Name="point" Mode="In" Type="Int32" />
             <Parameter Name="H_ID" Mode="In" Type="Int32" />
+            <Parameter Name="comment" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_UpdateAdditional">
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
@@ -1122,6 +1125,7 @@
           <Property Name="point" Type="Int32" />
           <Property Name="Part2ID" Type="Int32" />
           <Property Name="H_status" Type="Int32" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
         </EntityType>
         <ComplexType Name="SP_InsertHeader_Result">
           <Property Type="Int32" Name="H_id" Nullable="false" />
@@ -1669,6 +1673,7 @@
           <EntitySetMapping Name="tblHeaderAdditional">
             <EntityTypeMapping TypeName="PSESModel.tblHeaderAdditional">
               <MappingFragment StoreEntitySet="tblHeaderAdditional">
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
                 <ScalarProperty Name="H_status" ColumnName="H_status" />
                 <ScalarProperty Name="Part2ID" ColumnName="Part2ID" />
                 <ScalarProperty Name="point" ColumnName="point" />

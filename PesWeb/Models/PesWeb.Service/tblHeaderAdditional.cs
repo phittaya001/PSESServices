@@ -38,6 +38,8 @@ public partial class tblHeaderAdditional
 
     public Nullable<int> H_status { get; set; }
 
+    public string Comment { get; set; }
+
 }
 
 }

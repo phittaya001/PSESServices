@@ -463,11 +463,11 @@ namespace PESproj.Controllers
             foreach(JObject jo in Data)
             {
                 if (jo.Count>2 && jo["Score"].ToString() == "N/A"){
-                    header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), 0, Convert.ToInt32(jo["Id"].ToString()));
+                    header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), 0, Convert.ToInt32(jo["Id"].ToString()),string.IsNullOrEmpty(jo["Comment"].ToString())? "": jo["Comment"].ToString());
                 }
                 else
                 {
-                    header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), Convert.ToInt32(jo["Score"].ToString()), Convert.ToInt32(jo["Id"].ToString()));
+                    header.UpdateScoreData(Convert.ToInt32(jo["EvaId"].ToString()), Convert.ToInt32(jo["Score"].ToString()), Convert.ToInt32(jo["Id"].ToString()),"");
                 }
                 EvaID = Convert.ToInt32(jo["EvaId"].ToString());
             }
@@ -496,11 +496,11 @@ namespace PESproj.Controllers
                             sum += (int)thA.point;
                         }
 
-                        header.UpdateScoreData(EvaID, sum / H2.Count, th2.H_ID);
+                        header.UpdateScoreData(EvaID, sum / H2.Count, th2.H_ID,score.Where(a=>a.Eva_ID == EvaID && a.H3_ID == th2.H_ID).FirstOrDefault().Comment);
                         sum2 += sum / H2.Count;
                         sum = 0;
                     }
-                    header.UpdateScoreData(EvaID, sum2 / H1.Count, (int)th.H1_ID);
+                    header.UpdateScoreData(EvaID, sum2 / H1.Count, (int)th.H1_ID, score.Where(a => a.Eva_ID == EvaID && a.H3_ID == th.H1_ID).FirstOrDefault().Comment);
                     sum2 = 0;
                 }
                 
@@ -526,13 +526,13 @@ namespace PESproj.Controllers
                         sum += (int)tmp3.point;
                     }
                     sum = sum / (h2.Count);
-                    header.UpdateScoreData(EvaID, sum, tmp2.H_ID);
+                    header.UpdateScoreData(EvaID, sum, tmp2.H_ID,tmp2.Comment);
                     sum2 += sum;
                     sum = 0;
                     
                 }
                 sum2 = sum2 / (h1.Count);
-                header.UpdateScoreData(EvaID, sum2, tmp.H_ID);
+                header.UpdateScoreData(EvaID, sum2, tmp.H_ID,tmp.Comment);
             }
                 if (EvaID>0)
                 header.UpdateEvaluationStatus(EvaID, 1);

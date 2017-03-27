@@ -332,7 +332,7 @@ namespace PESproj.Controllers
             pm = header.getProjectMember().Where(a => a.ProjectID == eva.ProjectNO && a.StaffID == Data["EmpID"].ToString()).FirstOrDefault();
             
 
-            if (em != null)
+            if (em != null && eva.EmployeeNO != Data["EmpID"].ToString())
             {
                 if (em.PositionNo == 23 && App.GM == 1)
                 {
