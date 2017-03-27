@@ -337,6 +337,7 @@ namespace PESproj.Controllers
                 {
                     return ListApp.Where(a=>a.GM==1).Where(a => a.ST + a.PM + a.HR + a.GM == 3).ToList();
                 }
+
                 if(em.PositionNo == 21)
                 {
                     List<tblEmployeeOrganization> ListEmO = header.getEmployeeOrganization().Where(a => a.OrganizationNo == em.OrganizationNo && a.OrganizationNo != 21).ToList();
@@ -349,11 +350,11 @@ namespace PESproj.Controllers
                         List<tblEvaluation> evaTemp = eva.Where(a => a.EmployeeNO.Replace(" ", "") == tmp.EmployeeNo.Replace(" ","") && a.EvaStatus == 1).ToList();
                         foreach(tblEvaluation ev in evaTemp)
                         {
-                            if (ListApp.Where(a => a.EvaID == ev.Eva_ID).ToList().Count > 0)
-                                app.Add(ListApp.Where(a => a.EvaID == ev.Eva_ID).FirstOrDefault());
+                            if (ListApp.Where(a => a.EvaID == ev.Eva_ID).Where(a => a.ST + a.PM + a.HR + a.GM == 2).ToList().Count > 0)
+                                app.Add(ListApp.Where(a => a.EvaID == ev.Eva_ID).Where(a => a.PM == 1).FirstOrDefault());
                         }
                     }
-                    return app.Where(a=>a.PM==1).Where(a => a.ST + a.PM + a.HR + a.GM == 2).ToList();
+                   // return app.Where(a=>a.PM==1).Where(a => a.ST + a.PM + a.HR + a.GM == 2).ToList();
                 }
                 if (true) { 
                     List<tblProjectMember> ListPm = header.getProjectMember();
@@ -371,18 +372,18 @@ namespace PESproj.Controllers
                                 if(ev3.EvaStatus == 1 && ev3.EmployeeNO!=EmpID)
                                 if ((App.Count==0 || App.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count == 0)&& ListApp.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count==1)
                                 {
-                                        if (ListApp.Where(a => a.EvaID == ev3.Eva_ID).ToList().Count > 0)
+                                        if (ListApp.Where(a => a.EvaID == ev3.Eva_ID).Where(a => a.ST == 1).Where(a => a.ST + a.PM + a.HR + a.GM == 1).ToList().Count > 0)
                                             app.Add(ListApp.Where(a => a.EvaID == ev3.Eva_ID).OrderByDescending(a=>a.ID).FirstOrDefault());
                                 }
                             }
                            
                         }
                     }
-                    if (app.Count>0 && app.Where(a => a.ST == 1).ToList().Count > 0)
-                    {
+                    //if (app.Count>0 && app.Where(a => a.ST == 1).ToList().Count > 0)
+                    //{
 
-                        return app.Where(a => a.ST == 1).Where(a => a.ST + a.PM + a.HR + a.GM == 1).ToList();
-                    }
+                    //    //return app.Where(a => a.ST == 1).Where(a => a.ST + a.PM + a.HR + a.GM == 1).ToList();
+                    //}
                     //return app;
 
                 }
@@ -392,11 +393,11 @@ namespace PESproj.Controllers
                     List<tblApprove> appData = new List<tblApprove>();
                     foreach (tblEvaluation e in eva)
                     {
-                        if(ListApp.Where(a => a.EvaID == e.Eva_ID && e.EvaStatus == 1).ToList().Count>0)
-                        appData.Add(ListApp.Where(a => a.EvaID == e.Eva_ID).FirstOrDefault());
+                        if(ListApp.Where(a => a.EvaID == e.Eva_ID && e.EvaStatus == 1).Where(a => a.ST + a.PM + a.HR + a.GM == 0 && a.ApproveState == 1).ToList().Count>0)
+                        app.Add(ListApp.Where(a => a.EvaID == e.Eva_ID).FirstOrDefault());
                     }
-                    if(appData.Count > 0)
-                    return appData.Where(a=>a.ST+a.PM+a.HR+a.GM==0 && a.ApproveState==1).ToList();
+                    if(app.Count > 0)
+                    return app.ToList();
                 }
             }
             return null;
@@ -418,7 +419,7 @@ namespace PESproj.Controllers
             pm = header.getProjectMember().Where(a => a.ProjectID == eva.ProjectNO && a.StaffID == Data["EmpID"].ToString()).FirstOrDefault();
             
 
-            if (em != null && eva.EmployeeNO != Data["EmpID"].ToString())
+            if (em != null )
             {
                 if (em.PositionNo == 23 && App.GM == 1)
                 {
