@@ -307,7 +307,7 @@ namespace PESproj.Controllers
                     List<tblApprove> appData = new List<tblApprove>();
                     foreach (tblEvaluation e in eva)
                     {
-                        if(ListApp.Where(a => a.EvaID == e.Eva_ID).ToList().Count>0)
+                        if(ListApp.Where(a => a.EvaID == e.Eva_ID && e.EvaStatus == 1).ToList().Count>0)
                         appData.Add(ListApp.Where(a => a.EvaID == e.Eva_ID).FirstOrDefault());
                     }
                     if(appData.Count > 0)
