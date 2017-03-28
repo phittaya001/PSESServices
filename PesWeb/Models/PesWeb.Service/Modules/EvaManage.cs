@@ -121,10 +121,11 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             return db.tblPart2Master.ToList();
         }
-        public void insertApprove(tblApprove ap)
+        public SP_InsertApproveState_Result insertApprove(tblApprove ap)
         {
             PSESEntities db = new PSESEntities();
-            db.SP_InsertApproveState(ap.EvaID, ap.Position, ap.PositionID, ap.ProjectCode, ap.Role,ap.Name);
+            return db.SP_InsertApproveState(ap.EvaID, ap.Position, ap.PositionID, ap.ProjectCode, ap.Role, ap.Name).FirstOrDefault();
+             
         }
 
         public List<tblEmployeeOrganization> getEmployeeOrganization()
@@ -141,12 +142,34 @@ namespace PesWeb.Service.Modules
         {
             PSESEntities db = new PSESEntities();
             // tblApprove tmp = GetAllApprove().Where(a => a.ID == ap.ID).FirstOrDefault();
-            int number = 1;
+            int number = (int)ap.ApproveState;
             if (ap.GM + ap.HR + ap.PM + ap.ST == 4)
             {
-                number = 0;   
+                number = 2;   
             }
             db.SP_UpdateApprove(number, ap.ID, ap.HR, ap.GM, ap.PM, ap.ST);
+        }
+        public void insertApproveStatus(tblApproveStatus aps)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_InsertApproveFlow(0,aps.FlowOrder,aps.ApproveID,aps.Comment,aps.Name,aps.EmployeeNO);
+        }
+
+        public List<tblFlowMaster> getAllFlow()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblFlowMaster.ToList();
+        }
+        public List<tblApproveStatus> GetApproveStatus()
+        {
+            PSESEntities db = new PSESEntities();
+            return db.tblApproveStatus.ToList();
+        }
+
+        public void UpdateApproveData(tblApproveStatus aps)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_UpdateAprroveData(aps.Status, aps.ID);
         }
     }
 }

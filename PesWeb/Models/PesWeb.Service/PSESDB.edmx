@@ -33,6 +33,21 @@
           <Property Name="Role" Type="varchar" MaxLength="50" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
         </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PSES.dbo.tblApproveStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblApproveStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Status" Type="int" />
+          <Property Name="FlowOrder" Type="int" />
+          <Property Name="ApproveID" Type="int" />
+          <Property Name="ApproveDate" Type="date" />
+          <Property Name="Comment" Type="varchar" MaxLength="255" />
+          <Property Name="Name" Type="varchar" MaxLength="50" />
+          <Property Name="EmployeeNO" Type="varchar" MaxLength="10" />
+        </EntityType>
         <EntityType Name="tblEmployee">
           <Key>
             <PropertyRef Name="EmployeeNo" />
@@ -87,6 +102,18 @@
           <Property Name="StartEvaDate" Type="date" />
           <Property Name="FinishEvaDate" Type="date" />
           <Property Name="EvaStatus" Type="int" />
+        </EntityType>
+        <!--Errors Found During Generation:
+warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+        <EntityType Name="tblFlowMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CodeName" Type="varchar" MaxLength="5" />
+          <Property Name="PositionName" Type="varchar" MaxLength="15" />
+          <Property Name="FromTable" Type="int" />
+          <Property Name="Flow" Type="int" />
         </EntityType>
         <EntityType Name="tblHeader">
           <Key>
@@ -427,13 +454,21 @@
           <Parameter Name="H_Level" Type="int" Mode="In" />
           <Parameter Name="PositionNo" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_InsertApproveFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="status" Type="int" Mode="In" />
+          <Parameter Name="FlowOrder" Type="int" Mode="In" />
+          <Parameter Name="ApproveID" Type="int" Mode="In" />
+          <Parameter Name="Comment" Type="varchar" Mode="In" />
+          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="EmployeeNO" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_InsertApproveState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EvaID" Type="int" Mode="In" />
           <Parameter Name="Position" Type="varchar" Mode="In" />
           <Parameter Name="PositionID" Type="int" Mode="In" />
           <Parameter Name="ProjectCode" Type="varchar" Mode="In" />
           <Parameter Name="Role" Type="varchar" Mode="In" />
-          <Parameter Name="name" Type="varchar" Mode="In" />
+          <Parameter Name="Name" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_InsertEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProjectID" Type="varchar" Mode="In" />
@@ -479,6 +514,10 @@
           <Parameter Name="PM" Type="int" Mode="In" />
           <Parameter Name="ST" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_UpdateAprroveData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Status" Type="int" Mode="In" />
+          <Parameter Name="ID" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_UpdateData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EvaID" Type="int" Mode="In" />
           <Parameter Name="point" Type="int" Mode="In" />
@@ -511,6 +550,27 @@
           <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTitle" EntityType="Self.tblTitle" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblApproveStatus" EntityType="Self.tblApproveStatus" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblApproveStatus].[ID] AS [ID], 
+    [tblApproveStatus].[Status] AS [Status], 
+    [tblApproveStatus].[FlowOrder] AS [FlowOrder], 
+    [tblApproveStatus].[ApproveID] AS [ApproveID], 
+    [tblApproveStatus].[ApproveDate] AS [ApproveDate], 
+    [tblApproveStatus].[Comment] AS [Comment], 
+    [tblApproveStatus].[Name] AS [Name], 
+    [tblApproveStatus].[EmployeeNO] AS [EmployeeNO]
+    FROM [dbo].[tblApproveStatus] AS [tblApproveStatus]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="tblFlowMaster" EntityType="Self.tblFlowMaster" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [tblFlowMaster].[ID] AS [ID], 
+    [tblFlowMaster].[CodeName] AS [CodeName], 
+    [tblFlowMaster].[PositionName] AS [PositionName], 
+    [tblFlowMaster].[FromTable] AS [FromTable], 
+    [tblFlowMaster].[Flow] AS [Flow]
+    FROM [dbo].[tblFlowMaster] AS [tblFlowMaster]</DefiningQuery>
+          </EntitySet>
           <AssociationSet Name="FK_tblProject2_tblOrganization" Association="Self.FK_tblProject2_tblOrganization">
             <End Role="tblOrganization" EntitySet="tblOrganization" />
             <End Role="tblProject" EntitySet="tblProject" />
@@ -694,15 +754,6 @@
           <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <EntitySet Name="tblHeaderAdditional" EntityType="PSESModel.tblHeaderAdditional" />
-          <FunctionImport Name="SP_InsertAdditionalHeader">
-            <Parameter Name="parent" Mode="In" Type="Int32" />
-            <Parameter Name="Text" Mode="In" Type="String" />
-            <Parameter Name="Text_Eng" Mode="In" Type="String" />
-            <Parameter Name="EvaID" Mode="In" Type="Int32" />
-            <Parameter Name="Alias" Mode="In" Type="String" />
-            <Parameter Name="H_Level" Mode="In" Type="Int32" />
-            <Parameter Name="PositionNo" Mode="In" Type="Int32" />
-          </FunctionImport>
           <FunctionImport Name="SP_UpdateData">
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
             <Parameter Name="point" Mode="In" Type="Int32" />
@@ -743,14 +794,6 @@
           </FunctionImport>
           <EntitySet Name="tblApprove" EntityType="PSESModel.tblApprove" />
           <EntitySet Name="tblEmployeeOrganization" EntityType="PSESModel.tblEmployeeOrganization" />
-          <FunctionImport Name="SP_InsertApproveState">
-            <Parameter Name="EvaID" Mode="In" Type="Int32" />
-            <Parameter Name="Position" Mode="In" Type="String" />
-            <Parameter Name="PositionID" Mode="In" Type="Int32" />
-            <Parameter Name="ProjectCode" Mode="In" Type="String" />
-            <Parameter Name="Role" Mode="In" Type="String" />
-            <Parameter Name="name" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="SP_UpdateApprove">
             <Parameter Name="value" Mode="In" Type="Int32" />
             <Parameter Name="AppID" Mode="In" Type="Int32" />
@@ -762,6 +805,37 @@
           <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
             <Parameter Name="PositionNO" Mode="In" Type="Int32" />
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_InsertApproveState" ReturnType="Collection(PSESModel.SP_InsertApproveState_Result)">
+            <Parameter Name="EvaID" Mode="In" Type="Int32" />
+            <Parameter Name="Position" Mode="In" Type="String" />
+            <Parameter Name="PositionID" Mode="In" Type="Int32" />
+            <Parameter Name="ProjectCode" Mode="In" Type="String" />
+            <Parameter Name="Role" Mode="In" Type="String" />
+            <Parameter Name="Name" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="SP_InsertAdditionalHeader">
+            <Parameter Name="parent" Mode="In" Type="Int32" />
+            <Parameter Name="Text" Mode="In" Type="String" />
+            <Parameter Name="Text_Eng" Mode="In" Type="String" />
+            <Parameter Name="EvaID" Mode="In" Type="Int32" />
+            <Parameter Name="Alias" Mode="In" Type="String" />
+            <Parameter Name="H_Level" Mode="In" Type="Int32" />
+            <Parameter Name="PositionNo" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_InsertApproveFlow">
+            <Parameter Name="status" Mode="In" Type="Int32" />
+            <Parameter Name="FlowOrder" Mode="In" Type="Int32" />
+            <Parameter Name="ApproveID" Mode="In" Type="Int32" />
+            <Parameter Name="Comment" Mode="In" Type="String" />
+            <Parameter Name="name" Mode="In" Type="String" />
+            <Parameter Name="EmployeeNO" Mode="In" Type="String" />
+          </FunctionImport>
+          <EntitySet Name="tblApproveStatus" EntityType="PSESModel.tblApproveStatus" />
+          <EntitySet Name="tblFlowMaster" EntityType="PSESModel.tblFlowMaster" />
+          <FunctionImport Name="SP_UpdateAprroveData">
+            <Parameter Name="Status" Mode="In" Type="Int32" />
+            <Parameter Name="ID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -1199,6 +1273,32 @@
           <Property Type="Int32" Name="point" Nullable="true" />
           <Property Type="Int32" Name="Eva_ID" Nullable="true" />
         </ComplexType>
+        <ComplexType Name="SP_InsertApproveState_Result">
+          <Property Type="Int32" Name="ID" Nullable="false" />
+        </ComplexType>
+        <EntityType Name="tblApproveStatus">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Status" Type="Int32" />
+          <Property Name="FlowOrder" Type="Int32" />
+          <Property Name="ApproveID" Type="Int32" />
+          <Property Name="ApproveDate" Type="DateTime" Precision="0" />
+          <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeNO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+        </EntityType>
+        <EntityType Name="tblFlowMaster">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CodeName" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
+          <Property Name="PositionName" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
+          <Property Name="FromTable" Type="Int32" />
+          <Property Name="Flow" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1674,7 +1774,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
           <FunctionImportMapping FunctionImportName="SP_UpdateData" FunctionName="PSESModel.Store.SP_UpdateData" />
           <FunctionImportMapping FunctionImportName="SP_UpdateAdditional" FunctionName="PSESModel.Store.SP_UpdateAdditional" />
           <FunctionImportMapping FunctionImportName="SP_InsertHeader" FunctionName="PSESModel.Store.SP_InsertHeader" >
@@ -1756,7 +1855,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <FunctionImportMapping FunctionImportName="SP_InsertApproveState" FunctionName="PSESModel.Store.SP_InsertApproveState" />
           <FunctionImportMapping FunctionImportName="SP_UpdateApprove" FunctionName="PSESModel.Store.SP_UpdateApprove" />
           <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
             <ResultMapping>
@@ -1775,6 +1873,41 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertApproveState" FunctionName="PSESModel.Store.SP_InsertApproveState" >
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PSESModel.SP_InsertApproveState_Result">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
+          <FunctionImportMapping FunctionImportName="SP_InsertApproveFlow" FunctionName="PSESModel.Store.SP_InsertApproveFlow" />
+          <EntitySetMapping Name="tblApproveStatus">
+            <EntityTypeMapping TypeName="PSESModel.tblApproveStatus">
+              <MappingFragment StoreEntitySet="tblApproveStatus">
+                <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Comment" ColumnName="Comment" />
+                <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+                <ScalarProperty Name="ApproveID" ColumnName="ApproveID" />
+                <ScalarProperty Name="FlowOrder" ColumnName="FlowOrder" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblFlowMaster">
+            <EntityTypeMapping TypeName="PSESModel.tblFlowMaster">
+              <MappingFragment StoreEntitySet="tblFlowMaster">
+                <ScalarProperty Name="Flow" ColumnName="Flow" />
+                <ScalarProperty Name="FromTable" ColumnName="FromTable" />
+                <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+                <ScalarProperty Name="CodeName" ColumnName="CodeName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_UpdateAprroveData" FunctionName="PSESModel.Store.SP_UpdateAprroveData" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

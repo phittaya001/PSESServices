@@ -193,6 +193,9 @@
     <Compile Include="SP_HeaderTopByJob_Result.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="SP_InsertApproveState_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="SP_InsertEvaluation_Result.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
@@ -202,6 +205,9 @@
     <Compile Include="tblApprove.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
+    <Compile Include="tblApproveStatus.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
     <Compile Include="tblEmployee.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
@@ -209,6 +215,9 @@
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="tblEvaluation.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblFlowMaster.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="tblHeader.cs">

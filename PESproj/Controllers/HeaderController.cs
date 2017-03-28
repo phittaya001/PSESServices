@@ -114,6 +114,7 @@ namespace PESproj.Controllers
                     newHeader.H_ID = (-1) * HdATemp.H_ID;
                     newHeader.PositionNO = PositionID;
                     newHeader.point = HdATemp.point;
+                    newHeader.Comment = HdATemp.Comment;
                     //if (HdATemp.point ==null && HdATemp.point != 0)
                     //{
                     //    header.UpdateScoreData(EvaID, 0, (-1)*HdATemp.H_ID);

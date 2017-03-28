@@ -77,6 +77,10 @@ public partial class PSESEntities : DbContext
 
     public virtual DbSet<tblEmployeeOrganization> tblEmployeeOrganization { get; set; }
 
+    public virtual DbSet<tblApproveStatus> tblApproveStatus { get; set; }
+
+    public virtual DbSet<tblFlowMaster> tblFlowMaster { get; set; }
+
 
     public virtual int CreateForm(string empID, string evaluator, Nullable<int> jobID, string projectNO)
     {
@@ -519,48 +523,6 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual int SP_InsertAdditionalHeader(Nullable<int> parent, string text, string text_Eng, Nullable<int> evaID, string alias, Nullable<int> h_Level, Nullable<int> positionNo)
-    {
-
-        var parentParameter = parent.HasValue ?
-            new ObjectParameter("parent", parent) :
-            new ObjectParameter("parent", typeof(int));
-
-
-        var textParameter = text != null ?
-            new ObjectParameter("Text", text) :
-            new ObjectParameter("Text", typeof(string));
-
-
-        var text_EngParameter = text_Eng != null ?
-            new ObjectParameter("Text_Eng", text_Eng) :
-            new ObjectParameter("Text_Eng", typeof(string));
-
-
-        var evaIDParameter = evaID.HasValue ?
-            new ObjectParameter("EvaID", evaID) :
-            new ObjectParameter("EvaID", typeof(int));
-
-
-        var aliasParameter = alias != null ?
-            new ObjectParameter("Alias", alias) :
-            new ObjectParameter("Alias", typeof(string));
-
-
-        var h_LevelParameter = h_Level.HasValue ?
-            new ObjectParameter("H_Level", h_Level) :
-            new ObjectParameter("H_Level", typeof(int));
-
-
-        var positionNoParameter = positionNo.HasValue ?
-            new ObjectParameter("PositionNo", positionNo) :
-            new ObjectParameter("PositionNo", typeof(int));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertAdditionalHeader", parentParameter, textParameter, text_EngParameter, evaIDParameter, aliasParameter, h_LevelParameter, positionNoParameter);
-    }
-
-
     public virtual int SP_UpdateData(Nullable<int> evaID, Nullable<int> point, Nullable<int> h_ID, string comment)
     {
 
@@ -722,43 +684,6 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual int SP_InsertApproveState(Nullable<int> evaID, string position, Nullable<int> positionID, string projectCode, string role, string name)
-    {
-
-        var evaIDParameter = evaID.HasValue ?
-            new ObjectParameter("EvaID", evaID) :
-            new ObjectParameter("EvaID", typeof(int));
-
-
-        var positionParameter = position != null ?
-            new ObjectParameter("Position", position) :
-            new ObjectParameter("Position", typeof(string));
-
-
-        var positionIDParameter = positionID.HasValue ?
-            new ObjectParameter("PositionID", positionID) :
-            new ObjectParameter("PositionID", typeof(int));
-
-
-        var projectCodeParameter = projectCode != null ?
-            new ObjectParameter("ProjectCode", projectCode) :
-            new ObjectParameter("ProjectCode", typeof(string));
-
-
-        var roleParameter = role != null ?
-            new ObjectParameter("Role", role) :
-            new ObjectParameter("Role", typeof(string));
-
-
-        var nameParameter = name != null ?
-            new ObjectParameter("name", name) :
-            new ObjectParameter("name", typeof(string));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertApproveState", evaIDParameter, positionParameter, positionIDParameter, projectCodeParameter, roleParameter, nameParameter);
-    }
-
-
     public virtual int SP_UpdateApprove(Nullable<int> value, Nullable<int> appID, Nullable<int> hR, Nullable<int> gM, Nullable<int> pM, Nullable<int> sT)
     {
 
@@ -810,6 +735,139 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHeaderByPosition_Result>("SP_GetHeaderByPosition", positionNOParameter, evaIDParameter);
+    }
+
+
+    public virtual ObjectResult<SP_InsertApproveState_Result> SP_InsertApproveState(Nullable<int> evaID, string position, Nullable<int> positionID, string projectCode, string role, string name)
+    {
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        var positionParameter = position != null ?
+            new ObjectParameter("Position", position) :
+            new ObjectParameter("Position", typeof(string));
+
+
+        var positionIDParameter = positionID.HasValue ?
+            new ObjectParameter("PositionID", positionID) :
+            new ObjectParameter("PositionID", typeof(int));
+
+
+        var projectCodeParameter = projectCode != null ?
+            new ObjectParameter("ProjectCode", projectCode) :
+            new ObjectParameter("ProjectCode", typeof(string));
+
+
+        var roleParameter = role != null ?
+            new ObjectParameter("Role", role) :
+            new ObjectParameter("Role", typeof(string));
+
+
+        var nameParameter = name != null ?
+            new ObjectParameter("Name", name) :
+            new ObjectParameter("Name", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertApproveState_Result>("SP_InsertApproveState", evaIDParameter, positionParameter, positionIDParameter, projectCodeParameter, roleParameter, nameParameter);
+    }
+
+
+    public virtual int SP_InsertAdditionalHeader(Nullable<int> parent, string text, string text_Eng, Nullable<int> evaID, string alias, Nullable<int> h_Level, Nullable<int> positionNo)
+    {
+
+        var parentParameter = parent.HasValue ?
+            new ObjectParameter("parent", parent) :
+            new ObjectParameter("parent", typeof(int));
+
+
+        var textParameter = text != null ?
+            new ObjectParameter("Text", text) :
+            new ObjectParameter("Text", typeof(string));
+
+
+        var text_EngParameter = text_Eng != null ?
+            new ObjectParameter("Text_Eng", text_Eng) :
+            new ObjectParameter("Text_Eng", typeof(string));
+
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        var aliasParameter = alias != null ?
+            new ObjectParameter("Alias", alias) :
+            new ObjectParameter("Alias", typeof(string));
+
+
+        var h_LevelParameter = h_Level.HasValue ?
+            new ObjectParameter("H_Level", h_Level) :
+            new ObjectParameter("H_Level", typeof(int));
+
+
+        var positionNoParameter = positionNo.HasValue ?
+            new ObjectParameter("PositionNo", positionNo) :
+            new ObjectParameter("PositionNo", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertAdditionalHeader", parentParameter, textParameter, text_EngParameter, evaIDParameter, aliasParameter, h_LevelParameter, positionNoParameter);
+    }
+
+
+    public virtual int SP_InsertApproveFlow(Nullable<int> status, Nullable<int> flowOrder, Nullable<int> approveID, string comment, string name, string employeeNO)
+    {
+
+        var statusParameter = status.HasValue ?
+            new ObjectParameter("status", status) :
+            new ObjectParameter("status", typeof(int));
+
+
+        var flowOrderParameter = flowOrder.HasValue ?
+            new ObjectParameter("FlowOrder", flowOrder) :
+            new ObjectParameter("FlowOrder", typeof(int));
+
+
+        var approveIDParameter = approveID.HasValue ?
+            new ObjectParameter("ApproveID", approveID) :
+            new ObjectParameter("ApproveID", typeof(int));
+
+
+        var commentParameter = comment != null ?
+            new ObjectParameter("Comment", comment) :
+            new ObjectParameter("Comment", typeof(string));
+
+
+        var nameParameter = name != null ?
+            new ObjectParameter("name", name) :
+            new ObjectParameter("name", typeof(string));
+
+
+        var employeeNOParameter = employeeNO != null ?
+            new ObjectParameter("EmployeeNO", employeeNO) :
+            new ObjectParameter("EmployeeNO", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertApproveFlow", statusParameter, flowOrderParameter, approveIDParameter, commentParameter, nameParameter, employeeNOParameter);
+    }
+
+
+    public virtual int SP_UpdateAprroveData(Nullable<int> status, Nullable<int> iD)
+    {
+
+        var statusParameter = status.HasValue ?
+            new ObjectParameter("Status", status) :
+            new ObjectParameter("Status", typeof(int));
+
+
+        var iDParameter = iD.HasValue ?
+            new ObjectParameter("ID", iD) :
+            new ObjectParameter("ID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateAprroveData", statusParameter, iDParameter);
     }
 
 }

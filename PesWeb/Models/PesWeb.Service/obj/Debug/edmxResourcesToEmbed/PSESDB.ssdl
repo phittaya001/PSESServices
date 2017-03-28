@@ -28,6 +28,21 @@
     <Property Name="Role" Type="varchar" MaxLength="50" />
     <Property Name="Name" Type="varchar" MaxLength="100" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PSES.dbo.tblApproveStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblApproveStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="int" />
+    <Property Name="FlowOrder" Type="int" />
+    <Property Name="ApproveID" Type="int" />
+    <Property Name="ApproveDate" Type="date" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="EmployeeNO" Type="varchar" MaxLength="10" />
+  </EntityType>
   <EntityType Name="tblEmployee">
     <Key>
       <PropertyRef Name="EmployeeNo" />
@@ -82,6 +97,18 @@
     <Property Name="StartEvaDate" Type="date" />
     <Property Name="FinishEvaDate" Type="date" />
     <Property Name="EvaStatus" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblFlowMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodeName" Type="varchar" MaxLength="5" />
+    <Property Name="PositionName" Type="varchar" MaxLength="15" />
+    <Property Name="FromTable" Type="int" />
+    <Property Name="Flow" Type="int" />
   </EntityType>
   <EntityType Name="tblHeader">
     <Key>
@@ -422,13 +449,21 @@
     <Parameter Name="H_Level" Type="int" Mode="In" />
     <Parameter Name="PositionNo" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_InsertApproveFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="status" Type="int" Mode="In" />
+    <Parameter Name="FlowOrder" Type="int" Mode="In" />
+    <Parameter Name="ApproveID" Type="int" Mode="In" />
+    <Parameter Name="Comment" Type="varchar" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="EmployeeNO" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SP_InsertApproveState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="Position" Type="varchar" Mode="In" />
     <Parameter Name="PositionID" Type="int" Mode="In" />
     <Parameter Name="ProjectCode" Type="varchar" Mode="In" />
     <Parameter Name="Role" Type="varchar" Mode="In" />
-    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SP_InsertEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProjectID" Type="varchar" Mode="In" />
@@ -474,6 +509,10 @@
     <Parameter Name="PM" Type="int" Mode="In" />
     <Parameter Name="ST" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_UpdateAprroveData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Status" Type="int" Mode="In" />
+    <Parameter Name="ID" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_UpdateData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="point" Type="int" Mode="In" />
@@ -506,6 +545,27 @@
     <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTitle" EntityType="Self.tblTitle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblApproveStatus" EntityType="Self.tblApproveStatus" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblApproveStatus].[ID] AS [ID], 
+    [tblApproveStatus].[Status] AS [Status], 
+    [tblApproveStatus].[FlowOrder] AS [FlowOrder], 
+    [tblApproveStatus].[ApproveID] AS [ApproveID], 
+    [tblApproveStatus].[ApproveDate] AS [ApproveDate], 
+    [tblApproveStatus].[Comment] AS [Comment], 
+    [tblApproveStatus].[Name] AS [Name], 
+    [tblApproveStatus].[EmployeeNO] AS [EmployeeNO]
+    FROM [dbo].[tblApproveStatus] AS [tblApproveStatus]</DefiningQuery>
+    </EntitySet>
+    <EntitySet Name="tblFlowMaster" EntityType="Self.tblFlowMaster" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblFlowMaster].[ID] AS [ID], 
+    [tblFlowMaster].[CodeName] AS [CodeName], 
+    [tblFlowMaster].[PositionName] AS [PositionName], 
+    [tblFlowMaster].[FromTable] AS [FromTable], 
+    [tblFlowMaster].[Flow] AS [Flow]
+    FROM [dbo].[tblFlowMaster] AS [tblFlowMaster]</DefiningQuery>
+    </EntitySet>
     <AssociationSet Name="FK_tblProject2_tblOrganization" Association="Self.FK_tblProject2_tblOrganization">
       <End Role="tblOrganization" EntitySet="tblOrganization" />
       <End Role="tblProject" EntitySet="tblProject" />

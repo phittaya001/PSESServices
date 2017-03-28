@@ -470,7 +470,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
     <FunctionImportMapping FunctionImportName="SP_UpdateData" FunctionName="PSESModel.Store.SP_UpdateData" />
     <FunctionImportMapping FunctionImportName="SP_UpdateAdditional" FunctionName="PSESModel.Store.SP_UpdateAdditional" />
     <FunctionImportMapping FunctionImportName="SP_InsertHeader" FunctionName="PSESModel.Store.SP_InsertHeader">
@@ -552,7 +551,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SP_InsertApproveState" FunctionName="PSESModel.Store.SP_InsertApproveState" />
     <FunctionImportMapping FunctionImportName="SP_UpdateApprove" FunctionName="PSESModel.Store.SP_UpdateApprove" />
     <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
       <ResultMapping>
@@ -571,5 +569,40 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_InsertApproveState" FunctionName="PSESModel.Store.SP_InsertApproveState">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_InsertApproveState_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
+    <FunctionImportMapping FunctionImportName="SP_InsertApproveFlow" FunctionName="PSESModel.Store.SP_InsertApproveFlow" />
+    <EntitySetMapping Name="tblApproveStatus">
+      <EntityTypeMapping TypeName="PSESModel.tblApproveStatus">
+        <MappingFragment StoreEntitySet="tblApproveStatus">
+          <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveID" ColumnName="ApproveID" />
+          <ScalarProperty Name="FlowOrder" ColumnName="FlowOrder" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFlowMaster">
+      <EntityTypeMapping TypeName="PSESModel.tblFlowMaster">
+        <MappingFragment StoreEntitySet="tblFlowMaster">
+          <ScalarProperty Name="Flow" ColumnName="Flow" />
+          <ScalarProperty Name="FromTable" ColumnName="FromTable" />
+          <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+          <ScalarProperty Name="CodeName" ColumnName="CodeName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_UpdateAprroveData" FunctionName="PSESModel.Store.SP_UpdateAprroveData" />
   </EntityContainerMapping>
 </Mapping>
