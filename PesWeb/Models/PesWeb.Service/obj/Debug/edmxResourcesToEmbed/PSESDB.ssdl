@@ -388,6 +388,9 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
     <Parameter Name="JobID" Type="int" Mode="In" />
     <Parameter Name="ProjectNO" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="SP_DeleteApproveByEvaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_DeleteEva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
   </Function>

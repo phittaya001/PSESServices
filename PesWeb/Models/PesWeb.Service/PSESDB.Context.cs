@@ -870,6 +870,18 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateAprroveData", statusParameter, iDParameter);
     }
 
+
+    public virtual int SP_DeleteApproveByEvaID(Nullable<int> evaID)
+    {
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteApproveByEvaID", evaIDParameter);
+    }
+
 }
 
 }

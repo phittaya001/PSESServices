@@ -144,13 +144,14 @@ namespace PESproj.Controllers
                     {
                         tblApproveStatus tmp = new tblApproveStatus();
                         tmp.Comment = "";
-                        
+                        tmp.Status = 0;
                         tmp.FlowOrder = a.Flow;
                         if(a.CodeName == "PM")
                         {
                             tblEmployee emp2 = emp.Where(t => t.EmployeeNo.Trim() == Data["EvaluatorNO"].ToString().Trim()).FirstOrDefault();
                             tmp.Name = emp2.EmployeeFirstName + " " + emp2.EmployeeLastName;
                             tmp.EmployeeNO = emp2.EmployeeNo;
+                            tmp.Status = 1;
                         }
                         else if(a.CodeName == "ST")
                         {
@@ -251,11 +252,17 @@ namespace PESproj.Controllers
 
             // var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<tblApprove> app = header.GetAllApprove();
-            List<tblApproveStatus> ApS = header.GetApproveStatus().Where(a => a.EmployeeNO == EmpID && a.Status != 0).OrderByDescending(a => a.ID).GroupBy(a=>a.ApproveID).Select(a=>a.First()).ToList();
+            List<tblApproveStatus> ApS = header.GetApproveStatus().Where(a => a.EmployeeNO.Trim() == EmpID && a.Status != 0).ToList();
             List<tblApprove> Ap = new List<tblApprove>();
+            List<tblEvaluation> ListEva = header.GetAllEvaluation();
             foreach(tblApproveStatus o in ApS)
             {
-                Ap.Add(app.Where(a => a.ID == o.ApproveID).FirstOrDefault());
+                tblApprove Approve = app.Where(a => a.ID == o.ApproveID).FirstOrDefault();
+                if (Approve != null && ListEva.Where(a=>a.Eva_ID == Approve.EvaID).ToList().Count == 1)
+                {
+                    Ap.Add(Approve);
+                }
+                
             }
             return Ap;
         }
@@ -268,6 +275,7 @@ namespace PESproj.Controllers
             {
                 var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
                 header.DeleteEva(EvaID);
+                header.DeleteApprove(EvaID);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch
@@ -308,9 +316,10 @@ namespace PESproj.Controllers
         public List<tblApprove> getApproveList(string EmpID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            
             List<tblApproveStatus> AllAps = header.GetApproveStatus();
             List<tblApproveStatus> ApS = AllAps.Where(a => a.EmployeeNO.Trim() == EmpID && a.Status == 0).GroupBy(a => a.ApproveID).Select(a => a.First()).ToList();
-
+            List<tblEvaluation> ListEva = header.GetAllEvaluation();
             List<tblApprove> Ap = new List<tblApprove>();
             List<tblApprove> AllAp = header.GetAllApprove();
             foreach (tblApproveStatus aps in ApS)
@@ -330,7 +339,16 @@ namespace PESproj.Controllers
                 }
 
                 if(num==0)
-                    Ap.Add(AllAp.Where(a => a.ID == aps.ApproveID).FirstOrDefault());
+                {
+                    tblApprove Approve = AllAp.Where(a => a.ID == aps.ApproveID).FirstOrDefault();
+                    if (Approve != null)
+                    {
+                        tblEvaluation EvaData = ListEva.Where(a => a.Eva_ID == Approve.EvaID).FirstOrDefault();
+                        if(EvaData != null && EvaData.EvaStatus == 1)
+                            Ap.Add(Approve);
+                    }
+                }
+                    
             }
             return Ap;
         }

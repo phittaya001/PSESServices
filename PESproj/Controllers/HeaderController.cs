@@ -537,6 +537,15 @@ namespace PESproj.Controllers
             }
                 if (EvaID>0)
                 header.UpdateEvaluationStatus(EvaID, 1);
+
+
+            tblApprove AllAp = header2.GetAllApprove().Where(a => a.EvaID == EvaID).OrderByDescending(a => a.ID).FirstOrDefault();
+            tblApproveStatus ApS = header2.GetApproveStatus().Where(a => a.FlowOrder == 1 && a.ApproveID == AllAp.ID).OrderByDescending(a => a.ID).FirstOrDefault();
+          
+            AllAp.ST = 1;
+            
+            header2.UpdateApproveData(AllAp);
+            header2.UpdateApproveData(ApS);
         }
 
         [Route("EvaStatus")]

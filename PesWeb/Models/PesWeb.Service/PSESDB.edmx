@@ -393,6 +393,9 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
           <Parameter Name="JobID" Type="int" Mode="In" />
           <Parameter Name="ProjectNO" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SP_DeleteApproveByEvaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EvaID" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_DeleteEva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EvaID" Type="int" Mode="In" />
         </Function>
@@ -836,6 +839,9 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
           <FunctionImport Name="SP_UpdateAprroveData">
             <Parameter Name="Status" Mode="In" Type="Int32" />
             <Parameter Name="ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_DeleteApproveByEvaID">
+            <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -1908,6 +1914,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
             </EntityTypeMapping>
           </EntitySetMapping>
           <FunctionImportMapping FunctionImportName="SP_UpdateAprroveData" FunctionName="PSESModel.Store.SP_UpdateAprroveData" />
+          <FunctionImportMapping FunctionImportName="SP_DeleteApproveByEvaID" FunctionName="PSESModel.Store.SP_DeleteApproveByEvaID" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

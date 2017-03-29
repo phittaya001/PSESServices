@@ -255,6 +255,9 @@
       <Parameter Name="Status" Mode="In" Type="Int32" />
       <Parameter Name="ID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_DeleteApproveByEvaID">
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />

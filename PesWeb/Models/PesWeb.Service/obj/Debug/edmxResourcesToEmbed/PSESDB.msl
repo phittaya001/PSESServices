@@ -604,5 +604,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_UpdateAprroveData" FunctionName="PSESModel.Store.SP_UpdateAprroveData" />
+    <FunctionImportMapping FunctionImportName="SP_DeleteApproveByEvaID" FunctionName="PSESModel.Store.SP_DeleteApproveByEvaID" />
   </EntityContainerMapping>
 </Mapping>

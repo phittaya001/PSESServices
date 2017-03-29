@@ -55,6 +55,12 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             db.SP_DeleteEva(EvaID);
         }
+
+        public void DeleteApprove(int EvaID)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_DeleteApproveByEvaID(EvaID);
+        }
         //GG
         public List<tblEmployee> getEmployees()
         {
@@ -152,7 +158,7 @@ namespace PesWeb.Service.Modules
         public void insertApproveStatus(tblApproveStatus aps)
         {
             PSESEntities db = new PSESEntities();
-            db.SP_InsertApproveFlow(0,aps.FlowOrder,aps.ApproveID,aps.Comment,aps.Name,aps.EmployeeNO);
+            db.SP_InsertApproveFlow(aps.Status,aps.FlowOrder,aps.ApproveID,aps.Comment,aps.Name,aps.EmployeeNO);
         }
 
         public List<tblFlowMaster> getAllFlow()
