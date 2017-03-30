@@ -81,6 +81,8 @@ public partial class PSESEntities : DbContext
 
     public virtual DbSet<tblFlowMaster> tblFlowMaster { get; set; }
 
+    public virtual DbSet<tblActivityLog> tblActivityLog { get; set; }
+
 
     public virtual int CreateForm(string empID, string evaluator, Nullable<int> jobID, string projectNO)
     {
@@ -511,18 +513,6 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_GetEvaDataByEvaID_Result> SP_GetEvaDataByEvaID(Nullable<int> evaID)
-    {
-
-        var evaIDParameter = evaID.HasValue ?
-            new ObjectParameter("EvaID", evaID) :
-            new ObjectParameter("EvaID", typeof(int));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaDataByEvaID_Result>("SP_GetEvaDataByEvaID", evaIDParameter);
-    }
-
-
     public virtual int SP_UpdateData(Nullable<int> evaID, Nullable<int> point, Nullable<int> h_ID, string comment)
     {
 
@@ -880,6 +870,40 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteApproveByEvaID", evaIDParameter);
+    }
+
+
+    public virtual int SP_InsertLog(string activity, string employeeNo, string name)
+    {
+
+        var activityParameter = activity != null ?
+            new ObjectParameter("Activity", activity) :
+            new ObjectParameter("Activity", typeof(string));
+
+
+        var employeeNoParameter = employeeNo != null ?
+            new ObjectParameter("EmployeeNo", employeeNo) :
+            new ObjectParameter("EmployeeNo", typeof(string));
+
+
+        var nameParameter = name != null ?
+            new ObjectParameter("Name", name) :
+            new ObjectParameter("Name", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_InsertLog", activityParameter, employeeNoParameter, nameParameter);
+    }
+
+
+    public virtual ObjectResult<SP_GetEvaDataByEvaID_Result> SP_GetEvaDataByEvaID(Nullable<int> evaID)
+    {
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaDataByEvaID_Result>("SP_GetEvaDataByEvaID", evaIDParameter);
     }
 
 }

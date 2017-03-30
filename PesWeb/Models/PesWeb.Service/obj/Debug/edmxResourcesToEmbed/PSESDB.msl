@@ -433,26 +433,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SP_GetEvaDataByEvaID" FunctionName="PSESModel.Store.SP_GetEvaDataByEvaID">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="PSESModel.SP_GetEvaDataByEvaID_Result">
-          <ScalarProperty Name="Part2ID" ColumnName="Part2ID" />
-          <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
-          <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
-          <ScalarProperty Name="GroupOfStaff" ColumnName="GroupOfStaff" />
-          <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
-          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
-          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
-          <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />
-          <ScalarProperty Name="StartDatePlan" ColumnName="StartDatePlan" />
-          <ScalarProperty Name="FinishDatePlan" ColumnName="FinishDatePlan" />
-          <ScalarProperty Name="Function" ColumnName="Function" />
-          <ScalarProperty Name="EvaluatorFirstName" ColumnName="EvaluatorFirstName" />
-          <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
-          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <EntitySetMapping Name="tblHeaderAdditional">
       <EntityTypeMapping TypeName="PSESModel.tblHeaderAdditional">
         <MappingFragment StoreEntitySet="tblHeaderAdditional">
@@ -605,5 +585,39 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_UpdateAprroveData" FunctionName="PSESModel.Store.SP_UpdateAprroveData" />
     <FunctionImportMapping FunctionImportName="SP_DeleteApproveByEvaID" FunctionName="PSESModel.Store.SP_DeleteApproveByEvaID" />
+    <FunctionImportMapping FunctionImportName="SP_InsertLog" FunctionName="PSESModel.Store.SP_InsertLog" />
+    <EntitySetMapping Name="tblActivityLog">
+      <EntityTypeMapping TypeName="PSESModel.tblActivityLog">
+        <MappingFragment StoreEntitySet="tblActivityLog">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Activity" ColumnName="Activity" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetEvaDataByEvaID" FunctionName="PSESModel.Store.SP_GetEvaDataByEvaID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetEvaDataByEvaID_Result">
+          <ScalarProperty Name="Part2ID" ColumnName="Part2ID" />
+          <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
+          <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+          <ScalarProperty Name="GroupOfStaff" ColumnName="GroupOfStaff" />
+          <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
+          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+          <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />
+          <ScalarProperty Name="StartDatePlan" ColumnName="StartDatePlan" />
+          <ScalarProperty Name="FinishDatePlan" ColumnName="FinishDatePlan" />
+          <ScalarProperty Name="Function" ColumnName="Function" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="FinishTime" ColumnName="FinishTime" />
+          <ScalarProperty Name="EvaluatorFirstName" ColumnName="EvaluatorFirstName" />
+          <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
   </EntityContainerMapping>
 </Mapping>

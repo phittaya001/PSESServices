@@ -39,6 +39,10 @@ public partial class SP_GetEvaDataByEvaID_Result
 
     public string Function { get; set; }
 
+    public string StartTime { get; set; }
+
+    public string FinishTime { get; set; }
+
     public string EvaluatorFirstName { get; set; }
 
     public string EvaluatorLastName { get; set; }

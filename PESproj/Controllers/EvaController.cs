@@ -14,6 +14,16 @@ namespace PESproj.Controllers
     [RoutePrefix("Eva")]
     public class EvaController : ApiController
     {
+        public void insertLog(string Name,string EmployeeNo,string Activity)
+        {
+            var log = ServiceContainer.GetService<PesWeb.Service.Modules.Log>();
+            tblActivityLog lg = new tblActivityLog();
+            lg.Activity = Activity;
+            lg.EmployeeNo = EmployeeNo;
+            lg.Name = Name;
+            log.InsertLog(lg);
+        }
+        
         [Route("Period")]
         [HttpGet]
         public List<PeriodData> GetPeriod()
@@ -124,6 +134,7 @@ namespace PESproj.Controllers
                 {
                     header.InsertSCORE(eva_ID, h.H_ID);
                 }
+                List<tblEmployee> emp = header.getEmployees();
                 int num = header.GetAllApprove().Where(a => a.EvaID == eva_ID).ToList().Count;
                 if (num == 0)
                 {
@@ -139,7 +150,7 @@ namespace PESproj.Controllers
                     ap.ProjectCode = pj.CustomerCode + " " + pj.ProjectNameAlias;
                     int pID = header.insertApprove(ap).ID;
                     List<tblFlowMaster> AllFlow = header.getAllFlow();
-                    List<tblEmployee> emp = header.getEmployees();
+                   
                    foreach (tblFlowMaster a in AllFlow)
                     {
                         tblApproveStatus tmp = new tblApproveStatus();
@@ -184,9 +195,11 @@ namespace PESproj.Controllers
                         }
                         tmp.ApproveID = pID;
                         header.insertApproveStatus(tmp);
+                       
                     }
                 }
-
+                tblEmployee empLog = emp.Where(t => t.EmployeeNo.Trim() == Data["EvaluatorNO"].ToString().Trim()).FirstOrDefault();
+                insertLog(empLog.EmployeeFirstName + " " + empLog.EmployeeLastName, empLog.EmployeeNo, "new evaluation : " + eva_ID);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             return Request.CreateResponse(HttpStatusCode.BadRequest);
@@ -274,8 +287,11 @@ namespace PESproj.Controllers
             try
             {
                 var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+                tblEvaluation eva = header.GetAllEvaluation().Where(a => a.Eva_ID == EvaID).FirstOrDefault();
                 header.DeleteEva(EvaID);
                 header.DeleteApprove(EvaID);
+                tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo.Trim() == eva.EvaluatorNO).FirstOrDefault();
+                insertLog(emp.EmployeeFirstName + " " + emp.EmployeeLastName, eva.EvaluatorNO, "Delete Evaluation : " + EvaID);
                 return Request.CreateResponse(HttpStatusCode.OK);
             }
             catch
@@ -357,31 +373,38 @@ namespace PESproj.Controllers
         [HttpPut]
         public void ApproveState([FromBody]JObject Data)
         {
+            
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
            
             // var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             tblApprove AllAp = header.GetAllApprove().Where(a => a.EvaID == Convert.ToInt32(Data["EvaID"].ToString())).OrderByDescending(a=>a.ID).FirstOrDefault();
             tblApproveStatus ApS = header.GetApproveStatus().Where(a => a.EmployeeNO.Trim() == Data["EmpID"].ToString() && a.ApproveID == AllAp.ID).OrderByDescending(a=>a.ID).FirstOrDefault();
             ApS.Status = 1;//Convert.ToInt32(Data["Status"].ToString());
+            string type = "";
             if(ApS.FlowOrder == 1)
             {
                 AllAp.ST = 1;
+                type = "Project Manager";
                 
             }
             else if(ApS.FlowOrder == 2)
             {
+                type = "Staff";
                 AllAp.PM = 1;
             }
             else if(ApS.FlowOrder == 3)
             {
                 AllAp.GM = 1;
+                type = "Group Manager";
             }
             else if(ApS.FlowOrder == 4)
             {
                 AllAp.HR = 1;
+                type = "Human Resource";
             }
             header.UpdateApproveData(AllAp);
             header.UpdateApproveData(ApS);
+            insertLog(AllAp.Name, Data["EmpID"].ToString(), type + " Approve EvaID : " + Data["EvaID"].ToString());
         }
     }
 }

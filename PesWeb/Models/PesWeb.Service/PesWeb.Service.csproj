@@ -85,6 +85,7 @@
     <Compile Include="Modules\HeaderManage.cs" />
     <Compile Include="Modules\HeaderOutputData.cs" />
     <Compile Include="Modules\LDAPHelper.cs" />
+    <Compile Include="Modules\Log.cs" />
     <Compile Include="Modules\PeriodData.cs" />
     <Compile Include="Modules\ProjectMember.cs" />
     <Compile Include="Modules\UserLogSvr.cs" />
@@ -200,6 +201,9 @@
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="SP_InsertHeader_Result.cs">
+      <DependentUpon>PSESDB.tt</DependentUpon>
+    </Compile>
+    <Compile Include="tblActivityLog.cs">
       <DependentUpon>PSESDB.tt</DependentUpon>
     </Compile>
     <Compile Include="tblApprove.cs">

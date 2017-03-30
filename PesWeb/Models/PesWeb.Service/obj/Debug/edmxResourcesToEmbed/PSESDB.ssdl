@@ -10,6 +10,18 @@
     <Property Name="Code" Type="nchar" MaxLength="10" />
     <Property Name="Status" Type="int" />
   </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'PSES.dbo.tblActivityLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="tblActivityLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Activity" Type="varchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="EmployeeNo" Type="varchar" MaxLength="10" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="tblApprove">
     <Key>
       <PropertyRef Name="ID" />
@@ -94,8 +106,8 @@ warning 6002: The table/view 'PSES.dbo.tblApproveStatus' does not have a primary
     <Property Name="ProjectNO" Type="varchar" MaxLength="15" />
     <Property Name="period" Type="varchar" MaxLength="25" />
     <Property Name="PeriodID" Type="int" />
-    <Property Name="StartEvaDate" Type="date" />
-    <Property Name="FinishEvaDate" Type="date" />
+    <Property Name="StartEvaDate" Type="datetime" />
+    <Property Name="FinishEvaDate" Type="datetime" />
     <Property Name="EvaStatus" Type="int" />
   </EntityType>
   <!--Errors Found During Generation:
@@ -494,6 +506,11 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
     <Parameter Name="PositionNo" Type="int" Mode="In" />
     <Parameter Name="HeaderID" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_InsertLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Activity" Type="varchar" Mode="In" />
+    <Parameter Name="EmployeeNo" Type="varchar" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SP_InsertScore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="H3_ID" Type="int" Mode="In" />
@@ -548,6 +565,15 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
     <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTitle" EntityType="Self.tblTitle" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblActivityLog" EntityType="Self.tblActivityLog" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [tblActivityLog].[ID] AS [ID], 
+    [tblActivityLog].[Activity] AS [Activity], 
+    [tblActivityLog].[Date] AS [Date], 
+    [tblActivityLog].[EmployeeNo] AS [EmployeeNo], 
+    [tblActivityLog].[Name] AS [Name]
+    FROM [dbo].[tblActivityLog] AS [tblActivityLog]</DefiningQuery>
+    </EntitySet>
     <EntitySet Name="tblApproveStatus" EntityType="Self.tblApproveStatus" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 
     [tblApproveStatus].[ID] AS [ID], 
