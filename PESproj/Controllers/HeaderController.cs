@@ -56,7 +56,7 @@ namespace PESproj.Controllers
 
         [Route("All/{PositionID}/{EvaID}/{ID}/{Language}")]
         [HttpGet]
-        public List<SP_GetHeaderByPosition_Result> GetAllHeader(int PositionID,int EvaID,int ID,string Language)
+        public List<JObject> GetAllHeader(int PositionID,int EvaID,int ID,string Language)
         {
 
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
@@ -175,6 +175,8 @@ namespace PESproj.Controllers
             }
 
             List<SP_GetHeaderByPosition_Result> H_new2 = new List<SP_GetHeaderByPosition_Result>();
+            
+            
             foreach (SP_GetHeaderByPosition_Result a in H_new)
             {
                 if (a.Parent == 0)
@@ -193,17 +195,40 @@ namespace PESproj.Controllers
                     }
                 }
             }
-            
-            for(int i = 0;i<H_new2.Count;i++)
+            List<JObject> aaa = new List<JObject>();
+            H_new2.ForEach(a =>
             {
-                string json = H_new2[i].Text_Language.Replace(@"\", "");
-                JObject Data = JsonConvert.DeserializeObject<JObject>(json);
-                if (Data[Language] != null)
-                {
-                    H_new2[i].Text = Data[Language].ToString();
-                }
-            }
-            return H_new2;
+                JObject bbb = new JObject();
+                bbb["H_ID"] = a.H_ID;
+                bbb["Text_Language"] = JsonConvert.DeserializeObject<JObject>(a.Text_Language);
+                bbb["Alias"] = a.Alias;
+                bbb["Comment"] = a.Comment;
+                bbb["Eva_ID"] = a.Eva_ID;
+                bbb["H_Level"] = a.H_Level;
+                bbb["Parent"] = a.Parent;
+                bbb["point"] = a.point;
+                bbb["PositionNO"] = a.PositionNO;
+                bbb["Score_ID"] = a.Score_ID;
+                bbb["Text"] = a.Text;
+                bbb["Text_Eng"] = a.Text_Eng;
+                aaa.Add(bbb);
+            });
+
+            return aaa;
+            //JObject Data = new JObject();
+            //for (int i = 0;i<H_new2.Count;i++)
+            //{
+            //    if (H_new2[i].Text_Language != null)
+            //    {
+            //        string json = H_new2[i].Text_Language.Replace(@"\", "");
+            //        Data = JsonConvert.DeserializeObject<JObject>(json);
+            //        if (Data[Language] != null)
+            //        {
+            //            H_new2[i].Text_Language = Data.ToString();
+            //        }
+            //    }
+            //}
+            //return Data;
         }
 
         
@@ -504,9 +529,25 @@ namespace PESproj.Controllers
 
             header.insertHeader(H);
         }
+        [Route("Language/{language}")]
+        [HttpPut]
+        public string LanguageChange(string language)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            List<tblHeader> hder = header.GetAllHeader().ToList();
+            string json = "{";
+            foreach(tblHeader h in hder)
+            {
+                json += "\"" + h.Text + "\":" + h.Text_Language + ",";
+            }
+            json += "}";
+            return json;
+        }
 
-       
 
-        
+
+
+
+
     }
 }

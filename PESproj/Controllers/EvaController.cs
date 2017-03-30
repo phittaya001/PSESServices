@@ -326,11 +326,15 @@ namespace PESproj.Controllers
 
         [Route("EvaData/{EvaID}")]
         [HttpGet]
-        public List<SP_GetEvaDataByEvaID_Result> getEvaDataByEvaID(int EvaID)
+        public List<SP_GetEvaDataByEvaID_Result> getEvaDataByEvaID(int EvaID,string Language)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
-            
-            return header.getEvaDataByEvaID(EvaID).ToList();
+            List<SP_GetEvaDataByEvaID_Result> evadata = header.getEvaDataByEvaID(EvaID).ToList();
+            for (int i = 0; i < evadata.Count; i++)
+            {
+
+            }
+            return evadata;
         }
 
         [Route("Approve/{EmpID}/{EvaID}")]
