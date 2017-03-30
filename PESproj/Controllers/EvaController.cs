@@ -301,6 +301,29 @@ namespace PESproj.Controllers
         }
         //GG
 
+        [Route("UpdateLanguage/")]
+        [HttpGet]
+        public string UpdateDataTble()
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            var header2 = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            List<tblHeader> Hder = header2.GetAllHeader();
+            foreach(tblHeader h in Hder)
+            {
+                if(h.Text_Eng != "-")
+                {
+                    string Data = "{\"EN\":\"" + h.Text_Eng + "\",\"TH\":\"" + h.Text + "\"}";
+                    header.UpdateDataTable(Data, h.H_ID);
+                }
+                else
+                {
+                    string Data = "{\"EN\":\"" + h.Text + "\",\"TH\":\"" + h.Text + "\"}";
+                    header.UpdateDataTable(Data, h.H_ID);
+                }
+            }
+            return "success";
+        }
+
         [Route("EvaData/{EvaID}")]
         [HttpGet]
         public List<SP_GetEvaDataByEvaID_Result> getEvaDataByEvaID(int EvaID)

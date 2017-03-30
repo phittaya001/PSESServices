@@ -32,6 +32,8 @@ public partial class tblHeader
 
     public Nullable<int> H_Level { get; set; }
 
+    public string Text_Language { get; set; }
+
 }
 
 }

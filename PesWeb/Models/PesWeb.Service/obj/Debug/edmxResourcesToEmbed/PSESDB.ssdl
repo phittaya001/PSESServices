@@ -133,6 +133,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
     <Property Name="PositionNo" Type="int" />
     <Property Name="Alias" Type="varchar" MaxLength="5" />
     <Property Name="H_Level" Type="int" />
+    <Property Name="Text_Language" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="tblHeaderAdditional">
     <Key>
@@ -538,6 +539,10 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
     <Parameter Name="point" Type="int" Mode="In" />
     <Parameter Name="H_ID" Type="int" Mode="In" />
     <Parameter Name="comment" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_UpdateDataTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Language" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ID" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_UpdateEvaluationStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />

@@ -177,5 +177,11 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             db.SP_UpdateAprroveData(aps.Status, aps.ID);
         }
+
+        public void UpdateDataTable(string Data,int id)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_UpdateDataTable(Data,id);
+        }
     }
 }

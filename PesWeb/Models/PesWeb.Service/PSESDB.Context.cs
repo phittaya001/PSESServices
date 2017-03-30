@@ -711,23 +711,6 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_GetHeaderByPosition_Result> SP_GetHeaderByPosition(Nullable<int> positionNO, Nullable<int> evaID)
-    {
-
-        var positionNOParameter = positionNO.HasValue ?
-            new ObjectParameter("PositionNO", positionNO) :
-            new ObjectParameter("PositionNO", typeof(int));
-
-
-        var evaIDParameter = evaID.HasValue ?
-            new ObjectParameter("EvaID", evaID) :
-            new ObjectParameter("EvaID", typeof(int));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHeaderByPosition_Result>("SP_GetHeaderByPosition", positionNOParameter, evaIDParameter);
-    }
-
-
     public virtual ObjectResult<SP_InsertApproveState_Result> SP_InsertApproveState(Nullable<int> evaID, string position, Nullable<int> positionID, string projectCode, string role, string name)
     {
 
@@ -904,6 +887,40 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaDataByEvaID_Result>("SP_GetEvaDataByEvaID", evaIDParameter);
+    }
+
+
+    public virtual int SP_UpdateDataTable(string language, Nullable<int> iD)
+    {
+
+        var languageParameter = language != null ?
+            new ObjectParameter("Language", language) :
+            new ObjectParameter("Language", typeof(string));
+
+
+        var iDParameter = iD.HasValue ?
+            new ObjectParameter("ID", iD) :
+            new ObjectParameter("ID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateDataTable", languageParameter, iDParameter);
+    }
+
+
+    public virtual ObjectResult<SP_GetHeaderByPosition_Result> SP_GetHeaderByPosition(Nullable<int> positionNO, Nullable<int> evaID)
+    {
+
+        var positionNOParameter = positionNO.HasValue ?
+            new ObjectParameter("PositionNO", positionNO) :
+            new ObjectParameter("PositionNO", typeof(int));
+
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHeaderByPosition_Result>("SP_GetHeaderByPosition", positionNOParameter, evaIDParameter);
     }
 
 }

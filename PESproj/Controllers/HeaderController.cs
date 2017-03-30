@@ -1,4 +1,5 @@
 ﻿using CSI.CastleWindsorHelper;
+using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using PesWeb.Service;
 using PesWeb.Service.Modules;
@@ -53,9 +54,9 @@ namespace PESproj.Controllers
             header.DeleteHeader(H_ID);
         }
 
-        [Route("All/{PositionID}/{EvaID}/{ID}")]
+        [Route("All/{PositionID}/{EvaID}/{ID}/{Language}")]
         [HttpGet]
-        public List<SP_GetHeaderByPosition_Result> GetAllHeader(int PositionID,int EvaID,int ID)
+        public List<SP_GetHeaderByPosition_Result> GetAllHeader(int PositionID,int EvaID,int ID,string Language)
         {
 
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
@@ -193,7 +194,15 @@ namespace PESproj.Controllers
                 }
             }
             
-
+            for(int i = 0;i<H_new2.Count;i++)
+            {
+                string json = H_new2[i].Text_Language.Replace(@"\", "");
+                JObject Data = JsonConvert.DeserializeObject<JObject>(json);
+                if (Data[Language] != null)
+                {
+                    H_new2[i].Text = Data[Language].ToString();
+                }
+            }
             return H_new2;
         }
 

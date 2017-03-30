@@ -23,6 +23,8 @@ public partial class SP_GetHeaderByPosition_Result
 
     public string Text_Eng { get; set; }
 
+    public string Text_Language { get; set; }
+
     public Nullable<int> Parent { get; set; }
 
     public string Alias { get; set; }

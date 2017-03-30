@@ -217,10 +217,6 @@
       <Parameter Name="PM" Mode="In" Type="Int32" />
       <Parameter Name="ST" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
-      <Parameter Name="PositionNO" Mode="In" Type="Int32" />
-      <Parameter Name="EvaID" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="SP_InsertApproveState" ReturnType="Collection(PSESModel.SP_InsertApproveState_Result)">
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
       <Parameter Name="Position" Mode="In" Type="String" />
@@ -262,6 +258,14 @@
     </FunctionImport>
     <EntitySet Name="tblActivityLog" EntityType="PSESModel.tblActivityLog" />
     <FunctionImport Name="SP_GetEvaDataByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaDataByEvaID_Result)">
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UpdateDataTable">
+      <Parameter Name="Language" Mode="In" Type="String" />
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
+      <Parameter Name="PositionNO" Mode="In" Type="Int32" />
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
@@ -585,6 +589,7 @@
     <Property Name="PositionNo" Type="Int32" />
     <Property Name="Alias" Type="String" MaxLength="5" FixedLength="false" Unicode="false" />
     <Property Name="H_Level" Type="Int32" />
+    <Property Name="Text_Language" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tblHeaderAdditional">
     <Key>
@@ -671,19 +676,6 @@
     <Property Name="UpdateDate" Type="DateTime" Precision="0" />
     <Property Name="PrevEmployeeNo" Type="String" MaxLength="10" FixedLength="true" Unicode="false" />
   </EntityType>
-  <ComplexType Name="SP_GetHeaderByPosition_Result">
-    <Property Type="Int32" Name="PositionNO" Nullable="true" />
-    <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
-    <Property Type="Int32" Name="Parent" Nullable="true" />
-    <Property Type="String" Name="Alias" Nullable="true" MaxLength="5" />
-    <Property Type="Int32" Name="H_Level" Nullable="true" />
-    <Property Type="Int32" Name="Score_ID" Nullable="true" />
-    <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
-    <Property Type="Int32" Name="H_ID" Nullable="false" />
-    <Property Type="Int32" Name="point" Nullable="true" />
-    <Property Type="Int32" Name="Eva_ID" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="SP_InsertApproveState_Result">
     <Property Type="Int32" Name="ID" Nullable="false" />
   </ComplexType>
@@ -737,5 +729,19 @@
     <Property Type="String" Name="EvaluatorFirstName" Nullable="true" MaxLength="30" />
     <Property Type="String" Name="EvaluatorLastName" Nullable="true" MaxLength="30" />
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
+  </ComplexType>
+  <ComplexType Name="SP_GetHeaderByPosition_Result">
+    <Property Type="Int32" Name="PositionNO" Nullable="true" />
+    <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Text_Language" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+    <Property Type="String" Name="Alias" Nullable="true" MaxLength="5" />
+    <Property Type="Int32" Name="H_Level" Nullable="true" />
+    <Property Type="Int32" Name="Score_ID" Nullable="true" />
+    <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="H_ID" Nullable="false" />
+    <Property Type="Int32" Name="point" Nullable="true" />
+    <Property Type="Int32" Name="Eva_ID" Nullable="true" />
   </ComplexType>
 </Schema>
