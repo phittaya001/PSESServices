@@ -503,6 +503,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
           <Parameter Name="Alias" Type="varchar" Mode="In" />
           <Parameter Name="H_Level" Type="int" Mode="In" />
           <Parameter Name="PositionNO" Type="int" Mode="In" />
+          <Parameter Name="Text_Language" Type="varchar(max)" Mode="In" />
         </Function>
         <Function Name="SP_InsertHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="JobID" Type="int" Mode="In" />
@@ -804,6 +805,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
             <Parameter Name="Alias" Mode="In" Type="String" />
             <Parameter Name="H_Level" Mode="In" Type="Int32" />
             <Parameter Name="PositionNO" Mode="In" Type="Int32" />
+            <Parameter Name="Text_Language" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_InsertHeaderPosition">
             <Parameter Name="PositionNo" Mode="In" Type="Int32" />
@@ -882,7 +884,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_GetEvaDataByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaDataByEvaID_Result)">
-            <Parameter Name="EvaID" Mode="In" Type="Int32" />
+          <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">

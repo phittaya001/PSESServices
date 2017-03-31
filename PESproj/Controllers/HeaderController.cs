@@ -455,7 +455,7 @@ namespace PESproj.Controllers
 
         [Route("GetHeader/{PositionID}")]
         [HttpGet]
-        public List<tblHeader> GetHeaderByPosition(int PositionID)
+        public List<JObject> GetHeaderByPosition(int PositionID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
             List<tblHeader> result = header.getHeaderData().ToList();
@@ -509,7 +509,21 @@ namespace PESproj.Controllers
                 }
             }
 
-            return H_new;
+            List<JObject> aaa = new List<JObject>();
+            H_new.ForEach(a =>
+            {
+                JObject bbb = new JObject();
+                bbb["H_ID"] = a.H_ID;
+                bbb["Text_Language"] = JsonConvert.DeserializeObject<JObject>(a.Text_Language);
+                bbb["Alias"] = a.Alias;
+                bbb["H_Level"] = a.H_Level;
+                bbb["Parent"] = a.Parent;
+                bbb["Text"] = a.Text;
+                bbb["Text_Eng"] = a.Text_Eng;
+                aaa.Add(bbb);
+            });
+
+            return aaa;
         }
 
         
@@ -526,6 +540,7 @@ namespace PESproj.Controllers
             H.Text_Eng = Data["Text_Eng"].ToString();
             H.Alias = Data["Alias"].ToString();
             H.PositionNo = Convert.ToInt32( Data["PositionNo"].ToString());
+            H.Text_Language = "{\"EN\":\""+H.Text+"\",\"TH\":\""+H.Text_Eng+"\"}";
 
             header.insertHeader(H);
         }
