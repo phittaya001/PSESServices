@@ -236,18 +236,74 @@ namespace PESproj.Controllers
 
         [Route("Eva/{EvaluatorID}/All")]
         [HttpGet]
-        public List<SP_GetEvaListByEvaluatorID_Result> getEvaData(string EvaluatorID)
+        public List<JObject> getEvaData(string EvaluatorID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
-            return header.getEvaListByEvaluatorID(EvaluatorID).ToList();
+            List< SP_GetEvaListByEvaluatorID_Result > evalist = header.getEvaListByEvaluatorID(EvaluatorID).ToList();
+            List<JObject> Jeva = new List<JObject>();
+            List<tblEmployee> emp = header.getEmployees();
+            evalist.ForEach(a =>
+            {
+                JObject tmp = new JObject();
+                tmp["CustomerCompanyAlias"] = a.CustomerCompanyAlias;
+                tmp["EmployeeFirstName"] = a.EmployeeFirstName;
+                tmp["EmployeeLastName"] = a.EmployeeLastName;
+                tmp["EvaluatorFirstName"] = a.EvaluatorFirstName;
+                tmp["EvaluatorLastName"] = a.EvaluatorLastName;
+                tmp["EvaStatus"] = a.EvaStatus;
+                tmp["EvaTerm"] = a.EvaTerm;
+                tmp["Eva_ID"] = a.Eva_ID;
+                tmp["FinishDatePlan"] = a.FinishDatePlan;
+                tmp["FinishEvaDate"] = a.FinishEvaDate;
+                tmp["Function"] = a.Function;
+                tmp["GroupOfStaff"] = a.GroupOfStaff;
+                tmp["PeriodID"] = a.PeriodID;
+                tmp["ProjectCode"] = a.ProjectCode;
+                tmp["ProjectType"] = a.ProjectType;
+                tmp["StartDatePlan"] = a.StartDatePlan;
+                tmp["StartEvaDate"] = a.StartEvaDate;
+                //tmp["employee_language"] =
+               // tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Trim() == a.em).FirstOrDefault();
+                tmp["name_language"] = JsonConvert.DeserializeObject<JObject>("{\"EN\":\"" + a.EmployeeFirstName + " " + a.EmployeeLastName + "\",\"TH\":\"" + a.EmployeeFirstNameThai + " " + a.EmployeeLastNameThai + "\"}");
+                Jeva.Add(tmp);
+            });
+            return Jeva;
         }
 
         [Route("Eva/{EvaluatorID}/{periodID}")]
         [HttpGet]
-        public List<SP_GetEvaListByEvaluatorID_Result> getEvaDataByPeriod(string EvaluatorID,int periodID)
+        public List<JObject> getEvaDataByPeriod(string EvaluatorID,int periodID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
-            return header.getEvaListByEvaluatorID(EvaluatorID).Where(a=>a.PeriodID==periodID).ToList();
+            List<SP_GetEvaListByEvaluatorID_Result> evalist = header.getEvaListByEvaluatorID(EvaluatorID).Where(a => a.PeriodID == periodID).ToList();
+            List<JObject> Jeva = new List<JObject>();
+            List<tblEmployee> emp = header.getEmployees();
+            evalist.ForEach(a =>
+            {
+                JObject tmp = new JObject();
+                tmp["CustomerCompanyAlias"] = a.CustomerCompanyAlias;
+                tmp["EmployeeFirstName"] = a.EmployeeFirstName;
+                tmp["EmployeeLastName"] = a.EmployeeLastName;
+                tmp["EvaluatorFirstName"] = a.EvaluatorFirstName;
+                tmp["EvaluatorLastName"] = a.EvaluatorLastName;
+                tmp["EvaStatus"] = a.EvaStatus;
+                tmp["EvaTerm"] = a.EvaTerm;
+                tmp["Eva_ID"] = a.Eva_ID;
+                tmp["FinishDatePlan"] = a.FinishDatePlan;
+                tmp["FinishEvaDate"] = a.FinishEvaDate;
+                tmp["Function"] = a.Function;
+                tmp["GroupOfStaff"] = a.GroupOfStaff;
+                tmp["PeriodID"] = a.PeriodID;
+                tmp["ProjectCode"] = a.ProjectCode;
+                tmp["ProjectType"] = a.ProjectType;
+                tmp["StartDatePlan"] = a.StartDatePlan;
+                tmp["StartEvaDate"] = a.StartEvaDate;
+                //tmp["employee_language"] =
+                // tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Trim() == a.em).FirstOrDefault();
+                tmp["name_language"] = JsonConvert.DeserializeObject<JObject>("{\"EN\":\"" + a.EmployeeFirstName + " " + a.EmployeeLastName + "\",\"TH\":\"" + a.EmployeeFirstNameThai + " " + a.EmployeeLastNameThai + "\"}");
+                Jeva.Add(tmp);
+            });
+            return Jeva;
         }
 
         [Route("Eva/{EvaluatorID}/History")]
@@ -370,6 +426,7 @@ namespace PESproj.Controllers
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<SP_GetEvaDataByEvaID_Result> evadata = header.getEvaDataByEvaID(EvaID).ToList();
             List<JObject> Eva = new List<JObject>();
+            List<tblEmployee> emp = header.getEmployees();
             evadata.ForEach(a =>
             {
                 JObject tmp = new JObject();
@@ -392,6 +449,9 @@ namespace PESproj.Controllers
                 tmp["name_language"] = JsonConvert.DeserializeObject<JObject>(text);
                 text = "{\"EN\":\"" + a.EmployeeLastName + "\",\"TH\":\"" + a.EmployeeLastNameThai + "\"}";
                 tmp["lastname_language"] = JsonConvert.DeserializeObject<JObject>(text);
+                //tblEmployee em = emp.Where(b=>b.EmployeeNo.Trim() == a.)
+                text = "{\"EN\":\"" + a.EvaluatorFirstName + " " + a.EvaluatorLastName + "\",\"TH\":\"" + a.EvaluatorFirstNameThai +" " + a.EvaluatorLastNameThai + "\"}";
+                tmp["Evaluator"] = JsonConvert.DeserializeObject < JObject>(text);
                 Eva.Add(tmp);
                 //  evadata[i].EmployeeFirstNameThai = 
             });
@@ -417,7 +477,7 @@ namespace PESproj.Controllers
 
         [Route("ApproveList/{EmpID}")]
         [HttpGet]
-        public List<tblApprove> getApproveList(string EmpID)
+        public List<JObject> getApproveList(string EmpID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             
@@ -454,7 +514,31 @@ namespace PESproj.Controllers
                 }
                     
             }
-            return Ap;
+
+            List<tblEmployee> emp = header.getEmployees();
+            List<JObject> ApObject = new List<JObject>();
+            Ap.ForEach(a =>
+            {
+                JObject tmp = new JObject();
+                tmp["ApproverID"] = a.ApproverID;
+                tmp["ApproveState"] = a.ApproveState;
+                tmp["EvaID"] = a.EvaID;
+                tmp["GM"] = a.GM;
+                tmp["HR"] = a.HR;
+                tmp["ID"] = a.ID;
+                tmp["Name"] = a.Name;
+                tmp["PM"] = a.PM;
+                tmp["Position"] = a.Position;
+                tmp["PositionID"] = a.PositionID;
+                tmp["ProjectCode"] = a.ProjectCode;
+                tmp["Role"] = a.Role;
+                tmp["ST"] = a.ST;
+                tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Trim() == a.EmployeeNo).FirstOrDefault();
+                tmp["name_language"] = JsonConvert.DeserializeObject<JObject>("{\"EN\":\"" + empTemp.EmployeeFirstName + " " + empTemp.EmployeeLastName + "\",\"TH\":\"" + empTemp.EmployeeFirstNameThai + " " + empTemp.EmployeeLastNameThai + "\"}");
+                ApObject.Add(tmp);
+            });
+
+            return ApObject;
         }
 
         [Route("ApproveStatus")]

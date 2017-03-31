@@ -51,6 +51,10 @@ public partial class SP_GetEvaDataByEvaID_Result
 
     public string EvaluatorLastName { get; set; }
 
+    public string EvaluatorFirstNameThai { get; set; }
+
+    public string EvaluatorLastNameThai { get; set; }
+
     public int Eva_ID { get; set; }
 
 }

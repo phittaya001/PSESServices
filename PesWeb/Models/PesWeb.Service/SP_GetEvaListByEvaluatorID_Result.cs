@@ -27,6 +27,10 @@ public partial class SP_GetEvaListByEvaluatorID_Result
 
     public string EmployeeLastName { get; set; }
 
+    public string EmployeeLastNameThai { get; set; }
+
+    public string EmployeeFirstNameThai { get; set; }
+
     public string GroupOfStaff { get; set; }
 
     public string CustomerCompanyAlias { get; set; }
@@ -46,6 +50,10 @@ public partial class SP_GetEvaListByEvaluatorID_Result
     public string EvaluatorFirstName { get; set; }
 
     public string EvaluatorLastName { get; set; }
+
+    public string EvaluatorLastNameThai { get; set; }
+
+    public string EvaluatorFirstNameThai { get; set; }
 
     public int Eva_ID { get; set; }
 
