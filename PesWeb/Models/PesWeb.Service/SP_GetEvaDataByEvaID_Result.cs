@@ -21,7 +21,11 @@ public partial class SP_GetEvaDataByEvaID_Result
 
     public string EmployeeFirstName { get; set; }
 
+    public string EmployeeFirstNameThai { get; set; }
+
     public string EmployeeLastName { get; set; }
+
+    public string EmployeeLastNameThai { get; set; }
 
     public string GroupOfStaff { get; set; }
 

@@ -8,6 +8,7 @@ using System.Net;
 using System.Net.Http;
 using System.Web.Http;
 using PesWeb.Service.Modules;
+using Newtonsoft.Json;
 
 namespace PESproj.Controllers
 {
@@ -326,15 +327,35 @@ namespace PESproj.Controllers
 
         [Route("EvaData/{EvaID}")]
         [HttpGet]
-        public List<SP_GetEvaDataByEvaID_Result> getEvaDataByEvaID(int EvaID,string Language)
+        public List<JObject> getEvaDataByEvaID(int EvaID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<SP_GetEvaDataByEvaID_Result> evadata = header.getEvaDataByEvaID(EvaID).ToList();
-            for (int i = 0; i < evadata.Count; i++)
+            List<JObject> Eva = new List<JObject>();
+            evadata.ForEach(a =>
             {
-
-            }
-            return evadata;
+                JObject tmp = new JObject();
+                tmp["Part2ID"] = a.Part2ID;
+                tmp["GroupOfStaff"] = a.GroupOfStaff;
+                tmp["CustomerCompanyAlias"] = a.CustomerCompanyAlias;
+                tmp["ProjectCode"] = a.ProjectCode;
+                tmp["ProjectType"] = a.ProjectType;
+                tmp["EvaTerm"] = a.EvaTerm;
+                tmp["StartDatePlan"] = a.StartDatePlan;
+                tmp["FinishDatePlan"] = a.FinishDatePlan;
+                tmp["Function"] = a.Function;
+                tmp["StartTime"] = a.StartTime;
+                tmp["FinishTime"] = a.FinishTime;
+                tmp["EvaluatorFirstName"] = a.EvaluatorFirstName;
+                tmp["EvaluatorLastName"] = a.EvaluatorLastName;
+                tmp["Eva_ID"] = a.Eva_ID;
+                
+                string text = "{\"EN\":\"" + a.EmployeeFirstName + " " + a.EmployeeLastName + "\",\"TH\":\"" + a.EmployeeFirstNameThai + " " + a.EmployeeLastNameThai + "\"}";
+                tmp["name_language"] = JsonConvert.DeserializeObject<JObject>(text);
+                Eva.Add(tmp);
+                //  evadata[i].EmployeeFirstNameThai = 
+            });
+            return Eva;
         }
 
         [Route("Approve/{EmpID}/{EvaID}")]
