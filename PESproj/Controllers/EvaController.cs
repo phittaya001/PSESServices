@@ -260,7 +260,7 @@ namespace PESproj.Controllers
 
         [Route("Eva/ApproveHistory/{EmpID}/")]
         [HttpGet]
-        public List<tblApprove> ApproveHistory(string EmpID)
+        public List<JObject> ApproveHistory(string EmpID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
 
@@ -296,10 +296,11 @@ namespace PESproj.Controllers
                 tmp["ProjectCode"] = a.ProjectCode;
                 tmp["Role"] = a.Role;
                 tmp["ST"] = a.ST;
-                //tblEmployee empTemp = emp.Where(b=>b.EmployeeNo == a.)
-                
+                tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Trim() == a.EmployeeNo).FirstOrDefault();
+                tmp["name_language"] = JsonConvert.DeserializeObject < JObject > ("{\"EN\":\"" + empTemp.EmployeeFirstName + " " + empTemp.EmployeeLastName + "\",\"TH\":\"" + empTemp.EmployeeFirstNameThai + " " + empTemp.EmployeeLastNameThai + "\"}");
+                ApObject.Add(tmp);
             });
-            return Ap;
+            return ApObject;
         }
 
         [Route("Delete/{EvaID}")]
