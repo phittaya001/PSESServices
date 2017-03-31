@@ -41,8 +41,6 @@ warning 6002: The table/view 'PSES.dbo.tblActivityLog' does not have a primary k
     <Property Name="Name" Type="varchar" MaxLength="100" />
     <Property Name="EmployeeNo" Type="varchar" MaxLength="10" />
   </EntityType>
-  <!--Errors Found During Generation:
-warning 6002: The table/view 'PSES.dbo.tblApproveStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
   <EntityType Name="tblApproveStatus">
     <Key>
       <PropertyRef Name="ID" />
@@ -557,6 +555,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
   <EntityContainer Name="PSESModelStoreContainer">
     <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblApprove" EntityType="Self.tblApprove" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblApproveStatus" EntityType="Self.tblApproveStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmployeeOrganization" EntityType="Self.tblEmployeeOrganization" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
@@ -584,18 +583,6 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
     [tblActivityLog].[EmployeeNo] AS [EmployeeNo], 
     [tblActivityLog].[Name] AS [Name]
     FROM [dbo].[tblActivityLog] AS [tblActivityLog]</DefiningQuery>
-    </EntitySet>
-    <EntitySet Name="tblApproveStatus" EntityType="Self.tblApproveStatus" store:Type="Tables" store:Schema="dbo">
-      <DefiningQuery>SELECT 
-    [tblApproveStatus].[ID] AS [ID], 
-    [tblApproveStatus].[Status] AS [Status], 
-    [tblApproveStatus].[FlowOrder] AS [FlowOrder], 
-    [tblApproveStatus].[ApproveID] AS [ApproveID], 
-    [tblApproveStatus].[ApproveDate] AS [ApproveDate], 
-    [tblApproveStatus].[Comment] AS [Comment], 
-    [tblApproveStatus].[Name] AS [Name], 
-    [tblApproveStatus].[EmployeeNO] AS [EmployeeNO]
-    FROM [dbo].[tblApproveStatus] AS [tblApproveStatus]</DefiningQuery>
     </EntitySet>
     <EntitySet Name="tblFlowMaster" EntityType="Self.tblFlowMaster" store:Type="Tables" store:Schema="dbo">
       <DefiningQuery>SELECT 

@@ -436,8 +436,8 @@ namespace PESproj.Controllers
                 tmp["ProjectCode"] = a.ProjectCode;
                 tmp["ProjectType"] = a.ProjectType;
                 tmp["EvaTerm"] = a.EvaTerm;
-                tmp["StartDatePlan"] = a.StartDatePlan;
-                tmp["FinishDatePlan"] = a.FinishDatePlan;
+                tmp["StartDatePlan"] = a.StartDatePlan.Replace(" ","/");
+                tmp["FinishDatePlan"] = a.FinishDatePlan.Replace(" ","/");
                 tmp["Function"] = a.Function;
                 tmp["StartTime"] = a.StartTime;
                 tmp["FinishTime"] = a.FinishTime;

@@ -134,7 +134,6 @@ namespace PESproj.Controllers
                 }
                
             }
-            int j = 1;
             List<SP_GetHeaderByPosition_Result> H_new = new List<SP_GetHeaderByPosition_Result>();
             List<SP_GetHeaderByPosition_Result> hder = GetHeader.Where(a => a.H_ID > 0).OrderBy(a => a.H_ID).ToList();
             foreach (SP_GetHeaderByPosition_Result a in hder )
@@ -383,8 +382,8 @@ namespace PESproj.Controllers
                             sum += (int)thA.point;
                         }
 
-                        header.UpdateScoreData(EvaID, sum / H2.Count, th2.H_ID,score.Where(a=>a.Eva_ID == EvaID && a.H3_ID == th2.H_ID).FirstOrDefault().Comment);
-                        sum2 += sum / H2.Count;
+                        header.UpdateScoreData(EvaID, sum / (H2.Count + Hd1.Count), th2.H_ID,score.Where(a=>a.Eva_ID == EvaID && a.H3_ID == th2.H_ID).FirstOrDefault().Comment);
+                        sum2 += sum / (H2.Count + Hd1.Count);
                         sum = 0;
                     }
                     header.UpdateScoreData(EvaID, sum2 / H1.Count, (int)th.H1_ID, score.Where(a => a.Eva_ID == EvaID && a.H3_ID == th.H1_ID).FirstOrDefault().Comment);
