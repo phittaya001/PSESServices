@@ -188,6 +188,7 @@
       <Parameter Name="Alias" Mode="In" Type="String" />
       <Parameter Name="H_Level" Mode="In" Type="Int32" />
       <Parameter Name="PositionNO" Mode="In" Type="Int32" />
+      <Parameter Name="Text_Language" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_InsertHeaderPosition">
       <Parameter Name="PositionNo" Mode="In" Type="Int32" />
@@ -267,6 +268,10 @@
     </FunctionImport>
     <FunctionImport Name="SP_GetEvaDataByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaDataByEvaID_Result)">
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
+    </FunctionImport>
+    <FunctionImport Name="SP_UpdateApproveDetail">
+      <Parameter Name="ID" Mode="In" Type="Int32" />
+      <Parameter Name="EmployeeNO" Mode="In" Type="String" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
@@ -657,6 +662,7 @@
     <Property Name="ProjectCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
     <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="EmployeeNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tblEmployeeOrganization">
     <Key>

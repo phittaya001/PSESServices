@@ -278,6 +278,27 @@ namespace PESproj.Controllers
                 }
                 
             }
+            List<tblEmployee> emp = header.getEmployees();
+            List<JObject> ApObject = new List<JObject>();
+            Ap.ForEach(a =>
+            {
+                JObject tmp = new JObject();
+                tmp["ApproverID"] = a.ApproverID;
+                tmp["ApproveState"] = a.ApproveState;
+                tmp["EvaID"] = a.EvaID;
+                tmp["GM"] = a.GM;
+                tmp["HR"] = a.HR;
+                tmp["ID"] = a.ID;
+                tmp["Name"] = a.Name;
+                tmp["PM"] = a.PM;
+                tmp["Position"] = a.Position;
+                tmp["PositionID"] = a.PositionID;
+                tmp["ProjectCode"] = a.ProjectCode;
+                tmp["Role"] = a.Role;
+                tmp["ST"] = a.ST;
+                //tblEmployee empTemp = emp.Where(b=>b.EmployeeNo == a.)
+                
+            });
             return Ap;
         }
 
@@ -325,6 +346,22 @@ namespace PESproj.Controllers
             return "success";
         }
 
+        [Route("UpdateApprove/")]
+        [HttpGet]
+        public string UpdateApproveTble()
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            var header2 = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
+            List < tblApprove > Ap = header.getApprove().ToList();
+            List<tblEvaluation> eva = header.GetAllEvaluation();
+            Ap.ForEach(a =>
+            {
+                tblEvaluation empno = eva.Where(b => b.Eva_ID == a.EvaID).FirstOrDefault();
+                header2.UpdateApprove(a.ID,(empno==null)?"":empno.EmployeeNO );
+            });
+            return "success";
+        }
+
         [Route("EvaData/{EvaID}")]
         [HttpGet]
         public List<JObject> getEvaDataByEvaID(int EvaID)
@@ -350,8 +387,10 @@ namespace PESproj.Controllers
                 tmp["EvaluatorLastName"] = a.EvaluatorLastName;
                 tmp["Eva_ID"] = a.Eva_ID;
                 
-                string text = "{\"EN\":\"" + a.EmployeeFirstName + " " + a.EmployeeLastName + "\",\"TH\":\"" + a.EmployeeFirstNameThai + " " + a.EmployeeLastNameThai + "\"}";
+                string text = "{\"EN\":\"" + a.EmployeeFirstName + "\",\"TH\":\"" + a.EmployeeFirstNameThai +"\"}";
                 tmp["name_language"] = JsonConvert.DeserializeObject<JObject>(text);
+                text = "{\"EN\":\"" + a.EmployeeLastName + "\",\"TH\":\"" + a.EmployeeLastNameThai + "\"}";
+                tmp["lastname_language"] = JsonConvert.DeserializeObject<JObject>(text);
                 Eva.Add(tmp);
                 //  evadata[i].EmployeeFirstNameThai = 
             });

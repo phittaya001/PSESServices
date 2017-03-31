@@ -499,6 +499,7 @@
     <EntitySetMapping Name="tblApprove">
       <EntityTypeMapping TypeName="PSESModel.tblApprove">
         <MappingFragment StoreEntitySet="tblApprove">
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
           <ScalarProperty Name="Name" ColumnName="Name" />
           <ScalarProperty Name="Role" ColumnName="Role" />
           <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
@@ -624,5 +625,6 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_UpdateApproveDetail" FunctionName="PSESModel.Store.SP_UpdateApproveDetail" />
   </EntityContainerMapping>
 </Mapping>

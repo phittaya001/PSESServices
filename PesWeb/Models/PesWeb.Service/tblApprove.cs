@@ -44,6 +44,8 @@ public partial class tblApprove
 
     public string Name { get; set; }
 
+    public string EmployeeNo { get; set; }
+
 }
 
 }

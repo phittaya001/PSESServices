@@ -928,6 +928,23 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaDataByEvaID_Result>("SP_GetEvaDataByEvaID", evaIDParameter);
     }
 
+
+    public virtual int SP_UpdateApproveDetail(Nullable<int> iD, string employeeNO)
+    {
+
+        var iDParameter = iD.HasValue ?
+            new ObjectParameter("ID", iD) :
+            new ObjectParameter("ID", typeof(int));
+
+
+        var employeeNOParameter = employeeNO != null ?
+            new ObjectParameter("EmployeeNO", employeeNO) :
+            new ObjectParameter("EmployeeNO", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateApproveDetail", iDParameter, employeeNOParameter);
+    }
+
 }
 
 }

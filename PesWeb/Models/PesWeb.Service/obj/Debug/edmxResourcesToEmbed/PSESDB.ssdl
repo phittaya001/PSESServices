@@ -39,6 +39,7 @@ warning 6002: The table/view 'PSES.dbo.tblActivityLog' does not have a primary k
     <Property Name="ProjectCode" Type="varchar" MaxLength="15" />
     <Property Name="Role" Type="varchar" MaxLength="50" />
     <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="EmployeeNo" Type="varchar" MaxLength="10" />
   </EntityType>
   <!--Errors Found During Generation:
 warning 6002: The table/view 'PSES.dbo.tblApproveStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -498,6 +499,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
     <Parameter Name="Alias" Type="varchar" Mode="In" />
     <Parameter Name="H_Level" Type="int" Mode="In" />
     <Parameter Name="PositionNO" Type="int" Mode="In" />
+    <Parameter Name="Text_Language" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="SP_InsertHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="JobID" Type="int" Mode="In" />
@@ -529,6 +531,10 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
     <Parameter Name="GM" Type="int" Mode="In" />
     <Parameter Name="PM" Type="int" Mode="In" />
     <Parameter Name="ST" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_UpdateApproveDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeNO" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SP_UpdateAprroveData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Status" Type="int" Mode="In" />

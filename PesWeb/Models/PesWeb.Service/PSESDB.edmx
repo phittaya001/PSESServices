@@ -44,6 +44,7 @@ warning 6002: The table/view 'PSES.dbo.tblActivityLog' does not have a primary k
           <Property Name="ProjectCode" Type="varchar" MaxLength="15" />
           <Property Name="Role" Type="varchar" MaxLength="50" />
           <Property Name="Name" Type="varchar" MaxLength="100" />
+          <Property Name="EmployeeNo" Type="varchar" MaxLength="10" />
         </EntityType>
         <!--Errors Found During Generation:
 warning 6002: The table/view 'PSES.dbo.tblApproveStatus' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
@@ -536,6 +537,10 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
           <Parameter Name="PM" Type="int" Mode="In" />
           <Parameter Name="ST" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_UpdateApproveDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="EmployeeNO" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_UpdateAprroveData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
           <Parameter Name="ID" Type="int" Mode="In" />
@@ -885,6 +890,10 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
           </FunctionImport>
           <FunctionImport Name="SP_GetEvaDataByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaDataByEvaID_Result)">
           <Parameter Name="EvaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateApproveDetail">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeNO" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -1275,6 +1284,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
           <Property Name="ProjectCode" Type="String" MaxLength="15" FixedLength="false" Unicode="false" />
           <Property Name="Role" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <Property Name="EmployeeNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblEmployeeOrganization">
           <Key>
@@ -1868,6 +1878,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
           <EntitySetMapping Name="tblApprove">
             <EntityTypeMapping TypeName="PSESModel.tblApprove">
               <MappingFragment StoreEntitySet="tblApprove">
+                <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
                 <ScalarProperty Name="Name" ColumnName="Name" />
                 <ScalarProperty Name="Role" ColumnName="Role" />
                 <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
@@ -1993,6 +2004,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_UpdateApproveDetail" FunctionName="PSESModel.Store.SP_UpdateApproveDetail" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

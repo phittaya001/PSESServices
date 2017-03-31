@@ -119,12 +119,13 @@ namespace PESproj.Controllers
                     newHeader.PositionNO = PositionID;
                     newHeader.point = HdATemp.point;
                     newHeader.Comment = HdATemp.Comment;
+                    newHeader.Text_Language = "{\"EN\":\"" + HdATemp.Text + "\",\"TH\":\"" + HdATemp.Text_Eng + "\"}";
                     //if (HdATemp.point ==null && HdATemp.point != 0)
                     //{
                     //    header.UpdateScoreData(EvaID, 0, (-1)*HdATemp.H_ID);
                     //    newHeader.point = 0;
                     //}
-                    
+
                     GetHeader.Add(newHeader);
                 }
                 else if(ID == 1)
