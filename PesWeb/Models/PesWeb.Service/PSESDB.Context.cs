@@ -704,7 +704,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_InsertApproveState_Result> SP_InsertApproveState(Nullable<int> evaID, string position, Nullable<int> positionID, string projectCode, string role, string name)
+    public virtual ObjectResult<SP_InsertApproveState_Result> SP_InsertApproveState(Nullable<int> evaID, string position, Nullable<int> positionID, string projectCode, string role, string name, string employeeNo)
     {
 
         var evaIDParameter = evaID.HasValue ?
@@ -737,7 +737,12 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("Name", typeof(string));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertApproveState_Result>("SP_InsertApproveState", evaIDParameter, positionParameter, positionIDParameter, projectCodeParameter, roleParameter, nameParameter);
+        var employeeNoParameter = employeeNo != null ?
+            new ObjectParameter("EmployeeNo", employeeNo) :
+            new ObjectParameter("EmployeeNo", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertApproveState_Result>("SP_InsertApproveState", evaIDParameter, positionParameter, positionIDParameter, projectCodeParameter, roleParameter, nameParameter, employeeNoParameter);
     }
 
 

@@ -130,7 +130,7 @@ namespace PesWeb.Service.Modules
         public SP_InsertApproveState_Result insertApprove(tblApprove ap)
         {
             PSESEntities db = new PSESEntities();
-            return db.SP_InsertApproveState(ap.EvaID, ap.Position, ap.PositionID, ap.ProjectCode, ap.Role, ap.Name).FirstOrDefault();
+            return db.SP_InsertApproveState(ap.EvaID, ap.Position, ap.PositionID, ap.ProjectCode, ap.Role, ap.Name,ap.EmployeeNo).FirstOrDefault();
              
         }
 

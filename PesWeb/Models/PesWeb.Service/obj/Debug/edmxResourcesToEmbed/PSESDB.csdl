@@ -222,6 +222,7 @@
       <Parameter Name="ProjectCode" Mode="In" Type="String" />
       <Parameter Name="Role" Mode="In" Type="String" />
       <Parameter Name="Name" Mode="In" Type="String" />
+      <Parameter Name="EmployeeNo" Mode="In" Type="String" />
     </FunctionImport>
     <FunctionImport Name="SP_InsertAdditionalHeader">
       <Parameter Name="parent" Mode="In" Type="Int32" />

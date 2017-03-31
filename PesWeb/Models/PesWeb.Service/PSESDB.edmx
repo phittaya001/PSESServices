@@ -15,8 +15,6 @@
           <Property Name="Code" Type="nchar" MaxLength="10" />
           <Property Name="Status" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'PSES.dbo.tblActivityLog' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblActivityLog">
           <Key>
             <PropertyRef Name="ID" />
@@ -114,8 +112,6 @@ warning 6002: The table/view 'PSES.dbo.tblActivityLog' does not have a primary k
           <Property Name="FinishEvaDate" Type="datetime" />
           <Property Name="EvaStatus" Type="int" />
         </EntityType>
-        <!--Errors Found During Generation:
-warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
         <EntityType Name="tblFlowMaster">
           <Key>
             <PropertyRef Name="ID" />
@@ -484,6 +480,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
           <Parameter Name="ProjectCode" Type="varchar" Mode="In" />
           <Parameter Name="Role" Type="varchar" Mode="In" />
           <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="EmployeeNo" Type="varchar" Mode="In" />
         </Function>
         <Function Name="SP_InsertEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ProjectID" Type="varchar" Mode="In" />
@@ -559,11 +556,13 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
         </Function>
         <EntityContainer Name="PSESModelStoreContainer">
           <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblActivityLog" EntityType="Self.tblActivityLog" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblApprove" EntityType="Self.tblApprove" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblApproveStatus" EntityType="Self.tblApproveStatus" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEmployeeOrganization" EntityType="Self.tblEmployeeOrganization" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblFlowMaster" EntityType="Self.tblFlowMaster" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderAdditional" EntityType="Self.tblHeaderAdditional" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />
@@ -580,24 +579,6 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
           <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTitle" EntityType="Self.tblTitle" Schema="dbo" store:Type="Tables" />
-          <EntitySet Name="tblActivityLog" EntityType="Self.tblActivityLog" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tblActivityLog].[ID] AS [ID], 
-    [tblActivityLog].[Activity] AS [Activity], 
-    [tblActivityLog].[Date] AS [Date], 
-    [tblActivityLog].[EmployeeNo] AS [EmployeeNo], 
-    [tblActivityLog].[Name] AS [Name]
-    FROM [dbo].[tblActivityLog] AS [tblActivityLog]</DefiningQuery>
-          </EntitySet>
-          <EntitySet Name="tblFlowMaster" EntityType="Self.tblFlowMaster" store:Type="Tables" store:Schema="dbo">
-            <DefiningQuery>SELECT 
-    [tblFlowMaster].[ID] AS [ID], 
-    [tblFlowMaster].[CodeName] AS [CodeName], 
-    [tblFlowMaster].[PositionName] AS [PositionName], 
-    [tblFlowMaster].[FromTable] AS [FromTable], 
-    [tblFlowMaster].[Flow] AS [Flow]
-    FROM [dbo].[tblFlowMaster] AS [tblFlowMaster]</DefiningQuery>
-          </EntitySet>
           <AssociationSet Name="FK_tblProject2_tblOrganization" Association="Self.FK_tblProject2_tblOrganization">
             <End Role="tblOrganization" EntitySet="tblOrganization" />
             <End Role="tblProject" EntitySet="tblProject" />
@@ -831,6 +812,7 @@ warning 6002: The table/view 'PSES.dbo.tblFlowMaster' does not have a primary ke
             <Parameter Name="ProjectCode" Mode="In" Type="String" />
             <Parameter Name="Role" Mode="In" Type="String" />
             <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="EmployeeNo" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="SP_InsertAdditionalHeader">
             <Parameter Name="parent" Mode="In" Type="Int32" />
