@@ -253,14 +253,31 @@ namespace PESproj.Controllers
                 tmp["EvaStatus"] = a.EvaStatus;
                 tmp["EvaTerm"] = a.EvaTerm;
                 tmp["Eva_ID"] = a.Eva_ID;
+
+                a.StartDatePlan = a.StartDatePlan.Replace(" ", "/");
+                if (a.StartDatePlan.ElementAt(4) == '/')
+                {
+                    a.StartDatePlan = a.StartDatePlan.Substring(0, 4) + "0" + a.StartDatePlan.Substring(5);
+
+                }
+                a.StartDatePlan = a.StartDatePlan.Substring(4, 2) + "/" + a.StartDatePlan.Substring(0, 3) + "/" + a.StartDatePlan.Substring(9, 2);
+                tmp["StartDatePlan"] = a.StartDatePlan;
+
+                a.FinishDatePlan = a.FinishDatePlan.Replace(" ", "/");
+                if (a.FinishDatePlan.ElementAt(4) == '/')
+                {
+                    a.FinishDatePlan = a.FinishDatePlan.Substring(0, 4) + "0" + a.FinishDatePlan.Substring(5);
+
+                }
+                a.FinishDatePlan = a.FinishDatePlan.Substring(4, 2) + "/" + a.FinishDatePlan.Substring(0, 3) + "/" + a.FinishDatePlan.Substring(9, 2);
                 tmp["FinishDatePlan"] = a.FinishDatePlan;
+
                 tmp["FinishEvaDate"] = a.FinishEvaDate;
                 tmp["Function"] = a.Function;
                 tmp["GroupOfStaff"] = a.GroupOfStaff;
                 tmp["PeriodID"] = a.PeriodID;
                 tmp["ProjectCode"] = a.ProjectCode;
                 tmp["ProjectType"] = a.ProjectType;
-                tmp["StartDatePlan"] = a.StartDatePlan;
                 tmp["StartEvaDate"] = a.StartEvaDate;
                 //tmp["employee_language"] =
                // tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Trim() == a.em).FirstOrDefault();
@@ -436,8 +453,24 @@ namespace PESproj.Controllers
                 tmp["ProjectCode"] = a.ProjectCode;
                 tmp["ProjectType"] = a.ProjectType;
                 tmp["EvaTerm"] = a.EvaTerm;
-                tmp["StartDatePlan"] = a.StartDatePlan.Replace(" ","/");
-                tmp["FinishDatePlan"] = a.FinishDatePlan.Replace(" ","/");
+               
+                a.StartDatePlan = a.StartDatePlan.Replace(" ","/");
+                if (a.StartDatePlan.ElementAt(4)=='/')
+                {
+                    a.StartDatePlan = a.StartDatePlan.Substring(0, 4) + "0" + a.StartDatePlan.Substring(5);
+                    
+                }
+                a.StartDatePlan = a.StartDatePlan.Substring(4, 2) + "/" + a.StartDatePlan.Substring(0, 3) + "/" + a.StartDatePlan.Substring(9, 2);
+                tmp["StartDatePlan"] = a.StartDatePlan;
+
+                a.FinishDatePlan = a.FinishDatePlan.Replace(" ","/");
+                if (a.FinishDatePlan.ElementAt(4) == '/')
+                {
+                    a.FinishDatePlan = a.FinishDatePlan.Substring(0, 4) + "0" + a.FinishDatePlan.Substring(5);
+                    
+                }
+                a.FinishDatePlan = a.FinishDatePlan.Substring(4, 2) + "/" + a.FinishDatePlan.Substring(0, 3) + "/" + a.FinishDatePlan.Substring(9, 2);
+                tmp["FinishDatePlan"] = a.FinishDatePlan;
                 tmp["Function"] = a.Function;
                 tmp["StartTime"] = a.StartTime;
                 tmp["FinishTime"] = a.FinishTime;
