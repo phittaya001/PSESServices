@@ -260,10 +260,6 @@
       <Parameter Name="Language" Mode="In" Type="String" />
       <Parameter Name="ID" Mode="In" Type="Int32" />
     </FunctionImport>
-    <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
-      <Parameter Name="PositionNO" Mode="In" Type="Int32" />
-      <Parameter Name="EvaID" Mode="In" Type="Int32" />
-    </FunctionImport>
     <FunctionImport Name="SP_UpdateApproveDetail">
       <Parameter Name="ID" Mode="In" Type="Int32" />
       <Parameter Name="EmployeeNO" Mode="In" Type="String" />
@@ -273,6 +269,10 @@
     </FunctionImport>
     <FunctionImport Name="SP_GetEvaListByEvaluatorID" ReturnType="Collection(PSESModel.SP_GetEvaListByEvaluatorID_Result)">
       <Parameter Name="EvaluatorID" Mode="In" Type="String" />
+    </FunctionImport>
+    <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
+      <Parameter Name="PositionNO" Mode="In" Type="Int32" />
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
     </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
@@ -700,20 +700,6 @@
     <Property Name="EmployeeNo" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
     <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
   </EntityType>
-  <ComplexType Name="SP_GetHeaderByPosition_Result">
-    <Property Type="Int32" Name="PositionNO" Nullable="true" />
-    <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
-    <Property Type="String" Name="Text_Language" Nullable="true" />
-    <Property Type="Int32" Name="Parent" Nullable="true" />
-    <Property Type="String" Name="Alias" Nullable="true" MaxLength="5" />
-    <Property Type="Int32" Name="H_Level" Nullable="true" />
-    <Property Type="Int32" Name="Score_ID" Nullable="true" />
-    <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
-    <Property Type="Int32" Name="H_ID" Nullable="false" />
-    <Property Type="Int32" Name="point" Nullable="true" />
-    <Property Type="Int32" Name="Eva_ID" Nullable="true" />
-  </ComplexType>
   <ComplexType Name="SP_GetEvaDataByEvaID_Result">
     <Property Type="Int32" Name="Part2ID" Nullable="false" />
     <Property Type="String" Name="EmployeeFirstName" Nullable="true" MaxLength="30" />
@@ -758,5 +744,20 @@
     <Property Type="String" Name="EvaluatorFirstNameThai" Nullable="true" MaxLength="30" />
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
     <Property Type="Int32" Name="PeriodID" Nullable="true" />
+  </ComplexType>
+  <ComplexType Name="SP_GetHeaderByPosition_Result">
+    <Property Type="String" Name="statusNo" Nullable="false" MaxLength="1" />
+    <Property Type="Int32" Name="PositionNO" Nullable="true" />
+    <Property Type="String" Name="Text" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Text_Eng" Nullable="true" MaxLength="255" />
+    <Property Type="String" Name="Text_Language" Nullable="true" />
+    <Property Type="Int32" Name="Parent" Nullable="true" />
+    <Property Type="String" Name="Alias" Nullable="true" MaxLength="5" />
+    <Property Type="Int32" Name="H_Level" Nullable="true" />
+    <Property Type="Int32" Name="Score_ID" Nullable="true" />
+    <Property Type="String" Name="Comment" Nullable="true" MaxLength="255" />
+    <Property Type="Int32" Name="H_ID" Nullable="false" />
+    <Property Type="Int32" Name="point" Nullable="true" />
+    <Property Type="Int32" Name="Eva_ID" Nullable="true" />
   </ComplexType>
 </Schema>

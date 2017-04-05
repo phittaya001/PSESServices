@@ -125,7 +125,7 @@ namespace PESproj.Controllers
                     //    header.UpdateScoreData(EvaID, 0, (-1)*HdATemp.H_ID);
                     //    newHeader.point = 0;
                     //}
-
+                    newHeader.statusNo = "1";
                     GetHeader.Add(newHeader);
                 }
                 else if(ID == 1)
@@ -134,6 +134,29 @@ namespace PESproj.Controllers
                 }
                
             }
+
+            List<tblScore> sc2 = sc.Where(a => a.Eva_ID == EvaID).ToList();
+            sc2.ForEach(a =>
+            {
+                if(GetHeader.Where(b=>b.H_ID == a.H3_ID && a.point > 0).ToList().Count == 0)
+                {
+                    SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
+                    tblHeader hd2 = hd.Where(b => b.H_ID == a.H3_ID).FirstOrDefault();
+                    newHeader.Alias = hd2.Alias;
+                    newHeader.H_Level = hd2.H_Level;
+                    newHeader.Parent = hd2.Parent;
+                    newHeader.Text = hd2.Text;
+                    newHeader.Text_Eng = hd2.Text_Eng;
+                    newHeader.Eva_ID = EvaID;
+                    newHeader.H_ID = hd2.H_ID;
+                    newHeader.PositionNO = hd2.PositionNo;
+                    newHeader.point = a.point;
+                    newHeader.Comment = a.Comment;
+                    newHeader.Text_Language = hd2.Text_Language;
+                    newHeader.statusNo = "2";
+                    GetHeader.Add(newHeader);
+                }
+            });
             List<SP_GetHeaderByPosition_Result> H_new = new List<SP_GetHeaderByPosition_Result>();
             List<SP_GetHeaderByPosition_Result> hder = GetHeader.Where(a => a.H_ID > 0).OrderBy(a => a.H_ID).ToList();
             foreach (SP_GetHeaderByPosition_Result a in hder )
@@ -392,12 +415,6 @@ namespace PESproj.Controllers
                 
             }
                 
-            
-
-
-
-
-
             sum = 0; sum2 = 0;
             List<tblHeaderAdditional> hdaList = header.getHeaderAdditional().Where(a=>a.Eva_ID==EvaID).ToList();
             List<tblHeaderAdditional> hh = hdaList.Where(a => a.parent == 0 && a.Eva_ID == EvaID).ToList();
@@ -540,10 +557,11 @@ namespace PESproj.Controllers
             H.Text_Eng = Data["Text_Eng"].ToString();
             H.Alias = Data["Alias"].ToString();
             H.PositionNo = Convert.ToInt32( Data["PositionNo"].ToString());
-            H.Text_Language = "{\"EN\":\""+H.Text+"\",\"TH\":\""+H.Text_Eng+"\"}";
+            H.Text_Language = "{\"EN\":\""+ H.Text_Eng + "\",\"TH\":\""+H.Text + "\"}";
 
             header.insertHeader(H);
         }
+
         [Route("Language/{language}")]
         [HttpPut]
         public string LanguageChange(string language)

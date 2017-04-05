@@ -17,6 +17,8 @@ using System;
 public partial class SP_GetHeaderByPosition_Result
 {
 
+    public string statusNo { get; set; }
+
     public Nullable<int> PositionNO { get; set; }
 
     public string Text { get; set; }

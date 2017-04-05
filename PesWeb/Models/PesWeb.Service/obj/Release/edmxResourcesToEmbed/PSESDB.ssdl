@@ -10,11 +10,53 @@
     <Property Name="Code" Type="nchar" MaxLength="10" />
     <Property Name="Status" Type="int" />
   </EntityType>
+  <EntityType Name="tblActivityLog">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Activity" Type="varchar" MaxLength="50" />
+    <Property Name="Date" Type="datetime" />
+    <Property Name="EmployeeNo" Type="varchar" MaxLength="10" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="tblApprove">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="EvaID" Type="int" />
+    <Property Name="ApproverID" Type="int" />
+    <Property Name="ApproveState" Type="int" />
+    <Property Name="Position" Type="varchar" MaxLength="30" />
+    <Property Name="PositionID" Type="int" />
+    <Property Name="HR" Type="int" />
+    <Property Name="GM" Type="int" />
+    <Property Name="PM" Type="int" />
+    <Property Name="ST" Type="int" />
+    <Property Name="ProjectCode" Type="varchar" MaxLength="15" />
+    <Property Name="Role" Type="varchar" MaxLength="50" />
+    <Property Name="Name" Type="varchar" MaxLength="100" />
+    <Property Name="EmployeeNo" Type="varchar" MaxLength="10" />
+  </EntityType>
+  <EntityType Name="tblApproveStatus">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="Status" Type="int" />
+    <Property Name="FlowOrder" Type="int" />
+    <Property Name="ApproveID" Type="int" />
+    <Property Name="ApproveDate" Type="date" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
+    <Property Name="Name" Type="varchar" MaxLength="50" />
+    <Property Name="EmployeeNO" Type="varchar" MaxLength="10" />
+  </EntityType>
   <EntityType Name="tblEmployee">
     <Key>
       <PropertyRef Name="EmployeeNo" />
     </Key>
-    <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="EmployeeNo" Type="varchar" MaxLength="50" Nullable="false" />
     <Property Name="TitleNo" Type="tinyint" />
     <Property Name="EmployeeFirstName" Type="nvarchar" MaxLength="30" />
     <Property Name="EmployeeLastName" Type="nvarchar" MaxLength="30" />
@@ -31,6 +73,24 @@
     <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
     <Property Name="UpdateDate" Type="smalldatetime" />
   </EntityType>
+  <EntityType Name="tblEmployeeOrganization">
+    <Key>
+      <PropertyRef Name="EmployeeNo" />
+      <PropertyRef Name="OrganizationNo" />
+      <PropertyRef Name="PositionNo" />
+    </Key>
+    <Property Name="EmployeeNo" Type="char" MaxLength="10" Nullable="false" />
+    <Property Name="OrganizationNo" Type="int" Nullable="false" />
+    <Property Name="PositionNo" Type="int" Nullable="false" />
+    <Property Name="EmployeeOrganizationRate" Type="tinyint" />
+    <Property Name="IsMain" Type="bit" />
+    <Property Name="StartEffectiveDate" Type="smalldatetime" />
+    <Property Name="EndEffectiveDate" Type="smalldatetime" />
+    <Property Name="EmployeeOrganizationFlag" Type="bit" />
+    <Property Name="UpdateUser" Type="nvarchar" MaxLength="10" />
+    <Property Name="UpdateDate" Type="smalldatetime" />
+    <Property Name="PrevEmployeeNo" Type="char" MaxLength="10" />
+  </EntityType>
   <EntityType Name="tblEvaluation">
     <Key>
       <PropertyRef Name="Eva_ID" />
@@ -43,9 +103,19 @@
     <Property Name="ProjectNO" Type="varchar" MaxLength="15" />
     <Property Name="period" Type="varchar" MaxLength="25" />
     <Property Name="PeriodID" Type="int" />
-    <Property Name="StartEvaDate" Type="date" />
-    <Property Name="FinishEvaDate" Type="date" />
+    <Property Name="StartEvaDate" Type="datetime" />
+    <Property Name="FinishEvaDate" Type="datetime" />
     <Property Name="EvaStatus" Type="int" />
+  </EntityType>
+  <EntityType Name="tblFlowMaster">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="CodeName" Type="varchar" MaxLength="5" />
+    <Property Name="PositionName" Type="varchar" MaxLength="15" />
+    <Property Name="FromTable" Type="int" />
+    <Property Name="Flow" Type="int" />
   </EntityType>
   <EntityType Name="tblHeader">
     <Key>
@@ -58,6 +128,7 @@
     <Property Name="PositionNo" Type="int" />
     <Property Name="Alias" Type="varchar" MaxLength="5" />
     <Property Name="H_Level" Type="int" />
+    <Property Name="Text_Language" Type="varchar(max)" />
   </EntityType>
   <EntityType Name="tblHeaderAdditional">
     <Key>
@@ -73,6 +144,7 @@
     <Property Name="point" Type="int" />
     <Property Name="Part2ID" Type="int" />
     <Property Name="H_status" Type="int" />
+    <Property Name="Comment" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="tblHeaderBot">
     <Key>
@@ -324,6 +396,9 @@
     <Parameter Name="JobID" Type="int" Mode="In" />
     <Parameter Name="ProjectNO" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="SP_DeleteApproveByEvaID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_DeleteEva" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
   </Function>
@@ -385,6 +460,23 @@
     <Parameter Name="H_Level" Type="int" Mode="In" />
     <Parameter Name="PositionNo" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_InsertApproveFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="status" Type="int" Mode="In" />
+    <Parameter Name="FlowOrder" Type="int" Mode="In" />
+    <Parameter Name="ApproveID" Type="int" Mode="In" />
+    <Parameter Name="Comment" Type="varchar" Mode="In" />
+    <Parameter Name="name" Type="varchar" Mode="In" />
+    <Parameter Name="EmployeeNO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_InsertApproveState" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+    <Parameter Name="Position" Type="varchar" Mode="In" />
+    <Parameter Name="PositionID" Type="int" Mode="In" />
+    <Parameter Name="ProjectCode" Type="varchar" Mode="In" />
+    <Parameter Name="Role" Type="varchar" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+    <Parameter Name="EmployeeNo" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SP_InsertEvaluation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="ProjectID" Type="varchar" Mode="In" />
     <Parameter Name="EvaluatorID" Type="varchar" Mode="In" />
@@ -402,6 +494,7 @@
     <Parameter Name="Alias" Type="varchar" Mode="In" />
     <Parameter Name="H_Level" Type="int" Mode="In" />
     <Parameter Name="PositionNO" Type="int" Mode="In" />
+    <Parameter Name="Text_Language" Type="varchar(max)" Mode="In" />
   </Function>
   <Function Name="SP_InsertHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="JobID" Type="int" Mode="In" />
@@ -411,6 +504,11 @@
     <Parameter Name="PositionNo" Type="int" Mode="In" />
     <Parameter Name="HeaderID" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_InsertLog" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Activity" Type="varchar" Mode="In" />
+    <Parameter Name="EmployeeNo" Type="varchar" Mode="In" />
+    <Parameter Name="Name" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SP_InsertScore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="H3_ID" Type="int" Mode="In" />
@@ -419,11 +517,33 @@
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="point" Type="int" Mode="In" />
     <Parameter Name="H_ID" Type="int" Mode="In" />
+    <Parameter Name="comment" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_UpdateApprove" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="value" Type="int" Mode="In" />
+    <Parameter Name="AppID" Type="int" Mode="In" />
+    <Parameter Name="HR" Type="int" Mode="In" />
+    <Parameter Name="GM" Type="int" Mode="In" />
+    <Parameter Name="PM" Type="int" Mode="In" />
+    <Parameter Name="ST" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_UpdateApproveDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeNO" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_UpdateAprroveData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Status" Type="int" Mode="In" />
+    <Parameter Name="ID" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_UpdateData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="point" Type="int" Mode="In" />
     <Parameter Name="H_ID" Type="int" Mode="In" />
+    <Parameter Name="comment" Type="varchar" Mode="In" />
+  </Function>
+  <Function Name="SP_UpdateDataTable" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Language" Type="varchar(max)" Mode="In" />
+    <Parameter Name="ID" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_UpdateEvaluationStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
@@ -431,8 +551,13 @@
   </Function>
   <EntityContainer Name="PSESModelStoreContainer">
     <EntitySet Name="Period" EntityType="Self.Period" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblActivityLog" EntityType="Self.tblActivityLog" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblApprove" EntityType="Self.tblApprove" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblApproveStatus" EntityType="Self.tblApproveStatus" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEmployee" EntityType="Self.tblEmployee" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblEmployeeOrganization" EntityType="Self.tblEmployeeOrganization" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblEvaluation" EntityType="Self.tblEvaluation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblFlowMaster" EntityType="Self.tblFlowMaster" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeader" EntityType="Self.tblHeader" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderAdditional" EntityType="Self.tblHeaderAdditional" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblHeaderBot" EntityType="Self.tblHeaderBot" Schema="dbo" store:Type="Tables" />

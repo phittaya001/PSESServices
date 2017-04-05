@@ -423,6 +423,7 @@
     <EntitySetMapping Name="tblHeader">
       <EntityTypeMapping TypeName="PSESModel.tblHeader">
         <MappingFragment StoreEntitySet="tblHeader">
+          <ScalarProperty Name="Text_Language" ColumnName="Text_Language" />
           <ScalarProperty Name="H_Level" ColumnName="H_Level" />
           <ScalarProperty Name="Alias" ColumnName="Alias" />
           <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
@@ -433,45 +434,10 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SP_GetEvaDataByEvaID" FunctionName="PSESModel.Store.SP_GetEvaDataByEvaID">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="PSESModel.SP_GetEvaDataByEvaID_Result">
-          <ScalarProperty Name="Part2ID" ColumnName="Part2ID" />
-          <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
-          <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
-          <ScalarProperty Name="GroupOfStaff" ColumnName="GroupOfStaff" />
-          <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
-          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
-          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
-          <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />
-          <ScalarProperty Name="StartDatePlan" ColumnName="StartDatePlan" />
-          <ScalarProperty Name="FinishDatePlan" ColumnName="FinishDatePlan" />
-          <ScalarProperty Name="Function" ColumnName="Function" />
-          <ScalarProperty Name="EvaluatorFirstName" ColumnName="EvaluatorFirstName" />
-          <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
-          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
-          <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
-          <ScalarProperty Name="Parent" ColumnName="Parent" />
-          <ScalarProperty Name="Alias" ColumnName="Alias" />
-          <ScalarProperty Name="H_Level" ColumnName="H_Level" />
-          <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
-          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
-          <ScalarProperty Name="point" ColumnName="point" />
-          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <EntitySetMapping Name="tblHeaderAdditional">
       <EntityTypeMapping TypeName="PSESModel.tblHeaderAdditional">
         <MappingFragment StoreEntitySet="tblHeaderAdditional">
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
           <ScalarProperty Name="H_status" ColumnName="H_status" />
           <ScalarProperty Name="Part2ID" ColumnName="Part2ID" />
           <ScalarProperty Name="point" ColumnName="point" />
@@ -485,7 +451,6 @@
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
-    <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
     <FunctionImportMapping FunctionImportName="SP_UpdateData" FunctionName="PSESModel.Store.SP_UpdateData" />
     <FunctionImportMapping FunctionImportName="SP_UpdateAdditional" FunctionName="PSESModel.Store.SP_UpdateAdditional" />
     <FunctionImportMapping FunctionImportName="SP_InsertHeader" FunctionName="PSESModel.Store.SP_InsertHeader">
@@ -507,6 +472,139 @@
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_DeleteHeader" FunctionName="PSESModel.Store.SP_DeleteHeader" />
     <FunctionImportMapping FunctionImportName="SP_DeleteHeaderAdditional" FunctionName="PSESModel.Store.SP_DeleteHeaderAdditional" />
+    <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationStatus" FunctionName="PSESModel.Store.SP_UpdateEvaluationStatus" />
+    <EntitySetMapping Name="tblApprove">
+      <EntityTypeMapping TypeName="PSESModel.tblApprove">
+        <MappingFragment StoreEntitySet="tblApprove">
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Role" ColumnName="Role" />
+          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+          <ScalarProperty Name="ST" ColumnName="ST" />
+          <ScalarProperty Name="PM" ColumnName="PM" />
+          <ScalarProperty Name="GM" ColumnName="GM" />
+          <ScalarProperty Name="HR" ColumnName="HR" />
+          <ScalarProperty Name="PositionID" ColumnName="PositionID" />
+          <ScalarProperty Name="Position" ColumnName="Position" />
+          <ScalarProperty Name="ApproveState" ColumnName="ApproveState" />
+          <ScalarProperty Name="ApproverID" ColumnName="ApproverID" />
+          <ScalarProperty Name="EvaID" ColumnName="EvaID" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblEmployeeOrganization">
+      <EntityTypeMapping TypeName="PSESModel.tblEmployeeOrganization">
+        <MappingFragment StoreEntitySet="tblEmployeeOrganization">
+          <ScalarProperty Name="PrevEmployeeNo" ColumnName="PrevEmployeeNo" />
+          <ScalarProperty Name="UpdateDate" ColumnName="UpdateDate" />
+          <ScalarProperty Name="UpdateUser" ColumnName="UpdateUser" />
+          <ScalarProperty Name="EmployeeOrganizationFlag" ColumnName="EmployeeOrganizationFlag" />
+          <ScalarProperty Name="EndEffectiveDate" ColumnName="EndEffectiveDate" />
+          <ScalarProperty Name="StartEffectiveDate" ColumnName="StartEffectiveDate" />
+          <ScalarProperty Name="IsMain" ColumnName="IsMain" />
+          <ScalarProperty Name="EmployeeOrganizationRate" ColumnName="EmployeeOrganizationRate" />
+          <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+          <ScalarProperty Name="OrganizationNo" ColumnName="OrganizationNo" />
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_UpdateApprove" FunctionName="PSESModel.Store.SP_UpdateApprove" />
+    <FunctionImportMapping FunctionImportName="SP_InsertApproveState" FunctionName="PSESModel.Store.SP_InsertApproveState">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_InsertApproveState_Result">
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_InsertAdditionalHeader" FunctionName="PSESModel.Store.SP_InsertAdditionalHeader" />
+    <FunctionImportMapping FunctionImportName="SP_InsertApproveFlow" FunctionName="PSESModel.Store.SP_InsertApproveFlow" />
+    <EntitySetMapping Name="tblApproveStatus">
+      <EntityTypeMapping TypeName="PSESModel.tblApproveStatus">
+        <MappingFragment StoreEntitySet="tblApproveStatus">
+          <ScalarProperty Name="EmployeeNO" ColumnName="EmployeeNO" />
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="ApproveDate" ColumnName="ApproveDate" />
+          <ScalarProperty Name="ApproveID" ColumnName="ApproveID" />
+          <ScalarProperty Name="FlowOrder" ColumnName="FlowOrder" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="tblFlowMaster">
+      <EntityTypeMapping TypeName="PSESModel.tblFlowMaster">
+        <MappingFragment StoreEntitySet="tblFlowMaster">
+          <ScalarProperty Name="Flow" ColumnName="Flow" />
+          <ScalarProperty Name="FromTable" ColumnName="FromTable" />
+          <ScalarProperty Name="PositionName" ColumnName="PositionName" />
+          <ScalarProperty Name="CodeName" ColumnName="CodeName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_UpdateAprroveData" FunctionName="PSESModel.Store.SP_UpdateAprroveData" />
+    <FunctionImportMapping FunctionImportName="SP_DeleteApproveByEvaID" FunctionName="PSESModel.Store.SP_DeleteApproveByEvaID" />
+    <FunctionImportMapping FunctionImportName="SP_InsertLog" FunctionName="PSESModel.Store.SP_InsertLog" />
+    <EntitySetMapping Name="tblActivityLog">
+      <EntityTypeMapping TypeName="PSESModel.tblActivityLog">
+        <MappingFragment StoreEntitySet="tblActivityLog">
+          <ScalarProperty Name="Name" ColumnName="Name" />
+          <ScalarProperty Name="EmployeeNo" ColumnName="EmployeeNo" />
+          <ScalarProperty Name="Date" ColumnName="Date" />
+          <ScalarProperty Name="Activity" ColumnName="Activity" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <FunctionImportMapping FunctionImportName="SP_UpdateDataTable" FunctionName="PSESModel.Store.SP_UpdateDataTable" />
+    <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
+          <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="Text_Language" ColumnName="Text_Language" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="H_Level" ColumnName="H_Level" />
+          <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+          <ScalarProperty Name="point" ColumnName="point" />
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_UpdateApproveDetail" FunctionName="PSESModel.Store.SP_UpdateApproveDetail" />
+    <FunctionImportMapping FunctionImportName="SP_GetEvaDataByEvaID" FunctionName="PSESModel.Store.SP_GetEvaDataByEvaID">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetEvaDataByEvaID_Result">
+          <ScalarProperty Name="Part2ID" ColumnName="Part2ID" />
+          <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
+          <ScalarProperty Name="EmployeeFirstNameThai" ColumnName="EmployeeFirstNameThai" />
+          <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+          <ScalarProperty Name="EmployeeLastNameThai" ColumnName="EmployeeLastNameThai" />
+          <ScalarProperty Name="GroupOfStaff" ColumnName="GroupOfStaff" />
+          <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
+          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+          <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+          <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />
+          <ScalarProperty Name="StartDatePlan" ColumnName="StartDatePlan" />
+          <ScalarProperty Name="FinishDatePlan" ColumnName="FinishDatePlan" />
+          <ScalarProperty Name="Function" ColumnName="Function" />
+          <ScalarProperty Name="StartTime" ColumnName="StartTime" />
+          <ScalarProperty Name="FinishTime" ColumnName="FinishTime" />
+          <ScalarProperty Name="EvaluatorFirstName" ColumnName="EvaluatorFirstName" />
+          <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
+          <ScalarProperty Name="EvaluatorFirstNameThai" ColumnName="EvaluatorFirstNameThai" />
+          <ScalarProperty Name="EvaluatorLastNameThai" ColumnName="EvaluatorLastNameThai" />
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_GetEvaListByEvaluatorID" FunctionName="PSESModel.Store.SP_GetEvaListByEvaluatorID">
       <ResultMapping>
         <ComplexTypeMapping TypeName="PSESModel.SP_GetEvaListByEvaluatorID_Result">
@@ -515,6 +613,8 @@
           <ScalarProperty Name="FinishEvaDate" ColumnName="FinishEvaDate" />
           <ScalarProperty Name="StartEvaDate" ColumnName="StartEvaDate" />
           <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+          <ScalarProperty Name="EmployeeLastNameThai" ColumnName="EmployeeLastNameThai" />
+          <ScalarProperty Name="EmployeeFirstNameThai" ColumnName="EmployeeFirstNameThai" />
           <ScalarProperty Name="GroupOfStaff" ColumnName="GroupOfStaff" />
           <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
           <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
@@ -525,11 +625,12 @@
           <ScalarProperty Name="Function" ColumnName="Function" />
           <ScalarProperty Name="EvaluatorFirstName" ColumnName="EvaluatorFirstName" />
           <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
+          <ScalarProperty Name="EvaluatorLastNameThai" ColumnName="EvaluatorLastNameThai" />
+          <ScalarProperty Name="EvaluatorFirstNameThai" ColumnName="EvaluatorFirstNameThai" />
           <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
           <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
-    <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationStatus" FunctionName="PSESModel.Store.SP_UpdateEvaluationStatus" />
   </EntityContainerMapping>
 </Mapping>
