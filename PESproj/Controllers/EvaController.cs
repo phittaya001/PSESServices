@@ -634,5 +634,56 @@ namespace PESproj.Controllers
             header.UpdateApproveData(ApS);
             insertLog(AllAp.Name, Data["EmpID"].ToString(), type + " Approve EvaID : " + Data["EvaID"].ToString());
         }
+
+        [Route("EvalistData")]
+        [HttpGet]
+        public JObject EvalistData()
+        {
+
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            List<object> result = new List<object>();
+            List<tblEmployee> emp = header.getEmployees();
+            List<tblPart2Master> Role = header.getPart2Data();
+            List<tblProject> proj = header.getProject();
+            List<string> empname = new List<string>();
+            List<JObject> Data = new List<JObject>();
+            List<JObject> Em = new List<JObject>();
+            string str = "";
+            str = "{\"Employee\":[";
+            string t = "";
+            emp.ForEach(n =>
+            {
+
+                str += t + "{\"EN\":\"" + n.EmployeeFirstName + " " + n.EmployeeLastName + "\",\"TH\":\"" + n.EmployeeFirstNameThai + " " + n.EmployeeLastNameThai + "\"}";
+                t = ",";
+            });
+            JObject tmp2 = new JObject();
+            str += "]}";
+            tmp2["Employee"] = JsonConvert.DeserializeObject<JObject>(str);
+            str = "";
+            str += "{\"Role\":[";
+            
+            t = "";
+            Role.ForEach(n =>
+            {
+
+                str += t + "\"" + n.Function + "\"";
+                t = ",";
+            });
+            str += "]}";
+            tmp2["Role"] = JsonConvert.DeserializeObject<JObject>(str);
+            str = "{\"Project\":[";
+            t = "";
+            proj.ForEach(n =>
+            {
+                str += t + "\"" + n.CustomerCompanyAlias + " " + n.ProjectNameAlias + "("+ n.VersionNo+ ")"+ "\"";
+                t = ",";
+            });
+            str += "]}";
+            tmp2["Project"] = JsonConvert.DeserializeObject<JObject>(str);
+
+            // JObject a = JsonConvert.DeserializeObject<JObject>(emp);
+            return tmp2;
+        }
     }
 }

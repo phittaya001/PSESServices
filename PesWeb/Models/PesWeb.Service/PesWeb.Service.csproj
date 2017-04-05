@@ -80,6 +80,7 @@
     <Compile Include="Models\EmployeeData.cs" />
     <Compile Include="Modules\ApproveData.cs" />
     <Compile Include="Modules\EvaluationData.cs" />
+    <Compile Include="Modules\EvaluationListData.cs" />
     <Compile Include="Modules\EvaManage.cs" />
     <Compile Include="Modules\FormManage.cs" />
     <Compile Include="Modules\HeaderManage.cs" />

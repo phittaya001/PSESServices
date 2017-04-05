@@ -262,6 +262,7 @@ namespace PESproj.Controllers
                 bbb["Score_ID"] = a.Score_ID;
                 bbb["Text"] = a.Text;
                 bbb["Text_Eng"] = a.Text_Eng;
+                bbb["Status"] = a.statusNo;
                 aaa.Add(bbb);
             });
 
