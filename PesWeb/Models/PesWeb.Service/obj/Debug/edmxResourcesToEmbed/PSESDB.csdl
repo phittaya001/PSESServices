@@ -274,6 +274,10 @@
       <Parameter Name="PositionNO" Mode="In" Type="Int32" />
       <Parameter Name="EvaID" Mode="In" Type="Int32" />
     </FunctionImport>
+    <FunctionImport Name="SP_UpdateEvaluationData">
+      <Parameter Name="EvaID" Mode="In" Type="Int32" />
+      <Parameter Name="PositionNo" Mode="In" Type="Int32" />
+    </FunctionImport>
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />

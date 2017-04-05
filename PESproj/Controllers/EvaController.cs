@@ -189,8 +189,12 @@ namespace PESproj.Controllers
                             else
                             {
                                 tblEmployee emp2 = emp.Where(t => t.EmployeeNo.Trim() == emO.FirstOrDefault().EmployeeNo).FirstOrDefault();
-                                tmp.Name = emp2.EmployeeFirstName + " " + emp2.EmployeeLastName;
-                                tmp.EmployeeNO = emp2.EmployeeNo;
+                                if (emp2 != null)
+                                {
+                                    tmp.Name = emp2.EmployeeFirstName + " " + emp2.EmployeeLastName;
+                                    tmp.EmployeeNO = emp2.EmployeeNo;
+                                }
+                                
 
                             }
                             

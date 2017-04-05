@@ -65,11 +65,10 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             db.SP_DeleteHeaderBot(H3_ID);
         }
-        public void InsertHeaderTop(string Text,string Text_Eng,string Alias,int JobID)
+        public void InsertHeaderJob(int PositionNo,int H_ID)
         {
             PSESEntities db = new PSESEntities();
-            var H1_ID = db.InsertHeaderTop(Text, Alias, Text_Eng);
-            db.SP_InsertHeaderJob(JobID, H1_ID.FirstOrDefault());
+            db.SP_InsertHeaderJob(PositionNo, H_ID);
         }
 
         public void InsertHeaderMid(string Text, string Text_Eng, int H1_ID, int JobID)

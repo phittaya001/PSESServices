@@ -950,6 +950,23 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetHeaderByPosition_Result>("SP_GetHeaderByPosition", positionNOParameter, evaIDParameter);
     }
 
+
+    public virtual int SP_UpdateEvaluationData(Nullable<int> evaID, Nullable<int> positionNo)
+    {
+
+        var evaIDParameter = evaID.HasValue ?
+            new ObjectParameter("EvaID", evaID) :
+            new ObjectParameter("EvaID", typeof(int));
+
+
+        var positionNoParameter = positionNo.HasValue ?
+            new ObjectParameter("PositionNo", positionNo) :
+            new ObjectParameter("PositionNo", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateEvaluationData", evaIDParameter, positionNoParameter);
+    }
+
 }
 
 }

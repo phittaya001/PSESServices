@@ -133,7 +133,11 @@ namespace PesWeb.Service.Modules
             return db.SP_InsertApproveState(ap.EvaID, ap.Position, ap.PositionID, ap.ProjectCode, ap.Role, ap.Name,ap.EmployeeNo).FirstOrDefault();
              
         }
-
+        public void UpdateEvaluationData(int EvaID,int PositionNo)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_UpdateEvaluationData(EvaID, PositionNo);
+        }
         public List<tblEmployeeOrganization> getEmployeeOrganization()
         {
             PSESEntities db = new PSESEntities();

@@ -26,7 +26,7 @@ namespace PESproj.Controllers
             lg.Name = Name;
             log.InsertLog(lg);
         }
-        
+
 
         public List<tblHeader> FinalHeader(tblHeader parent, List<tblHeader> ListAll)
         {
@@ -37,6 +37,7 @@ namespace PESproj.Controllers
                 return ListResult;
             }
             List<tblHeader> Result = new List<tblHeader>();
+            Result.Add(parent);
             foreach (tblHeader res in ListAll.Where(a => a.Parent == parent.H_ID).ToList())
             {
                 foreach (tblHeader a in FinalHeader(res, ListAll))
@@ -77,34 +78,33 @@ namespace PESproj.Controllers
                 sum += FinalHeader(hd.Where(a=>a.H_ID==hh.H1_ID).FirstOrDefault() , hd).ToList().Count;
             }
             p.H_ID = 0;
-            int a1 = GetHeader.Where(a => a.Eva_ID == EvaID).ToList().Count;
-            int a2 = GetHeader.Where(a => a.Score_ID > 0).Where(a => a.Eva_ID == EvaID).ToList().Count;
-            if (a2 < sum)
-                foreach (tblHeaderJob tmpHJ in hj)
+            
+            foreach (tblHeaderJob tmpHJ in hj)
+            {
+                foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmpHJ.H1_ID))
                 {
-                    foreach (tblHeader hd2 in hd.Where(a => a.H_ID == tmpHJ.H1_ID))
-                    {
 
-                        foreach (tblHeader hd3 in FinalHeader(hd2, hd))
-                        {
-                            if (sc.Where(a => a.Eva_ID == EvaID && a.H3_ID == hd3.H_ID).ToList().Count == 0)
-                                if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
-                                    Ans.Add(hd3);
-                        }
+                    foreach (tblHeader hd3 in FinalHeader(hd2, hd))
+                    {
+                        if (sc.Where(a => a.Eva_ID == EvaID && a.H3_ID == hd3.H_ID).ToList().Count == 0)
+                            //if (Ans.Where(a => a.H_ID == hd3.H_ID).ToList().Count == 0)
+                            Ans.Add(hd3);
                     }
                 }
+            }
+
             foreach (tblHeader h in Ans)
             {
                 header2.InsertSCORE(EvaID, h.H_ID);
             }
-
+            header2.UpdateEvaluationData(EvaID, PositionID);
             GetHeader = header.getHeaderByPosition(PositionID, EvaID).OrderBy(a=>a.H_ID).ToList();
             List<SP_GetHeaderByPosition_Result> H = new List<SP_GetHeaderByPosition_Result>();
             //List<SP_GetHeaderByPosition_Result> H2 = new List<SP_GetHeaderByPosition_Result>();
             // GetHeader.Reverse(0,GetHeader.Count);
             List<SP_GetHeaderByPosition_Result> GetHeader2 = new List<SP_GetHeaderByPosition_Result>();
-            List<tblHeaderAdditional> HdA = header.getHeaderAdditional().Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).ToList();
-            foreach(tblHeaderAdditional HdATemp in HdA)
+            List<tblHeaderAdditional> HdA = header.getHeaderAdditional();
+            foreach(tblHeaderAdditional HdATemp in HdA.Where(a => a.Eva_ID == EvaID && a.Part2ID == PositionID).ToList())
             {
                 if (HdATemp.H_status == 1 || ID == 2)
                 {
@@ -119,12 +119,8 @@ namespace PESproj.Controllers
                     newHeader.PositionNO = PositionID;
                     newHeader.point = HdATemp.point;
                     newHeader.Comment = HdATemp.Comment;
-                    newHeader.Text_Language = "{\"EN\":\"" + HdATemp.Text + "\",\"TH\":\"" + HdATemp.Text_Eng + "\"}";
-                    //if (HdATemp.point ==null && HdATemp.point != 0)
-                    //{
-                    //    header.UpdateScoreData(EvaID, 0, (-1)*HdATemp.H_ID);
-                    //    newHeader.point = 0;
-                    //}
+                    newHeader.Text_Language = "{\"EN\":\"" + HdATemp.Text_Eng + "\",\"TH\":\"" + HdATemp.Text+ "\"}";
+
                     newHeader.statusNo = "1";
                     GetHeader.Add(newHeader);
                 }
@@ -138,23 +134,55 @@ namespace PESproj.Controllers
             List<tblScore> sc2 = sc.Where(a => a.Eva_ID == EvaID).ToList();
             sc2.ForEach(a =>
             {
-                if(GetHeader.Where(b=>b.H_ID == a.H3_ID && a.point > 0).ToList().Count == 0)
+                SP_GetHeaderByPosition_Result tmp = GetHeader.Where(b => b.H_ID == a.H3_ID).FirstOrDefault();
+                if (tmp == null && a.point > 0 )
                 {
                     SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
                     tblHeader hd2 = hd.Where(b => b.H_ID == a.H3_ID).FirstOrDefault();
-                    newHeader.Alias = hd2.Alias;
-                    newHeader.H_Level = hd2.H_Level;
-                    newHeader.Parent = hd2.Parent;
-                    newHeader.Text = hd2.Text;
-                    newHeader.Text_Eng = hd2.Text_Eng;
-                    newHeader.Eva_ID = EvaID;
-                    newHeader.H_ID = hd2.H_ID;
-                    newHeader.PositionNO = hd2.PositionNo;
-                    newHeader.point = a.point;
-                    newHeader.Comment = a.Comment;
-                    newHeader.Text_Language = hd2.Text_Language;
-                    newHeader.statusNo = "2";
-                    GetHeader.Add(newHeader);
+                    if (hd2 != null)
+                    {
+                        newHeader.Alias = hd2.Alias;
+                        newHeader.H_Level = hd2.H_Level;
+                        newHeader.Parent = hd2.Parent;
+                        newHeader.Text = hd2.Text;
+                        newHeader.Text_Eng = hd2.Text_Eng;
+                        newHeader.Eva_ID = EvaID;
+                        newHeader.H_ID = hd2.H_ID;
+                        newHeader.PositionNO = hd2.PositionNo;
+                        newHeader.point = a.point;
+                        newHeader.Comment = a.Comment;
+                        newHeader.Text_Language = hd2.Text_Language;
+                        newHeader.statusNo = "2";
+                        GetHeader.Add(newHeader);
+                    }
+                    
+                }
+            });
+            List<tblHeaderAdditional> hda2 = HdA.Where(a => a.Eva_ID == EvaID).ToList();
+            hda2.ForEach(a =>
+            {
+                SP_GetHeaderByPosition_Result tmp = GetHeader.Where(b => b.H_ID == a.H_ID).FirstOrDefault();
+                if (tmp == null && a.point > 0)
+                {
+                    SP_GetHeaderByPosition_Result newHeader = new SP_GetHeaderByPosition_Result();
+                    tblHeaderAdditional hd2 = HdA.Where(b => b.H_ID == a.H_ID).FirstOrDefault();
+                    if (hd2 != null)
+                    {
+                        newHeader.Alias = hd2.Alias;
+                        newHeader.H_Level = hd2.H_Level;
+                        newHeader.Parent = hd2.parent;
+                        newHeader.Text = hd2.Text;
+                        newHeader.Text_Eng = hd2.Text_Eng;
+                        newHeader.Eva_ID = EvaID;
+                        newHeader.H_ID = hd2.H_ID;
+                        newHeader.PositionNO = 0;
+                        newHeader.point = a.point;
+                        newHeader.Comment = a.Comment;
+                        newHeader.Text_Language = "{\"EN\":\"" + hd2.Text_Eng + "\",\"TH\":\"" + hd2.Text + "\"}";
+                        newHeader.statusNo = "2";
+                        GetHeader.Add(newHeader);
+                    }
+                    
                 }
             });
             List<SP_GetHeaderByPosition_Result> H_new = new List<SP_GetHeaderByPosition_Result>();
@@ -404,9 +432,12 @@ namespace PESproj.Controllers
                         {
                             sum += (int)thA.point;
                         }
-
-                        header.UpdateScoreData(EvaID, sum / (H2.Count + Hd1.Count), th2.H_ID,score.Where(a=>a.Eva_ID == EvaID && a.H3_ID == th2.H_ID).FirstOrDefault().Comment);
-                        sum2 += sum / (H2.Count + Hd1.Count);
+                        if(H2.Count>0 || Hd1.Count >0)
+                        {
+                            header.UpdateScoreData(EvaID, sum / (H2.Count + Hd1.Count), th2.H_ID, score.Where(a => a.Eva_ID == EvaID && a.H3_ID == th2.H_ID).FirstOrDefault().Comment);
+                            sum2 += sum / (H2.Count + Hd1.Count);
+                        }
+                        
                         sum = 0;
                     }
                     header.UpdateScoreData(EvaID, sum2 / H1.Count, (int)th.H1_ID, score.Where(a => a.Eva_ID == EvaID && a.H3_ID == th.H1_ID).FirstOrDefault().Comment);

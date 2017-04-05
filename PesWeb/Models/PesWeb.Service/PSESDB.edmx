@@ -550,6 +550,10 @@
           <Parameter Name="Language" Type="varchar(max)" Mode="In" />
           <Parameter Name="ID" Type="int" Mode="In" />
         </Function>
+        <Function Name="SP_UpdateEvaluationData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EvaID" Type="int" Mode="In" />
+          <Parameter Name="PositionNo" Type="int" Mode="In" />
+        </Function>
         <Function Name="SP_UpdateEvaluationStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EvaID" Type="int" Mode="In" />
           <Parameter Name="EvaStatus" Type="int" Mode="In" />
@@ -863,6 +867,10 @@
           <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
             <Parameter Name="PositionNO" Mode="In" Type="Int32" />
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateEvaluationData">
+            <Parameter Name="EvaID" Mode="In" Type="Int32" />
+            <Parameter Name="PositionNo" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -1988,6 +1996,7 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationData" FunctionName="PSESModel.Store.SP_UpdateEvaluationData" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
