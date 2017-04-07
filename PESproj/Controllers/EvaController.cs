@@ -536,65 +536,70 @@ namespace PESproj.Controllers
         public List<JObject> getApproveList(string EmpID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
-            
+            List<JObject> ApObject = new List<JObject>();
             List<tblApproveStatus> AllAps = header.GetApproveStatus();
-            List<tblApproveStatus> ApS = AllAps.Where(a => a.EmployeeNO.Trim() == EmpID && a.Status == 0).GroupBy(a => a.ApproveID).Select(a => a.First()).ToList();
-            List<tblEvaluation> ListEva = header.GetAllEvaluation();
-            List<tblApprove> Ap = new List<tblApprove>();
-            List<tblApprove> AllAp = header.GetAllApprove();
-            foreach (tblApproveStatus aps in ApS)
+            List<tblApproveStatus> ApS = AllAps.Where(a => a.EmployeeNO == EmpID).ToList();
+            if (ApS != null)
             {
-                int num = 0;
-                List<tblApproveStatus> tmp = AllAps.Where(a => a.ApproveID == aps.ApproveID).ToList();
-                foreach(tblApproveStatus n in tmp)
+                List<tblEvaluation> ListEva = header.GetAllEvaluation();
+                List<tblApprove> Ap = new List<tblApprove>();
+                List<tblApprove> AllAp = header.GetAllApprove();
+                foreach (tblApproveStatus aps in ApS.Where(a=>a.Status == 0).GroupBy(a => a.ApproveID).Select(a => a.First()).ToList())
                 {
-                    if(n.ID == aps.ID)
+                    int num = 0;
+                    List<tblApproveStatus> tmp = AllAps.Where(a => a.ApproveID == aps.ApproveID).ToList();
+                    foreach (tblApproveStatus n in tmp)
                     {
-                        break;
+                        if (n.ID == aps.ID)
+                        {
+                            break;
+                        }
+                        else if (n.Status == 0)
+                        {
+                            num = 1;
+                        }
                     }
-                    else if(n.Status==0)
+
+                    if (num == 0)
                     {
-                        num = 1;
+                        tblApprove Approve = AllAp.Where(a => a.ID == aps.ApproveID).FirstOrDefault();
+                        if (Approve != null)
+                        {
+                            tblEvaluation EvaData = ListEva.Where(a => a.Eva_ID == Approve.EvaID).FirstOrDefault();
+                            if (EvaData != null && EvaData.EvaStatus == 1)
+                                Ap.Add(Approve);
+                        }
                     }
+
                 }
 
-                if(num==0)
+                List<tblEmployee> emp = header.getEmployees();
+                
+                Ap.ForEach(a =>
                 {
-                    tblApprove Approve = AllAp.Where(a => a.ID == aps.ApproveID).FirstOrDefault();
-                    if (Approve != null)
-                    {
-                        tblEvaluation EvaData = ListEva.Where(a => a.Eva_ID == Approve.EvaID).FirstOrDefault();
-                        if(EvaData != null && EvaData.EvaStatus == 1)
-                            Ap.Add(Approve);
-                    }
-                }
-                    
+                    JObject tmp = new JObject();
+                    tmp["ApproverID"] = a.ApproverID;
+                    tmp["ApproveState"] = a.ApproveState;
+                    tmp["EvaID"] = a.EvaID;
+                    tmp["GM"] = a.GM;
+                    tmp["HR"] = a.HR;
+                    tmp["ID"] = a.ID;
+                    tmp["Name"] = a.Name;
+                    tmp["PM"] = a.PM;
+                    tmp["Position"] = a.Position;
+                    tmp["PositionID"] = a.PositionID;
+                    tmp["ProjectCode"] = a.ProjectCode;
+                    tmp["Role"] = a.Role;
+                    tmp["ST"] = a.ST;
+                    tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Trim() == a.EmployeeNo).FirstOrDefault();
+                    tmp["name_language"] = JsonConvert.DeserializeObject<JObject>("{\"EN\":\"" + empTemp.EmployeeFirstName + " " + empTemp.EmployeeLastName + "\",\"TH\":\"" + empTemp.EmployeeFirstNameThai + " " + empTemp.EmployeeLastNameThai + "\"}");
+                    ApObject.Add(tmp);
+                });
+                
             }
 
-            List<tblEmployee> emp = header.getEmployees();
-            List<JObject> ApObject = new List<JObject>();
-            Ap.ForEach(a =>
-            {
-                JObject tmp = new JObject();
-                tmp["ApproverID"] = a.ApproverID;
-                tmp["ApproveState"] = a.ApproveState;
-                tmp["EvaID"] = a.EvaID;
-                tmp["GM"] = a.GM;
-                tmp["HR"] = a.HR;
-                tmp["ID"] = a.ID;
-                tmp["Name"] = a.Name;
-                tmp["PM"] = a.PM;
-                tmp["Position"] = a.Position;
-                tmp["PositionID"] = a.PositionID;
-                tmp["ProjectCode"] = a.ProjectCode;
-                tmp["Role"] = a.Role;
-                tmp["ST"] = a.ST;
-                tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Trim() == a.EmployeeNo).FirstOrDefault();
-                tmp["name_language"] = JsonConvert.DeserializeObject<JObject>("{\"EN\":\"" + empTemp.EmployeeFirstName + " " + empTemp.EmployeeLastName + "\",\"TH\":\"" + empTemp.EmployeeFirstNameThai + " " + empTemp.EmployeeLastNameThai + "\"}");
-                ApObject.Add(tmp);
-            });
-
             return ApObject;
+
         }
 
         [Route("ApproveStatus")]
@@ -649,17 +654,27 @@ namespace PESproj.Controllers
             List<JObject> Data = new List<JObject>();
             List<JObject> Em = new List<JObject>();
             string str = "";
-            str = "{\"Employee\":[";
+            str = "{\"EN\":[";
             string t = "";
             emp.ForEach(n =>
             {
 
-                str += t + "{\"EN\":\"" + n.EmployeeFirstName + " " + n.EmployeeLastName + "\",\"TH\":\"" + n.EmployeeFirstNameThai + " " + n.EmployeeLastNameThai + "\"}";
+                str += t + "\"" + n.EmployeeFirstName + " " + n.EmployeeLastName + "\"";
                 t = ",";
             });
-            JObject tmp2 = new JObject();
             str += "]}";
-            tmp2["Employee"] = JsonConvert.DeserializeObject<JObject>(str);
+            JObject tmp2 = new JObject();
+            tmp2["EN"] = JsonConvert.DeserializeObject<JObject>(str);
+            
+            str = "{\"TH\":[";
+            emp.ForEach(n =>
+            {
+
+                str += t + "\"" + n.EmployeeFirstNameThai + " " + n.EmployeeLastNameThai + "\"";
+                t = ",";
+            });
+            str += "]}";
+            tmp2["TH"] = JsonConvert.DeserializeObject<JObject>(str);
             str = "";
             str += "{\"Role\":[";
             
