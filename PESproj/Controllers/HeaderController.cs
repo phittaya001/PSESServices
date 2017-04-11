@@ -239,7 +239,7 @@ namespace PESproj.Controllers
                     int parent = (int)a.Parent;
                     for (int i = 0; i < H_new2.Count; i++)
                     {
-                        if (H_new2[i].H_ID == parent)
+                        if (H_new2[i].H_ID == parent && H_new2.Find(b=>b.H_ID == a.H_ID) == null )
                         {
                             H_new2.Insert(i + 1, a);
                         }

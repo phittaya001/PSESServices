@@ -712,5 +712,26 @@ namespace PESproj.Controllers
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             header.DeleteScore(ScoreID);
         }
+
+        [Route("ApproveFlow/{EvaID}")]
+        [HttpGet]
+        public List<JObject> ApproveFlow(int EvaID)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            tblApprove app = header.getApprove().Where(a => a.EvaID == EvaID).OrderByDescending(a=>a.ID).FirstOrDefault();
+            List<tblFlowMaster> FlowList = header.getAllFlow().ToList();
+            List<tblApproveStatus> ApSList = header.GetApproveStatus().Where(a=>a.ApproveID == app.ID).ToList();
+            List<JObject> Result = new List<JObject>();
+            ApSList.ForEach(a=>{
+                JObject tmp = new JObject();
+                tmp["Date"] = a.ApproveDate;
+                tmp["Name"] = a.Name;
+                tmp["ProjectCode"] = app.ProjectCode;
+                tmp["Role"] = FlowList[(int)a.FlowOrder-1].PositionName; ;
+                tmp["Status"] = a.Status;
+                Result.Add(tmp);
+            });
+            return Result;
+        }
     }
 }
