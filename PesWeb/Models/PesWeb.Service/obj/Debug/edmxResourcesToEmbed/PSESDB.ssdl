@@ -47,7 +47,7 @@
     <Property Name="Status" Type="int" />
     <Property Name="FlowOrder" Type="int" />
     <Property Name="ApproveID" Type="int" />
-    <Property Name="ApproveDate" Type="date" />
+    <Property Name="ApproveDate" Type="datetime" />
     <Property Name="Comment" Type="varchar" MaxLength="255" />
     <Property Name="Name" Type="varchar" MaxLength="50" />
     <Property Name="EmployeeNO" Type="varchar" MaxLength="10" />
@@ -417,6 +417,9 @@
   <Function Name="SP_DeleteHeaderTop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="H1_ID" Type="int" Mode="In" />
     <Parameter Name="JobID" Type="int" Mode="In" />
+  </Function>
+  <Function Name="SP_DeleteScore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="Score_ID" Type="int" Mode="In" />
   </Function>
   <Function Name="SP_GetAllHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
   <Function Name="SP_GetAllHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />

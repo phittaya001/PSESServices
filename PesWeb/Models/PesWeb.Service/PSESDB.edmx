@@ -52,7 +52,7 @@
           <Property Name="Status" Type="int" />
           <Property Name="FlowOrder" Type="int" />
           <Property Name="ApproveID" Type="int" />
-          <Property Name="ApproveDate" Type="date" />
+          <Property Name="ApproveDate" Type="datetime" />
           <Property Name="Comment" Type="varchar" MaxLength="255" />
           <Property Name="Name" Type="varchar" MaxLength="50" />
           <Property Name="EmployeeNO" Type="varchar" MaxLength="10" />
@@ -422,6 +422,9 @@
         <Function Name="SP_DeleteHeaderTop" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="H1_ID" Type="int" Mode="In" />
           <Parameter Name="JobID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="SP_DeleteScore" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Score_ID" Type="int" Mode="In" />
         </Function>
         <Function Name="SP_GetAllHeaderByJobID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="SP_GetAllHeaderJob" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -872,6 +875,9 @@
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
             <Parameter Name="PositionNo" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="SP_DeleteScore">
+            <Parameter Name="Score_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -1273,7 +1279,7 @@
           <Property Name="Status" Type="Int32" />
           <Property Name="FlowOrder" Type="Int32" />
           <Property Name="ApproveID" Type="Int32" />
-          <Property Name="ApproveDate" Type="DateTime" Precision="0" />
+          <Property Name="ApproveDate" Type="DateTime" Precision="3" />
           <Property Name="Comment" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="EmployeeNO" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
@@ -1997,6 +2003,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationData" FunctionName="PSESModel.Store.SP_UpdateEvaluationData" />
+          <FunctionImportMapping FunctionImportName="SP_DeleteScore" FunctionName="PSESModel.Store.SP_DeleteScore" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

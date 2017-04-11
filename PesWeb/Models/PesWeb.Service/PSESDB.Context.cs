@@ -967,6 +967,18 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateEvaluationData", evaIDParameter, positionNoParameter);
     }
 
+
+    public virtual int SP_DeleteScore(Nullable<int> score_ID)
+    {
+
+        var score_IDParameter = score_ID.HasValue ?
+            new ObjectParameter("Score_ID", score_ID) :
+            new ObjectParameter("Score_ID", typeof(int));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteScore", score_IDParameter);
+    }
+
 }
 
 }

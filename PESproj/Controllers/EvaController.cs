@@ -702,5 +702,15 @@ namespace PESproj.Controllers
             // JObject a = JsonConvert.DeserializeObject<JObject>(emp);
             return tmp2;
         }
+
+
+        [Route("ScoreDelete/{ScoreID}")]
+        [HttpDelete]
+        public void DeleteScore(int ScoreID)
+        {
+
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            header.DeleteScore(ScoreID);
+        }
     }
 }

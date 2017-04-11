@@ -50,6 +50,11 @@ namespace PesWeb.Service.Modules
             return db.tblProject.ToList();
         }
 
+        public void DeleteScore(int ScoreID)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_DeleteScore(ScoreID);
+        }
         public void DeleteEva(int EvaID)
         {
             PSESEntities db = new PSESEntities();
