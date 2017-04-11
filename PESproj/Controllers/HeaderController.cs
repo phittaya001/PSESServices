@@ -131,7 +131,7 @@ namespace PESproj.Controllers
                
             }
 
-            List<tblScore> sc2 = sc.Where(a => a.Eva_ID == EvaID).ToList();
+            List<tblScore> sc2 = sc.Where(a => a.Eva_ID == EvaID && a.point > 0).OrderBy(a=>a.H3_ID).ToList();
             sc2.ForEach(a =>
             {
                 SP_GetHeaderByPosition_Result tmp = GetHeader.Where(b => b.H_ID == a.H3_ID).FirstOrDefault();
@@ -414,8 +414,19 @@ namespace PESproj.Controllers
             List<tblScore> score = header2.GetAllScore().Where(a => a.Eva_ID == EvaID).OrderBy(a=>a.H3_ID).ToList();
             List<tblHeader> hd = header.GetAllHeader().ToList();
             tblEvaluation eva = header2.GetAllEvaluation().Where(a => a.Eva_ID == EvaID).FirstOrDefault();
-            List<tblHeaderJob> hj = header.getAllHeaderJob().Where(a => a.PositionNo == eva.Job_ID).ToList();
-            foreach(tblHeaderJob th in hj)
+            List<tblHeaderJob> hj = header.getAllHeaderJob().ToList();
+            List<tblHeaderJob> hjList = new List<tblHeaderJob>();
+            hj.ForEach(a =>
+            {
+                foreach (JObject jo in Data)
+                {
+                    if(Convert.ToInt32(jo["Id"].ToString()) == a.H1_ID)
+                    {
+                        hjList.Add(a);
+                    }
+                }
+            });
+            foreach(tblHeaderJob th in hjList)
             {
                 if(hd.Where(a=>a.H_ID == th.H1_ID).ToList().Count > 0)
                 {
