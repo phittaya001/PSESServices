@@ -545,6 +545,10 @@
     <Parameter Name="Language" Type="varchar(max)" Mode="In" />
     <Parameter Name="ID" Type="int" Mode="In" />
   </Function>
+  <Function Name="SP_UpdateEvaluationData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="EvaID" Type="int" Mode="In" />
+    <Parameter Name="PositionNo" Type="int" Mode="In" />
+  </Function>
   <Function Name="SP_UpdateEvaluationStatus" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="EvaID" Type="int" Mode="In" />
     <Parameter Name="EvaStatus" Type="int" Mode="In" />

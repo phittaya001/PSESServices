@@ -480,7 +480,7 @@ namespace PESproj.Controllers
             
             header2.UpdateApproveData(AllAp);
             header2.UpdateApproveData(ApS);
-            tblEmployee emp = header2.getEmployees().Where(a => a.EmployeeNo.Trim() == eva.EvaluatorNO).FirstOrDefault();
+            tblEmployee emp = header2.getEmployees().Where(a => a.EmployeeNo.Replace(" ","") == eva.EvaluatorNO).FirstOrDefault();
             insertLog(emp.EmployeeFirstName+ " "+emp.EmployeeLastName, eva.EvaluatorNO, "Update Score of EvaID : " + EvaID);
         }
 

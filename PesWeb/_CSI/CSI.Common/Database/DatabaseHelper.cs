@@ -41,7 +41,7 @@ namespace CSI.Common.Database
         public static string ExtractProviderConnectionString(string contextConnectionString)
         {
             string connectionString = contextConnectionString;
-            if (connectionString.Replace(" ", "").Trim().ToLower().StartsWith("name="))
+            if (connectionString.Replace(" ", "").Replace(" ","").ToLower().StartsWith("name="))
             {
                 string settingName = connectionString.Replace("name=", "");
                 var con = ConfigurationManager.ConnectionStrings[settingName];

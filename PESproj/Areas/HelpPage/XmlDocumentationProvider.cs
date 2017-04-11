@@ -59,7 +59,7 @@ namespace PESproj.Areas.HelpPage
                     XPathNavigator parameterNode = methodNode.SelectSingleNode(String.Format(CultureInfo.InvariantCulture, ParameterExpression, parameterName));
                     if (parameterNode != null)
                     {
-                        return parameterNode.Value.Trim();
+                        return parameterNode.Value.Replace(" ","");
                     }
                 }
             }
@@ -120,7 +120,7 @@ namespace PESproj.Areas.HelpPage
                 XPathNavigator node = parentNode.SelectSingleNode(tagName);
                 if (node != null)
                 {
-                    return node.Value.Trim();
+                    return node.Value.Replace(" ","");
                 }
             }
 

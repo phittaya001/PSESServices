@@ -23,18 +23,18 @@ namespace CSI.Common.Resources
 
             if (names.Length == 2)
             {
-                ResName = names[0].Trim();
-                AssemName = names[1].Trim();
+                ResName = names[0].Replace(" ","");
+                AssemName = names[1].Replace(" ","");
 
                 Assembly assembly = null;
-                assembly = Assembly.Load(names[1].Trim());
+                assembly = Assembly.Load(names[1].Replace(" ",""));
                 stream = assembly.GetManifestResourceStream(AssemName + "." + ResName);
                 if (stream == null)
                     stream = assembly.GetManifestResourceStream(ResName);
             }
             else
             {
-                ResName = resource.Trim();
+                ResName = resource.Replace(" ","");
                 Assembly[] assemblies = AppDomain.CurrentDomain.GetAssemblies();
                 foreach (Assembly assembly in assemblies)
                 {

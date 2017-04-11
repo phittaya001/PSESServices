@@ -560,24 +560,6 @@
       </EntityTypeMapping>
     </EntitySetMapping>
     <FunctionImportMapping FunctionImportName="SP_UpdateDataTable" FunctionName="PSESModel.Store.SP_UpdateDataTable" />
-    <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
-      <ResultMapping>
-        <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
-          <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
-          <ScalarProperty Name="Text" ColumnName="Text" />
-          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
-          <ScalarProperty Name="Text_Language" ColumnName="Text_Language" />
-          <ScalarProperty Name="Parent" ColumnName="Parent" />
-          <ScalarProperty Name="Alias" ColumnName="Alias" />
-          <ScalarProperty Name="H_Level" ColumnName="H_Level" />
-          <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
-          <ScalarProperty Name="Comment" ColumnName="Comment" />
-          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
-          <ScalarProperty Name="point" ColumnName="point" />
-          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
-        </ComplexTypeMapping>
-      </ResultMapping>
-    </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_UpdateApproveDetail" FunctionName="PSESModel.Store.SP_UpdateApproveDetail" />
     <FunctionImportMapping FunctionImportName="SP_GetEvaDataByEvaID" FunctionName="PSESModel.Store.SP_GetEvaDataByEvaID">
       <ResultMapping>
@@ -632,5 +614,25 @@
         </ComplexTypeMapping>
       </ResultMapping>
     </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
+      <ResultMapping>
+        <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
+          <ScalarProperty Name="statusNo" ColumnName="statusNo" />
+          <ScalarProperty Name="PositionNO" ColumnName="PositionNO" />
+          <ScalarProperty Name="Text" ColumnName="Text" />
+          <ScalarProperty Name="Text_Eng" ColumnName="Text_Eng" />
+          <ScalarProperty Name="Text_Language" ColumnName="Text_Language" />
+          <ScalarProperty Name="Parent" ColumnName="Parent" />
+          <ScalarProperty Name="Alias" ColumnName="Alias" />
+          <ScalarProperty Name="H_Level" ColumnName="H_Level" />
+          <ScalarProperty Name="Score_ID" ColumnName="Score_ID" />
+          <ScalarProperty Name="Comment" ColumnName="Comment" />
+          <ScalarProperty Name="H_ID" ColumnName="H_ID" />
+          <ScalarProperty Name="point" ColumnName="point" />
+          <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+        </ComplexTypeMapping>
+      </ResultMapping>
+    </FunctionImportMapping>
+    <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationData" FunctionName="PSESModel.Store.SP_UpdateEvaluationData" />
   </EntityContainerMapping>
 </Mapping>
