@@ -635,5 +635,6 @@
     </FunctionImportMapping>
     <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationData" FunctionName="PSESModel.Store.SP_UpdateEvaluationData" />
     <FunctionImportMapping FunctionImportName="SP_DeleteScore" FunctionName="PSESModel.Store.SP_DeleteScore" />
+    <FunctionImportMapping FunctionImportName="SP_UpdateApproveStatusFlow" FunctionName="PSESModel.Store.SP_UpdateApproveStatusFlow" />
   </EntityContainerMapping>
 </Mapping>

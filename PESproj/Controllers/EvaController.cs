@@ -795,6 +795,17 @@ namespace PESproj.Controllers
             });
             return j;
            }
+        [Route("UpdateGm")]
+        [HttpPut]
+        public void UpdateGM([FromBody]JObject Data)
+        {
 
-    }
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            tblApprove Ap = header.GetAllApprove().Where(a => a.EvaID == Convert.ToInt32(Data["EvaID"].ToString())).OrderByDescending(a=>a.ID).FirstOrDefault();
+            tblApproveStatus Aps = header.GetApproveStatus().Where(a => a.ApproveID == Ap.ID && a.FlowOrder == 3).FirstOrDefault();
+            tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo.Trim() == Data["EmployeeNo"].ToString()).FirstOrDefault();
+            header.UpdateGM(Aps.ID, emp.EmployeeNo.Trim(), emp.EmployeeFirstName + " " + emp.EmployeeLastName);
+        }
+
+        }
 }

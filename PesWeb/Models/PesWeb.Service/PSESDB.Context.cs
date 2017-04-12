@@ -979,6 +979,28 @@ public partial class PSESEntities : DbContext
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_DeleteScore", score_IDParameter);
     }
 
+
+    public virtual int SP_UpdateApproveStatusFlow(Nullable<int> iD, string employeeNo, string employeeName)
+    {
+
+        var iDParameter = iD.HasValue ?
+            new ObjectParameter("ID", iD) :
+            new ObjectParameter("ID", typeof(int));
+
+
+        var employeeNoParameter = employeeNo != null ?
+            new ObjectParameter("EmployeeNo", employeeNo) :
+            new ObjectParameter("EmployeeNo", typeof(string));
+
+
+        var employeeNameParameter = employeeName != null ?
+            new ObjectParameter("EmployeeName", employeeName) :
+            new ObjectParameter("EmployeeName", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateApproveStatusFlow", iDParameter, employeeNoParameter, employeeNameParameter);
+    }
+
 }
 
 }

@@ -539,6 +539,11 @@
           <Parameter Name="ID" Type="int" Mode="In" />
           <Parameter Name="EmployeeNO" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="SP_UpdateApproveStatusFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ID" Type="int" Mode="In" />
+          <Parameter Name="EmployeeNo" Type="varchar" Mode="In" />
+          <Parameter Name="EmployeeName" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="SP_UpdateAprroveData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Status" Type="int" Mode="In" />
           <Parameter Name="ID" Type="int" Mode="In" />
@@ -876,7 +881,12 @@
             <Parameter Name="PositionNo" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="SP_DeleteScore">
-            <Parameter Name="Score_ID" Mode="In" Type="Int32" />
+          <Parameter Name="Score_ID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="SP_UpdateApproveStatusFlow">
+            <Parameter Name="ID" Mode="In" Type="Int32" />
+            <Parameter Name="EmployeeNo" Mode="In" Type="String" />
+            <Parameter Name="EmployeeName" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -2004,6 +2014,7 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationData" FunctionName="PSESModel.Store.SP_UpdateEvaluationData" />
           <FunctionImportMapping FunctionImportName="SP_DeleteScore" FunctionName="PSESModel.Store.SP_DeleteScore" />
+          <FunctionImportMapping FunctionImportName="SP_UpdateApproveStatusFlow" FunctionName="PSESModel.Store.SP_UpdateApproveStatusFlow" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

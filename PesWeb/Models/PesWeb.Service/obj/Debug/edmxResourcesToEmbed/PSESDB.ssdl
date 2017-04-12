@@ -534,6 +534,11 @@
     <Parameter Name="ID" Type="int" Mode="In" />
     <Parameter Name="EmployeeNO" Type="varchar" Mode="In" />
   </Function>
+  <Function Name="SP_UpdateApproveStatusFlow" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="ID" Type="int" Mode="In" />
+    <Parameter Name="EmployeeNo" Type="varchar" Mode="In" />
+    <Parameter Name="EmployeeName" Type="varchar" Mode="In" />
+  </Function>
   <Function Name="SP_UpdateAprroveData" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="Status" Type="int" Mode="In" />
     <Parameter Name="ID" Type="int" Mode="In" />
