@@ -365,6 +365,7 @@ namespace PESproj.Controllers
             List<tblApproveStatus> ApS = header.GetApproveStatus().Where(a => a.EmployeeNO == EmpID && a.Status != 0).ToList();
             List<tblApprove> Ap = new List<tblApprove>();
             List<tblEvaluation> ListEva = header.GetAllEvaluation();
+            List<tblFlowMaster> ListFlow = header.getAllFlow();
             foreach(tblApproveStatus o in ApS)
             {
                 tblApprove Approve = app.Where(a => a.ID == o.ApproveID).FirstOrDefault();
@@ -392,6 +393,16 @@ namespace PESproj.Controllers
                 tmp["ProjectCode"] = a.ProjectCode;
                 tmp["Role"] = a.Role;
                 tmp["ST"] = a.ST;
+                List<tblApproveStatus> ApSt = ApS.Where(b => b.ID == a.ID).OrderBy(b=>b.FlowOrder).ToList();
+                tmp["Date"] = "";
+                ApSt.ForEach(c =>
+                {
+                    if (c.Status == 1)
+                    {
+                        tmp["Date"] = tmp["Date"] = c.ApproveDate.ToString().Substring(0, 9).Replace("-", "/") + " " + c.ApproveDate.ToString().Substring(12, 5).Replace("-", "/");
+                    }
+                    
+                });
                 tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Replace(" ","") == a.EmployeeNo).FirstOrDefault();
                 tmp["name_language"] = JsonConvert.DeserializeObject < JObject > ("{\"EN\":\"" + empTemp.EmployeeFirstName + " " + empTemp.EmployeeLastName + "\",\"TH\":\"" + empTemp.EmployeeFirstNameThai + " " + empTemp.EmployeeLastNameThai + "\"}");
                 ApObject.Add(tmp);
@@ -611,7 +622,7 @@ namespace PESproj.Controllers
            
             // var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             tblApprove AllAp = header.GetAllApprove().Where(a => a.EvaID == Convert.ToInt32(Data["EvaID"].ToString())).OrderByDescending(a=>a.ID).FirstOrDefault();
-            tblApproveStatus ApS = header.GetApproveStatus().Where(a => a.EmployeeNO.Replace(" ","") == Data["EmpID"].ToString() && a.ApproveID == AllAp.ID).OrderByDescending(a=>a.ID).FirstOrDefault();
+            tblApproveStatus ApS = header.GetApproveStatus().Where(a => a.EmployeeNO == Data["EmpID"].ToString() && a.ApproveID == AllAp.ID).OrderByDescending(a=>a.ID).FirstOrDefault();
             ApS.Status = 1;//Convert.ToInt32(Data["Status"].ToString());
             string type = "";
             if(ApS.FlowOrder == 1)
@@ -634,6 +645,10 @@ namespace PESproj.Controllers
             {
                 AllAp.HR = 1;
                 type = "Human Resource";
+            }
+            if(Convert.ToInt32(Data["Status"].ToString()) == 0)
+            {
+                ApS.Status = -1;
             }
             header.UpdateApproveData(AllAp);
             header.UpdateApproveData(ApS);
@@ -722,10 +737,16 @@ namespace PESproj.Controllers
             List<tblFlowMaster> FlowList = header.getAllFlow().ToList();
             List<tblApproveStatus> ApSList = header.GetApproveStatus().Where(a=>a.ApproveID == app.ID).ToList();
             List<JObject> Result = new List<JObject>();
+            tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo.Trim() == app.EmployeeNo).FirstOrDefault();
             ApSList.ForEach(a=>{
                 JObject tmp = new JObject();
-                tmp["Date"] = a.ApproveDate;
-                tmp["Name"] = a.Name;
+                tmp["Date"] = a.ApproveDate.ToString().Substring(0,9).Replace("-","/") + " " + a.ApproveDate.ToString().Substring(12, 5).Replace("-", "/");
+                string str = "";
+                if (a.Status == 1)
+                {
+                     str = "{\"EN\":\"" + emp.EmployeeFirstName + " " + emp.EmployeeLastName + "\",\"TH\":\"" + emp.EmployeeFirstNameThai + " " + emp.EmployeeLastNameThai + "\"}";
+                }
+                tmp["Name"] = JsonConvert.DeserializeObject<JObject>(str);
                 tmp["ProjectCode"] = app.ProjectCode;
                 tmp["Role"] = FlowList[(int)a.FlowOrder-1].PositionName; ;
                 tmp["Status"] = a.Status;
