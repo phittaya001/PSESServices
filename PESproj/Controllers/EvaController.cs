@@ -735,26 +735,66 @@ namespace PESproj.Controllers
             List<tblApproveStatus> ApSList = header.GetApproveStatus().Where(a=>a.ApproveID == app.ID).ToList();
             List<JObject> Result = new List<JObject>();
             List<tblEmployee> emp2 = header.getEmployees().ToList();
-            ApSList.ForEach(a=>{
+            List<tblEmployeeOrganization> em = header.getEmployeeOrganization().Where(a=>a.PositionNo==21).ToList();
+            ApSList.ForEach(a=> {
                 JObject tmp = new JObject();
                 tmp["Date"] = "";
                 string str = "";
                 tblEmployee emp = emp2.Where(b => b.EmployeeNo.Trim() == a.EmployeeNO.Trim()).FirstOrDefault();
                 str = "{\"EN\":\"\",\"TH\":\"\"}";
-                if (emp!= null)
-                str = "{\"EN\":\"" + emp.EmployeeFirstName + " " + emp.EmployeeLastName + "\",\"TH\":\"" + emp.EmployeeFirstNameThai + " " + emp.EmployeeLastNameThai + "\"}";
+                if (emp != null)
+                    str = "{\"EN\":\"" + emp.EmployeeFirstName + " " + emp.EmployeeLastName + "\",\"TH\":\"" + emp.EmployeeFirstNameThai + " " + emp.EmployeeLastNameThai + "\"}";
 
                 if (a.Status == 1)
                 {
-                    tmp["Date"] = a.ApproveDate.ToString().Substring(0, 9).Replace("-", "/") + " " + a.ApproveDate.ToString().Substring(10, 5).Replace("-", "/");
+                    tmp["Date"] = a.ApproveDate.ToString().Substring(0, 9).Replace("-", "/") + " " + a.ApproveDate.ToString().Substring(9, 5).Replace("-", "/");
                 }
+                
                 tmp["Name"] = JsonConvert.DeserializeObject<JObject>(str);
                 tmp["ProjectCode"] = app.ProjectCode;
                 tmp["Role"] = FlowList[(int)a.FlowOrder-1].PositionName; ;
                 tmp["Status"] = a.Status;
                 Result.Add(tmp);
             });
+
+
+            
+
             return Result;
         }
+
+        [Route("GroupManager")]
+        [HttpGet]
+        public List<JObject> GroupManager()
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            List<tblEmployee> emp2 = header.getEmployees().Where(b => b.PositionNo == 21).ToList();
+            List<JObject> j = new List<JObject>();
+                List<tblEmployee> result = new List<tblEmployee>();
+                List<tblEmployeeOrganization> t = header.getEmployeeOrganization().Where(b => b.PositionNo == 21).ToList();
+                emp2.ForEach(c =>
+                {
+                    result.Add(c);
+                });
+                t.ForEach(c =>
+                {
+                    tblEmployee e = emp2.Where(b => b.EmployeeNo.Trim() == c.EmployeeNo.Trim()).FirstOrDefault();
+                    if (e != null && result.Where(b => b.EmployeeNo.Trim() == c.EmployeeNo.Trim()).ToList().Count == 0)
+                    {
+                        result.Add(e);
+                    }
+                });
+            result.ForEach(a =>
+            {
+                JObject tmp = new JObject();
+                string str = "{\"EN\":\"" + a.EmployeeFirstName + " " + a.EmployeeLastName + "\",\"TH\":\"" + a.EmployeeFirstNameThai + " " + a.EmployeeLastNameThai + "\"}";
+                tmp["Name"] = JsonConvert.DeserializeObject<JObject>(str);
+                tmp["EmployeeNo"] = a.EmployeeNo;
+                j.Add(tmp);
+
+            });
+            return j;
+           }
+
     }
 }
