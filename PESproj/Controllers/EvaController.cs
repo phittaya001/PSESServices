@@ -544,7 +544,7 @@ namespace PESproj.Controllers
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<JObject> ApObject = new List<JObject>();
             List<tblApproveStatus> AllAps = header.GetApproveStatus();
-            List<tblApproveStatus> ApS = AllAps.Where(a => a.EmployeeNO == EmpID).ToList();
+            List<tblApproveStatus> ApS = AllAps.Where(a => ((a.EmployeeNO!=null)?a.EmployeeNO.Trim():a.EmployeeNO) == EmpID.Trim()).ToList();
             if (ApS != null)
             {
                 List<tblEvaluation> ListEva = header.GetAllEvaluation();
@@ -619,7 +619,7 @@ namespace PESproj.Controllers
            
             // var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             tblApprove AllAp = header.GetAllApprove().Where(a => a.EvaID == Convert.ToInt32(Data["EvaID"].ToString())).OrderByDescending(a=>a.ID).FirstOrDefault();
-            tblApproveStatus ApS = header.GetApproveStatus().Where(a => a.EmployeeNO == Data["EmpID"].ToString() && a.ApproveID == AllAp.ID).OrderByDescending(a=>a.ID).FirstOrDefault();
+            tblApproveStatus ApS = header.GetApproveStatus().Where(a => ((a.EmployeeNO!=null)?a.EmployeeNO.Trim():a.EmployeeNO) == Data["EmpID"].ToString() && a.ApproveID == AllAp.ID).OrderByDescending(a=>a.ID).FirstOrDefault();
             ApS.Status = 1;//Convert.ToInt32(Data["Status"].ToString());
             string type = "";
             if(ApS.FlowOrder == 1)
@@ -740,7 +740,13 @@ namespace PESproj.Controllers
                 JObject tmp = new JObject();
                 tmp["Date"] = "";
                 string str = "";
-                tblEmployee emp = emp2.Where(b => b.EmployeeNo.Trim() == a.EmployeeNO.Trim()).FirstOrDefault();
+                tblEmployee emp = new tblEmployee();
+                emp = null;
+               // if (a.EmployeeNO != null)
+                {
+                    emp = emp2.Where(b => b.EmployeeNo.Trim() == a.EmployeeNO.Trim()).FirstOrDefault();
+                }
+                
                 str = "{\"EN\":\"\",\"TH\":\"\"}";
                 if (emp != null)
                     str = "{\"EN\":\"" + emp.EmployeeFirstName + " " + emp.EmployeeLastName + "\",\"TH\":\"" + emp.EmployeeFirstNameThai + " " + emp.EmployeeLastNameThai + "\"}";
@@ -749,7 +755,7 @@ namespace PESproj.Controllers
                 {
                     tmp["Date"] = a.ApproveDate.ToString().Substring(0, 9).Replace("-", "/") + " " + a.ApproveDate.ToString().Substring(9, 5).Replace("-", "/");
                 }
-                
+                tmp["EmployeeNo"] = (emp!=null)?a.EmployeeNO.Trim():null;
                 tmp["Name"] = JsonConvert.DeserializeObject<JObject>(str);
                 tmp["ProjectCode"] = app.ProjectCode;
                 tmp["Role"] = FlowList[(int)a.FlowOrder-1].PositionName; ;
@@ -789,7 +795,7 @@ namespace PESproj.Controllers
                 JObject tmp = new JObject();
                 string str = "{\"EN\":\"" + a.EmployeeFirstName + " " + a.EmployeeLastName + "\",\"TH\":\"" + a.EmployeeFirstNameThai + " " + a.EmployeeLastNameThai + "\"}";
                 tmp["Name"] = JsonConvert.DeserializeObject<JObject>(str);
-                tmp["EmployeeNo"] = a.EmployeeNo;
+                tmp["EmployeeNo"] = a.EmployeeNo.Trim();
                 j.Add(tmp);
 
             });
@@ -803,7 +809,7 @@ namespace PESproj.Controllers
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             tblApprove Ap = header.GetAllApprove().Where(a => a.EvaID == Convert.ToInt32(Data["EvaID"].ToString())).OrderByDescending(a=>a.ID).FirstOrDefault();
             tblApproveStatus Aps = header.GetApproveStatus().Where(a => a.ApproveID == Ap.ID && a.FlowOrder == 3).FirstOrDefault();
-            tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo.Trim() == Data["EmployeeNo"].ToString()).FirstOrDefault();
+            tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo.Trim() == Data["EmployeeNo"].ToString().Trim()).FirstOrDefault();
             header.UpdateGM(Aps.ID, emp.EmployeeNo.Trim(), emp.EmployeeFirstName + " " + emp.EmployeeLastName);
         }
 

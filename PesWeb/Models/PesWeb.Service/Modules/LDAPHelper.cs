@@ -43,6 +43,7 @@ namespace PesWeb.Service.Modules
                     authenRs.Result = true;
                     authenRs.EmployeeID = up.EmployeeId;
                     authenRs.EmployeeName = up.DisplayName;
+                    //authenRs.Message = up
                     return authenRs;
                 }
             }

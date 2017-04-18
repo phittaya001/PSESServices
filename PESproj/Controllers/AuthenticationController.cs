@@ -9,6 +9,7 @@ using Newtonsoft.Json.Linq;
 using PesWeb.Service.Modules;
 using System.Web.Configuration;
 using CSI.CastleWindsorHelper;
+using PesWeb.Service;
 
 namespace PESproj.Controllers
 {
@@ -50,6 +51,9 @@ namespace PESproj.Controllers
                 try
                 {
                     svr.EmployeeActivityLog(authenRs.EmployeeID, "LOGIN");
+                    var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+                    tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo.Trim() == authenRs.EmployeeID.Trim()).FirstOrDefault();
+                    authenRs.positionNo = (int)emp.PositionNo;
                 }
                 catch (Exception e)
                 {
@@ -58,6 +62,8 @@ namespace PESproj.Controllers
                     return authenRs;
                 }
             }
+            
+
             return authenRs;
         }
     }

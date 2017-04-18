@@ -12,5 +12,6 @@ namespace PesWeb.Service.Models
         public string EmployeeID;
         public string EmployeeName;
         public string Message = string.Empty;
+        public int positionNo;
     }
 }
