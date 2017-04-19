@@ -488,7 +488,7 @@ namespace PESproj.Controllers
             tblApproveStatus ApS = header2.GetApproveStatus().Where(a => a.FlowOrder == 1 && a.ApproveID == AllAp.ID).OrderByDescending(a => a.ID).FirstOrDefault();
           
             AllAp.ST = 1;
-            
+            ApS.Status = 1;
             header2.UpdateApproveData(AllAp);
             header2.UpdateApproveData(ApS);
             tblEmployee emp = header2.getEmployees().Where(a => a.EmployeeNo.Replace(" ","") == eva.EvaluatorNO).FirstOrDefault();

@@ -56,6 +56,7 @@ namespace PESproj.Controllers
             {
                 Emp[i].PlanStartDate = Emp[i].PlanStartDate.Substring(0, 10).Replace('/', '-');
                 Emp[i].PlanFinishDate = Emp[i].PlanFinishDate.Substring(0, 10).Replace('/', '-');
+                
             }
             return Emp;
         }
@@ -90,7 +91,7 @@ namespace PESproj.Controllers
                 
                 var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
                 var header2 = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
-            List<tblEvaluation> evaAll = header.GetAllEvaluation().Where(a => a.EvaluatorNO == Data["EvaluatorNO"].ToString() && a.EmployeeNO == Data["EmployeeNO"].ToString() && a.ProjectNO == Data["ProjectNO"].ToString()).ToList();
+            List<tblEvaluation> evaAll = header.GetAllEvaluation().Where(a => a.EvaluatorNO == Data["EvaluatorNO"].ToString() && a.EmployeeNO == Data["EmployeeNO"].ToString() && a.ProjectNO == Data["ProjectNO"].ToString() && a.PeriodID == Convert.ToInt32( Data["PeriodID"].ToString())).ToList();
             if (evaAll.Count == 0)
             {
 
@@ -164,7 +165,7 @@ namespace PESproj.Controllers
                             tblEmployee emp2 = emp.Where(t => t.EmployeeNo.Replace(" ","") == Data["EvaluatorNO"].ToString().Replace(" ","")).FirstOrDefault();
                             tmp.Name = emp2.EmployeeFirstName + " " + emp2.EmployeeLastName;
                             tmp.EmployeeNO = emp2.EmployeeNo;
-                            tmp.Status = 1;
+                           // tmp.Status = 1;
                         }
                         else if(a.CodeName == "ST")
                         {
@@ -244,7 +245,7 @@ namespace PESproj.Controllers
         public List<JObject> getEvaData(string EvaluatorID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
-            List< SP_GetEvaListByEvaluatorID_Result > evalist = header.getEvaListByEvaluatorID(EvaluatorID).OrderByDescending(a=>a.Eva_ID).ToList();
+            List< SP_GetEvaListByEvaluatorID_Result > evalist = header.getEvaListByEvaluatorID(EvaluatorID).Where(a=>a.EvaStatus!=3).OrderByDescending(a=>a.Eva_ID).ToList();
             List<JObject> Jeva = new List<JObject>();
             List<tblEmployee> emp = header.getEmployees();
             evalist.ForEach(a =>
@@ -362,9 +363,9 @@ namespace PESproj.Controllers
 
             // var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<tblApprove> app = header.GetAllApprove();
-            List<tblApproveStatus> ApS = header.GetApproveStatus().Where(a => a.EmployeeNO == EmpID && a.Status != 0).ToList();
+            List<tblApproveStatus> ApS = header.GetApproveStatus().Where(a => a.EmployeeNO == EmpID).OrderByDescending(a=>a.ID).ToList();
             List<tblApprove> Ap = new List<tblApprove>();
-            List<tblEvaluation> ListEva = header.GetAllEvaluation();
+            List<tblEvaluation> ListEva = header.GetAllEvaluation().ToList();
             List<tblFlowMaster> ListFlow = header.getAllFlow();
             foreach(tblApproveStatus o in ApS)
             {
@@ -596,7 +597,7 @@ namespace PESproj.Controllers
                     tmp["ProjectCode"] = a.ProjectCode;
                     tmp["Role"] = a.Role;
                     tmp["ST"] = a.ST;
-                    tblEvaluation eva = evalist.Where(b => b.Eva_ID == a.EvaID).FirstOrDefault();
+                    tblEvaluation eva = evalist.Where(b => b.Eva_ID == a.EvaID && b.EvaStatus == 1).FirstOrDefault();
                     tmp["Date"] = eva.StartEvaDate.ToString().Substring(0, 9).Replace("-", "/") + " " + eva.StartEvaDate.ToString().Substring(10, 5).Replace("-", "/");
                     
                     tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Replace(" ","") == a.EmployeeNo).FirstOrDefault();
@@ -632,6 +633,7 @@ namespace PESproj.Controllers
             {
                 type = "Staff";
                 AllAp.PM = 1;
+                //header.updateEvaluationStatus(Convert.ToInt32(Data["EvaID"].ToString()), 3);
             }
             else if(ApS.FlowOrder == 3)
             {
@@ -642,6 +644,7 @@ namespace PESproj.Controllers
             {
                 AllAp.HR = 1;
                 type = "Human Resource";
+                header.updateEvaluationStatus(Convert.ToInt32(Data["EvaID"].ToString()), 3);
             }
             if(Convert.ToInt32(Data["Status"].ToString()) == 0)
             {
@@ -742,7 +745,7 @@ namespace PESproj.Controllers
                 string str = "";
                 tblEmployee emp = new tblEmployee();
                 emp = null;
-               // if (a.EmployeeNO != null)
+                if (a.EmployeeNO != null)
                 {
                     emp = emp2.Where(b => b.EmployeeNo.Trim() == a.EmployeeNO.Trim()).FirstOrDefault();
                 }
@@ -753,7 +756,7 @@ namespace PESproj.Controllers
 
                 if (a.Status == 1)
                 {
-                    tmp["Date"] = a.ApproveDate.ToString().Substring(0, 9).Replace("-", "/") + " " + a.ApproveDate.ToString().Substring(9, 5).Replace("-", "/");
+                    tmp["Date"] = a.ApproveDate.ToString().Substring(0, 9).Replace("-", "/") + " " + a.ApproveDate.ToString().Substring(10, 5).Replace("-", "/");
                 }
                 tmp["EmployeeNo"] = (emp!=null)?a.EmployeeNO.Trim():null;
                 tmp["Name"] = JsonConvert.DeserializeObject<JObject>(str);

@@ -197,6 +197,11 @@ namespace PesWeb.Service.Modules
             PSESEntities db = new PSESEntities();
             db.SP_UpdateApproveStatusFlow(ID, EmployeeNo, name);
         }
+        public void updateEvaluationStatus(int evaID,int status)
+        {
+            PSESEntities db = new PSESEntities();
+            db.SP_UpdateEvaluationStatus(evaID, status);
+        }
 
     }
 }
