@@ -119,6 +119,14 @@ namespace PESproj.Controllers
                     newHeader.PositionNO = PositionID;
                     newHeader.point = HdATemp.point;
                     newHeader.Comment = HdATemp.Comment;
+                    if(HdATemp.Text_Eng == "-")
+                    {
+                        HdATemp.Text_Eng = HdATemp.Text;
+                    }
+                    if (HdATemp.Text == "-")
+                    {
+                        HdATemp.Text = HdATemp.Text_Eng;
+                    }
                     newHeader.Text_Language = "{\"EN\":\"" + HdATemp.Text_Eng + "\",\"TH\":\"" + HdATemp.Text+ "\"}";
 
                     newHeader.statusNo = "1";
@@ -178,6 +186,14 @@ namespace PESproj.Controllers
                         newHeader.PositionNO = 0;
                         newHeader.point = a.point;
                         newHeader.Comment = a.Comment;
+                        if (hd2.Text_Eng == "-")
+                        {
+                            hd2.Text_Eng = hd2.Text;
+                        }
+                        if (hd2.Text == "-")
+                        {
+                            hd2.Text = hd2.Text_Eng;
+                        }
                         newHeader.Text_Language = "{\"EN\":\"" + hd2.Text_Eng + "\",\"TH\":\"" + hd2.Text + "\"}";
                         newHeader.statusNo = "2";
                         GetHeader.Add(newHeader);
@@ -327,6 +343,7 @@ namespace PESproj.Controllers
             H.Text = Data["Text"].ToString(); 
             H.Text_Eng = Data["Text_Eng"].ToString(); 
             H.Alias = Data["Alias"].ToString();
+            
             H.point = 0;
 
             header.InsertAdditionalHeader(H);
@@ -600,6 +617,14 @@ namespace PESproj.Controllers
             H.Text_Eng = Data["Text_Eng"].ToString();
             H.Alias = Data["Alias"].ToString();
             H.PositionNo = Convert.ToInt32( Data["PositionNo"].ToString());
+            if(H.Text_Eng.Length == 0)
+            {
+                H.Text_Eng = H.Text;
+            }
+            if(H.Text.Length == 0)
+            {
+                H.Text = H.Text_Eng;
+            }
             H.Text_Language = "{\"EN\":\""+ H.Text_Eng + "\",\"TH\":\""+H.Text + "\"}";
 
             header.insertHeader(H);

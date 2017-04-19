@@ -662,9 +662,11 @@ namespace PESproj.Controllers
 
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<object> result = new List<object>();
-            List<tblEmployee> emp = header.getEmployees();
+            List<tblEmployee> emp = header.getEmployees().Where(a=>a.QuitDate==null).ToList();
             List<tblPart2Master> Role = header.getPart2Data();
-            List<tblProject> proj = header.getProject();
+            List<tblProject> proj = header.getProject().OrderByDescending(a=>a.VersionNo).ToList();
+           // var proj2 = header.getProject().GroupBy(a => a.ProjectCode).Select(grp => new {  LastProject = grp.OrderByDescending(x => x.VersionNo).FirstOrDefault() }).ToList();
+
             List<string> empname = new List<string>();
             List<JObject> Data = new List<JObject>();
             List<JObject> Em = new List<JObject>();
@@ -706,10 +708,16 @@ namespace PESproj.Controllers
             tmp2["Role"] = JsonConvert.DeserializeObject<JObject>(str);
             str = "{\"Project\":[";
             t = "";
+            List<tblProject> test = new List<tblProject>();
             proj.ForEach(n =>
             {
-                str += t + "\"" + n.CustomerCompanyAlias + " " + n.ProjectNameAlias + "("+ n.VersionNo+ ")"+ "\"";
-                t = ",";
+               if(test.Where(a=>a.ProjectNameAlias == n.ProjectNameAlias).ToList().Count == 0)
+                {
+                    str += t + "\"" +  n.ProjectNameAlias + "\"";
+                    t = ",";
+                    test.Add(n);
+                }
+                
             });
             str += "]}";
             tmp2["Project"] = JsonConvert.DeserializeObject<JObject>(str);
@@ -777,26 +785,35 @@ namespace PESproj.Controllers
         public List<JObject> GroupManager()
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
-            List<tblEmployee> emp2 = header.getEmployees().Where(b => b.PositionNo == 21).ToList();
+            List<tblEmployee> emp2 = header.getEmployees().Where(b => b.PositionNo == 21 && b.QuitDate == null).ToList();
             List<JObject> j = new List<JObject>();
+          //  List<tblEmployee> tmpp = new List<tblEmployee>();
                 List<tblEmployee> result = new List<tblEmployee>();
                 List<tblEmployeeOrganization> t = header.getEmployeeOrganization().Where(b => b.PositionNo == 21).ToList();
                 emp2.ForEach(c =>
                 {
-                    result.Add(c);
+                    //if (result.Where(b => b.EmployeeNo.Trim() == c.EmployeeNo.Trim()).ToList().Count == 0 && result.Where(b => b.EmployeeFirstName.Trim() == c.EmployeeFirstName.Trim() && b.EmployeeLastName.Trim() == c.EmployeeLastName.Trim()).ToList().Count == 0)
+                    {
+                        result.Add(c);
+                    }
+                        
                 });
                 t.ForEach(c =>
                 {
+                    
                     tblEmployee e = emp2.Where(b => b.EmployeeNo.Trim() == c.EmployeeNo.Trim()).FirstOrDefault();
-                    if (e != null && result.Where(b => b.EmployeeNo.Trim() == c.EmployeeNo.Trim()).ToList().Count == 0)
+                    if(e!=null)
+                    if ( result.Where(b => b.EmployeeNo.Trim() == c.EmployeeNo.Trim()).ToList().Count == 0 && result.Where(b => b.EmployeeFirstName.Trim() == e.EmployeeFirstName.Trim() && b.EmployeeLastName.Trim() == e.EmployeeLastName.Trim()).ToList().Count == 0)
                     {
                         result.Add(e);
                     }
                 });
+            result.Reverse();
             result.ForEach(a =>
             {
                 JObject tmp = new JObject();
                 string str = "{\"EN\":\"" + a.EmployeeFirstName + " " + a.EmployeeLastName + "\",\"TH\":\"" + a.EmployeeFirstNameThai + " " + a.EmployeeLastNameThai + "\"}";
+                
                 tmp["Name"] = JsonConvert.DeserializeObject<JObject>(str);
                 tmp["EmployeeNo"] = a.EmployeeNo.Trim();
                 j.Add(tmp);
