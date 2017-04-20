@@ -7,6 +7,8 @@ using System.Web.Http;
 using PesWeb.Service;
 using CSI.CastleWindsorHelper;
 using Newtonsoft.Json.Linq;
+using PESproj.Views;
+using PESproj.Views.Control;
 
 namespace PESproj.Controllers
 {
@@ -228,6 +230,16 @@ namespace PESproj.Controllers
                 }
             }
             //return header.GetAllEvaluation();
+        }
+
+        [Route("Test")]
+        [HttpGet]
+        public void test()
+        {
+            Handler1 a = new Handler1();
+           // System.Web.HttpContext b = new System.Web.HttpContext(new System.Web.HttpRequest("", "www.google.com", ""), new System.Web.HttpResponse(new System.IO.StringWriter()));
+             
+            a.ProcessRequest(System.Web.HttpContext.Current);
         }
 
     }
