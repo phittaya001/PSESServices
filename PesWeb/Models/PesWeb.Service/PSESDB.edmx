@@ -878,9 +878,6 @@
           <FunctionImport Name="SP_GetEvaDataByEvaID" ReturnType="Collection(PSESModel.SP_GetEvaDataByEvaID_Result)">
           <Parameter Name="EvaID" Mode="In" Type="Int32" />
           </FunctionImport>
-          <FunctionImport Name="SP_GetEvaListByEvaluatorID" ReturnType="Collection(PSESModel.SP_GetEvaListByEvaluatorID_Result)">
-          <Parameter Name="EvaluatorID" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="SP_GetHeaderByPosition" ReturnType="Collection(PSESModel.SP_GetHeaderByPosition_Result)">
             <Parameter Name="PositionNO" Mode="In" Type="Int32" />
             <Parameter Name="EvaID" Mode="In" Type="Int32" />
@@ -898,6 +895,9 @@
             <Parameter Name="EmployeeName" Mode="In" Type="String" />
           </FunctionImport>
           <EntitySet Name="tblReport" EntityType="PSESModel.tblReport" />
+          <FunctionImport Name="SP_GetEvaListByEvaluatorID" ReturnType="Collection(PSESModel.SP_GetEvaListByEvaluatorID_Result)">
+            <Parameter Name="EvaluatorID" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -1346,29 +1346,6 @@
           <Property Type="String" Name="EvaluatorLastNameThai" Nullable="true" MaxLength="30" />
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
         </ComplexType>
-        <ComplexType Name="SP_GetEvaListByEvaluatorID_Result">
-          <Property Type="String" Name="EmployeeFirstName" Nullable="true" MaxLength="30" />
-          <Property Type="Int32" Name="EvaStatus" Nullable="true" />
-          <Property Type="DateTime" Name="FinishEvaDate" Nullable="true" Precision="23" />
-          <Property Type="DateTime" Name="StartEvaDate" Nullable="true" Precision="23" />
-          <Property Type="String" Name="EmployeeLastName" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="EmployeeLastNameThai" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="EmployeeFirstNameThai" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="GroupOfStaff" Nullable="false" MaxLength="4" />
-          <Property Type="String" Name="CustomerCompanyAlias" Nullable="true" MaxLength="20" />
-          <Property Type="String" Name="ProjectCode" Nullable="true" MaxLength="41" />
-          <Property Type="String" Name="ProjectType" Nullable="false" MaxLength="8" />
-          <Property Type="String" Name="EvaTerm" Nullable="true" MaxLength="25" />
-          <Property Type="String" Name="StartDatePlan" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="FinishDatePlan" Nullable="true" MaxLength="8" />
-          <Property Type="String" Name="Function" Nullable="false" MaxLength="40" />
-          <Property Type="String" Name="EvaluatorFirstName" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="EvaluatorLastName" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="EvaluatorLastNameThai" Nullable="true" MaxLength="30" />
-          <Property Type="String" Name="EvaluatorFirstNameThai" Nullable="true" MaxLength="30" />
-          <Property Type="Int32" Name="Eva_ID" Nullable="false" />
-          <Property Type="Int32" Name="PeriodID" Nullable="true" />
-        </ComplexType>
         <ComplexType Name="SP_GetHeaderByPosition_Result">
           <Property Type="String" Name="statusNo" Nullable="false" MaxLength="1" />
           <Property Type="Int32" Name="PositionNO" Nullable="true" />
@@ -1392,6 +1369,30 @@
           <Property Name="ReportName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
           <Property Name="isCreate" Type="Int32" />
         </EntityType>
+        <ComplexType Name="SP_GetEvaListByEvaluatorID_Result">
+          <Property Type="String" Name="EmployeeFirstName" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="EvaStatus" Nullable="true" />
+          <Property Type="DateTime" Name="Date" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="FinishEvaDate" Nullable="true" Precision="23" />
+          <Property Type="DateTime" Name="StartEvaDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EmployeeLastName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="EmployeeLastNameThai" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="EmployeeFirstNameThai" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="GroupOfStaff" Nullable="false" MaxLength="4" />
+          <Property Type="String" Name="CustomerCompanyAlias" Nullable="true" MaxLength="20" />
+          <Property Type="String" Name="ProjectCode" Nullable="true" MaxLength="41" />
+          <Property Type="String" Name="ProjectType" Nullable="false" MaxLength="8" />
+          <Property Type="String" Name="EvaTerm" Nullable="true" MaxLength="25" />
+          <Property Type="String" Name="StartDatePlan" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="FinishDatePlan" Nullable="true" MaxLength="12" />
+          <Property Type="String" Name="Function" Nullable="false" MaxLength="40" />
+          <Property Type="String" Name="EvaluatorFirstName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="EvaluatorLastName" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="EvaluatorLastNameThai" Nullable="true" MaxLength="30" />
+          <Property Type="String" Name="EvaluatorFirstNameThai" Nullable="true" MaxLength="30" />
+          <Property Type="Int32" Name="Eva_ID" Nullable="false" />
+          <Property Type="Int32" Name="PeriodID" Nullable="true" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -1984,33 +1985,6 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
-          <FunctionImportMapping FunctionImportName="SP_GetEvaListByEvaluatorID" FunctionName="PSESModel.Store.SP_GetEvaListByEvaluatorID">
-            <ResultMapping>
-              <ComplexTypeMapping TypeName="PSESModel.SP_GetEvaListByEvaluatorID_Result">
-                <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
-                <ScalarProperty Name="EvaStatus" ColumnName="EvaStatus" />
-                <ScalarProperty Name="FinishEvaDate" ColumnName="FinishEvaDate" />
-                <ScalarProperty Name="StartEvaDate" ColumnName="StartEvaDate" />
-                <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
-                <ScalarProperty Name="EmployeeLastNameThai" ColumnName="EmployeeLastNameThai" />
-                <ScalarProperty Name="EmployeeFirstNameThai" ColumnName="EmployeeFirstNameThai" />
-                <ScalarProperty Name="GroupOfStaff" ColumnName="GroupOfStaff" />
-                <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
-                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
-                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
-                <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />
-                <ScalarProperty Name="StartDatePlan" ColumnName="StartDatePlan" />
-                <ScalarProperty Name="FinishDatePlan" ColumnName="FinishDatePlan" />
-                <ScalarProperty Name="Function" ColumnName="Function" />
-                <ScalarProperty Name="EvaluatorFirstName" ColumnName="EvaluatorFirstName" />
-                <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
-                <ScalarProperty Name="EvaluatorLastNameThai" ColumnName="EvaluatorLastNameThai" />
-                <ScalarProperty Name="EvaluatorFirstNameThai" ColumnName="EvaluatorFirstNameThai" />
-                <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
-                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
-              </ComplexTypeMapping>
-            </ResultMapping>
-          </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="SP_GetHeaderByPosition" FunctionName="PSESModel.Store.SP_GetHeaderByPosition">
             <ResultMapping>
               <ComplexTypeMapping TypeName="PSESModel.SP_GetHeaderByPosition_Result">
@@ -2042,6 +2016,34 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
+          <FunctionImportMapping FunctionImportName="SP_GetEvaListByEvaluatorID" FunctionName="PSESModel.Store.SP_GetEvaListByEvaluatorID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="PSESModel.SP_GetEvaListByEvaluatorID_Result">
+                <ScalarProperty Name="EmployeeFirstName" ColumnName="EmployeeFirstName" />
+                <ScalarProperty Name="EvaStatus" ColumnName="EvaStatus" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="FinishEvaDate" ColumnName="FinishEvaDate" />
+                <ScalarProperty Name="StartEvaDate" ColumnName="StartEvaDate" />
+                <ScalarProperty Name="EmployeeLastName" ColumnName="EmployeeLastName" />
+                <ScalarProperty Name="EmployeeLastNameThai" ColumnName="EmployeeLastNameThai" />
+                <ScalarProperty Name="EmployeeFirstNameThai" ColumnName="EmployeeFirstNameThai" />
+                <ScalarProperty Name="GroupOfStaff" ColumnName="GroupOfStaff" />
+                <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
+                <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
+                <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />
+                <ScalarProperty Name="StartDatePlan" ColumnName="StartDatePlan" />
+                <ScalarProperty Name="FinishDatePlan" ColumnName="FinishDatePlan" />
+                <ScalarProperty Name="Function" ColumnName="Function" />
+                <ScalarProperty Name="EvaluatorFirstName" ColumnName="EvaluatorFirstName" />
+                <ScalarProperty Name="EvaluatorLastName" ColumnName="EvaluatorLastName" />
+                <ScalarProperty Name="EvaluatorLastNameThai" ColumnName="EvaluatorLastNameThai" />
+                <ScalarProperty Name="EvaluatorFirstNameThai" ColumnName="EvaluatorFirstNameThai" />
+                <ScalarProperty Name="Eva_ID" ColumnName="Eva_ID" />
+                <ScalarProperty Name="PeriodID" ColumnName="PeriodID" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

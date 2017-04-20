@@ -924,18 +924,6 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_GetEvaListByEvaluatorID_Result> SP_GetEvaListByEvaluatorID(string evaluatorID)
-    {
-
-        var evaluatorIDParameter = evaluatorID != null ?
-            new ObjectParameter("EvaluatorID", evaluatorID) :
-            new ObjectParameter("EvaluatorID", typeof(string));
-
-
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaListByEvaluatorID_Result>("SP_GetEvaListByEvaluatorID", evaluatorIDParameter);
-    }
-
-
     public virtual ObjectResult<SP_GetHeaderByPosition_Result> SP_GetHeaderByPosition(Nullable<int> positionNO, Nullable<int> evaID)
     {
 
@@ -1001,6 +989,18 @@ public partial class PSESEntities : DbContext
 
 
         return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("SP_UpdateApproveStatusFlow", iDParameter, employeeNoParameter, employeeNameParameter);
+    }
+
+
+    public virtual ObjectResult<SP_GetEvaListByEvaluatorID_Result> SP_GetEvaListByEvaluatorID(string evaluatorID)
+    {
+
+        var evaluatorIDParameter = evaluatorID != null ?
+            new ObjectParameter("EvaluatorID", evaluatorID) :
+            new ObjectParameter("EvaluatorID", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_GetEvaListByEvaluatorID_Result>("SP_GetEvaListByEvaluatorID", evaluatorIDParameter);
     }
 
 }

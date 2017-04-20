@@ -253,9 +253,8 @@ namespace PESproj.Controllers
             List<tblApprove> ap = header.GetAllApprove();
             evalist.ForEach(a =>
             {
-                tblApprove t = ap.Where(x => x.EvaID == a.Eva_ID).FirstOrDefault();
-                
                 JObject tmp = new JObject();
+                tblApprove t = ap.Where(x => x.EvaID == a.Eva_ID).FirstOrDefault();
                 tmp["ApproveStat"] = (t != null) ? t.ApproveState : 0;
                 tmp["CustomerCompanyAlias"] = a.CustomerCompanyAlias;
                 tmp["EmployeeFirstName"] = a.EmployeeFirstName;
@@ -265,6 +264,7 @@ namespace PESproj.Controllers
                 tmp["EvaStatus"] = a.EvaStatus;
                 tmp["EvaTerm"] = a.EvaTerm;
                 tmp["Eva_ID"] = a.Eva_ID;
+                tmp["Date"] = a.Date.ToString().Substring(0, 10) + " " + ((a.Date.ToString().ElementAt(11) == ':') ? '0' + a.Date.ToString().Substring(10, 4) : a.Date.ToString().Substring(10, 5));
 
                 a.StartDatePlan = a.StartDatePlan.Replace(" ", "/");
                 if (a.StartDatePlan.ElementAt(4) == '/')
@@ -292,7 +292,7 @@ namespace PESproj.Controllers
                 tmp["ProjectType"] = a.ProjectType;
                 tmp["StartEvaDate"] = a.StartEvaDate;
                 //tmp["employee_language"] =
-               // tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Replace(" ","") == a.em).FirstOrDefault();
+                // tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Replace(" ","") == a.em).FirstOrDefault();
                 tmp["name_language"] = JsonConvert.DeserializeObject<JObject>("{\"EN\":\"" + a.EmployeeFirstName + " " + a.EmployeeLastName + "\",\"TH\":\"" + a.EmployeeFirstNameThai + " " + a.EmployeeLastNameThai + "\"}");
                 Jeva.Add(tmp);
             });
@@ -306,7 +306,6 @@ namespace PESproj.Controllers
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<SP_GetEvaListByEvaluatorID_Result> evalist = header.getEvaListByEvaluatorID(EvaluatorID).Where(a => a.PeriodID == periodID).OrderByDescending(a => a.Eva_ID).ToList();
             List<JObject> Jeva = new List<JObject>();
-            List<tblEmployee> emp = header.getEmployees();
             List<tblEmployee> emp = header.getEmployees();
             List<tblApprove> ap = header.GetAllApprove();
             evalist.ForEach(a =>
@@ -322,7 +321,7 @@ namespace PESproj.Controllers
                 tmp["EvaStatus"] = a.EvaStatus;
                 tmp["EvaTerm"] = a.EvaTerm;
                 tmp["Eva_ID"] = a.Eva_ID;
-
+                tmp["Date"] = a.Date.ToString().Substring(0,10) + " " + ((a.Date.ToString().ElementAt(11) == ':')?'0'+ a.Date.ToString().Substring(10, 4): a.Date.ToString().Substring(10, 5));
 
                 a.StartDatePlan = a.StartDatePlan.Replace(" ", "/");
                 if (a.StartDatePlan.ElementAt(4) == '/')
@@ -406,8 +405,10 @@ namespace PESproj.Controllers
                 tmp["ST"] = a.ST;
                 List<tblApproveStatus> ApSt = ApS.Where(b => b.ApproveID == a.ID).OrderBy(b=>b.FlowOrder).ToList();
                 tblEvaluation eva = ListEva.Where(b => b.Eva_ID == a.EvaID).FirstOrDefault();
-                tmp["Date"] = eva.StartEvaDate.ToString().Substring(0, 9).Replace("-", "/") + " " + eva.StartEvaDate.ToString().Substring(10, 5).Replace("-", "/");
-               
+                tmp["Date"] = eva.StartEvaDate.ToString().Substring(0, 9).Replace("-", "/") + " " + ((eva.StartEvaDate.ToString().ElementAt(11)==':')?'0'+ eva.StartEvaDate.ToString().Substring(10, 4).Replace("-", "/"): eva.StartEvaDate.ToString().Substring(10, 5).Replace("-", "/"));
+                
+
+
                 tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Replace(" ","") == a.EmployeeNo).FirstOrDefault();
                 tmp["name_language"] = JsonConvert.DeserializeObject < JObject > ("{\"EN\":\"" + empTemp.EmployeeFirstName + " " + empTemp.EmployeeLastName + "\",\"TH\":\"" + empTemp.EmployeeFirstNameThai + " " + empTemp.EmployeeLastNameThai + "\"}");
                 ApObject.Add(tmp);
@@ -608,7 +609,7 @@ namespace PESproj.Controllers
                     tmp["Role"] = a.Role;
                     tmp["ST"] = a.ST;
                     tblEvaluation eva = evalist.Where(b => b.Eva_ID == a.EvaID && b.EvaStatus == 1).FirstOrDefault();
-                    tmp["Date"] = eva.StartEvaDate.ToString().Substring(0, 9).Replace("-", "/") + " " + eva.StartEvaDate.ToString().Substring(10, 5).Replace("-", "/");
+                    tmp["Date"] = eva.StartEvaDate.ToString().Substring(0, 9).Replace("-", "/") + " " + ((eva.StartEvaDate.ToString().ElementAt(11)==':')?'0'+ eva.StartEvaDate.ToString().Substring(10, 4).Replace("-", "/") : eva.StartEvaDate.ToString().Substring(10, 5));
                     
                     tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Replace(" ","") == a.EmployeeNo).FirstOrDefault();
                     tmp["name_language"] = JsonConvert.DeserializeObject<JObject>("{\"EN\":\"" + empTemp.EmployeeFirstName + " " + empTemp.EmployeeLastName + "\",\"TH\":\"" + empTemp.EmployeeFirstNameThai + " " + empTemp.EmployeeLastNameThai + "\"}");
@@ -774,7 +775,8 @@ namespace PESproj.Controllers
 
                 if (a.Status == 1)
                 {
-                    tmp["Date"] = a.ApproveDate.ToString().Substring(0, 9).Replace("-", "/") + " " + a.ApproveDate.ToString().Substring(10, 5).Replace("-", "/");
+                    tmp["Date"] = a.ApproveDate.ToString().Substring(0, 10).Replace("-", "/") + " " + ((a.ApproveDate.ToString().ElementAt(11) == ':')?'0'+a.ApproveDate.ToString().Substring(10,4):a.ApproveDate.ToString().Substring(10,5));
+                    //((a.Date.ToString().ElementAt(11) == ':') ? '0' + a.Date.ToString().Substring(10, 4) : a.Date.ToString().Substring(10, 5))
                 }
                 tmp["EmployeeNo"] = (emp!=null)?a.EmployeeNO.Trim():null;
                 tmp["Name"] = JsonConvert.DeserializeObject<JObject>(str);

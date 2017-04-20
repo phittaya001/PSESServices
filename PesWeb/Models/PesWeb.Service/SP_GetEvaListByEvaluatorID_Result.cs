@@ -21,6 +21,8 @@ public partial class SP_GetEvaListByEvaluatorID_Result
 
     public Nullable<int> EvaStatus { get; set; }
 
+    public Nullable<System.DateTime> Date { get; set; }
+
     public Nullable<System.DateTime> FinishEvaDate { get; set; }
 
     public Nullable<System.DateTime> StartEvaDate { get; set; }
