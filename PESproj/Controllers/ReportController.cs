@@ -30,18 +30,27 @@ namespace PESproj.Controllers
            // 
             List<tblOrganization> result = new List<tblOrganization>();
             List<string> str = new List<string>();
-            if(Type == "nonsub")
+            List<tblOrganization> all = header.getOrganization();
+            if (Type == "nonsub")
             {
-                result = header.getOrganization().Where(a => a.OrganizationAlias.Contains("-") == false).ToList();
+                //all.ForEach(a =>
+                //{
+                //    int p = a.OrganizationAlias.IndexOf("-");
+                //    if (p < 0)
+                //    {
+                //        result.Add(a);
+                //    }
+                //});
+                result = all.Where(a => a.OrganizationAlias.Contains("-") == false).ToList();
 
             }
-            if(Type == "all")
+            else if(Type == "all")
             {
-                result = header.getOrganization().Where(a => a.OrganizationAlias.Contains("-") == true).ToList();
+                result = all.Where(a => a.OrganizationAlias.Contains("-") == true).ToList();
             }
             else
             {
-                result = header.getOrganization().Where(a => a.OrganizationAlias.Contains(Type) == true && a.OrganizationAlias != Type).ToList();
+                result = all.Where(a => a.OrganizationAlias.Contains(Type) == true && a.OrganizationAlias != Type).ToList();
             }
             
             result.ForEach(a =>
@@ -61,6 +70,7 @@ namespace PESproj.Controllers
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             int groupn = 0;
+            int evatmp = 0;
             if(Group == "0")
             {
                 //tblOrganization g = header.getOrganization().Where(a => a.OrganizationAlias == Group).FirstOrDefault();
@@ -77,7 +87,7 @@ namespace PESproj.Controllers
                     groupn = -1;
                 }
             }
-
+            List<tblEmployee> listem = header.getEmployees();
 
             //tblReport a = new tblReport();
             
@@ -92,6 +102,7 @@ namespace PESproj.Controllers
                     List<tblEvaluation> result = new List<tblEvaluation>();
                     e.ForEach(a =>
                     {
+                        //if(evatmp )
                         tblEvaluation tmp = new tblEvaluation();
                         tmp.EvaluatorNO = a.EvaluatorNO;
                         tmp.EmployeeNO = a.EmployeeNO;

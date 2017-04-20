@@ -52,8 +52,10 @@ namespace PESproj.Controllers
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             List<SP_GetEmployeeListByPeriodID_Result> Emp = new List<SP_GetEmployeeListByPeriodID_Result>();
             Emp = header.getEmpListByPeriod(Period_ID, EmployeeId).ToList();
+            
             for(int i = 0; i < Emp.Count; i++)
             {
+                //if(ap.Where(a=>a.EvaID == Emp[i].e))
                 Emp[i].PlanStartDate = Emp[i].PlanStartDate.Substring(0, 10).Replace('/', '-');
                 Emp[i].PlanFinishDate = Emp[i].PlanFinishDate.Substring(0, 10).Replace('/', '-');
                 
@@ -248,9 +250,13 @@ namespace PESproj.Controllers
             List< SP_GetEvaListByEvaluatorID_Result > evalist = header.getEvaListByEvaluatorID(EvaluatorID).Where(a=>a.EvaStatus!=3).OrderByDescending(a=>a.Eva_ID).ToList();
             List<JObject> Jeva = new List<JObject>();
             List<tblEmployee> emp = header.getEmployees();
+            List<tblApprove> ap = header.GetAllApprove();
             evalist.ForEach(a =>
             {
+                tblApprove t = ap.Where(x => x.EvaID == a.Eva_ID).FirstOrDefault();
+                
                 JObject tmp = new JObject();
+                tmp["ApproveStat"] = (t != null) ? t.ApproveState : 0;
                 tmp["CustomerCompanyAlias"] = a.CustomerCompanyAlias;
                 tmp["EmployeeFirstName"] = a.EmployeeFirstName;
                 tmp["EmployeeLastName"] = a.EmployeeLastName;
@@ -301,9 +307,13 @@ namespace PESproj.Controllers
             List<SP_GetEvaListByEvaluatorID_Result> evalist = header.getEvaListByEvaluatorID(EvaluatorID).Where(a => a.PeriodID == periodID).OrderByDescending(a => a.Eva_ID).ToList();
             List<JObject> Jeva = new List<JObject>();
             List<tblEmployee> emp = header.getEmployees();
+            List<tblEmployee> emp = header.getEmployees();
+            List<tblApprove> ap = header.GetAllApprove();
             evalist.ForEach(a =>
             {
                 JObject tmp = new JObject();
+                tblApprove t = ap.Where(x => x.EvaID == a.Eva_ID).FirstOrDefault();
+                tmp["ApproveStat"] = (t != null) ? t.ApproveState : 0;
                 tmp["CustomerCompanyAlias"] = a.CustomerCompanyAlias;
                 tmp["EmployeeFirstName"] = a.EmployeeFirstName;
                 tmp["EmployeeLastName"] = a.EmployeeLastName;
