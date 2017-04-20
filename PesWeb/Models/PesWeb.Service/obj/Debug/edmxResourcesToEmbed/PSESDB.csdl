@@ -286,6 +286,7 @@
       <Parameter Name="EmployeeNo" Mode="In" Type="String" />
       <Parameter Name="EmployeeName" Mode="In" Type="String" />
     </FunctionImport>
+    <EntitySet Name="tblReport" EntityType="PSESModel.tblReport" />
   </EntityContainer>
   <ComplexType Name="GetEvaluationRequest_Result">
     <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -772,4 +773,12 @@
     <Property Type="Int32" Name="point" Nullable="true" />
     <Property Type="Int32" Name="Eva_ID" Nullable="true" />
   </ComplexType>
+  <EntityType Name="tblReport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="ReportName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="isCreate" Type="Int32" />
+  </EntityType>
 </Schema>

@@ -75,6 +75,8 @@ namespace PesWeb.Injectors
                    (typeof(LoggingInterceptor), typeof(CachedMethodInterceptor));
             ServiceContainer.RegisterServiceSingleton<PesWeb.Service.Modules.Log>
                    (typeof(LoggingInterceptor), typeof(CachedMethodInterceptor));
+            ServiceContainer.RegisterServiceSingleton<PesWeb.Service.Modules.ReportManage>
+                   (typeof(LoggingInterceptor), typeof(CachedMethodInterceptor));
         }
     }
 }

@@ -636,5 +636,14 @@
     <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationData" FunctionName="PSESModel.Store.SP_UpdateEvaluationData" />
     <FunctionImportMapping FunctionImportName="SP_DeleteScore" FunctionName="PSESModel.Store.SP_DeleteScore" />
     <FunctionImportMapping FunctionImportName="SP_UpdateApproveStatusFlow" FunctionName="PSESModel.Store.SP_UpdateApproveStatusFlow" />
+    <EntitySetMapping Name="tblReport">
+      <EntityTypeMapping TypeName="PSESModel.tblReport">
+        <MappingFragment StoreEntitySet="tblReport">
+          <ScalarProperty Name="isCreate" ColumnName="isCreate" />
+          <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+          <ScalarProperty Name="ID" ColumnName="ID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
   </EntityContainerMapping>
 </Mapping>

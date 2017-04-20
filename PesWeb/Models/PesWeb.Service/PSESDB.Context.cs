@@ -83,6 +83,8 @@ public partial class PSESEntities : DbContext
 
     public virtual DbSet<tblActivityLog> tblActivityLog { get; set; }
 
+    public virtual DbSet<tblReport> tblReport { get; set; }
+
 
     public virtual int CreateForm(string empID, string evaluator, Nullable<int> jobID, string projectNO)
     {

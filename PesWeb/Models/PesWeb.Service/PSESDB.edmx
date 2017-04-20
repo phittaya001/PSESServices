@@ -332,6 +332,14 @@
           <Property Name="UpdateDate" Type="datetime" Nullable="false" />
           <Property Name="CancelDate" Type="datetime" />
         </EntityType>
+        <EntityType Name="tblReport">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ReportName" Type="varchar" MaxLength="255" />
+          <Property Name="isCreate" Type="int" />
+        </EntityType>
         <EntityType Name="tblScore">
           <Key>
             <PropertyRef Name="Score_ID" />
@@ -589,6 +597,7 @@
           <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectEmployee" EntityType="Self.tblProjectEmployee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblReport" EntityType="Self.tblReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblTitle" EntityType="Self.tblTitle" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_tblProject2_tblOrganization" Association="Self.FK_tblProject2_tblOrganization">
@@ -888,6 +897,7 @@
             <Parameter Name="EmployeeNo" Mode="In" Type="String" />
             <Parameter Name="EmployeeName" Mode="In" Type="String" />
           </FunctionImport>
+          <EntitySet Name="tblReport" EntityType="PSESModel.tblReport" />
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
           <Property Type="Int32" Name="Eva_ID" Nullable="false" />
@@ -1374,6 +1384,14 @@
           <Property Type="Int32" Name="point" Nullable="true" />
           <Property Type="Int32" Name="Eva_ID" Nullable="true" />
         </ComplexType>
+        <EntityType Name="tblReport">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ReportName" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="isCreate" Type="Int32" />
+        </EntityType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -2015,6 +2033,15 @@
           <FunctionImportMapping FunctionImportName="SP_UpdateEvaluationData" FunctionName="PSESModel.Store.SP_UpdateEvaluationData" />
           <FunctionImportMapping FunctionImportName="SP_DeleteScore" FunctionName="PSESModel.Store.SP_DeleteScore" />
           <FunctionImportMapping FunctionImportName="SP_UpdateApproveStatusFlow" FunctionName="PSESModel.Store.SP_UpdateApproveStatusFlow" />
+          <EntitySetMapping Name="tblReport">
+            <EntityTypeMapping TypeName="PSESModel.tblReport">
+              <MappingFragment StoreEntitySet="tblReport">
+                <ScalarProperty Name="isCreate" ColumnName="isCreate" />
+                <ScalarProperty Name="ReportName" ColumnName="ReportName" />
+                <ScalarProperty Name="ID" ColumnName="ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -327,6 +327,14 @@
     <Property Name="UpdateDate" Type="datetime" Nullable="false" />
     <Property Name="CancelDate" Type="datetime" />
   </EntityType>
+  <EntityType Name="tblReport">
+    <Key>
+      <PropertyRef Name="ID" />
+    </Key>
+    <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="ReportName" Type="varchar" MaxLength="255" />
+    <Property Name="isCreate" Type="int" />
+  </EntityType>
   <EntityType Name="tblScore">
     <Key>
       <PropertyRef Name="Score_ID" />
@@ -584,6 +592,7 @@
     <EntitySet Name="tblProject" EntityType="Self.tblProject" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectEmployee" EntityType="Self.tblProjectEmployee" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblProjectMember" EntityType="Self.tblProjectMember" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tblReport" EntityType="Self.tblReport" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblScore" EntityType="Self.tblScore" Schema="dbo" store:Type="Tables" />
     <EntitySet Name="tblTitle" EntityType="Self.tblTitle" Schema="dbo" store:Type="Tables" />
     <AssociationSet Name="FK_tblProject2_tblOrganization" Association="Self.FK_tblProject2_tblOrganization">

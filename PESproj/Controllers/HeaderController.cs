@@ -340,8 +340,17 @@ namespace PESproj.Controllers
             H.parent = Convert.ToInt32(Data["H_ID"].ToString());
             //tblHeader hd = header.GetAllHeader().Where(a => a.H_ID == H.parent).FirstOrDefault();
             H.H_Level = (Convert.ToInt32(Data["H_ID"].ToString()) == 0)? 1: (Convert.ToInt32(Data["H_ID"].ToString())>0)? header.GetAllHeader().Where(a => a.H_ID == H.parent).FirstOrDefault().H_Level + 1 : header.getHeaderAdditional().Where(a => a.H_ID == (-1)*H.parent).FirstOrDefault().H_Level+1;
+
             H.Text = Data["Text"].ToString(); 
             H.Text_Eng = Data["Text_Eng"].ToString(); 
+            if(H.Text.Length == 0)
+            {
+                H.Text = H.Text_Eng;
+            }
+            if(H.Text_Eng.Length == 0)
+            {
+                H.Text_Eng = H.Text;
+            }
             H.Alias = Data["Alias"].ToString();
             
             H.point = 0;

@@ -22,6 +22,7 @@ namespace PESproj.Controllers
             EmployeeData authenRs = null;
             try
             {
+                
                 LDAPHelper authen = new LDAPHelper(WebConfigurationManager.AppSettings["ADDomainName"]
                                                         , WebConfigurationManager.AppSettings["ADIPAddress"]
                                                         , Convert.ToInt32(WebConfigurationManager.AppSettings["ADPort"]));

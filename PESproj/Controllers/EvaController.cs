@@ -677,7 +677,7 @@ namespace PESproj.Controllers
             {
                 if(n.EmployeeFirstName != null && n.EmployeeLastName != null)
                 {
-                    str += t + "\"" + n.EmployeeFirstName + " " + n.EmployeeLastName + "\"";
+                    str += t + "\""+ n.EmployeeNo + " : " + n.EmployeeFirstName + " " + n.EmployeeLastName + "\"";
                     t = ",";
                 }
                 
