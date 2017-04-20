@@ -9,6 +9,7 @@ using CSI.CastleWindsorHelper;
 using Newtonsoft.Json.Linq;
 using PESproj.Views;
 using PESproj.Views.Control;
+using Newtonsoft.Json;
 
 namespace PESproj.Controllers
 {
@@ -65,14 +66,39 @@ namespace PESproj.Controllers
             });
             return str;
         }
-        
+        public List<JObject> toJson(List<tblEvaluation> eva)
+        {
+            var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            List<tblEmployee> emp = header.getEmployees();
+            List<tblPosition> pos = header.getPosition();
+            List<JObject> j = new List<JObject>();
+            eva.ForEach(a =>
+            {
+                JObject tmp = new JObject();
+                tmp["Eva_ID"] = a.Eva_ID;
+                tmp["EmployeeNO"] = a.EmployeeNO;
+                tmp["EvaluatorNO"] = a.EvaluatorNO;
+                tblEmployee emt = emp.Where(x => x.EmployeeNo.Trim() == ((a.EmployeeNO!=null)?a.EmployeeNO.Trim():"0")).FirstOrDefault();
+                string name = "{\"EN\":\"\",\"TH\":\"\"}";
+                if (emt!=null)name = "{\"EN\":\"" + emt.EmployeeFirstName + " " + emt.EmployeeLastName + "\",\"TH\":\"" + emt.EmployeeFirstNameThai + " " + emt.EmployeeLastNameThai + "\"}";
+                tmp["EmployeeName"] = JsonConvert.DeserializeObject<JObject>(name);
+                if(a.Job_ID!=null)tmp["Role"] = pos.Where(x => x.PositionNo == a.Job_ID).FirstOrDefault().PositionName;
+                emt = emp.Where(x => x.EmployeeNo.Trim() == a.EvaluatorNO.Trim()).FirstOrDefault();
+                if(emt!=null)name = "{\"EN\":\"" + emt.EmployeeFirstName + " " + emt.EmployeeLastName + "\",\"TH\":\"" + emt.EmployeeFirstNameThai + " " + emt.EmployeeLastNameThai + "\"}";
+                tmp["EvaluatorName"] = JsonConvert.DeserializeObject<JObject>(name);
+                 if (a.Job_ID != null) tmp["Role"] = pos.Where(x => x.PositionNo == a.Job_ID).FirstOrDefault().PositionName;
+                j.Add(tmp);
+            });
+            return j;
+        }
         [Route("Report1/{Group}/{SubGroup}/{PeriodID}")]
         [HttpGet]
-        public List<tblEvaluation> Report1(string Group,string SubGroup,int PeriodID)
+        public List<JObject> Report1(string Group,string SubGroup,int PeriodID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
             int groupn = 0;
-            int evatmp = 0;
+            string evatmp = "";
+            int period = 0;
             if(Group == "0")
             {
                 //tblOrganization g = header.getOrganization().Where(a => a.OrganizationAlias == Group).FirstOrDefault();
@@ -104,15 +130,21 @@ namespace PESproj.Controllers
                     List<tblEvaluation> result = new List<tblEvaluation>();
                     e.ForEach(a =>
                     {
-                        //if(evatmp )
+                        if (evatmp != a.EvaluatorNO)
+                        {
+                            tblEvaluation tmp2 = new tblEvaluation();
+                            tmp2.EvaluatorNO = a.EvaluatorNO;
+                            result.Add(tmp2);
+                        }
                         tblEvaluation tmp = new tblEvaluation();
                         tmp.EvaluatorNO = a.EvaluatorNO;
                         tmp.EmployeeNO = a.EmployeeNO;
                         tmp.Eva_ID = a.Eva_ID;
                         tmp.PeriodID = a.PeriodID;
+                        tmp.Job_ID = a.Job_ID;
                         result.Add(tmp);
                     });
-                    return result;
+                    return toJson(result);
                 }
                 else
                 {
@@ -123,16 +155,23 @@ namespace PESproj.Controllers
                         {
                             if (emo.Where(x => x.EmployeeNo.Trim() == a.EmployeeNO.Trim() && x.OrganizationNo == groupn).ToList().Count > 0)
                             {
+                                if (evatmp != a.EvaluatorNO)
+                                {
+                                    tblEvaluation tmp2 = new tblEvaluation();
+                                    tmp2.EvaluatorNO = a.EvaluatorNO;
+                                    result.Add(tmp2);
+                                }
                                 tblEvaluation tmp = new tblEvaluation();
                                 tmp.EvaluatorNO = a.EvaluatorNO;
                                 tmp.EmployeeNO = a.EmployeeNO;
                                 tmp.Eva_ID = a.Eva_ID;
                                 tmp.PeriodID = a.PeriodID;
+                                tmp.Job_ID = a.Job_ID;
                                 result.Add(tmp);
                             }
 
                         });
-                        return result;
+                        return toJson( result);
                     }else
                     {
                         List<tblEvaluation> result = new List<tblEvaluation>();
@@ -143,16 +182,23 @@ namespace PESproj.Controllers
                             {
                                 if (emo.Where(x => x.EmployeeNo.Trim() == a.EmployeeNO.Trim() && x.OrganizationNo == y.OrganizationNo).ToList().Count > 0 && result.Where(x=>x.Eva_ID==a.Eva_ID).ToList().Count==0)
                                 {
+                                    if (evatmp != a.EvaluatorNO)
+                                    {
+                                        tblEvaluation tmp2 = new tblEvaluation();
+                                        tmp2.EvaluatorNO = a.EvaluatorNO;
+                                        result.Add(tmp2);
+                                    }
                                     tblEvaluation tmp = new tblEvaluation();
                                     tmp.EvaluatorNO = a.EvaluatorNO;
                                     tmp.EmployeeNO = a.EmployeeNO;
                                     tmp.Eva_ID = a.Eva_ID;
                                     tmp.PeriodID = a.PeriodID;
+                                    tmp.Job_ID = a.Job_ID;
                                     result.Add(tmp);
                                 }
                             });
                         });
-                        return result;
+                        return toJson(result);
 
                     }
 
@@ -168,16 +214,23 @@ namespace PESproj.Controllers
                     e.ForEach(a =>
                     {
                         if(a.PeriodID == PeriodID){
+                            if (evatmp != a.EvaluatorNO)
+                            {
+                                tblEvaluation tmp2 = new tblEvaluation();
+                                tmp2.EvaluatorNO = a.EvaluatorNO;
+                                result.Add(tmp2);
+                            }
                             tblEvaluation tmp = new tblEvaluation();
                             tmp.EvaluatorNO = a.EvaluatorNO;
                             tmp.EmployeeNO = a.EmployeeNO;
                             tmp.Eva_ID = a.Eva_ID;
                             tmp.PeriodID = a.PeriodID;
+                            tmp.Job_ID = a.Job_ID;
                             result.Add(tmp);
                         }
                         
                     });
-                    return result;
+                    return toJson(result);
                 }
                 else
                 {
@@ -190,18 +243,25 @@ namespace PESproj.Controllers
                             {
                                 if (a.PeriodID == PeriodID)
                                 {
+                                    if (evatmp != a.EvaluatorNO)
+                                    {
+                                        tblEvaluation tmp2 = new tblEvaluation();
+                                        tmp2.EvaluatorNO = a.EvaluatorNO;
+                                        result.Add(tmp2);
+                                    }
                                     tblEvaluation tmp = new tblEvaluation();
                                     tmp.EvaluatorNO = a.EvaluatorNO;
                                     tmp.EmployeeNO = a.EmployeeNO;
                                     tmp.Eva_ID = a.Eva_ID;
                                     tmp.PeriodID = a.PeriodID;
+                                    tmp.Job_ID = a.Job_ID;
                                     result.Add(tmp);
                                 }
 
                             }
 
                         });
-                        return result;
+                        return toJson(result);
                     }
                     else{
                         List<tblEvaluation> result = new List<tblEvaluation>();
@@ -214,17 +274,24 @@ namespace PESproj.Controllers
                                 {
                                     if (a.PeriodID == PeriodID)
                                     {
+                                        if (evatmp != a.EvaluatorNO)
+                                        {
+                                            tblEvaluation tmp2 = new tblEvaluation();
+                                            tmp2.EvaluatorNO = a.EvaluatorNO;
+                                            result.Add(tmp2);
+                                        }
                                         tblEvaluation tmp = new tblEvaluation();
                                         tmp.EvaluatorNO = a.EvaluatorNO;
                                         tmp.EmployeeNO = a.EmployeeNO;
                                         tmp.Eva_ID = a.Eva_ID;
                                         tmp.PeriodID = a.PeriodID;
+                                        tmp.Job_ID = a.Job_ID;
                                         result.Add(tmp);
                                     }
                                 }
                             });
                         });
-                        return result;
+                        return toJson(result);
                     }
                     
                 }
