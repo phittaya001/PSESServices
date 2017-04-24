@@ -90,25 +90,50 @@ namespace PESproj.Controllers
         [HttpPut]
         public HttpResponseMessage InsertEva([FromBody]JObject Data)
         {
+
                 
                 var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
                 var header2 = ServiceContainer.GetService<PesWeb.Service.Modules.HeaderManage>();
-            List<tblEvaluation> evaAll = header.GetAllEvaluation().Where(a => a.EvaluatorNO == Data["EvaluatorNO"].ToString() && a.EmployeeNO == Data["EmployeeNO"].ToString() && a.ProjectNO == Data["ProjectNO"].ToString() && a.PeriodID == Convert.ToInt32( Data["PeriodID"].ToString())).ToList();
+            List<tblEvaluation> evaAll = new List<tblEvaluation>();
             if (evaAll.Count == 0)
             {
 
-
+                int isAdd = 0;
+                string name = "";
+                tblProjectMember proj = new tblProjectMember();
+                if (Data["EmployeeNO"].ToString().Length > 10)
+                {
+                    
+                    isAdd = 1;
+                    List<string> nme = Data["EmployeeNO"].ToString().Split('-').ToList();
+                    name = nme[1].Trim();
+                    tblPart2Master role = header.getPart2Data().Where(a => a.Function.Trim() == Data["Position"].ToString().Trim()).FirstOrDefault();
+                    proj.Part2ID = role.Part2ID;
+                    Data["EmployeeNO"] = Data["EmployeeNO"].ToString().Split('-')[0].Trim();
+                }
+                else
+                {
+                    proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a => a.StaffID == Data["EmployeeNO"].ToString()).FirstOrDefault();
+                }
+                header.GetAllEvaluation().Where(a => a.EvaluatorNO == Data["EvaluatorNO"].ToString() && a.EmployeeNO == Data["EmployeeNO"].ToString() && a.ProjectNO == Data["ProjectNO"].ToString() && a.PeriodID == Convert.ToInt32(Data["PeriodID"].ToString())).ToList();
                 tblEvaluation eva = new tblEvaluation();
-                tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a => a.StaffID == Data["EmployeeNO"].ToString()).FirstOrDefault();
+                
                 Period p = header.GetPeriod().Where(a => a.Period_Id == Convert.ToInt32(Data["PeriodID"].ToString())).FirstOrDefault();
                 eva.EmployeeNO = Data["EmployeeNO"].ToString();
                 eva.EvaluatorNO = Data["EvaluatorNO"].ToString();
+                //eva.Job_ID = (isAdd==1)? Data["ProjectNO"].ToString().Split(':')
                 eva.Job_ID = proj.Part2ID;
                 eva.PeriodID = p.Period_Id;
                 eva.period = p.StartDate.ToString().Substring(3, 7);
                 eva.ProjectNO = Data["ProjectNO"].ToString();
                 eva.StartEvaDate = Convert.ToDateTime(Data["StartDate"].ToString());
                 eva.FinishEvaDate = Convert.ToDateTime(Data["FinishDate"].ToString());
+                tblProject pj = new tblProject();
+                if (isAdd == 1)
+                {
+                    pj = header.getProject().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).FirstOrDefault();
+                }
+                eva.ProjectCode = (isAdd == 1) ? Data["ProjectNO"].ToString() : pj.CustomerCompanyAlias + " " + pj.ProjectNameAlias;
                 SP_InsertEvaluation_Result evaid = header.InsertEvaData(eva);
                 int eva_ID = evaid.Eva_ID;
 
@@ -146,12 +171,18 @@ namespace PESproj.Controllers
                     ap.EvaID = eva_ID;
                     ap.PositionID = header.getEmployees().Where(a => a.EmployeeNo.Replace(" ", "") == Data["EmployeeNO"].ToString().Replace(" ","")).FirstOrDefault().PositionNo;
                     ap.Position = header.getPosition().Where(a => a.PositionNo == ap.PositionID).FirstOrDefault().PositionName;
+                    
                     tblProjectMember pm = header.getProjectMember().Where(a => a.StaffID.Replace(" ","") == Data["EmployeeNO"].ToString().Replace(" ","") && a.ProjectID == Data["ProjectNO"].ToString()).FirstOrDefault();
-                    string role = header.getPart2Data().Where(a => a.Part2ID == pm.Part2ID).FirstOrDefault().Function;
+                    string role = (isAdd==1)? Data["Position"].ToString(): header.getPart2Data().Where(a => a.Part2ID == pm.Part2ID).FirstOrDefault().Function;
+                    if (isAdd == 0)
+                    {
+                        name = pm.StaffName;
+                    }
                     ap.Role = role;
-                    ap.Name = pm.StaffName;
-                    tblProject pj = header.getProject().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).FirstOrDefault();
-                    ap.ProjectCode = pj.CustomerCode + " " + pj.ProjectNameAlias;
+                    tblEmployee emptemp  = emp.Where(a => a.EmployeeNo.Trim() == Data["EmployeeNO"].ToString().Trim()).FirstOrDefault();
+                    ap.Name = (emptemp != null) ? emptemp.EmployeeFirstName + " " + emptemp.EmployeeLastName : "";
+                    //tblProject pj = header.getProject().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).FirstOrDefault();
+                    ap.ProjectCode = eva.ProjectCode;
                     ap.EmployeeNo = Data["EmployeeNO"].ToString().Replace(" ","");
                     int pID = header.insertApprove(ap).ID;
                     List<tblFlowMaster> AllFlow = header.getAllFlow();
@@ -171,8 +202,8 @@ namespace PESproj.Controllers
                         }
                         else if(a.CodeName == "ST")
                         {
-                            tmp.Name = pm.StaffName;
-                            tmp.EmployeeNO = pm.StaffID;
+                            tmp.Name = name;
+                            tmp.EmployeeNO = Data["EmployeeNO"].ToString().Replace(" ", "");
                         }
                         else if(a.CodeName == "HR")
                         {
@@ -224,7 +255,7 @@ namespace PESproj.Controllers
                 tblScore sc = new tblScore();
 
                 tblEvaluation eva = new tblEvaluation();
-                tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a => a.StaffID == Data["EmployeeNO"].ToString()).FirstOrDefault();
+               // tblProjectMember proj = header.getProjectMember().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).Where(a => a.StaffID == Data["EmployeeNO"].ToString()).FirstOrDefault();
                 Period p = header.GetPeriod().Where(a => a.Period_Id == Convert.ToInt32(Data["PeriodID"].ToString())).FirstOrDefault();
                 sc.Eva_ID = Convert.ToInt32(Data["Eva_ID"].ToString());
                 sc.H3_ID = Convert.ToInt32(Data["H_ID"].ToString());
@@ -609,7 +640,16 @@ namespace PESproj.Controllers
                     tmp["Role"] = a.Role;
                     tmp["ST"] = a.ST;
                     tblEvaluation eva = evalist.Where(b => b.Eva_ID == a.EvaID && b.EvaStatus == 1).FirstOrDefault();
-                    tmp["Date"] = eva.StartEvaDate.ToString().Substring(0, 9).Replace("-", "/") + " " + ((eva.StartEvaDate.ToString().ElementAt(11)==':')?'0'+ eva.StartEvaDate.ToString().Substring(10, 4).Replace("-", "/") : eva.StartEvaDate.ToString().Substring(10, 5));
+                    List<tblApproveStatus> aps = header.GetApproveStatus().Where(x => x.ApproveID == a.ID).ToList();
+                    tmp["Date"] = eva.StartEvaDate.ToString().Substring(0, 9).Replace("-", "/") + " " + ((eva.StartEvaDate.ToString().ElementAt(11) == ':') ? '0' + eva.StartEvaDate.ToString().Substring(10, 4).Replace("-", "/") : eva.StartEvaDate.ToString().Substring(10, 5));
+                    aps.ForEach(x =>
+                    {
+                        if(x.ApproveDate != null)
+                        {
+                            tmp["Date"] = x.ApproveDate.ToString().Substring(0, 9).Replace("-", "/") + " " + ((x.ApproveDate.ToString().ElementAt(11) == ':') ? '0' + x.ApproveDate.ToString().Substring(10, 4).Replace("-", "/") : x.ApproveDate.ToString().Substring(10, 5));
+                        }
+                    });
+                    
                     
                     tblEmployee empTemp = emp.Where(b => b.EmployeeNo.Replace(" ","") == a.EmployeeNo).FirstOrDefault();
                     tmp["name_language"] = JsonConvert.DeserializeObject<JObject>("{\"EN\":\"" + empTemp.EmployeeFirstName + " " + empTemp.EmployeeLastName + "\",\"TH\":\"" + empTemp.EmployeeFirstNameThai + " " + empTemp.EmployeeLastNameThai + "\"}");

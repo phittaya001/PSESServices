@@ -4,6 +4,7 @@
     <EntitySetMapping Name="tblEvaluation">
       <EntityTypeMapping TypeName="PSESModel.tblEvaluation">
         <MappingFragment StoreEntitySet="tblEvaluation">
+          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
           <ScalarProperty Name="EvaStatus" ColumnName="EvaStatus" />
           <ScalarProperty Name="FinishEvaDate" ColumnName="FinishEvaDate" />
           <ScalarProperty Name="StartEvaDate" ColumnName="StartEvaDate" />

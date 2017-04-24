@@ -15,6 +15,7 @@
     <Property Name="StartEvaDate" Type="DateTime" Precision="3" />
     <Property Name="FinishEvaDate" Type="DateTime" Precision="3" />
     <Property Name="EvaStatus" Type="Int32" />
+    <Property Name="ProjectCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
   </EntityType>
   <EntityType Name="tblHeaderBot">
     <Key>

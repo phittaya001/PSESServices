@@ -111,6 +111,7 @@
           <Property Name="StartEvaDate" Type="datetime" />
           <Property Name="FinishEvaDate" Type="datetime" />
           <Property Name="EvaStatus" Type="int" />
+          <Property Name="ProjectCode" Type="varchar" MaxLength="100" />
         </EntityType>
         <EntityType Name="tblFlowMaster">
           <Key>
@@ -624,6 +625,7 @@
           <Property Name="StartEvaDate" Type="DateTime" Precision="3" />
           <Property Name="FinishEvaDate" Type="DateTime" Precision="3" />
           <Property Name="EvaStatus" Type="Int32" />
+          <Property Name="ProjectCode" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
         </EntityType>
         <EntityType Name="tblHeaderBot">
           <Key>
@@ -896,7 +898,7 @@
           </FunctionImport>
           <EntitySet Name="tblReport" EntityType="PSESModel.tblReport" />
           <FunctionImport Name="SP_GetEvaListByEvaluatorID" ReturnType="Collection(PSESModel.SP_GetEvaListByEvaluatorID_Result)">
-            <Parameter Name="EvaluatorID" Mode="In" Type="String" />
+          <Parameter Name="EvaluatorID" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="GetEvaluationRequest_Result">
@@ -1402,6 +1404,7 @@
           <EntitySetMapping Name="tblEvaluation">
             <EntityTypeMapping TypeName="PSESModel.tblEvaluation">
               <MappingFragment StoreEntitySet="tblEvaluation">
+                <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
                 <ScalarProperty Name="EvaStatus" ColumnName="EvaStatus" />
                 <ScalarProperty Name="FinishEvaDate" ColumnName="FinishEvaDate" />
                 <ScalarProperty Name="StartEvaDate" ColumnName="StartEvaDate" />

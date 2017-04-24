@@ -106,6 +106,7 @@
     <Property Name="StartEvaDate" Type="datetime" />
     <Property Name="FinishEvaDate" Type="datetime" />
     <Property Name="EvaStatus" Type="int" />
+    <Property Name="ProjectCode" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="tblFlowMaster">
     <Key>

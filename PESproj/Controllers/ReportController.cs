@@ -87,6 +87,8 @@ namespace PESproj.Controllers
                 if(emt!=null)name = "{\"EN\":\"" + emt.EmployeeFirstName + " " + emt.EmployeeLastName + "\",\"TH\":\"" + emt.EmployeeFirstNameThai + " " + emt.EmployeeLastNameThai + "\"}";
                 tmp["EvaluatorName"] = JsonConvert.DeserializeObject<JObject>(name);
                  if (a.Job_ID != null) tmp["Role"] = pos.Where(x => x.PositionNo == a.Job_ID).FirstOrDefault().PositionName;
+                tmp["PeriodID"] = a.PeriodID;
+                tmp["Period"] = a.period;
                 j.Add(tmp);
             });
             return j;
@@ -96,6 +98,7 @@ namespace PESproj.Controllers
         public List<JObject> Report1(string Group,string SubGroup,int PeriodID)
         {
             var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
+            List<Period> per = header.GetPeriod();
             int groupn = 0;
             string evatmp = "";
             int period = 0;
@@ -118,106 +121,40 @@ namespace PESproj.Controllers
             List<tblEmployee> listem = header.getEmployees();
 
             //tblReport a = new tblReport();
+            var em1 = header.GetAllEvaluation().OrderBy(a => a.EvaluatorNO).ToList();
             
-            var e = header.GetAllEvaluation().OrderBy(a=>a.EvaluatorNO).ToList();
             List<tblEmployeeOrganization> emo = header.getEmployeeOrganization();
             List<tblEvaluation> eva = new List<tblEvaluation>();
             List<tblOrganization> or = header.getOrganization();
-            if(PeriodID == 0 )
+            
+            var e = em1.OrderBy(a=>a.EvaluatorNO).ToList();
+
+            if (PeriodID == 0)
             {
-                if(SubGroup == "0" && Group == "0")
-                {
-                    List<tblEvaluation> result = new List<tblEvaluation>();
-                    e.ForEach(a =>
-                    {
-                        if (evatmp != a.EvaluatorNO)
-                        {
-                            tblEvaluation tmp2 = new tblEvaluation();
-                            tmp2.EvaluatorNO = a.EvaluatorNO;
-                            result.Add(tmp2);
-                        }
-                        tblEvaluation tmp = new tblEvaluation();
-                        tmp.EvaluatorNO = a.EvaluatorNO;
-                        tmp.EmployeeNO = a.EmployeeNO;
-                        tmp.Eva_ID = a.Eva_ID;
-                        tmp.PeriodID = a.PeriodID;
-                        tmp.Job_ID = a.Job_ID;
-                        result.Add(tmp);
-                    });
-                    return toJson(result);
-                }
-                else
-                {
-                    if(SubGroup != "0")
-                    {
-                        List<tblEvaluation> result = new List<tblEvaluation>();
-                        e.ForEach(a =>
-                        {
-                            if (emo.Where(x => x.EmployeeNo.Trim() == a.EmployeeNO.Trim() && x.OrganizationNo == groupn).ToList().Count > 0)
-                            {
-                                if (evatmp != a.EvaluatorNO)
-                                {
-                                    tblEvaluation tmp2 = new tblEvaluation();
-                                    tmp2.EvaluatorNO = a.EvaluatorNO;
-                                    result.Add(tmp2);
-                                }
-                                tblEvaluation tmp = new tblEvaluation();
-                                tmp.EvaluatorNO = a.EvaluatorNO;
-                                tmp.EmployeeNO = a.EmployeeNO;
-                                tmp.Eva_ID = a.Eva_ID;
-                                tmp.PeriodID = a.PeriodID;
-                                tmp.Job_ID = a.Job_ID;
-                                result.Add(tmp);
-                            }
-
-                        });
-                        return toJson( result);
-                    }else
-                    {
-                        List<tblEvaluation> result = new List<tblEvaluation>();
-                        e.ForEach(a =>
-                        {
-                            List<tblOrganization> ortmp = or.Where(x => x.OrganizationAlias.Contains(Group) == true).ToList();
-                            ortmp.ForEach(y =>
-                            {
-                                if (emo.Where(x => x.EmployeeNo.Trim() == a.EmployeeNO.Trim() && x.OrganizationNo == y.OrganizationNo).ToList().Count > 0 && result.Where(x=>x.Eva_ID==a.Eva_ID).ToList().Count==0)
-                                {
-                                    if (evatmp != a.EvaluatorNO)
-                                    {
-                                        tblEvaluation tmp2 = new tblEvaluation();
-                                        tmp2.EvaluatorNO = a.EvaluatorNO;
-                                        result.Add(tmp2);
-                                    }
-                                    tblEvaluation tmp = new tblEvaluation();
-                                    tmp.EvaluatorNO = a.EvaluatorNO;
-                                    tmp.EmployeeNO = a.EmployeeNO;
-                                    tmp.Eva_ID = a.Eva_ID;
-                                    tmp.PeriodID = a.PeriodID;
-                                    tmp.Job_ID = a.Job_ID;
-                                    result.Add(tmp);
-                                }
-                            });
-                        });
-                        return toJson(result);
-
-                    }
-
-                }
-                
-            }
-            else
-            {
-                
                 if (SubGroup == "0" && Group == "0")
                 {
+                    List<JObject> jResult = new List<JObject>();
                     List<tblEvaluation> result = new List<tblEvaluation>();
-                    e.ForEach(a =>
+                    per.ForEach(g =>
                     {
-                        if(a.PeriodID == PeriodID){
+                        if(period != g.Period_Id)
+                        {
+                            JObject tmp = new JObject();
+                            period = g.Period_Id;
+                            tmp["type"] = 1;
+                            tmp["PeriodID"] = g.Period_Id;
+
+                        }
+                        e = em1.Where(a=>a.PeriodID == g.Period_Id).OrderBy(a => a.EvaluatorNO).ToList();
+                        e.ForEach(a =>
+                        {
                             if (evatmp != a.EvaluatorNO)
                             {
                                 tblEvaluation tmp2 = new tblEvaluation();
                                 tmp2.EvaluatorNO = a.EvaluatorNO;
+                                evatmp = a.EvaluatorNO;
+                                tmp2.PeriodID = a.PeriodID;
+                                tmp2.period = a.period;
                                 result.Add(tmp2);
                             }
                             tblEvaluation tmp = new tblEvaluation();
@@ -226,9 +163,127 @@ namespace PESproj.Controllers
                             tmp.Eva_ID = a.Eva_ID;
                             tmp.PeriodID = a.PeriodID;
                             tmp.Job_ID = a.Job_ID;
+                            tmp.period = a.period;
+                            result.Add(tmp);
+                        });
+                    });
+                    
+
+                    return toJson(result);
+                }
+                else
+                {
+                    if (SubGroup != "0")
+                    {
+
+                        List<tblEvaluation> result = new List<tblEvaluation>();
+                        per.ForEach(g =>
+                        {
+                            e = em1.Where(a => a.PeriodID == g.Period_Id).OrderBy(a => a.EvaluatorNO).ToList();
+                            e.ForEach(a =>
+                        {
+                            if (emo.Where(x => x.EmployeeNo.Trim() == a.EmployeeNO.Trim() && x.OrganizationNo == groupn).ToList().Count > 0)
+                            {
+                                if (evatmp != a.EvaluatorNO)
+                                {
+                                    tblEvaluation tmp2 = new tblEvaluation();
+                                    tmp2.EvaluatorNO = a.EvaluatorNO;
+                                    evatmp = a.EvaluatorNO;
+                                    tmp2.PeriodID = a.PeriodID;
+                                    tmp2.period = a.period;
+                                    result.Add(tmp2);
+                                }
+                                tblEvaluation tmp = new tblEvaluation();
+                                tmp.EvaluatorNO = a.EvaluatorNO;
+                                tmp.EmployeeNO = a.EmployeeNO;
+                                tmp.Eva_ID = a.Eva_ID;
+                                tmp.PeriodID = a.PeriodID;
+                                tmp.Job_ID = a.Job_ID;
+                                tmp.period = a.period;
+                                result.Add(tmp);
+                            }
+
+                        });
+                        });
+                        return toJson(result);
+                    }
+                    else
+                    {
+                        List<tblEvaluation> result = new List<tblEvaluation>();
+                        per.ForEach(g =>
+                        {
+                            e = em1.Where(a => a.PeriodID == g.Period_Id).OrderBy(a => a.EvaluatorNO).ToList();
+
+                            e.ForEach(a =>
+                        {
+                            List<tblOrganization> ortmp = or.Where(x => x.OrganizationAlias.Contains(Group) == true).ToList();
+
+                            ortmp.ForEach(y =>
+                            {
+                                if (emo.Where(x => x.EmployeeNo.Trim() == a.EmployeeNO.Trim() && x.OrganizationNo == y.OrganizationNo).ToList().Count > 0 && result.Where(x => x.Eva_ID == a.Eva_ID).ToList().Count == 0)
+                                {
+                                    if (evatmp != a.EvaluatorNO)
+                                    {
+                                        tblEvaluation tmp2 = new tblEvaluation();
+                                        tmp2.EvaluatorNO = a.EvaluatorNO;
+                                        evatmp = a.EvaluatorNO;
+                                        tmp2.PeriodID = a.PeriodID;
+                                        tmp2.period = a.period;
+                                        result.Add(tmp2);
+                                    }
+                                    tblEvaluation tmp = new tblEvaluation();
+                                    tmp.EvaluatorNO = a.EvaluatorNO;
+                                    tmp.EmployeeNO = a.EmployeeNO;
+                                    tmp.Eva_ID = a.Eva_ID;
+                                    tmp.PeriodID = a.PeriodID;
+                                    tmp.Job_ID = a.Job_ID;
+                                    tmp.period = a.period;
+                                    result.Add(tmp);
+                                }
+                            });
+                        });
+                        });
+                        return toJson(result);
+
+                    }
+
+                }
+
+            }
+            else
+            {
+
+                if (SubGroup == "0" && Group == "0")
+                {
+                    List<tblEvaluation> result = new List<tblEvaluation>();
+                    per.ForEach(g =>
+                    {
+                        e = em1.Where(a => a.PeriodID == g.Period_Id).OrderBy(a => a.EvaluatorNO).ToList();
+
+                        e.ForEach(a =>
+                    {
+                        if (a.PeriodID == PeriodID)
+                        {
+                            if (evatmp != a.EvaluatorNO)
+                            {
+                                tblEvaluation tmp2 = new tblEvaluation();
+                                tmp2.EvaluatorNO = a.EvaluatorNO;
+                                evatmp = a.EvaluatorNO;
+                                tmp2.PeriodID = a.PeriodID;
+                                tmp2.period = a.period;
+                                result.Add(tmp2);
+                            }
+                            tblEvaluation tmp = new tblEvaluation();
+                            tmp.EvaluatorNO = a.EvaluatorNO;
+                            tmp.EmployeeNO = a.EmployeeNO;
+                            tmp.Eva_ID = a.Eva_ID;
+                            tmp.PeriodID = a.PeriodID;
+                            tmp.Job_ID = a.Job_ID;
+                            tmp.period = a.period;
                             result.Add(tmp);
                         }
-                        
+
+                    });
                     });
                     return toJson(result);
                 }
@@ -237,7 +292,11 @@ namespace PESproj.Controllers
                     if (SubGroup != "0")
                     {
                         List<tblEvaluation> result = new List<tblEvaluation>();
-                        e.ForEach(a =>
+                        per.ForEach(g =>
+                        {
+                            e = em1.Where(a => a.PeriodID == g.Period_Id).OrderBy(a => a.EvaluatorNO).ToList();
+
+                            e.ForEach(a =>
                         {
                             if (emo.Where(x => x.EmployeeNo.Trim() == a.EmployeeNO.Trim() && x.OrganizationNo == groupn).ToList().Count > 0)
                             {
@@ -247,6 +306,9 @@ namespace PESproj.Controllers
                                     {
                                         tblEvaluation tmp2 = new tblEvaluation();
                                         tmp2.EvaluatorNO = a.EvaluatorNO;
+                                        evatmp = a.EvaluatorNO;
+                                        tmp2.PeriodID = a.PeriodID;
+                                        tmp2.period = a.period;
                                         result.Add(tmp2);
                                     }
                                     tblEvaluation tmp = new tblEvaluation();
@@ -255,17 +317,24 @@ namespace PESproj.Controllers
                                     tmp.Eva_ID = a.Eva_ID;
                                     tmp.PeriodID = a.PeriodID;
                                     tmp.Job_ID = a.Job_ID;
+                                    tmp.period = a.period;
                                     result.Add(tmp);
                                 }
 
                             }
 
                         });
+                        });
                         return toJson(result);
                     }
-                    else{
+                    else
+                    {
                         List<tblEvaluation> result = new List<tblEvaluation>();
-                        e.ForEach(a =>
+                        per.ForEach(g =>
+                        {
+                            e = em1.Where(a => a.PeriodID == g.Period_Id).OrderBy(a => a.EvaluatorNO).ToList();
+
+                            e.ForEach(a =>
                         {
                             List<tblOrganization> ortmp = or.Where(x => x.OrganizationAlias.Contains(Group) == true).ToList();
                             ortmp.ForEach(y =>
@@ -278,6 +347,9 @@ namespace PESproj.Controllers
                                         {
                                             tblEvaluation tmp2 = new tblEvaluation();
                                             tmp2.EvaluatorNO = a.EvaluatorNO;
+                                            evatmp = a.EvaluatorNO;
+                                            tmp2.PeriodID = a.PeriodID;
+                                            tmp2.period = a.period;
                                             result.Add(tmp2);
                                         }
                                         tblEvaluation tmp = new tblEvaluation();
@@ -285,18 +357,23 @@ namespace PESproj.Controllers
                                         tmp.EmployeeNO = a.EmployeeNO;
                                         tmp.Eva_ID = a.Eva_ID;
                                         tmp.PeriodID = a.PeriodID;
+                                        tmp.period = a.period;
                                         tmp.Job_ID = a.Job_ID;
+                                        
                                         result.Add(tmp);
                                     }
                                 }
                             });
                         });
+                        });
                         return toJson(result);
                     }
-                    
+
                 }
             }
-            //return header.GetAllEvaluation();
+
+           
+            return null;
         }
 
         [Route("Test")]

@@ -40,6 +40,8 @@ public partial class tblEvaluation
 
     public Nullable<int> EvaStatus { get; set; }
 
+    public string ProjectCode { get; set; }
+
 }
 
 }
