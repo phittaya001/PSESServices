@@ -293,7 +293,7 @@ namespace PESproj.Controllers
             JObject tmp = new JObject();
             tblApprove t = ap.Where(x => x.EvaID == a.Eva_ID).FirstOrDefault();
             tmp["ApproveStat"] = (t != null) ? t.ApproveState : 0;
-                if (a.ProjectCode != null)
+                if (a.ProjectCode != null && a.ProjectCode.Trim().Length>0)
                 {
                     tblProject tt = pr.Where(x => x.ProjectCode.Trim() == ((a.ProjectCode.Contains('-') ? a.ProjectCode.Trim().Split('-')[1] : a.ProjectCode))).FirstOrDefault();
                     tmp["CustomerCompanyAlias"] = (a.ProjectCode.Contains('-') ? a.ProjectCode.Trim().Split('-')[0] : "");
