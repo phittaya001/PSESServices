@@ -422,7 +422,7 @@ public partial class PSESEntities : DbContext
     }
 
 
-    public virtual ObjectResult<SP_InsertEvaluation_Result> SP_InsertEvaluation(string projectID, string evaluatorID, string employeeID, Nullable<int> jobID, string period, Nullable<int> periodID, Nullable<System.DateTime> startDate, Nullable<System.DateTime> finishDate)
+    public virtual ObjectResult<SP_InsertEvaluation_Result> SP_InsertEvaluation(string projectID, string evaluatorID, string employeeID, Nullable<int> jobID, string period, Nullable<int> periodID, Nullable<System.DateTime> startDate, Nullable<System.DateTime> finishDate, string projectCode)
     {
 
         var projectIDParameter = projectID != null ?
@@ -465,7 +465,12 @@ public partial class PSESEntities : DbContext
             new ObjectParameter("FinishDate", typeof(System.DateTime));
 
 
-        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertEvaluation_Result>("SP_InsertEvaluation", projectIDParameter, evaluatorIDParameter, employeeIDParameter, jobIDParameter, periodParameter, periodIDParameter, startDateParameter, finishDateParameter);
+        var projectCodeParameter = projectCode != null ?
+            new ObjectParameter("ProjectCode", projectCode) :
+            new ObjectParameter("ProjectCode", typeof(string));
+
+
+        return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<SP_InsertEvaluation_Result>("SP_InsertEvaluation", projectIDParameter, evaluatorIDParameter, employeeIDParameter, jobIDParameter, periodParameter, periodIDParameter, startDateParameter, finishDateParameter, projectCodeParameter);
     }
 
 

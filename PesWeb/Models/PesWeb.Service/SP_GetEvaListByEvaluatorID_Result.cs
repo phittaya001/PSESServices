@@ -35,8 +35,6 @@ public partial class SP_GetEvaListByEvaluatorID_Result
 
     public string GroupOfStaff { get; set; }
 
-    public string CustomerCompanyAlias { get; set; }
-
     public string ProjectCode { get; set; }
 
     public string ProjectType { get; set; }

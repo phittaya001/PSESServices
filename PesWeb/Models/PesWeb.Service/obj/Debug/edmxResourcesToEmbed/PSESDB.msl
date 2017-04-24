@@ -631,7 +631,6 @@
           <ScalarProperty Name="EmployeeLastNameThai" ColumnName="EmployeeLastNameThai" />
           <ScalarProperty Name="EmployeeFirstNameThai" ColumnName="EmployeeFirstNameThai" />
           <ScalarProperty Name="GroupOfStaff" ColumnName="GroupOfStaff" />
-          <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
           <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
           <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
           <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />

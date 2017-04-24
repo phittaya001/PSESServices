@@ -108,6 +108,11 @@ namespace PESproj.Controllers
                     List<string> nme = Data["EmployeeNO"].ToString().Split('-').ToList();
                     name = nme[1].Trim();
                     tblPart2Master role = header.getPart2Data().Where(a => a.Function.Trim() == Data["Position"].ToString().Trim()).FirstOrDefault();
+                    tblProject project = header.getProject().Where(a => a.ProjectNameAlias.Trim() == Data["ProjectNO"].ToString().Trim()).FirstOrDefault();
+                    if (project != null)
+                    {
+                        Data["ProjectNO"] = project.CustomerCompanyAlias + "-" + project.ProjectNameAlias;
+                    }
                     proj.Part2ID = role.Part2ID;
                     Data["EmployeeNO"] = Data["EmployeeNO"].ToString().Split('-')[0].Trim();
                 }
@@ -282,12 +287,18 @@ namespace PESproj.Controllers
             List<JObject> Jeva = new List<JObject>();
             List<tblEmployee> emp = header.getEmployees();
             List<tblApprove> ap = header.GetAllApprove();
+            List<tblProject> pr = header.getProject();
             evalist.ForEach(a =>
             {
-                JObject tmp = new JObject();
-                tblApprove t = ap.Where(x => x.EvaID == a.Eva_ID).FirstOrDefault();
-                tmp["ApproveStat"] = (t != null) ? t.ApproveState : 0;
-                tmp["CustomerCompanyAlias"] = a.CustomerCompanyAlias;
+            JObject tmp = new JObject();
+            tblApprove t = ap.Where(x => x.EvaID == a.Eva_ID).FirstOrDefault();
+            tmp["ApproveStat"] = (t != null) ? t.ApproveState : 0;
+                if (a.ProjectCode != null)
+                {
+                    tblProject tt = pr.Where(x => x.ProjectCode.Trim() == ((a.ProjectCode.Contains('-') ? a.ProjectCode.Trim().Split('-')[1] : a.ProjectCode))).FirstOrDefault();
+                    tmp["CustomerCompanyAlias"] = (a.ProjectCode.Contains('-') ? a.ProjectCode.Trim().Split('-')[0] : "");
+
+                }
                 tmp["EmployeeFirstName"] = a.EmployeeFirstName;
                 tmp["EmployeeLastName"] = a.EmployeeLastName;
                 tmp["EvaluatorFirstName"] = a.EvaluatorFirstName;
@@ -344,7 +355,8 @@ namespace PESproj.Controllers
                 JObject tmp = new JObject();
                 tblApprove t = ap.Where(x => x.EvaID == a.Eva_ID).FirstOrDefault();
                 tmp["ApproveStat"] = (t != null) ? t.ApproveState : 0;
-                tmp["CustomerCompanyAlias"] = a.CustomerCompanyAlias;
+                if(a.ProjectCode !=null)
+                tmp["CustomerCompanyAlias"] = (a.ProjectCode.Contains('-') ? a.ProjectCode.Trim().Split('-')[0] : "");
                 tmp["EmployeeFirstName"] = a.EmployeeFirstName;
                 tmp["EmployeeLastName"] = a.EmployeeLastName;
                 tmp["EvaluatorFirstName"] = a.EvaluatorFirstName;
@@ -728,7 +740,7 @@ namespace PESproj.Controllers
             {
                 if(n.EmployeeFirstName != null && n.EmployeeLastName != null)
                 {
-                    str += t + "\""+ n.EmployeeNo + " : " + n.EmployeeFirstName + " " + n.EmployeeLastName + "\"";
+                    str += t + "\""+ n.EmployeeNo + " - " + n.EmployeeFirstName + " " + n.EmployeeLastName + "\"";
                     t = ",";
                 }
                 

@@ -146,6 +146,7 @@
       <Parameter Name="periodID" Mode="In" Type="Int32" />
       <Parameter Name="StartDate" Mode="In" Type="DateTime" />
       <Parameter Name="FinishDate" Mode="In" Type="DateTime" />
+      <Parameter Name="ProjectCode" Mode="In" Type="String" />
     </FunctionImport>
     <EntitySet Name="tblProject" EntityType="PSESModel.tblProject" />
     <EntitySet Name="tblPart2Master" EntityType="PSESModel.tblPart2Master" />
@@ -769,8 +770,7 @@
     <Property Type="String" Name="EmployeeLastNameThai" Nullable="true" MaxLength="30" />
     <Property Type="String" Name="EmployeeFirstNameThai" Nullable="true" MaxLength="30" />
     <Property Type="String" Name="GroupOfStaff" Nullable="false" MaxLength="4" />
-    <Property Type="String" Name="CustomerCompanyAlias" Nullable="true" MaxLength="20" />
-    <Property Type="String" Name="ProjectCode" Nullable="true" MaxLength="41" />
+    <Property Type="String" Name="ProjectCode" Nullable="true" MaxLength="100" />
     <Property Type="String" Name="ProjectType" Nullable="false" MaxLength="8" />
     <Property Type="String" Name="EvaTerm" Nullable="true" MaxLength="25" />
     <Property Type="String" Name="StartDatePlan" Nullable="true" MaxLength="12" />
