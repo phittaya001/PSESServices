@@ -154,7 +154,7 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/20/2017 16:02:43</publishTime>
     </File>
     <File Include="bin/itextsharp.dll">
-      <publishTime>07/10/2016 19:33:43</publishTime>
+      <publishTime>10/07/2016 19:33:43</publishTime>
     </File>
     <File Include="bin/itextsharp.pdfa.dll">
       <publishTime>04/20/2017 15:16:47</publishTime>
@@ -232,16 +232,16 @@ by editing this MSBuild file. In order to learn more about this please visit htt
       <publishTime>02/20/2017 16:02:51</publishTime>
     </File>
     <File Include="bin/PESproj.dll">
-      <publishTime>04/21/2017 17:31:11</publishTime>
+      <publishTime>04/24/2017 17:23:01</publishTime>
     </File>
     <File Include="bin/PesWeb.Injectors.dll">
-      <publishTime>04/20/2017 16:13:57</publishTime>
+      <publishTime>04/24/2017 17:22:54</publishTime>
     </File>
     <File Include="bin/PesWeb.Interceptors.dll">
-      <publishTime>04/20/2017 16:13:57</publishTime>
+      <publishTime>04/24/2017 17:22:53</publishTime>
     </File>
     <File Include="bin/PesWeb.Service.dll">
-      <publishTime>04/20/2017 16:13:56</publishTime>
+      <publishTime>04/24/2017 17:22:53</publishTime>
     </File>
     <File Include="bin/roslyn/csc.exe">
       <publishTime>02/20/2017 16:02:49</publishTime>

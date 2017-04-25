@@ -106,6 +106,7 @@
     <Property Name="StartEvaDate" Type="datetime" />
     <Property Name="FinishEvaDate" Type="datetime" />
     <Property Name="EvaStatus" Type="int" />
+    <Property Name="ProjectCode" Type="varchar" MaxLength="100" />
   </EntityType>
   <EntityType Name="tblFlowMaster">
     <Key>
@@ -497,6 +498,7 @@
     <Parameter Name="periodID" Type="int" Mode="In" />
     <Parameter Name="StartDate" Type="date" Mode="In" />
     <Parameter Name="FinishDate" Type="date" Mode="In" />
+    <Parameter Name="ProjectCode" Type="varchar" Mode="In" />
   </Function>
   <Function Name="SP_InsertHeader" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
     <Parameter Name="parent" Type="int" Mode="In" />

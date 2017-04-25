@@ -134,10 +134,11 @@ namespace PESproj.Controllers
                 eva.StartEvaDate = Convert.ToDateTime(Data["StartDate"].ToString());
                 eva.FinishEvaDate = Convert.ToDateTime(Data["FinishDate"].ToString());
                 tblProject pj = new tblProject();
-                if (isAdd == 1)
+                if (isAdd == 0)
                 {
                     pj = header.getProject().Where(a => a.ProjectID == Data["ProjectNO"].ToString()).FirstOrDefault();
                 }
+                
                 eva.ProjectCode = (isAdd == 1) ? Data["ProjectNO"].ToString() : pj.CustomerCompanyAlias + " " + pj.ProjectNameAlias;
                 SP_InsertEvaluation_Result evaid = header.InsertEvaData(eva);
                 int eva_ID = evaid.Eva_ID;
@@ -288,6 +289,7 @@ namespace PESproj.Controllers
             List<tblEmployee> emp = header.getEmployees();
             List<tblApprove> ap = header.GetAllApprove();
             List<tblProject> pr = header.getProject();
+            List<tblApproveStatus> ApS = header.GetApproveStatus();
             evalist.ForEach(a =>
             {
             JObject tmp = new JObject();
@@ -295,10 +297,12 @@ namespace PESproj.Controllers
             tmp["ApproveStat"] = (t != null) ? t.ApproveState : 0;
                 if (a.ProjectCode != null && a.ProjectCode.Trim().Length>0)
                 {
-                    tblProject tt = pr.Where(x => x.ProjectCode.Trim() == ((a.ProjectCode.Contains('-') ? a.ProjectCode.Trim().Split('-')[1] : a.ProjectCode))).FirstOrDefault();
+                    tblProject tt = pr.Where(x => x.ProjectNameAlias.Trim() == ((a.ProjectCode.Contains('-') ? a.ProjectCode.Trim().Split('-')[1] : a.ProjectCode))).FirstOrDefault();
                     tmp["CustomerCompanyAlias"] = (a.ProjectCode.Contains('-') ? a.ProjectCode.Trim().Split('-')[0] : "");
 
                 }
+                tblApproveStatus ApSt = ApS.Where(x => x.ApproveID == t.ID && x.Status != 0).OrderByDescending(x=>x.ApproveID).FirstOrDefault();
+                
                 tmp["EmployeeFirstName"] = a.EmployeeFirstName;
                 tmp["EmployeeLastName"] = a.EmployeeLastName;
                 tmp["EvaluatorFirstName"] = a.EvaluatorFirstName;
@@ -306,7 +310,7 @@ namespace PESproj.Controllers
                 tmp["EvaStatus"] = a.EvaStatus;
                 tmp["EvaTerm"] = a.EvaTerm;
                 tmp["Eva_ID"] = a.Eva_ID;
-                tmp["Date"] = a.Date.ToString().Substring(0, 10) + " " + ((a.Date.ToString().ElementAt(11) == ':') ? '0' + a.Date.ToString().Substring(10, 4) : a.Date.ToString().Substring(10, 5));
+                tmp["Date"] = (ApSt!=null)?ApSt.ApproveDate.ToString().Substring(0, 10) + " " + ((ApSt.ApproveDate.ToString().ElementAt(11) == ':') ? '0' + ApSt.ApproveDate.ToString().Substring(10, 4) : ApSt.ApproveDate.ToString().Substring(10, 5)) : a.Date.ToString().Substring(0, 10) + " " + ((a.Date.ToString().ElementAt(11) == ':') ? '0' + a.Date.ToString().Substring(10, 4) : a.Date.ToString().Substring(10, 5));
 
                 a.StartDatePlan = a.StartDatePlan.Replace(" ", "/");
                 if (a.StartDatePlan.ElementAt(4) == '/')
@@ -325,7 +329,7 @@ namespace PESproj.Controllers
                 }
                 a.FinishDatePlan = a.FinishDatePlan.Substring(4, 2) + "/" + a.FinishDatePlan.Substring(0, 3) + "/" + a.FinishDatePlan.Substring(9, 2);
                 tmp["FinishDatePlan"] = a.FinishDatePlan;
-
+                
                 tmp["FinishEvaDate"] = a.FinishEvaDate;
                 tmp["Function"] = a.Function;
                 tmp["GroupOfStaff"] = a.GroupOfStaff;
@@ -446,9 +450,9 @@ namespace PESproj.Controllers
                 tmp["ProjectCode"] = a.ProjectCode;
                 tmp["Role"] = a.Role;
                 tmp["ST"] = a.ST;
-                List<tblApproveStatus> ApSt = ApS.Where(b => b.ApproveID == a.ID).OrderBy(b=>b.FlowOrder).ToList();
+                tblApproveStatus ApSt = ApS.Where(b => b.ApproveID == a.ID && b.Status!=0).OrderByDescending(b=>b.ID).FirstOrDefault();
                 tblEvaluation eva = ListEva.Where(b => b.Eva_ID == a.EvaID).FirstOrDefault();
-                tmp["Date"] = eva.StartEvaDate.ToString().Substring(0, 9).Replace("-", "/") + " " + ((eva.StartEvaDate.ToString().ElementAt(11)==':')?'0'+ eva.StartEvaDate.ToString().Substring(10, 4).Replace("-", "/"): eva.StartEvaDate.ToString().Substring(10, 5).Replace("-", "/"));
+                tmp["Date"] = (ApSt!=null)? ApSt.ApproveDate.ToString().Substring(0, 9).Replace("-", "/") + " " + ((ApSt.ApproveDate.ToString().ElementAt(11) == ':') ? '0' + ApSt.ApproveDate.ToString().Substring(10, 4).Replace("-", "/") : ApSt.ApproveDate.ToString().Substring(10, 5).Replace("-", "/")) : eva.StartEvaDate.ToString().Substring(0, 9).Replace("-", "/") + " " + ((eva.StartEvaDate.ToString().ElementAt(11)==':')?'0'+ eva.StartEvaDate.ToString().Substring(10, 4).Replace("-", "/"): eva.StartEvaDate.ToString().Substring(10, 5).Replace("-", "/"));
                 
 
 
@@ -532,8 +536,12 @@ namespace PESproj.Controllers
             {
                 JObject tmp = new JObject();
                 tmp["Part2ID"] = a.Part2ID;
-                tmp["GroupOfStaff"] = a.GroupOfStaff;
-                tmp["CustomerCompanyAlias"] = a.CustomerCompanyAlias;
+                tblEvaluation evat = header.GetAllEvaluation().Where(x => x.Eva_ID == a.Eva_ID).FirstOrDefault();
+                tblEmployeeOrganization emo = header.getEmployeeOrganization().Where(x => x.EmployeeNo.Trim() == evat.EmployeeNO.Trim()).OrderByDescending(x => x.StartEffectiveDate).FirstOrDefault();
+                tblOrganization org = header.getOrganization().Where(x => x.OrganizationNo == ((emo!=null)?emo.OrganizationNo:0)).FirstOrDefault();
+                tmp["GroupOfStaff"] = (org!=null)? org.OrganizationName : "";
+                tblProject proj = header.getProject().Where(x => x.ProjectID == evat.ProjectNO).FirstOrDefault();
+                tmp["CustomerCompanyAlias"] = (proj!=null)?proj.CustomerCompanyAlias: a.CustomerCompanyAlias;
                 tmp["ProjectCode"] = a.ProjectCode;
                 tmp["ProjectType"] = a.ProjectType;
                 tmp["EvaTerm"] = a.EvaTerm;
@@ -570,9 +578,13 @@ namespace PESproj.Controllers
                 text = "{\"EN\":\"" + a.EvaluatorFirstName + " " + a.EvaluatorLastName + "\",\"TH\":\"" + a.EvaluatorFirstNameThai +" " + a.EvaluatorLastNameThai + "\"}";
                 tmp["Evaluator"] = JsonConvert.DeserializeObject < JObject>(text);
                 Eva.Add(tmp);
+                
                 //  evadata[i].EmployeeFirstNameThai = 
             });
-            return Eva;
+            List<JObject> n = new List<JObject>();
+            if(Eva.FirstOrDefault()!=null)
+            n.Add(Eva.FirstOrDefault());
+            return n;
         }
 
         [Route("Approve/{EmpID}/{EvaID}")]
@@ -656,7 +668,7 @@ namespace PESproj.Controllers
                     tmp["Date"] = eva.StartEvaDate.ToString().Substring(0, 9).Replace("-", "/") + " " + ((eva.StartEvaDate.ToString().ElementAt(11) == ':') ? '0' + eva.StartEvaDate.ToString().Substring(10, 4).Replace("-", "/") : eva.StartEvaDate.ToString().Substring(10, 5));
                     aps.ForEach(x =>
                     {
-                        if(x.ApproveDate != null)
+                        if(x.Status != 0)
                         {
                             tmp["Date"] = x.ApproveDate.ToString().Substring(0, 9).Replace("-", "/") + " " + ((x.ApproveDate.ToString().ElementAt(11) == ':') ? '0' + x.ApproveDate.ToString().Substring(10, 4).Replace("-", "/") : x.ApproveDate.ToString().Substring(10, 5));
                         }
@@ -833,8 +845,9 @@ namespace PESproj.Controllers
                 tmp["EmployeeNo"] = (emp!=null)?a.EmployeeNO.Trim():null;
                 tmp["Name"] = JsonConvert.DeserializeObject<JObject>(str);
                 tmp["ProjectCode"] = app.ProjectCode;
-                tmp["Role"] = FlowList[(int)a.FlowOrder-1].PositionName; ;
+                tmp["Role"] = "("+ a.FlowOrder +")"+ FlowList[(int)a.FlowOrder-1].PositionName; ;
                 tmp["Status"] = a.Status;
+                //tmp["NO"] = a.FlowOrder;
                 Result.Add(tmp);
             });
 

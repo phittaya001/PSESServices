@@ -4,6 +4,7 @@
     <EntitySetMapping Name="tblEvaluation">
       <EntityTypeMapping TypeName="PSESModel.tblEvaluation">
         <MappingFragment StoreEntitySet="tblEvaluation">
+          <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
           <ScalarProperty Name="EvaStatus" ColumnName="EvaStatus" />
           <ScalarProperty Name="FinishEvaDate" ColumnName="FinishEvaDate" />
           <ScalarProperty Name="StartEvaDate" ColumnName="StartEvaDate" />
@@ -630,7 +631,6 @@
           <ScalarProperty Name="EmployeeLastNameThai" ColumnName="EmployeeLastNameThai" />
           <ScalarProperty Name="EmployeeFirstNameThai" ColumnName="EmployeeFirstNameThai" />
           <ScalarProperty Name="GroupOfStaff" ColumnName="GroupOfStaff" />
-          <ScalarProperty Name="CustomerCompanyAlias" ColumnName="CustomerCompanyAlias" />
           <ScalarProperty Name="ProjectCode" ColumnName="ProjectCode" />
           <ScalarProperty Name="ProjectType" ColumnName="ProjectType" />
           <ScalarProperty Name="EvaTerm" ColumnName="EvaTerm" />
