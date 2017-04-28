@@ -54,7 +54,7 @@ namespace PESproj.Controllers
                     svr.EmployeeActivityLog(authenRs.EmployeeID, "LOGIN");
                     var header = ServiceContainer.GetService<PesWeb.Service.Modules.EvaManage>();
                     tblEmployee emp = header.getEmployees().Where(a => a.EmployeeNo.Trim() == authenRs.EmployeeID.Trim()).FirstOrDefault();
-                    authenRs.positionNo = (int)emp.PositionNo;
+                    authenRs.positionNo = (emp!=null)?(int)emp.PositionNo:0 ;
                 }
                 catch (Exception e)
                 {

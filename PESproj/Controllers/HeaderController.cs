@@ -257,7 +257,8 @@ namespace PESproj.Controllers
                     {
                         if (H_new2[i].H_ID == parent && H_new2.Find(b=>b.H_ID == a.H_ID) == null )
                         {
-                            H_new2.Insert(i + 1, a);
+                            if(H_new2.Where(x=>x.Score_ID==a.Score_ID).ToList().Count == 0)
+                                H_new2.Insert(i + 1, a);
                         }
                     }
                 }

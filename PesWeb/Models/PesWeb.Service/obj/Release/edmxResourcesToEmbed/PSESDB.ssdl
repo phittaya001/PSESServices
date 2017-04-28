@@ -28,7 +28,7 @@
     <Property Name="EvaID" Type="int" />
     <Property Name="ApproverID" Type="int" />
     <Property Name="ApproveState" Type="int" />
-    <Property Name="Position" Type="varchar" MaxLength="30" />
+    <Property Name="Position" Type="varchar" MaxLength="50" />
     <Property Name="PositionID" Type="int" />
     <Property Name="HR" Type="int" />
     <Property Name="GM" Type="int" />
